@@ -19,12 +19,14 @@ return new class extends Migration {
                 ->references('id')
                 ->on('courses')
                 ->onDelete('cascade');
+
             $table->unsignedBigInteger('student_id')->index();
             $table
                 ->foreign('student_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+
             $table->primary(['course_id', 'student_id']);
         });
     }

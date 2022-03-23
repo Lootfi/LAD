@@ -26,7 +26,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        Course::where('id', 1);
+        //
     }
 
     /**
