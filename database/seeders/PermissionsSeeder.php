@@ -42,12 +42,6 @@ class PermissionsSeeder extends Seeder
 
         // gets all permissions via Gate::before rule; see AuthServiceProvider
 
-        // create demo users
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Teacher 01',
-        ]);
-        $user->assignRole($teacher);
-
         $user = \App\Models\User::factory()->create([
             'email' => 'teacher@example.com',
         ]);

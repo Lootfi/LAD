@@ -30,7 +30,7 @@ class QuizPolicy
      */
     public function view(User $user, Quiz $quiz)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,9 @@ class QuizPolicy
      */
     public function create(User $user)
     {
-        //
+        if ($user->hasRole('teacher')) {
+            return true;
+        }
     }
 
     /**
@@ -53,7 +55,9 @@ class QuizPolicy
      */
     public function update(User $user, Quiz $quiz)
     {
-        //
+        if ($user->hasRole('teacher')) {
+            return true;
+        }
     }
 
     /**
@@ -65,7 +69,9 @@ class QuizPolicy
      */
     public function delete(User $user, Quiz $quiz)
     {
-        //
+        if ($user->hasRole('teacher')) {
+            return true;
+        }
     }
 
     /**
@@ -77,7 +83,9 @@ class QuizPolicy
      */
     public function restore(User $user, Quiz $quiz)
     {
-        //
+        if ($user->hasRole('teacher')) {
+            return true;
+        }
     }
 
     /**
@@ -89,6 +97,8 @@ class QuizPolicy
      */
     public function forceDelete(User $user, Quiz $quiz)
     {
-        //
+        if ($user->hasRole('teacher')) {
+            return true;
+        }
     }
 }

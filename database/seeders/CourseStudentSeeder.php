@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Course;
+use App\Models\CourseStudent;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +16,13 @@ class CourseStudentSeeder extends Seeder
      */
     public function run()
     {
-        //
+        CourseStudent::factory(1)->create([
+            'course_id' => 1,
+            'student_id' => 2,
+        ]);
+        CourseStudent::factory(1)->create([
+            'course_id' => 1,
+            'student_id' => 3,
+        ]);
     }
 }

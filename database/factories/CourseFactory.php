@@ -20,7 +20,7 @@ class CourseFactory extends Factory
         return [
             'title' => $this->faker->company(),
             'active' => true,
-            'teacher_id' => 3,
+            'teacher_id' => 1,
         ];
     }
 }

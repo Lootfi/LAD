@@ -28,6 +28,8 @@ return new class extends Migration {
                 ->onDelete('cascade');
 
             $table->primary(['quiz_id', 'student_id']);
+
+            $table->timestamps();
         });
     }
 

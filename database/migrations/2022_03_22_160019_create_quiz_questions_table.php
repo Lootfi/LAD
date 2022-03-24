@@ -15,7 +15,6 @@ return new class extends Migration {
         Schema::create('quiz_questions', function (Blueprint $table) {
             $table->id();
             $table->string('question');
-            $table->timestamps();
 
             $table->unsignedBigInteger('quiz_id');
             $table
@@ -23,6 +22,8 @@ return new class extends Migration {
                 ->references('id')
                 ->on('quizzes')
                 ->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 

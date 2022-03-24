@@ -17,7 +17,8 @@ class QuizFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => 'Quiz 01',
+            'course_id' => 1,
         ];
     }
 }
