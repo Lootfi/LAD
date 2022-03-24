@@ -79,7 +79,7 @@ class User extends Authenticatable
 
     function teaches()
     {
-        return $this->hasMany(Course::class, 'teacher_id', 'id');
+        return $this->hasOne(Course::class, 'teacher_id', 'id');
     }
 
     function courses(): BelongsToMany

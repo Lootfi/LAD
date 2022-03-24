@@ -32,11 +32,17 @@ class QuizController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreQuizRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(StoreQuizRequest $request)
     {
-        //
+        $course = auth()->user()->teaches;
+
+        $quiz = Quiz::create([
+            'name' => $request->name,
+            'course_id' => $course->id,
+        ]);
+
+        return view('questions.create', [$quiz]);
     }
 
     /**
