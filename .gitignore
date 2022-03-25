@@ -1,9 +1,12 @@
 /node_modules
 /public/hot
 /public/storage
+/public/argon
+/public/assets
 /storage/*.key
 /vendor
 .env
+.env.production
 .env.backup
 .phpunit.result.cache
 Homestead.json
