@@ -24,7 +24,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|QuizStudents whereQuizId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuizStudents whereStudentId($value)
  */
-class QuizStudents extends Model
+class QuizStudent extends Model
 {
     use HasFactory;
+
+    protected $table = 'quiz_students';
 }

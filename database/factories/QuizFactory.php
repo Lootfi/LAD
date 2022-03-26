@@ -17,6 +17,8 @@ class QuizFactory extends Factory
     public function definition()
     {
         return [
+            // start date two days from now
+            'start_date' => now()->addDays(2),
             'name' => 'Quiz 01',
             'course_id' => 1,
         ];

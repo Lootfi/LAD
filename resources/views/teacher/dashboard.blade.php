@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboard')
+
+@section('breadcrumb')
+<li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
+@endsection
+
+@endsection
+
 @section('content')
-@include('layouts.headers.cards')
+{{-- @include('layouts.headers.cards') --}}
 
 <div class="container-fluid mt--7">
     <div class="row">

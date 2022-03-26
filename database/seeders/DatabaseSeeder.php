@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,7 @@ class DatabaseSeeder extends Seeder
             CourseStudentSeeder::class,
             QuizQuestionSeeder::class,
             QuizAnswerSeeder::class,
-            QuizStudentsSeeder::class,
+            QuizStudentSeeder::class,
         ]);
     }
 }
