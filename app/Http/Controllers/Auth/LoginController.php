@@ -26,7 +26,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+
 
     /**
      * Create a new controller instance.
@@ -36,5 +37,15 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    // redirect user to dashboard after login based on role of user 'teacher' or 'student'
+    public function redirectTo()
+    {
+        if (auth()->user()->hasRole('teacher')) {
+            return view('teacher.dashboard');
+        } elseif (auth()->user()->hasRole('student')) {
+            return view('student.dashboard');
+        }
     }
 }

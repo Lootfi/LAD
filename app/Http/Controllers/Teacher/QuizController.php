@@ -21,10 +21,28 @@ class QuizController extends Controller
     // index quiz function
     public function index()
     {
+
+        $heads = [
+            'Quiz',
+            ['label' => 'Start Date',],
+            ['label' => 'Status',],
+            ['label' => 'Active Students', 'no-export' => true],
+            ['label' => 'Completion', 'no-export' => true],
+            ['label' => '', 'width' => '1', 'no-export' => true],
+        ];
+
+        $config = [
+            'filters' => ['quiz_name', 'start_date', 'status'],
+            'actions' => ['edit', 'delete'],
+            'perPage' => 10,
+            'perPageOptions' => [10, 20, 50, 100],
+            'order' => [['start_date', 'desc']],
+            'columns' => ['quiz_name', 'start_date', 'status', 'students', 'completion', 'actions'],
+        ];
         // get the authenticated user's course with quizzes relation eager loaded 
         $course = auth()->user()->teaches()->with('quizzes')->first();
         // get the authenticated user's course's quiz
-        return view('teacher.quiz.index', compact('course'));
+        return view('teacher.quiz.index', compact('course', 'heads', 'config'));
     }
 
     // store quiz function
@@ -58,7 +76,7 @@ class QuizController extends Controller
     {
         $quiz->update($request->all());
         // redirect to the quiz index page
-        return redirect()->route('teacher.quiz.index');
+        return redirect()->route('teacher.quiz.index', $course);
     }
 
     // destroy quiz function

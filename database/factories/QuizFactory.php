@@ -19,6 +19,8 @@ class QuizFactory extends Factory
         return [
             // start date two days from now
             'start_date' => now()->addDays(2),
+            // duration is 30 minutes
+            'duration' => 30,
             'name' => 'Quiz 01',
             'course_id' => 1,
         ];

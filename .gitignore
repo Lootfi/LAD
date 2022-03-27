@@ -3,6 +3,7 @@
 /public/storage
 /public/argon
 /public/assets
+/public/vendor
 /storage/*.key
 /vendor
 .env

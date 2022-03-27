@@ -1,4 +1,5 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app') --}}
+@extends('adminlte::page')
 
 @section('title', 'Dashboard')
 
@@ -6,7 +7,6 @@
 <li class="breadcrumb-item"><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
 @endsection
 
-@endsection
 
 @section('content')
 {{-- @include('layouts.headers.cards') --}}

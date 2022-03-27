@@ -20,6 +20,11 @@ return new class extends Migration
 
             // adding quiz start date
             $table->dateTime('start_date');
+            // adding quiz duration
+            $table->integer('duration');
+            // adding quiz description
+            $table->text('description')->nullable();
+
 
             $table->unsignedBigInteger('course_id');
             $table

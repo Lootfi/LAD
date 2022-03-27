@@ -54,12 +54,13 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'avatar'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -90,5 +91,11 @@ class User extends Authenticatable
             'student_id',
             'course_id'
         );
+    }
+
+    //avatar attribute
+    public function getAvatarAttribute($value)
+    {
+        return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
     }
 }

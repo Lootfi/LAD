@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('title', 'Course')
 
-@section('breadcrumbs')
+@section('content_header')
 <li class="breadcrumb-item">Course</li>
-@show
+@endsection
 
 @section('content')
 <div class="container-fluid mt--7">

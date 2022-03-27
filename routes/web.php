@@ -4,6 +4,8 @@ use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardControll
 use App\Http\Controllers\Teacher\CourseController as TeacherCourseController;
 use App\Http\Controllers\Teacher\StudentController as TeacherStudentController;
 use App\Http\Controllers\Teacher\QuizController as TeacherQuizController;
+use App\Http\Controllers\Teacher\QuizQuestionController as TeacherQuizQuestionController;
+use App\Http\Controllers\Teacher\QuizAnswerController as TeacherQuizAnswerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +24,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Auth::routes();
-
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'App\Http\Controllers\UserController', [
@@ -61,15 +60,18 @@ Route::group(['middleware' => 'auth'], function () {
 Route::prefix('teacher')
     ->middleware(['middleware' => 'role:teacher'])
     ->group(function () {
+
         Route::get('dashboard', [
             TeacherDashboardController::class,
             'index',
         ])->name('teacher.dashboard');
+
         // create a student account
         Route::get('student/create', [
             TeacherStudentController::class,
             'create',
         ])->name('teacher.student.create');
+
         Route::post('student/create', [
             TeacherStudentController::class,
             'store',
@@ -83,15 +85,18 @@ Route::prefix('teacher')
             TeacherCourseController::class,
             'create',
         ])->name('teacher.course.create');
+
         Route::post('course/create', [
             TeacherCourseController::class,
             'store',
         ])->name('teacher.course.store');
+
         //edit course
         Route::get('course/{course}/edit', [
             TeacherCourseController::class,
             'edit',
         ])->name('teacher.course.edit');
+
         Route::put('course/{course}/edit', [
             TeacherCourseController::class,
             'update',
@@ -232,3 +237,9 @@ Route::prefix('teacher')
         // 	return view('pages.teacher.assignments.delete');
         // })->name('teacher.assignments.delete');
     });
+
+Auth::routes();
+
+Route::get('/home', function () {
+    return view('home');
+})->name('home')->middleware('auth');
