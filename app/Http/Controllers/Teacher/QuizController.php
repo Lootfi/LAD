@@ -62,11 +62,8 @@ class QuizController extends Controller
     }
 
     // destroy quiz function
-    public function destroy($quiz)
+    public function destroy(Course $course, Quiz $quiz)
     {
-        // get the authenticated user's course with quizzes relation eager loaded 
-        $course = auth()->user()->teaches()->with('quizzes')->first();
-        // get the authenticated user's course's quiz
         $quiz->delete();
         // redirect to the quiz index page
         return redirect()->route('teacher.quiz.index');
