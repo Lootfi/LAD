@@ -18,8 +18,6 @@ class QuizAnswerFactory extends Factory
     {
         return [
             'answer' => $this->faker->sentence(2) . '.',
-            'question_id' => $this->faker->numberBetween(1, 10),
-            'right_answer' => false,
         ];
     }
 }

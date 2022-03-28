@@ -31,6 +31,26 @@ class QuizQuestionController extends Controller
         });
         $question->save();
 
-        return redirect()->route('teacher.quiz.show', parameters: ['course' => $course, 'quiz' => $quiz]);
+        //reload page and scroll to the updated question in the list of questions in the quiz edit page
+        return redirect()->route('teacher.quiz.edit', ['course' => $course, 'quiz' => $quiz, 'question_id' => $question->id]);
+    }
+
+    // store question in quiz and redirect to edit page of the question in the quiz edit page
+    // create with it one answer
+    public function store(Request $request, Quiz $quiz)
+    {
+        $course = $quiz->course;
+        $quiz = $quiz->load('questions');
+        $question = $quiz->questions()->create([
+            'question' => $request->question,
+        ]);
+        $question->answers()->create([
+            'answer' => $request->answer,
+            'right_answer' => true,
+        ]);
+        $question->save();
+
+        //reload page and scroll to the new question in the list of questions in the quiz edit page
+        return redirect()->route('teacher.quiz.edit', ['course' => $course, 'quiz' => $quiz, 'question_id' => $question->id]);
     }
 }

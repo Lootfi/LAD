@@ -15,6 +15,11 @@ class QuizQuestionSeeder extends Seeder
      */
     public function run()
     {
-        QuizQuestion::factory(2)->create();
+        QuizQuestion::factory(2)->create([
+            'quiz_id' => 1,
+        ]);
+        QuizQuestion::factory(2)->create([
+            'quiz_id' => 2,
+        ]);
     }
 }

@@ -21,7 +21,8 @@ class QuizFactory extends Factory
             'start_date' => now()->addDays(2),
             // duration is 30 minutes
             'duration' => 30,
-            'name' => 'Quiz 01',
+            // random number in quiz name "Quiz #"
+            'name' => 'Quiz #' . rand(1, 100),
             'course_id' => 1,
         ];
     }

@@ -18,7 +18,7 @@ class QuizQuestionFactory extends Factory
     {
         return [
             'question' => $this->faker->sentence(variableNbWords: false) . '?',
-            'quiz_id' => 1,
+            // quiz_id is set in the seeder
         ];
     }
 }

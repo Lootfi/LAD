@@ -141,36 +141,6 @@ Route::prefix('teacher')
             'destroy',
         ])->name('teacher.quiz.destroy');
 
-        // update quiz questions and answers
-        Route::put('course/{course}/quiz/{quiz}/questions/update', [
-            TeacherQuizController::class,
-            'questionUpdate',
-        ])->name('teacher.quiz.questions.update');
-        Route::delete('course/{course}/quiz/{quiz}/question/{question}', [
-            TeacherQuizController::class,
-            'questionDestroy',
-        ])->name('teacher.quiz.question.destroy');
-        Route::get(
-            'course/{course}/quiz/{quiz}/question/{question}/answer/create',
-            [TeacherQuizController::class, 'answerCreate']
-        )->name('teacher.quiz.answer.create');
-        Route::post(
-            'course/{course}/quiz/{quiz}/question/{question}/answer/create',
-            [TeacherQuizController::class, 'answerStore']
-        )->name('teacher.quiz.answer.store');
-        Route::get(
-            'course/{course}/quiz/{quiz}/question/{question}/answer/{answer}/edit',
-            [TeacherQuizController::class, 'answerEdit']
-        )->name('teacher.quiz.answer.edit');
-        Route::put(
-            'course/{course}/quiz/{quiz}/question/{question}/answer/{answer}',
-            [TeacherQuizController::class, 'answerUpdate']
-        )->name('teacher.quiz.answer.update');
-        Route::delete(
-            'course/{course}/quiz/{quiz}/question/{question}/answer/{answer}',
-            [TeacherQuizController::class, 'answerDestroy']
-        )->name('teacher.quiz.answer.destroy');
-
         //add quesion to quiz
         Route::get('quiz/{quiz}/question/create', [
             TeacherQuizQuestionController::class,
@@ -189,17 +159,14 @@ Route::prefix('teacher')
             TeacherQuizQuestionController::class,
             'update',
         ])->name('teacher.quiz.question.update');
+
         //delete question
         Route::delete('quiz/{quiz}/question/{question}/delete', [
             TeacherQuizQuestionController::class,
             'destroy',
         ])->name('teacher.quiz.question.destroy');
 
-        //add answer to question
-        Route::get('quiz/{quiz}/question/{question}/answer/create', [
-            TeacherQuizAnswerController::class,
-            'create',
-        ])->name('teacher.quiz.answer.create');
+
         Route::post('quiz/{quiz}/question/{question}/answer/create', [
             TeacherQuizAnswerController::class,
             'store',

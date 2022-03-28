@@ -38,7 +38,8 @@
                     </div>
                     <div class="form-group{{ $errors->has('start_date') ? ' has-danger' : '' }}">
                         <label class="form-control-label" for="input-start_date">{{ __('Start Date') }}</label>
-                        <input type="date" name="start_date" id="input-start_date"
+                        {{-- input for start date datetime_local dd/mm/yyyy--}}
+                        <input type="datetime-local" name="start_date" id="input-start_date"
                             class="form-control form-control-alternative{{ $errors->has('start_date') ? ' is-invalid' : '' }}"
                             placeholder="{{ __('Start Date') }}" value="{{ old('start_date', $quiz->start_date) }}"
                             required autofocus>
@@ -97,70 +98,15 @@
 {{-- rows of forms to edit quiz questions with their answers --}}
 {{-- foreach question, add a row with a form --}}
 @foreach ($quiz->questions as $question)
-<div class="row">
-    <div class="col">
-        <div class="card bg-default shadow">
-            <div class="card-header bg-transparent border-0">
-                <h3 class="mb-0">Edit Question</h3>
-            </div>
-            <div class="card-body">
-                <form id="{{$question->id}}" method="POST"
-                    action="{{ route('teacher.quiz.question.update', [$course, $quiz, $question]) }}">
-                    @csrf
-                    @method('PUT')
-                    <div class="form-group{{ $errors->has('question') ? ' has-danger' : '' }}">
-                        <label class="form-control-label" for="input-question">{{ __('Question') }}</label>
-                        <input type="text" name="question" id="input-question"
-                            class="form-control form-control-alternative{{ $errors->has('question') ? ' is-invalid' : '' }}"
-                            placeholder="{{ __('Question') }}" value="{{ old('question', $question->question) }}"
-                            required autofocus>
 
-                        @if ($errors->has('question'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('question') }}</strong>
-                        </span>
-                        @endif
-                    </div>
-                    {{-- a form group with all possible question's answers, and a toggle for right_answer --}}
-                    @foreach ($question->answers as $answer)
-                    <div class="form-group" name="answers" id="{{$answer->id}}">
-                        <label class="form-control-label" for="input-answer">{{ __('Answer') }}</label>
-                        {{-- fancy checkbox for right_answer, allow user to change right_answer --}}
-                        <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" name="right-answers[]" class="custom-control-input"
-                                id="right-answer-{{ $answer->id }}" value="{{ $answer->id }}" {{ $answer->right_answer ?
-                            'checked' : '' }}>
-                            <label class="custom-control-label" for="right-answer-{{ $answer->id }}">{{ __('Correct
-                                Answer') }}</label>
-                        </div>
+{{-- create new answer modal --}}
 
-                        {{-- answer --}}
-                        <input type="text" name="answers[{{ $answer->id }}]" id="answer-{{ $answer->id }}"
-                            class="form-control form-control-alternative{{ $errors->has('answer') ? ' is-invalid' : '' }}"
-                            placeholder="{{ __('Answer') }}" value="{{ old('answer', $answer->answer) }}" required
-                            autofocus>
+<x-teacher.quiz.create_new_answer_modal :question="$question" :quiz="$quiz" />
 
-                        @if ($errors->has('answer'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('answer') }}</strong>
-                        </span>
-                        @endif
-                    </div>
-                    @endforeach
-                    {{-- button that creates a new input group for a new answer in a modal --}}
-                    <div class="text-center">
-                        <button type="button" class="btn btn-success mt-4" data-toggle="modal"
-                            data-target="#add-answer-modal">{{ __('Add A New Answer') }}</button>
-                    </div>
+{{-- edit question row --}}
+<x-teacher.quiz.edit_question_form :question="$question" :quiz="$quiz" />
 
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+{{-- edit answer row --}}
 
 {{-- add some margin between two divs --}}
 <div class="row">
@@ -173,7 +119,7 @@
     <div class="col">
         {{-- button 'Add Question', shows new modal --}}
         <button type="button" class="mb-5 btn btn-success btn-block" data-toggle="modal"
-            data-target="#add-question-modal">{{
+            data-target="#add-question-modal-{{$quiz->id}}">{{
             __('Add New Question') }}</button>
     </div>
 </div>
@@ -181,93 +127,39 @@
 {{-- modal for adding new question --}}
 
 {{-- add-question-modal --}}
-<div class="modal fade" id="add-question-modal" tabindex="-1" role="dialog" aria-labelledby="add-question-modal-label"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="add-question-modal-label">{{ __('Add Question') }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="{{ route('teacher.quiz.question.store', [$course, $quiz]) }}">
-                    @csrf
-                    <div class="form-group{{ $errors->has('question') ? ' has-danger' : '' }}">
-                        <label class="form-control-label" for="input-question">{{ __('Question') }}</label>
-                        <input type="text" name="question" id="input-question"
-                            class="form-control form-control-alternative{{ $errors->has('question') ? ' is-invalid' : '' }}"
-                            placeholder="{{ __('Question') }}" value="{{ old('question') }}" required autofocus>
 
-                        @if ($errors->has('question'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('question') }}</strong>
-                        </span>
-                        @endif
-                    </div>
-                    <div class="form-group" name='answers'>
-                        <label class="form-control-label" for="input-answer">{{ __('Answer') }}</label>
-                        <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" name="right-answers[]" class="custom-control-input"
-                                id="right-answer-1" value="1" checked>
-                            <label class="custom-control-label" for="right-answer-1">{{ __('Correct Answer') }}</label>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-success mt-4">{{ __('Add') }}</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<x-teacher.quiz.create_new_question_modal :quiz="$quiz" />
 
 
-{{-- add-answer-modal --}}
-<div class="modal fade" id="add-answer-modal" tabindex="-1" role="dialog" aria-labelledby="add-answer-modal-label"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="add-answer-modal-label">{{ __('Add Answer') }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="{{ route('teacher.quiz.answer.store', [$course, $quiz, $question]) }}">
-                    @csrf
-                    <div class="form-group" name='answers'>
-                        <label class="form-control-label" for="input-answer">{{ __('Answer') }}</label>
-                        <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" name="right_answer" class="custom-control-input" id="right_answer"
-                                value="1">
-                            <label class="custom-control-label" for="right_answer">{{ __('Correct Answer') }}</label>
-                        </div>
-                    </div>
-                    <input type="text" name="answer" id="answer"
-                        class="form-control form-control-alternative{{ $errors->has('answer') ? ' is-invalid' : '' }}"
-                        placeholder="{{ __('Answer') }}" value="" required autofocus>
 
-                    @if ($errors->has('answer'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('answer') }}</strong>
-                    </span>
-                    @endif
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-success mt-4">{{ __('Add') }}</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
 
 
 @endsection
 
 @section('js')
+<script>
+    var updateRightAnswer;
+    // when page is reloaded, scroll to question's id in url (if exists) or to the top of the page (if not)
+    $(document).ready(function () {
+        // get question_id from url paramaters (if exists)
+        var question_id = new URLSearchParams(window.location.search).get('question_id')
+        console.log(question_id);
+        if (question_id) {
 
+            document.getElementById('question-' + question_id).scrollIntoView({
+            behavior: 'auto',
+            block: 'center',
+            inline: 'center',
+            behavior: 'smooth',
+        });
+            
+        }
+
+        updateRightAnswer = function (elementId) {
+        let el = document.getElementById("answer-wrapper-" + elementId);
+        el.classList.add("border","border-success");
+    }
+    });
+
+</script>
 @endsection

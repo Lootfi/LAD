@@ -32,5 +32,21 @@ class QuizAnswerSeeder extends Seeder
             'question_id' => 2,
             'right_answer' => false,
         ]);
+        QuizAnswer::factory(1)->create([
+            'question_id' => 3,
+            'right_answer' => true,
+        ]);
+        QuizAnswer::factory(1)->create([
+            'question_id' => 3,
+            'right_answer' => false,
+        ]);
+        QuizAnswer::factory(1)->create([
+            'question_id' => 4,
+            'right_answer' => true,
+        ]);
+        QuizAnswer::factory(1)->create([
+            'question_id' => 4,
+            'right_answer' => false,
+        ]);
     }
 }
