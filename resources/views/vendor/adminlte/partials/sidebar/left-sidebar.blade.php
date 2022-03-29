@@ -17,8 +17,13 @@
                 {{-- Configured sidebar links --}}
                 @each('adminlte::partials.sidebar.menu-item', $adminlte->menu('sidebar'), 'item')
 
+
                 {{-- sidenar link to teacher's course --}}
                 @role('teacher')
+                {{-- header --}}
+                <li class="nav-header">
+                    COURSES
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('teacher.course') }}" class="nav-link">
                         <i class="fas fa-book"></i>

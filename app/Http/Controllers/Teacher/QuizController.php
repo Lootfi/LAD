@@ -10,11 +10,9 @@ use Illuminate\Http\Request;
 class QuizController extends Controller
 {
     // create quiz function
-    public function create()
+    public function create(Request $request)
     {
-        // get the authenticated user's course
-        $course = auth()->user()->course;
-        // get the authenticated user's course's quiz
+        $course = Course::find($request->course_id);
         return view('teacher.quiz.create', compact('course'));
     }
 
@@ -22,26 +20,37 @@ class QuizController extends Controller
     public function index()
     {
 
+        // load the authenticated user's course quizzes
+        $course = auth()->user()->teaches()->with('quizzes')->first();
+
         $heads = [
-            'Quiz',
-            ['label' => 'Start Date',],
-            ['label' => 'Status',],
-            ['label' => 'Active Students', 'no-export' => true],
-            ['label' => 'Completion', 'no-export' => true],
-            ['label' => '', 'width' => '1', 'no-export' => true],
+            ['label' => 'Name', 'key' => 'name'],
+            ['label' => 'Start Date', 'key' => 'start_date'],
+            ['label' => 'Status', 'key' => 'status'],
+            ['label' => 'Active Students', 'no-export' => true, 'key' => 'active_students'],
+            ['label' => 'Completion', 'no-export' => true, 'key' => 'completion'],
+            ['label' => 'Actions', 'width' => '1', 'no-export' => true, 'key' => 'actions'],
         ];
 
         $config = [
-            'filters' => ['quiz_name', 'start_date', 'status'],
+            //filters
+            'filters' => [
+                ['name' => 'name', 'label' => 'Name', 'type' => 'text'],
+                ['name' => 'start_date', 'label' => 'Start Date', 'type' => 'date'],
+                ['name' => 'status', 'label' => 'Status', 'type' => 'select', 'options' => [
+                    ['value' => '', 'label' => 'All'],
+                    ['value' => 'active', 'label' => 'Active'],
+                    ['value' => 'inactive', 'label' => 'Inactive'],
+                ]],
+            ],
             'actions' => ['edit', 'delete'],
             'perPage' => 10,
             'perPageOptions' => [10, 20, 50, 100],
             'order' => [['start_date', 'desc']],
-            'columns' => ['quiz_name', 'start_date', 'status', 'students', 'completion', 'actions'],
+            //columns
+            'columns' => $heads,
         ];
-        // get the authenticated user's course with quizzes relation eager loaded 
-        $course = auth()->user()->teaches()->with('quizzes')->first();
-        // get the authenticated user's course's quiz
+
         return view('teacher.quiz.index', compact('course', 'heads', 'config'));
     }
 
@@ -86,7 +95,4 @@ class QuizController extends Controller
         // redirect to the quiz index page
         return redirect()->route('teacher.quiz.index');
     }
-
-    // show quiz result function
-
 }

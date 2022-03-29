@@ -112,16 +112,23 @@ Route::prefix('teacher')
             TeacherQuizController::class,
             'index',
         ])->name('teacher.quiz.index');
-        //viez course 1 quiz
-        Route::get('course/{course}/quiz/{quiz}', [
-            TeacherQuizController::class,
-            'show',
-        ])->name('teacher.quiz.show');
+
+
         // Create a quiz for a course
         Route::get('course/{course}/quiz/create', [
             TeacherQuizController::class,
             'create',
         ])->name('teacher.quiz.create');
+
+        //viez course 1 quiz
+        Route::get('course/{course}/quiz/{quiz}', [
+            TeacherQuizController::class,
+            'show',
+        ])->name('teacher.quiz.show');
+
+
+
+
         Route::post('course/{course}/quiz/create', [
             TeacherQuizController::class,
             'store',

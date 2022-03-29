@@ -16,3 +16,11 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+
+public/argonx/
+public/assetsx/
+resources/views/dashboardx.blade.php
+resources/views/layoutsx/
+resources/views/pagesx/
+resources/views/profilex/
+resources/views/usersx/

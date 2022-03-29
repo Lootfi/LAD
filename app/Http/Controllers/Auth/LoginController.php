@@ -43,9 +43,9 @@ class LoginController extends Controller
     public function redirectTo()
     {
         if (auth()->user()->hasRole('teacher')) {
-            return view('teacher.dashboard');
+            return route('teacher.dashboard');
         } elseif (auth()->user()->hasRole('student')) {
-            return view('student.dashboard');
+            return route('student.dashboard');
         }
     }
 }

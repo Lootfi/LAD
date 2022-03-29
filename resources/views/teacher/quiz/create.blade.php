@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('title', 'Create Quiz')
 
-@section('breadcrumb')
+@section('content_header')
 <li class="breadcrumb-item"><a href="{{ route('teacher.quiz.index', ['course' => auth()->user()->teaches]) }}">Quiz</a>
 </li>
 <li class="breadcrumb-item active">Create</li>
@@ -11,50 +11,30 @@
 
 @section('content')
 
-{{-- //create a quiz form --}}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Create Quiz') }}</div>
+{{-- create a quiz form --}}
+<form action="{{ route('teacher.quiz.store', ['course' => auth()->user()->teaches]) }}" method="POST">
+    @csrf
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter description"
+            required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="start_date">Start Date</label>
+        {{-- input for start date datetime_local dd/mm/yyyy--}}
+        <input type="datetime-local" class="form-control" id="start_date" name="start_date" required>
+    </div>
+    <div class="form-group">
+        <label for="time_limit">Time Limit (mins)</label>
+        <input type="number" class="form-control" id="time_limit" name="duration" placeholder="Enter time limit"
+            required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('teacher.quiz.store') }}">
-                        @csrf
 
-                        <div class="form-group row">
-                            <label for="quiz_name" class="col-md-4 col-form-label text-md-right">{{ __('Quiz Name')
-                                }}</label>
-
-                            <div class="col-md-6">
-                                <input id="quiz_name" type="text"
-                                    class="form-control @error('quiz_name') is-invalid @enderror" name="quiz_name"
-                                    value="{{ old('quiz_name') }}" required autocomplete="quiz_name" autofocus>
-
-                                @error('quiz_name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="quiz_description" class="col-md-4 col-form-label text-md-right">{{ __('Quiz
-                                Description') }}</label>
-
-                            <div class="col-md-6">
-                                <textarea id="quiz_description"
-                                    class="form-control @error('quiz_description') is-invalid @enderror"
-                                    name="quiz_description" value="{{ old('quiz_description') }}" required
-                                    autocomplete="quiz_description" autofocus></textarea>
-
-                                @error('quiz_description')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        < @endsection
+@endsection

@@ -37,6 +37,8 @@ class Quiz extends Model
     //mutated attribute end_date is not present in the database table but we need it for the model to work properly
     protected $fillable = ['name', 'course_id', 'start_date', 'duration', 'description'];
 
+    // appends to status and completion attributes
+    protected $appends = ['status'];
 
 
 
