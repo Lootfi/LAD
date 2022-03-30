@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <form method="POST"
-                    action="{{ route('teacher.quiz.answer.store', ['quiz' => $quiz, 'question' => $question]) }}">
+                    action="{{ route('teacher.answer.store', ['quiz' => $quiz, 'question' => $question]) }}">
                     @csrf
                     <div class="form-group" name='answers'>
                         <label class="form-control-label" for="input-answer">{{ __('Answer') }}</label>

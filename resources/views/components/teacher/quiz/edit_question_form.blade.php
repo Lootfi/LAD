@@ -6,7 +6,7 @@
             </div>
             <div class="card-body">
                 <form id="question-{{$question->id}}" method="POST"
-                    action="{{ route('teacher.quiz.question.update', ['quiz' => $quiz, 'question' => $question]) }}">
+                    action="{{ route('teacher.question.update', ['quiz' => $quiz, 'question' => $question]) }}">
                     @csrf
                     @method('PUT')
                     <div class="form-group{{ $errors->has('question') ? ' has-danger' : '' }}">

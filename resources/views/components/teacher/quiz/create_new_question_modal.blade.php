@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('teacher.quiz.question.store', ['quiz' => $quiz]) }}">
+                <form method="POST" action="{{ route('teacher.question.store', ['quiz' => $quiz]) }}">
                     @csrf
                     <div class="form-group{{ $errors->has('question') ? ' has-danger' : '' }}">
                         <label class="form-control-label" for="input-question">{{ __('Question') }}</label>

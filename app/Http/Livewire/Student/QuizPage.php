@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Student;
 
 use App\Models\Quiz;
 use Livewire\Component;
 
-class QuizCountdownTimer extends Component
+class QuizPage extends Component
 {
-    // quiz
     public $quiz;
-
-    // mount
 
     public function mount(Quiz $quiz)
     {
@@ -19,6 +16,6 @@ class QuizCountdownTimer extends Component
 
     public function render()
     {
-        return view('livewire.quiz-countdown-timer');
+        return view('livewire.student.quiz-page');
     }
 }

@@ -25,7 +25,7 @@
                     COURSES
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('teacher.course') }}" class="nav-link">
+                    <a href="{{ route('teacher.course.show',['course' => auth()->user()->teaches]) }}" class="nav-link">
                         <i class="fas fa-book"></i>
                         <p>
                             Course
@@ -53,16 +53,13 @@
                 @endrole
 
 
-                @if(Auth::user()->role == 'student')
-                <li class="nav-item">
-                    <a href="{{ route('student.course.index') }}" class="nav-link">
-                        <i class="fas fa-book"></i>
-                        <p>
-                            Course
-                        </p>
-                    </a>
+                {{-- sidenar link to student's course --}}
+                @role('student')
+                {{-- header --}}
+                <li class="nav-header">
+                    COURSES
                 </li>
-                @endif
+                @endrole
 
             </ul>
         </nav>
