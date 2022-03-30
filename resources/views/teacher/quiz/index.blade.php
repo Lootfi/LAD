@@ -6,11 +6,6 @@
 <li class="breadcrumb-item">Course</li>
 @endsection
 
-@section('css')
-
-<link rel="stylesheet" href="{{asset('css/avatars.css')}}">
-@endsection
-
 @section('content')
 
 
@@ -46,7 +41,7 @@
             <div class="avatar-group avatar-group-overlapped avatar-group-sm mr-40 mt-25">
                 @foreach ($course->students as $student)
                 <a href="#" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="{{ $student->name }}">
-                    <img alt="Image placeholder" src="{{ $student->avatar }}" class="avatar-img rounded-circle ">
+                    <img alt="Image placeholder" src="{{ $student->avatar }}" class="avatar-img rounded-circle">
                 </a>
                 @endforeach
             </div>
@@ -80,12 +75,16 @@
                     <a class="dropdown-item" href="{{ route('teacher.quiz.edit', [$course, $quiz]) }}">
                         Edit Quiz
                     </a>
-                    {{-- delete button that shows a confirmation modal --}}
+                    {{-- button to notify students about the upcomming quiz --}}
+                    <a class="dropdown-item" href="{{ route('teacher.quiz.notify', [$course, $quiz]) }}">
+                        Notify Students
+                    </a>
+                    {{-- delete button that shows a confirmation modal, text color red --}}
                     <button class="dropdown-item" data-toggle="modal" data-target="#deleteModal"
                         data-url="{{ route('teacher.quiz.destroy', [$course, $quiz]) }}">
                         Delete Quiz
                     </button>
-                    {{-- <a class="dropdown-item" href="#">Delete</a> --}}
+
                 </div>
             </div>
         </td>
@@ -120,6 +119,16 @@
         </div>
     </div>
 </div>
+
+{{-- view success message when students are notified --}}
+@if (session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session('success') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 
 @endsection
 

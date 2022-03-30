@@ -58,11 +58,11 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         // get the authenticated user's course
-        $course = auth()->user()->course;
+        $course = auth()->user()->teaches;
         // create a new quiz
         $quiz = $course->quizzes()->create($request->all());
         // redirect to the quiz index page
-        return redirect()->route('teacher.quiz.index');
+        return redirect()->route('teacher.quiz.index', compact('course'));
     }
 
     // show quiz function
@@ -94,5 +94,20 @@ class QuizController extends Controller
         $quiz->delete();
         // redirect to the quiz index page
         return redirect()->route('teacher.quiz.index');
+    }
+
+    // notify quiz function
+    public function notify(Course $course, Quiz $quiz)
+    {
+        // get the quiz's students
+        $students = $course->students;
+
+        // loop through the students
+        foreach ($students as $student) {
+            // send the student a notification
+            $student->notify(new \App\Notifications\NewQuiz($quiz->load('course')));
+        }
+
+        return redirect()->route('teacher.quiz.index', compact('course'))->with('success', 'Students have been notified about quiz!');
     }
 }

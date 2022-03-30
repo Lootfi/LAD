@@ -6,6 +6,14 @@ use App\Http\Controllers\Teacher\StudentController as TeacherStudentController;
 use App\Http\Controllers\Teacher\QuizController as TeacherQuizController;
 use App\Http\Controllers\Teacher\QuizQuestionController as TeacherQuizQuestionController;
 use App\Http\Controllers\Teacher\QuizAnswerController as TeacherQuizAnswerController;
+
+use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
+use App\Http\Controllers\Student\CourseController as StudentCourseController;
+use App\Http\Controllers\Student\QuizController as StudentQuizController;
+use App\Http\Controllers\Student\QuizQuestionController as StudentQuizQuestionController;
+use App\Http\Controllers\Student\QuizAnswerController as StudentQuizAnswerController;
+use App\Http\Controllers\Student\NotificationController as StudentNotificationController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,36 +31,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::resource('user', 'App\Http\Controllers\UserController', [
-        'except' => ['show'],
-    ]);
-    Route::get('profile', [
-        'as' => 'profile.edit',
-        'uses' => 'App\Http\Controllers\ProfileController@edit',
-    ]);
-    Route::put('profile', [
-        'as' => 'profile.update',
-        'uses' => 'App\Http\Controllers\ProfileController@update',
-    ]);
-    Route::get('upgrade', function () {
-        return view('pages.upgrade');
-    })->name('upgrade');
-    Route::get('map', function () {
-        return view('pages.maps');
-    })->name('map');
-    Route::get('icons', function () {
-        return view('pages.icons');
-    })->name('icons');
-    Route::get('table-list', function () {
-        return view('pages.tables');
-    })->name('table');
-    Route::put('profile/password', [
-        'as' => 'profile.password',
-        'uses' => 'App\Http\Controllers\ProfileController@password',
-    ]);
 });
 
 //teacher dashboard routes, with auth middleware
@@ -125,6 +103,11 @@ Route::prefix('teacher')
             TeacherQuizController::class,
             'show',
         ])->name('teacher.quiz.show');
+        // notify students about quiz
+        Route::get('course/{course}/quiz/{quiz}/notify', [
+            TeacherQuizController::class,
+            'notify',
+        ])->name('teacher.quiz.notify');
 
 
 
@@ -211,6 +194,86 @@ Route::prefix('teacher')
         // 	return view('pages.teacher.assignments.delete');
         // })->name('teacher.assignments.delete');
     });
+
+
+// student dashboard routes
+
+Route::prefix('student')
+    ->middleware(['middleware' => 'role:student'])
+    ->group(function () {
+        Route::get('/', [
+            StudentDashboardController::class,
+            'index',
+        ])->name('student.dashboard');
+
+        Route::get('/course', [
+            StudentCourseController::class,
+            'index',
+        ])->name('student.course');
+
+        Route::get('/course/{course}', [
+            StudentCourseController::class,
+            'show',
+        ])->name('student.course.show');
+
+        // student.quiz.index
+        Route::get('/course/{course}/quiz', [
+            StudentQuizController::class,
+            'index',
+        ])->name('student.quiz.index');
+
+        Route::get('/course/{course}/quiz/{quiz}', [
+            StudentQuizController::class,
+            'show',
+        ])->name('student.quiz.show');
+
+        Route::post('/course/{course}/quiz/{quiz}', [
+            StudentQuizController::class,
+            'store',
+        ])->name('student.quiz.store');
+
+        Route::get('/course/{course}/quiz/{quiz}/result', [
+            StudentQuizController::class,
+            'result',
+        ])->name('student.quiz.result');
+
+        Route::get('/course/{course}/quiz/{quiz}/result/{result}', [
+            StudentQuizController::class,
+            'showResult',
+        ])->name('student.quiz.showResult');
+
+        Route::get('/course/{course}/quiz/{quiz}/result/{result}/edit', [
+            StudentQuizController::class,
+            'editResult',
+        ])->name('student.quiz.editResult');
+
+        Route::put('/course/{course}/quiz/{quiz}/result/{result}/edit', [
+            StudentQuizController::class,
+            'updateResult',
+        ])->name('student.quiz.updateResult');
+
+        Route::get('/course/{course}/quiz/{quiz}/result/{result}/delete', [
+            StudentQuizController::class,
+            'destroyResult',
+        ])->name('student.quiz.destroyResult');
+
+        Route::get('/course/{course}/quiz/{quiz}/result/{result}/comment', [
+            StudentQuizController::class,
+            'comment',
+        ])->name('student.quiz.comment');
+
+
+
+        // student.notifications.markAsRead
+        Route::post('/notifications/markAsRead', [
+            StudentNotificationController::class,
+            'markAsRead',
+        ])->name('student.notifications.markAsRead');
+    });
+
+
+
+
 
 Auth::routes();
 

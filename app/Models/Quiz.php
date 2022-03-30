@@ -38,7 +38,7 @@ class Quiz extends Model
     protected $fillable = ['name', 'course_id', 'start_date', 'duration', 'description'];
 
     // appends to status and completion attributes
-    protected $appends = ['status'];
+    protected $appends = ['status', 'end_date', 'is_active'];
 
 
 
@@ -71,7 +71,12 @@ class Quiz extends Model
     //quiz custom attribute: is_active, equals end_date > now
     public function getIsActiveAttribute()
     {
-        return $this->end_date > now();
+        // if status is active, return true
+        if ($this->status == 'active') {
+            return true;
+        }
+        // else return false
+        return false;
     }
 
     //quiz custom attribute: status

@@ -43,16 +43,19 @@ class PermissionsSeeder extends Seeder
         // gets all permissions via Gate::before rule; see AuthServiceProvider
 
         $user = \App\Models\User::factory()->create([
+            'name' => 'Teacher',
             'email' => 'teacher@example.com',
         ]);
         $user->assignRole($teacher);
 
         $user = \App\Models\User::factory()->create([
+            'name' => 'Student 01',
             'email' => 'student01@example.com',
         ]);
         $user->assignRole($student);
 
         $user = \App\Models\User::factory()->create([
+            'name' => 'Student 02',
             'email' => 'student02@example.com',
         ]);
         $user->assignRole($student);
