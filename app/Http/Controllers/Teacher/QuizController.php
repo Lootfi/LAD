@@ -74,9 +74,8 @@ class QuizController extends Controller
     // edit quiz function
     public function edit(Course $course, Quiz $quiz)
     {
-        // get quiz questions and answers with quiz_question and quiz_answer relation eager loaded
-        $quiz = $quiz->load('questions.answers');
-        // return the edit quiz page
+        $quiz->load('questions.answers');
+
         return view('teacher.quiz.edit', compact('course', 'quiz'));
     }
 

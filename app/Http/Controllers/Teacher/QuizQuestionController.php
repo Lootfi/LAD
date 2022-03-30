@@ -15,7 +15,7 @@ class QuizQuestionController extends Controller
     public function update(Request $request, Quiz $quiz, QuizQuestion $question)
     {
         $course = $quiz->course;
-        $quiz = $quiz->load('questions');
+        $quiz->load('questions');
         $question = $quiz->questions->find($question);
         $question->update([
             'question' => $request->question,
@@ -40,7 +40,7 @@ class QuizQuestionController extends Controller
     public function store(Request $request, Quiz $quiz)
     {
         $course = $quiz->course;
-        $quiz = $quiz->load('questions');
+        $quiz->load('questions');
         $question = $quiz->questions()->create([
             'question' => $request->question,
         ]);

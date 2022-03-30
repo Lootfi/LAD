@@ -12,8 +12,7 @@ class QuizController extends Controller
     // show one quiz method
     public function show(Course $course, Quiz $quiz)
     {
-        $quiz = $quiz->load('questions.answers');
-        $quiz = $quiz->load('course');
+        $quiz->load(['questions.answers', 'course']);
 
         return view('student.quiz.show', compact('quiz'));
     }

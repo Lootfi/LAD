@@ -47,12 +47,12 @@ Route::prefix('teacher')
 
         /*
         *
-        * Course Routes
+        * Course Resource Routes
         *
         */
 
-        Route::resource('course', TeacherCourseController::class);
 
+        Route::resource('course', TeacherCourseController::class);
 
         /*
         *
@@ -112,7 +112,7 @@ Route::prefix('student')
         * Student Courses Routes
         */
 
-        Route::resource('course', StudentCourseController::class);
+        Route::resource('course', StudentCourseController::class)->except(['create', 'edit']);
 
         /*
         *

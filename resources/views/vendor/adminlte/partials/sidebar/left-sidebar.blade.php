@@ -15,7 +15,7 @@
                 data-animation-speed="{{ config('adminlte.sidebar_nav_animation_speed') }}" @endif
                 @if(!config('adminlte.sidebar_nav_accordion')) data-accordion="false" @endif>
                 {{-- Configured sidebar links --}}
-                @each('adminlte::partials.sidebar.menu-item', $adminlte->menu('sidebar'), 'item')
+                {{-- @each('adminlte::partials.sidebar.menu-item', $adminlte->menu('sidebar'), 'item') --}}
 
 
                 {{-- sidenar link to teacher's course --}}
@@ -55,10 +55,40 @@
 
                 {{-- sidenar link to student's course --}}
                 @role('student')
-                {{-- header --}}
-                <li class="nav-header">
-                    COURSES
+
+                <li class="nav-item has-treeview">
+                    {{-- white colored hr line --}}
+                    <hr class="sidebar-divider ">
+                    {{-- Menu toggler --}}
+                    <a class="nav-link" href="">
+
+                        <i class="fas fa-fw fa-share' }}"></i>
+                        <p>
+                            My Courses
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+
+                    </a>
+                    {{-- Menu items --}}
+                    <ul class="nav nav-treeview">
+                        {{-- foreach student courses --}}
+                        @foreach(auth()->user()->courses as $course)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('student.course.show',['course' => $course])}}">
+                                <i class=""></i>
+                                <p>
+                                    {{ $course->title }}
+                                </p>
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
+                    <hr class="sidebar-divider ">
+
                 </li>
+
+
+
                 @endrole
 
             </ul>
