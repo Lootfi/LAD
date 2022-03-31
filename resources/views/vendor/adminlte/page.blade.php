@@ -15,6 +15,8 @@
 @section('body')
 <div class="wrapper">
 
+    @if(isset($no_navigation) && $no_navigation == true)
+    @else
     {{-- Top Navbar --}}
     @if($layoutHelper->isLayoutTopnavEnabled())
     @include('adminlte::partials.navbar.navbar-layout-topnav')
@@ -26,6 +28,8 @@
     @if(!$layoutHelper->isLayoutTopnavEnabled())
     @include('adminlte::partials.sidebar.left-sidebar')
     @endif
+    @endif
+
 
     {{-- Content Wrapper --}}
     @empty($iFrameEnabled)

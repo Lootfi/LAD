@@ -17,11 +17,7 @@ class QuizFactory extends Factory
     public function definition()
     {
         return [
-            // start date two days from now
-            'start_date' => now()->addDays(2),
-            // duration is 30 minutes
             'duration' => 30,
-            // random number in quiz name "Quiz #"
             'name' => 'Quiz #' . rand(1, 100),
             'course_id' => 1,
         ];

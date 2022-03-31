@@ -24,7 +24,8 @@
                             @endrole
 
                             @role('student')
-                            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{route('student.dashboard')}}"><i
+                                        class="fas fa-home"></i></a></li>
 
                             @endrole
                             @yield('content_header')

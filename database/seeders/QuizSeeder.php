@@ -15,6 +15,12 @@ class QuizSeeder extends Seeder
      */
     public function run()
     {
-        Quiz::factory(2)->create();
+        Quiz::factory()->create([
+            'start_date' => now()->addDays(2),
+        ]);
+        Quiz::factory()->create([
+            'start_date' => now(),
+            'duration' => 90
+        ]);
     }
 }
