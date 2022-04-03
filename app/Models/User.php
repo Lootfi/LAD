@@ -93,7 +93,6 @@ class User extends Authenticatable
         );
     }
 
-    //avatar attribute
     public function getAvatarAttribute($value)
     {
         return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';

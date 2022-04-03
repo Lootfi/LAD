@@ -12,7 +12,7 @@
                 <ul class="list-group mr-2">
                     @foreach ($quiz->questions as $key => $question)
                     {{-- rounded div --}}
-                    <li class="list-group-item {{ $key == 0 ? 'active' : '' }}">
+                    <li class="list-group-item {{ $question->id == $active_question->id ? 'active' : '' }}">
                         <span class="">{{ $key + 1 }}</span>
                     </li>
                     @endforeach

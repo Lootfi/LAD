@@ -35,8 +35,9 @@ class QuizQuestion extends Model
 {
     use HasFactory;
 
-    //allow mass assignment of the following fields to be set by the user in the database (not the model)
     protected $fillable = ['question', 'quiz_id'];
+
+    protected $table = 'quiz_questions';
 
     function quiz(): BelongsTo
     {
@@ -48,7 +49,6 @@ class QuizQuestion extends Model
         return $this->hasMany(QuizAnswer::class, 'question_id');
     }
 
-    // get student's responses for this question
     function responses(): HasMany
     {
         return $this->hasMany(QuizResponse::class, 'question_id');

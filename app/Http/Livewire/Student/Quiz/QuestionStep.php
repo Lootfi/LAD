@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Student\Quiz;
 
 use App\Models\QuizQuestion;
+use App\Models\QuizResponse;
 use Livewire\Component;
 
 class QuestionStep extends Component
@@ -18,6 +19,15 @@ class QuestionStep extends Component
 
         $this->question = $question;
         $this->quiz = $this->question->quiz;
+
+        //load quiz responses
+        $responsesCollection = $this->question->responses()
+            ->where('student_id', auth()->user()->id)
+            ->get('answer_id');
+
+        foreach ($responsesCollection as $responseObj) {
+            array_push($this->responses, $responseObj->answer_id);
+        }
     }
 
     // goToNextQuestion EVENT
@@ -30,6 +40,13 @@ class QuestionStep extends Component
     //saving student's response in database
     public function saveResponses()
     {
+        foreach ($this->responses as $key => $answerId) {
+            QuizResponse::firstOrCreate([
+                'student_id' => auth()->user()->id,
+                'question_id' => $this->question->id,
+                'answer_id' => $answerId,
+            ]);
+        }
     }
 
 

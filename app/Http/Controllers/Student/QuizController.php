@@ -15,6 +15,9 @@ class QuizController extends Controller
     {
         $quiz->load(['questions.answers', 'course']);
 
+        //sort quiz questions by created_at
+        $quiz->questions = $quiz->questions->sortBy('created_at', descending: true);
+
         return view('student.quiz.show', compact('quiz'));
     }
 

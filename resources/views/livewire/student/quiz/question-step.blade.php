@@ -12,7 +12,6 @@
             {{ $answer->answer }}
         </div>
         @endforeach
-        Answers: {{ var_export($responses) }}
     </div>
     <div class="row d-flex justify-content-center">
         <div class="circle" wire:click="goToNextQuestion">

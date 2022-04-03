@@ -29,4 +29,24 @@ class QuizStudent extends Model
     use HasFactory;
 
     protected $table = 'quiz_students';
+
+    protected $fillable = [
+        'quiz_id',
+        'student_id',
+    ];
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class);
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function responses()
+    {
+        return $this->hasMany(QuizResponse::class);
+    }
 }
