@@ -11,6 +11,7 @@ class QuestionStep extends Component
     public $question;
     public $step;
     public $quiz;
+    public $lastQuestion;
     public $responses = [];
 
     public function mount(QuizQuestion $question, $step)

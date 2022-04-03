@@ -14,10 +14,12 @@
         @endforeach
     </div>
     <div class="row d-flex justify-content-center">
+        @if(!$lastQuestion)
         <div class="circle" wire:click="goToNextQuestion">
             <div class="fa fa-long-arrow-right next" id="nextquestion"><i class="fa fa-arrow-right"
                     aria-hidden="true"></i>
             </div>
         </div>
+        @endif
     </div>
 </div>
