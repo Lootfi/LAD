@@ -109,4 +109,11 @@ class QuizController extends Controller
 
         return redirect()->route('teacher.quiz.index', compact('course'))->with('success', 'Students have been notified about quiz!');
     }
+
+    //sort quiz questions function
+    public function sort(Course $course, Quiz $quiz)
+    {
+        $quiz->load(['questions', 'course']);
+        return view('teacher.quiz.sort-questions', ['quiz' => $quiz]);
+    }
 }

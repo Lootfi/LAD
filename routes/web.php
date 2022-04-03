@@ -64,7 +64,14 @@ Route::prefix('teacher')
             'notify',
         ])->name('quiz.notify');
 
+        Route::get('course/{course}/quiz/{quiz}/sort', [
+            TeacherQuizController::class,
+            'sort',
+        ])->name('quiz.sort');
+
         Route::resource('course/{course}/quiz', TeacherQuizController::class);
+
+
 
 
         /*

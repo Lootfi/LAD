@@ -71,15 +71,15 @@
                     <i class="fas fa-ellipsis-v"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                    {{-- link to course's quiz edit page --}}
                     <a class="dropdown-item" href="{{ route('teacher.quiz.edit', [$course, $quiz]) }}">
                         Edit Quiz
                     </a>
-                    {{-- button to notify students about the upcomming quiz --}}
+                    <a class="dropdown-item" href="{{ route('teacher.quiz.sort', [$course, $quiz]) }}">
+                        Sort Quiz Questions
+                    </a>
                     <a class="dropdown-item" href="{{ route('teacher.quiz.notify', [$course, $quiz]) }}">
                         Notify Students
                     </a>
-                    {{-- delete button that shows a confirmation modal, text color red --}}
                     <button class="dropdown-item" data-toggle="modal" data-target="#deleteModal"
                         data-url="{{ route('teacher.quiz.destroy', [$course, $quiz]) }}">
                         Delete Quiz
