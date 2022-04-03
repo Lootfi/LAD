@@ -47,4 +47,10 @@ class QuizQuestion extends Model
     {
         return $this->hasMany(QuizAnswer::class, 'question_id');
     }
+
+    // get student's responses for this question
+    function responses(): HasMany
+    {
+        return $this->hasMany(QuizResponse::class, 'question_id');
+    }
 }
