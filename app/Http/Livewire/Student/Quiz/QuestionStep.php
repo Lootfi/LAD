@@ -14,6 +14,10 @@ class QuestionStep extends Component
     public $lastQuestion;
     public $responses = [];
 
+    protected $listeners = [
+        'saveResponses' => 'saveResponses',
+    ];
+
     public function mount(QuizQuestion $question, $step)
     {
         $this->step = $step;
@@ -31,7 +35,6 @@ class QuestionStep extends Component
         }
     }
 
-    // goToNextQuestion EVENT
     public function goToNextQuestion()
     {
         $this->saveResponses();
@@ -41,7 +44,7 @@ class QuestionStep extends Component
     //saving student's response in database
     public function saveResponses()
     {
-        foreach ($this->responses as $key => $answerId) {
+        foreach ($this->responses as $answerId) {
             QuizResponse::firstOrCreate([
                 'student_id' => auth()->user()->id,
                 'question_id' => $this->question->id,

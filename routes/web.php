@@ -121,6 +121,12 @@ Route::prefix('student')
 
         Route::resource('course/{course}/quiz', StudentQuizController::class);
 
+        //quiz results
+        Route::get('course/{course}/quiz/{quiz}/results', [
+            StudentQuizController::class,
+            'results',
+        ])->name('quiz.results');
+
 
         /*
         *

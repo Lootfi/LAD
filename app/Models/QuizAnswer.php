@@ -34,13 +34,15 @@ class QuizAnswer extends Model
 
     protected $fillable = ['answer', 'right_answer'];
 
+    protected $appends = ['is_right'];
+
+    public function getIsRightAttribute()
+    {
+        return $this->right_answer;
+    }
+
     function question(): BelongsTo
     {
         return $this->belongsTo(QuizQuestion::class, 'question_id');
-    }
-
-    function isRight(): bool
-    {
-        return $this->right_answer;
     }
 }

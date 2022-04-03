@@ -44,4 +44,28 @@ class QuizController extends Controller
 
         return view('student.quiz.index', ['course' => $course, 'quizzes' => $quizzes]);
     }
+
+    public function results(Course $course, Quiz $quiz)
+    {
+        $quiz->load(['questions.answers', 'course', 'questions.responses']);
+
+        $quiz->questions = $quiz->questions->sortBy('created_at', descending: true);
+
+        $quiz->questions->each(function ($question) {
+            $question->correct = false;
+            $responses = $question->responses;
+
+            foreach ($responses as $response) {
+                if ($response->answer->is_right) {
+                    $question->correct = true;
+                } else {
+                    $question->correct = false;
+                    break;
+                }
+            }
+        });
+
+
+        return view('student.quiz.results', compact('quiz'));
+    }
 }

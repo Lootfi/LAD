@@ -29,6 +29,7 @@ class QuizStudent extends Model
     use HasFactory;
 
     protected $table = 'quiz_students';
+    public $timestamps = false;
 
     protected $fillable = [
         'quiz_id',
