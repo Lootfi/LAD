@@ -386,6 +386,21 @@ return [
                 ],
             ],
         ],
+        'Filepond' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => 'https://unpkg.com/filepond@^4/dist/filepond.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => 'https://unpkg.com/filepond@^4/dist/filepond.css',
+                ],
+            ],
+        ],
         'Chartjs' => [
             'active' => true,
             'files' => [
