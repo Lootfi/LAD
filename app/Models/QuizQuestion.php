@@ -35,7 +35,7 @@ class QuizQuestion extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['question', 'quiz_id'];
+    protected $fillable = ['question', 'quiz_id', 'order'];
 
     protected $table = 'quiz_questions';
 

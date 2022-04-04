@@ -15,11 +15,25 @@ class QuizQuestionSeeder extends Seeder
      */
     public function run()
     {
-        QuizQuestion::factory(2)->create([
+        QuizQuestion::factory()->create([
             'quiz_id' => 1,
+            'question' => 'What is the capital of France?',
+            'order' => 1,
         ]);
-        QuizQuestion::factory(2)->create([
+        QuizQuestion::factory()->create([
+            'quiz_id' => 1,
+            'question' => 'What is the capital of Germany?',
+            'order' => 2,
+        ]);
+        QuizQuestion::factory()->create([
             'quiz_id' => 2,
+            'question' => 'What is the capital of France?',
+            'order' => 1,
+        ]);
+        QuizQuestion::factory()->create([
+            'quiz_id' => 2,
+            'question' => 'What is the capital of Germany?',
+            'order' => 2,
         ]);
     }
 }

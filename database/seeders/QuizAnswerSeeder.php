@@ -18,35 +18,48 @@ class QuizAnswerSeeder extends Seeder
         QuizAnswer::factory(1)->create([
             'question_id' => 1,
             'right_answer' => true,
+            'answer' => 'Paris',
         ]);
         QuizAnswer::factory(1)->create([
             'question_id' => 1,
             'right_answer' => false,
+            'answer' => 'Berlin',
         ]);
+
 
         QuizAnswer::factory(1)->create([
             'question_id' => 2,
             'right_answer' => true,
+            'answer' => 'Paris',
         ]);
         QuizAnswer::factory(1)->create([
             'question_id' => 2,
             'right_answer' => false,
+            'answer' => 'Berlin',
         ]);
+
+
         QuizAnswer::factory(1)->create([
             'question_id' => 3,
             'right_answer' => true,
+            'answer' => 'Paris',
         ]);
         QuizAnswer::factory(1)->create([
             'question_id' => 3,
             'right_answer' => false,
+            'answer' => 'Berlin',
         ]);
+
+
         QuizAnswer::factory(1)->create([
             'question_id' => 4,
             'right_answer' => true,
+            'answer' => 'Paris',
         ]);
         QuizAnswer::factory(1)->create([
             'question_id' => 4,
             'right_answer' => false,
+            'answer' => 'Berlin',
         ]);
     }
 }

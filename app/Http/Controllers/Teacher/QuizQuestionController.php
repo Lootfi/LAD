@@ -41,8 +41,11 @@ class QuizQuestionController extends Controller
     {
         $course = $quiz->course;
         $quiz->load('questions');
+
+
         $question = $quiz->questions()->create([
             'question' => $request->question,
+            'order' => $quiz->questions->count() + 1,
         ]);
         $question->answers()->create([
             'answer' => $request->answer,
@@ -50,7 +53,6 @@ class QuizQuestionController extends Controller
         ]);
         $question->save();
 
-        //reload page and scroll to the new question in the list of questions in the quiz edit page
         return redirect()->route('teacher.quiz.edit', ['course' => $course, 'quiz' => $quiz, 'question_id' => $question->id]);
     }
 }
