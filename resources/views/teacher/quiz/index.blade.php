@@ -8,7 +8,7 @@
 
 @section('content')
 
-
+<livewire:teacher.quiz.table :course="$course" />
 
 <x-adminlte-datatable id="table1" :heads="$heads" bordered hoverable :config="$config">
     @foreach ($course->quizzes as $quiz)

@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder|Course whereTeacherId($value)
  * @method static Builder|Course whereTitle($value)
  * @method static Builder|Course whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Section[] $sections
+ * @property-read int|null $sections_count
  */
 class Course extends Model
 {

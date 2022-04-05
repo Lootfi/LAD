@@ -23,6 +23,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $student_id
  * @method static \Illuminate\Database\Eloquent\Builder|QuizStudents whereQuizId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuizStudents whereStudentId($value)
+ * @property int $submitted
+ * @property string $submitted_at
+ * @property-read \App\Models\Quiz $quiz
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\QuizResponse[] $responses
+ * @property-read int|null $responses_count
+ * @property-read \App\Models\User $student
+ * @method static \Illuminate\Database\Eloquent\Builder|QuizStudent whereSubmitted($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuizStudent whereSubmittedAt($value)
  */
 class QuizStudent extends Model
 {

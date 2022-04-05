@@ -29,6 +29,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Quiz whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Quiz whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $start_date
+ * @property int $duration
+ * @property string|null $description
+ * @property-read mixed $end_date
+ * @property-read mixed $is_active
+ * @property-read mixed $status
+ * @method static \Illuminate\Database\Eloquent\Builder|Quiz whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quiz whereDuration($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quiz whereStartDate($value)
  */
 class Quiz extends Model
 {

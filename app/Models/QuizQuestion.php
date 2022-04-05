@@ -30,6 +30,10 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @method static \Illuminate\Database\Eloquent\Builder|QuizQuestion whereQuizId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuizQuestion whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $order
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\QuizResponse[] $responses
+ * @property-read int|null $responses_count
+ * @method static \Illuminate\Database\Eloquent\Builder|QuizQuestion whereOrder($value)
  */
 class QuizQuestion extends Model
 {

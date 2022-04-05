@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.5.1.
+ * Generated for Laravel 9.6.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1896,6 +1896,7 @@
          * @param string $field
          * @param array $extraConditions
          * @return \Symfony\Component\HttpFoundation\Response|null 
+         * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
          * @static 
          */ 
         public static function basic($field = 'email', $extraConditions = [])
@@ -1909,6 +1910,7 @@
          * @param string $field
          * @param array $extraConditions
          * @return \Symfony\Component\HttpFoundation\Response|null 
+         * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
          * @static 
          */ 
         public static function onceBasic($field = 'email', $extraConditions = [])
@@ -6421,6 +6423,19 @@
         {
                         /** @var \Illuminate\Filesystem\Filesystem $instance */
                         return $instance->isWritable($path);
+        }
+                    /**
+         * Determine if two files are the same by comparing their hashes.
+         *
+         * @param string $firstFile
+         * @param string $secondFile
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasSameHash($firstFile, $secondFile)
+        {
+                        /** @var \Illuminate\Filesystem\Filesystem $instance */
+                        return $instance->hasSameHash($firstFile, $secondFile);
         }
                     /**
          * Determine if the given path is a file.
@@ -11963,6 +11978,7 @@
      * @method static \Illuminate\Routing\RouteRegistrar prefix(string $prefix)
      * @method static \Illuminate\Routing\RouteRegistrar scopeBindings()
      * @method static \Illuminate\Routing\RouteRegistrar where(array $where)
+     * @method static \Illuminate\Routing\RouteRegistrar withoutMiddleware(array|string $middleware)
      * @see \Illuminate\Routing\Router
      */ 
         class Route {
@@ -12618,7 +12634,7 @@
                     /**
          * Check if a route with the given name exists.
          *
-         * @param string $name
+         * @param string|array $name
          * @return bool 
          * @static 
          */ 
@@ -12851,6 +12867,47 @@
                         /** @var \Illuminate\Routing\Router $instance */
                         return $instance->macroCall($method, $parameters);
         }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::auth()
+         * @param mixed $options
+         * @static 
+         */ 
+        public static function auth($options = [])
+        {
+                        return \Illuminate\Routing\Router::auth($options);
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::resetPassword()
+         * @static 
+         */ 
+        public static function resetPassword()
+        {
+                        return \Illuminate\Routing\Router::resetPassword();
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::confirmPassword()
+         * @static 
+         */ 
+        public static function confirmPassword()
+        {
+                        return \Illuminate\Routing\Router::confirmPassword();
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::emailVerification()
+         * @static 
+         */ 
+        public static function emailVerification()
+        {
+                        return \Illuminate\Routing\Router::emailVerification();
+        }
          
     }
             /**
@@ -13009,6 +13066,34 @@
         {            //Method inherited from \Illuminate\Database\Schema\Builder         
                         /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
                         return $instance->hasColumns($table, $columns);
+        }
+                    /**
+         * Execute a table builder callback if the given table has a given column.
+         *
+         * @param string $table
+         * @param string $column
+         * @param \Closure $callback
+         * @return void 
+         * @static 
+         */ 
+        public static function whenTableHasColumn($table, $column, $callback)
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        $instance->whenTableHasColumn($table, $column, $callback);
+        }
+                    /**
+         * Execute a table builder callback if the given table doesn't have a given column.
+         *
+         * @param string $table
+         * @param string $column
+         * @param \Closure $callback
+         * @return void 
+         * @static 
+         */ 
+        public static function whenTableDoesntHaveColumn($table, $column, $callback)
+        {            //Method inherited from \Illuminate\Database\Schema\Builder         
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        $instance->whenTableDoesntHaveColumn($table, $column, $callback);
         }
                     /**
          * Get the data type for the given column name.
@@ -14180,7 +14265,7 @@
          * @param string $path
          * @param \Psr\Http\Message\StreamInterface|\Illuminate\Http\File|\Illuminate\Http\UploadedFile|string|resource $contents
          * @param mixed $options
-         * @return bool 
+         * @return string|bool 
          * @static 
          */ 
         public static function put($path, $contents, $options = [])
@@ -14620,6 +14705,18 @@
         {
                         /** @var \Illuminate\Routing\UrlGenerator $instance */
                         return $instance->previous($fallback);
+        }
+                    /**
+         * Get the previous path info for the request.
+         *
+         * @param mixed $fallback
+         * @return string 
+         * @static 
+         */ 
+        public static function previousPath($fallback = false)
+        {
+                        /** @var \Illuminate\Routing\UrlGenerator $instance */
+                        return $instance->previousPath($fallback);
         }
                     /**
          * Generate an absolute URL to the given path.
@@ -17035,6 +17132,55 @@
             /**
      * 
      *
+     * @mixin \Illuminate\Routing\RouteRegistrar
+     */ 
+        class Router {
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::auth()
+         * @param mixed $options
+         * @static 
+         */ 
+        public static function auth($options = [])
+        {
+                        return \Illuminate\Routing\Router::auth($options);
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::resetPassword()
+         * @static 
+         */ 
+        public static function resetPassword()
+        {
+                        return \Illuminate\Routing\Router::resetPassword();
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::confirmPassword()
+         * @static 
+         */ 
+        public static function confirmPassword()
+        {
+                        return \Illuminate\Routing\Router::confirmPassword();
+        }
+                    /**
+         * 
+         *
+         * @see \Laravel\Ui\AuthRouteMethods::emailVerification()
+         * @static 
+         */ 
+        public static function emailVerification()
+        {
+                        return \Illuminate\Routing\Router::emailVerification();
+        }
+         
+    }
+            /**
+     * 
+     *
      */ 
         class Route {
                     /**
@@ -17059,6 +17205,60 @@
         {
                         return \Illuminate\Routing\Route::permission($permissions);
         }
+         
+    }
+     
+}
+
+    namespace Laravel\Ui { 
+            /**
+     * 
+     *
+     */ 
+        class UiCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class AuthCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ControllersCommand {
+         
+    }
+     
+}
+
+    namespace Illuminate\Console { 
+            /**
+     * 
+     *
+     */ 
+        class Command {
+                    /**
+         * 
+         *
+         * @see \LaravelFrontendPresets\ArgonPreset\ArgonPresetServiceProvider::boot()
+         * @param mixed $command
+         * @static 
+         */ 
+        public static function argon($command)
+        {
+                        return \Illuminate\Console\Command::argon($command);
+        }
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class GeneratorCommand {
          
     }
      
@@ -17145,6 +17345,973 @@
         {
                         return \Illuminate\View\View::slot($slot);
         }
+         
+    }
+     
+}
+
+    namespace Illuminate\Foundation\Console { 
+            /**
+     * 
+     *
+     */ 
+        class ClosureCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ClearCompiledCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ConfigCacheCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ConfigClearCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class DownCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class EnvironmentCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class EventCacheCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class EventClearCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class EventListCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class KeyGenerateCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class OptimizeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class OptimizeClearCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class PackageDiscoverCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class RouteCacheCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class RouteClearCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class RouteListCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class StorageLinkCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class UpCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ViewCacheCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ViewClearCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class CastMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ChannelMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ComponentMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ConsoleMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class EventGenerateCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class EventMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ExceptionMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class JobMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ListenerMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class MailMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ModelMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class NotificationMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ObserverMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class PolicyMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ProviderMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class RequestMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ResourceMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class RuleMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ScopeMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ServeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class StubPublishCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class TestMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class VendorPublishCommand {
+         
+    }
+     
+}
+
+    namespace BeyondCode\ErdGenerator { 
+            /**
+     * 
+     *
+     */ 
+        class GenerateDiagramCommand {
+         
+    }
+     
+}
+
+    namespace Laracasts\Generators\Commands { 
+            /**
+     * 
+     *
+     */ 
+        class MigrationMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class PivotMigrationMakeCommand {
+         
+    }
+     
+}
+
+    namespace JeroenNoten\LaravelAdminLte\Console { 
+            /**
+     * 
+     *
+     */ 
+        class AdminLteInstallCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class AdminLteStatusCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class AdminLteUpdateCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class AdminLtePluginCommand {
+         
+    }
+     
+}
+
+    namespace Livewire\Commands { 
+            /**
+     * 
+     *
+     */ 
+        class MakeLivewireCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class MakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class FileManipulationCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class TouchCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class CopyCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class CpCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class DeleteCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class RmCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class MoveCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class MvCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class StubsCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class DiscoverCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class S3CleanupCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class PublishCommand {
+         
+    }
+     
+}
+
+    namespace NunoMaduro\Collision\Adapters\Laravel\Commands { 
+            /**
+     * 
+     *
+     * @internal 
+     * @final 
+     */ 
+        class TestCommand {
+         
+    }
+     
+}
+
+    namespace Rappasoft\LaravelLivewireTables\Commands { 
+            /**
+     * Class MakeCommand
+     *
+     * @package Rappasoft\LaravelLivewireTables\Commands
+     */ 
+        class MakeCommand {
+         
+    }
+     
+}
+
+    namespace Spatie\Activitylog { 
+            /**
+     * 
+     *
+     */ 
+        class CleanActivitylogCommand {
+         
+    }
+     
+}
+
+    namespace Spatie\Permission\Commands { 
+            /**
+     * 
+     *
+     */ 
+        class CacheReset {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class CreateRole {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class CreatePermission {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class Show {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class UpgradeForTeams {
+         
+    }
+     
+}
+
+    namespace Illuminate\Cache\Console { 
+            /**
+     * 
+     *
+     */ 
+        class ClearCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ForgetCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class CacheTableCommand {
+         
+    }
+     
+}
+
+    namespace Illuminate\Auth\Console { 
+            /**
+     * 
+     *
+     */ 
+        class ClearResetsCommand {
+         
+    }
+     
+}
+
+    namespace Illuminate\Database\Console { 
+            /**
+     * 
+     *
+     */ 
+        class DbCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class PruneCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class WipeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class DumpCommand {
+         
+    }
+     
+}
+
+    namespace Illuminate\Queue\Console { 
+            /**
+     * 
+     *
+     */ 
+        class ClearCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ListFailedCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class FlushFailedCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ForgetFailedCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ListenCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class MonitorCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class PruneBatchesCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class PruneFailedJobsCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class RestartCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class RetryCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class RetryBatchCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class WorkCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class FailedTableCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class TableCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class BatchesTableCommand {
+         
+    }
+     
+}
+
+    namespace Illuminate\Database\Console\Seeds { 
+            /**
+     * 
+     *
+     */ 
+        class SeedCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class SeederMakeCommand {
+         
+    }
+     
+}
+
+    namespace Illuminate\Console\Scheduling { 
+            /**
+     * 
+     *
+     */ 
+        class ScheduleFinishCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ScheduleListCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ScheduleRunCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ScheduleClearCacheCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ScheduleTestCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ScheduleWorkCommand {
+         
+    }
+     
+}
+
+    namespace Illuminate\Routing\Console { 
+            /**
+     * 
+     *
+     */ 
+        class ControllerMakeCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class MiddlewareMakeCommand {
+         
+    }
+     
+}
+
+    namespace Illuminate\Database\Console\Factories { 
+            /**
+     * 
+     *
+     */ 
+        class FactoryMakeCommand {
+         
+    }
+     
+}
+
+    namespace Illuminate\Notifications\Console { 
+            /**
+     * 
+     *
+     */ 
+        class NotificationTableCommand {
+         
+    }
+     
+}
+
+    namespace Illuminate\Session\Console { 
+            /**
+     * 
+     *
+     */ 
+        class SessionTableCommand {
+         
+    }
+     
+}
+
+    namespace Illuminate\Database\Console\Migrations { 
+            /**
+     * 
+     *
+     */ 
+        class MigrateCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class BaseCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class FreshCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class InstallCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class RefreshCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class ResetCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class RollbackCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class StatusCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class MigrateMakeCommand {
+         
+    }
+     
+}
+
+    namespace Barryvdh\LaravelIdeHelper\Console { 
+            /**
+     * A command to generate autocomplete information for your IDE
+     *
+     * @author Barry vd. Heuvel <barryvdh@gmail.com>
+     */ 
+        class GeneratorCommand {
+         
+    }
+            /**
+     * A command to generate autocomplete information for your IDE
+     *
+     * @author Barry vd. Heuvel <barryvdh@gmail.com>
+     */ 
+        class ModelsCommand {
+         
+    }
+            /**
+     * A command to generate phpstorm meta data
+     *
+     * @author Barry vd. Heuvel <barryvdh@gmail.com>
+     */ 
+        class MetaCommand {
+         
+    }
+            /**
+     * A command to add \Eloquent mixin to Eloquent\Model
+     *
+     * @author Charles A. Peterson <artistan@gmail.com>
+     */ 
+        class EloquentCommand {
+         
+    }
+     
+}
+
+    namespace Laravel\Sail\Console { 
+            /**
+     * 
+     *
+     */ 
+        class InstallCommand {
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class PublishCommand {
+         
+    }
+     
+}
+
+    namespace Laravel\Tinker\Console { 
+            /**
+     * 
+     *
+     */ 
+        class TinkerCommand {
          
     }
      

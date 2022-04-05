@@ -49,6 +49,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read int|null $roles_count
  * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
+ * @property string|null $avatar
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereAvatar($value)
  */
 class User extends Authenticatable
 {
