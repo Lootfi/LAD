@@ -6,12 +6,11 @@ use App\Http\Controllers\Teacher\StudentController as TeacherStudentController;
 use App\Http\Controllers\Teacher\QuizController as TeacherQuizController;
 use App\Http\Controllers\Teacher\QuizQuestionController as TeacherQuizQuestionController;
 use App\Http\Controllers\Teacher\QuizAnswerController as TeacherQuizAnswerController;
+use App\Http\Controllers\Teacher\SectionController as TeacherSectionController;
 
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\CourseController as StudentCourseController;
 use App\Http\Controllers\Student\QuizController as StudentQuizController;
-use App\Http\Controllers\Student\QuizQuestionController as StudentQuizQuestionController;
-use App\Http\Controllers\Student\QuizAnswerController as StudentQuizAnswerController;
 use App\Http\Controllers\Student\NotificationController as StudentNotificationController;
 
 use Illuminate\Support\Facades\Route;
@@ -54,6 +53,14 @@ Route::prefix('teacher')
 
         Route::resource('course', TeacherCourseController::class);
 
+
+        /*
+        *
+        * Course Section Routes
+        *
+        */
+
+        Route::resource('course.section', TeacherSectionController::class);
         /*
         *
         * Course Quiz Routes

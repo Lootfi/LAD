@@ -60,4 +60,9 @@ class Course extends Model
     {
         return $this->hasMany(Quiz::class);
     }
+
+    public function sections(): HasMany
+    {
+        return $this->hasMany(Section::class);
+    }
 }

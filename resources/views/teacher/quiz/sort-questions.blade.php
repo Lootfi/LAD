@@ -25,3 +25,4 @@
 {{-- js section --}}
 @section('js')
 <script src="{{ asset('js/quiz/sort-questions.js') }}"></script>
+@endsection

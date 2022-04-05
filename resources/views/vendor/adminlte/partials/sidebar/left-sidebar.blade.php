@@ -16,14 +16,7 @@
                 @if(!config('adminlte.sidebar_nav_accordion')) data-accordion="false" @endif>
                 {{-- Configured sidebar links --}}
                 {{-- @each('adminlte::partials.sidebar.menu-item', $adminlte->menu('sidebar'), 'item') --}}
-
-
-                {{-- sidenar link to teacher's course --}}
                 @role('teacher')
-                {{-- header --}}
-                <li class="nav-header">
-                    COURSES
-                </li>
                 <li class="nav-item">
                     <a href="{{ route('teacher.course.show',['course' => auth()->user()->teaches]) }}" class="nav-link">
                         <i class="fas fa-book"></i>
@@ -50,6 +43,9 @@
                         </p>
                     </a>
                 </li>
+
+                {{-- Add Course Section --}}
+
                 @endrole
 
 

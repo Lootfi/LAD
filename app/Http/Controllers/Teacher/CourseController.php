@@ -10,9 +10,7 @@ class CourseController extends Controller
 {
     public function show(Course $course)
     {
-        $students = $course->students;
-        $quizzes = $course->quizzes;
-
-        return view('teacher.course', compact('course', 'students', 'quizzes'));
+        $course->load(['sections.lessons', 'students']);
+        return view('teacher.course.show', compact('course'));
     }
 }
