@@ -24,6 +24,10 @@ return new class extends Migration
                 ->on('courses')
                 ->onDelete('cascade');
 
+            $table->boolean('status')->default(true);
+            $table->text('description')->nullable();
+
+
             $table->timestamps();
         });
     }
