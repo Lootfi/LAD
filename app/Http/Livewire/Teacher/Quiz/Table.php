@@ -2,23 +2,16 @@
 
 namespace App\Http\Livewire\Teacher\Quiz;
 
-use App\Models\Course;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Quiz;
-use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 class Table extends DataTableComponent
 {
     // protected $model = Quiz::class;
-
-    public Course $course;
-
-    public function mount(Course $course)
-    {
-        $this->course = $course;
-    }
 
     public function builder(): Builder
     {
@@ -30,28 +23,46 @@ class Table extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
+        $this
+            ->setPrimaryKey('id')
+            ->setSingleSortingDisabled();
     }
 
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
-                ->sortable(),
+            Column::make("ID", "id")
+                ->hideIf(true),
             Column::make("Name", "name")
+                ->searchable()
                 ->sortable(),
             Column::make("Course id", "course_id")
-                ->sortable(),
+                ->hideIf(true),
             Column::make("Start date", "start_date")
+                ->hideIf(true),
+            Column::make("Start date")
+                ->label(function (Quiz $quiz) {
+                    $start_date = Carbon::parse($quiz->start_date);
+
+                    return $start_date->format('d/m/Y');
+                })
+                ->searchable()
                 ->sortable(),
+            Column::make("Status")
+                ->label(function (Quiz $quiz) {
+                    $start_date = Carbon::parse($quiz->start_date);
+                    return Str::ucfirst($quiz->status) . ' (' . $start_date->diffForHumans() . ')';
+                }),
             Column::make("Duration", "duration")
                 ->sortable(),
-            Column::make("Description", "description")
-                ->sortable(),
-            Column::make("Created at", "created_at")
-                ->sortable(),
-            Column::make("Updated at", "updated_at")
-                ->sortable(),
+            Column::make('Students')
+                ->label(function (Quiz $row) {
+                    return view('livewire.teacher.quiz.partials.students')->withRow($row);
+                }),
+            Column::make('Actions')
+                ->label(function (Quiz $row) {
+                    return view('livewire.teacher.quiz.partials.actions')->withRow($row);
+                }),
         ];
     }
 }

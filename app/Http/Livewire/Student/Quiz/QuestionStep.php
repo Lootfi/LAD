@@ -44,6 +44,15 @@ class QuestionStep extends Component
     //saving student's response in database
     public function saveResponses()
     {
+
+        // TODO: check if student has already answered this question to avoid deleting all responses and creating new ones
+        // must change $responses array structure to array of arrays [['answer_id' => boolean], ...]
+
+        //delete existing responses first (if student unchecks a question in the middle of the quiz)
+        QuizResponse::where('student_id', auth()->user()->id)
+            ->where('question_id', $this->question->id)
+            ->delete();
+
         foreach ($this->responses as $answerId) {
             QuizResponse::firstOrCreate([
                 'student_id' => auth()->user()->id,

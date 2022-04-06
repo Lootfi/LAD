@@ -79,20 +79,16 @@ class QuizController extends Controller
         return view('teacher.quiz.edit', compact('course', 'quiz'));
     }
 
-    // update quiz function
     public function update(Request $request, Course $course, Quiz $quiz)
     {
         $quiz->update($request->all());
-        // redirect to the quiz index page
         return redirect()->route('teacher.quiz.index', $course);
     }
 
-    // destroy quiz function
     public function destroy(Course $course, Quiz $quiz)
     {
         $quiz->delete();
-        // redirect to the quiz index page
-        return redirect()->route('teacher.quiz.index');
+        return redirect()->route('teacher.quiz.index', ['course' => $course]);
     }
 
     // notify quiz function

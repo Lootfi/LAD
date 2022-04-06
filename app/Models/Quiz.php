@@ -46,8 +46,6 @@ class Quiz extends Model
     protected $fillable = ['name', 'course_id', 'start_date', 'duration', 'description'];
     protected $appends = ['status', 'end_date', 'is_active'];
 
-
-
     function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
