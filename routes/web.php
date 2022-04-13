@@ -7,6 +7,7 @@ use App\Http\Controllers\Teacher\QuizController as TeacherQuizController;
 use App\Http\Controllers\Teacher\QuizQuestionController as TeacherQuizQuestionController;
 use App\Http\Controllers\Teacher\QuizAnswerController as TeacherQuizAnswerController;
 use App\Http\Controllers\Teacher\SectionController as TeacherSectionController;
+use App\Http\Controllers\Teacher\LessonController as TeacherLessonController;
 
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\CourseController as StudentCourseController;
@@ -61,6 +62,22 @@ Route::prefix('teacher')
         */
 
         Route::resource('course.section', TeacherSectionController::class);
+
+        /*
+        *
+        * Course Section Lessons Routes
+        *
+        */
+
+        Route::get('course/{course}/section/{section}/lesson/{lesson}/notify', [
+            TeacherLessonController::class,
+            'notify',
+        ])->name('course.section.lesson.notify');
+
+        Route::resource('course.section.lesson', TeacherLessonController::class);
+
+
+
         /*
         *
         * Course Quiz Routes

@@ -2,29 +2,27 @@
 
 namespace App\Notifications;
 
-use App\Models\Quiz;
+use App\Models\Lesson;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewQuiz extends Notification implements ShouldQueue
+class NewLesson extends Notification
 {
     use Queueable;
 
-    // quiz
-    protected Quiz $quiz;
+    protected Lesson $lesson;
 
     /**
-     * Create a new notification instance. takes quiz object as parameter to be used in the notification message body
+     * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Quiz $quiz)
+    public function __construct(Lesson $lesson)
     {
-        $this->quiz = $quiz;
+        $this->lesson = $lesson;
     }
-
 
     /**
      * Get the notification's delivery channels.
@@ -46,9 +44,9 @@ class NewQuiz extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'message' => 'You have a new quiz: ' . $this->quiz->name,
-            'link' => route('student.quiz.show', ['quiz' => $this->quiz, 'course' => $this->quiz->course]),
-            'quiz' => $this->quiz
+            'message' => 'You have a new lesson: ' . $this->lesson->name,
+            'link' => route('student.course.section.show', ['lesson' => $this->lesson, 'section' => $this->lesson->section, 'course' => $this->lesson->section->course]),
+            'lesson' => $this->lesson
         ];
     }
 }

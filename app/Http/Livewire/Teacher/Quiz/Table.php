@@ -25,7 +25,8 @@ class Table extends DataTableComponent
     {
         $this
             ->setPrimaryKey('id')
-            ->setSingleSortingDisabled();
+            ->setSingleSortingDisabled()
+            ->setFooterStatus(true);
     }
 
     public function columns(): array

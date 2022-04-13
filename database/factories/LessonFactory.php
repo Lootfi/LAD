@@ -17,7 +17,8 @@ class LessonFactory extends Factory
     public function definition()
     {
         return [
-            //
+            //lesson name
+            'name' => $this->faker->sentence(3, false),
         ];
     }
 }

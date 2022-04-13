@@ -1,4 +1,4 @@
-<div class="dropdown">
+{{-- <div class="dropdown" style="z-index: 100;">
     <a class="btn btn-sm btn-icon-only" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         <i class="fas fa-ellipsis-v"></i>
@@ -19,10 +19,47 @@
         </button>
 
     </div>
+</div> --}}
+
+{{-- row of icons for actions, show, notify, sort, edit, delete --}}
+
+<div class="row">
+    <div class="col-auto">
+        <a href="{{ route('teacher.quiz.show', ['course' => $row->course, 'quiz' => $row]) }}"
+            class="btn btn-sm btn-icon btn-2 btn-info btn-text-secondary">
+            <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
+        </a>
+    </div>
+    <div class="col-auto">
+        <a href="{{ route('teacher.quiz.edit', ['course' => $row->course, 'quiz' => $row]) }}"
+            class="btn btn-sm btn-icon btn-2 btn-primary btn-text-secondary">
+            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+        </a>
+    </div>
+    <div class="col-auto">
+        <a href="{{ route('teacher.quiz.sort', ['course' => $row->course, 'quiz' => $row]) }}"
+            class="btn btn-sm btn-icon btn-2 btn-dark btn-text-secondary">
+            <span class="btn-inner--icon"><i class="fas fa-sort"></i></span>
+        </a>
+    </div>
+    <div class="col-auto">
+        <a href="{{ route('teacher.quiz.notify', ['course' => $row->course, 'quiz' => $row]) }}"
+            class="btn btn-sm btn-icon btn-2 btn-success btn-text-secondary">
+            <span class="btn-inner--icon"><i class="fas fa-bell"></i></span>
+        </a>
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-sm btn-icon btn-2 btn-danger btn-text-secondary" data-toggle="modal"
+            data-target="#deleteModal-{{$row->id}}"
+            data-url="{{ route('teacher.quiz.destroy', ['course' => $row->course, 'quiz' => $row]) }}">
+            <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
+        </button>
+    </div>
 </div>
 
+
 {{-- delete quiz confirmation modal --}}
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+<div class="modal fade" id="deleteModal-{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

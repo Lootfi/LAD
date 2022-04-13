@@ -14,12 +14,12 @@ class SectionController extends Controller
     {
         $course->load('sections');
 
-        return view('teacher.sections.index', compact('course'));
+        return view('teacher.section.index', compact('course'));
     }
 
     public function show(Course $course, Section $section)
     {
-        return view('teacher.sections.show', compact('section', 'course'));
+        return view('teacher.section.show', compact('section', 'course'));
     }
 
 
@@ -48,7 +48,7 @@ class SectionController extends Controller
 
     public function update(Request $request, Course $course, Section $section)
     {
-        $request->validate([
+        $validation = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'string|max:255',
             'status' => 'required|boolean',
