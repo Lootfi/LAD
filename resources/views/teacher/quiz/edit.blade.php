@@ -13,6 +13,7 @@
 @endsection
 
 @section('content')
+
 {{-- edit quiz form --}}
 <div class="row">
     <div class="col">

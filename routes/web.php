@@ -11,6 +11,8 @@ use App\Http\Controllers\Teacher\LessonController as TeacherLessonController;
 
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\CourseController as StudentCourseController;
+use App\Http\Controllers\Student\SectionController as StudentSectionController;
+use App\Http\Controllers\Student\LessonController as StudentLessonController;
 use App\Http\Controllers\Student\QuizController as StudentQuizController;
 use App\Http\Controllers\Student\NotificationController as StudentNotificationController;
 
@@ -30,7 +32,14 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['register' => false]);
 
 Route::get('/', function () {
-    return view('welcome');
+    $user = auth()->user();
+    if (!$user) {
+        return redirect()->route('login');
+    } elseif ($user->hasRole('teacher')) {
+        return redirect()->route('teacher.dashboard');
+    } elseif ($user->hasRole('student')) {
+        return redirect()->route('student.dashboard');
+    }
 });
 
 //teacher dashboard routes, with auth middleware
@@ -143,14 +152,27 @@ Route::prefix('student')
         * Student Courses Routes
         */
 
-        Route::resource('course', StudentCourseController::class)->except(['create', 'edit']);
+        Route::resource('course', StudentCourseController::class)->except(['create', 'edit', 'destroy']);
+
+        /*
+        *
+        * Student Course Sections Routes
+        */
+        Route::resource('course.section', StudentSectionController::class)->except(['create', 'edit', 'destroy']);
+
+        /*
+        *
+        * Student Course Section Lessons Routes
+        */
+        Route::resource('course.section.lesson', StudentLessonController::class)->except(['create', 'edit', 'destroy']);
+
 
         /*
         *
         * Student Quiz Routes
         */
 
-        Route::resource('course/{course}/quiz', StudentQuizController::class);
+        Route::resource('course/{course}/quiz', StudentQuizController::class)->except(['create', 'edit', 'destroy']);
 
         //quiz results
         Route::get('course/{course}/quiz/{quiz}/results', [

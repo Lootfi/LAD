@@ -52,6 +52,11 @@
         @endif
 
         <div class="{{ config('adminlte.classes_content') ?: $def_container_class }}">
+            @if (auth()->user()->hasRole('teacher'))
+            {{-- show page top navigation --}}
+            @include('teacher.course.show-page-top-nav', ['course' => $course])
+            @endif
+            {{-- yield content --}}
             @yield('content')
         </div>
 

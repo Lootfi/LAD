@@ -18,6 +18,7 @@
 @endsection
 
 @section('content')
+
 {{-- show section information in bootstrap card element --}}
 <div class="card">
     <div class="card-header">

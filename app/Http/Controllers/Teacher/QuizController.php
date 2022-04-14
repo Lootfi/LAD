@@ -10,9 +10,8 @@ use Illuminate\Http\Request;
 class QuizController extends Controller
 {
     // create quiz function
-    public function create(Request $request)
+    public function create(Course $course)
     {
-        $course = Course::find($request->course_id);
         return view('teacher.quiz.create', compact('course'));
     }
 

@@ -8,10 +8,6 @@
 
 @section('content')
 
-{{-- show page top navigation --}}
-@include('teacher.course.show-page-top-nav', ['course' => $course])
-
-
 <div class="container-fluid mt--7">
 
     <div class="row">
