@@ -83,10 +83,10 @@ Route::prefix('teacher')
             'notify',
         ])->name('course.section.lesson.notify');
 
-        Route::put('course/{course}/section/{section}/lesson/{lesson}/update-content', [
-            TeacherLessonController::class,
-            'updateContent',
-        ])->name('course.section.lesson.update-content');
+        // Route::put('course/{course}/section/{section}/lesson/{lesson}/update-content', [
+        //     TeacherLessonController::class,
+        //     'updateContent',
+        // ])->name('course.section.lesson.update-content');
 
         Route::resource('course.section.lesson', TeacherLessonController::class);
 
@@ -144,7 +144,7 @@ Route::prefix('teacher')
 // student dashboard routes
 Route::prefix('student')
     ->name('student.')
-    ->middleware(['middleware' => 'role:student'])
+    ->middleware(['role:student', 'student_last_activity'])
     ->group(function () {
 
         Route::get('/', [

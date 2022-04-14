@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Closed Quizzes</h3>
+                <h3 class="card-title">Old Quizzes</h3>
             </div>
             <div class="card-body">
                 <table id="quizzes" class="table table-bordered table-striped">
@@ -38,7 +38,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">No Closed Quizzes</h3>
+                <h3 class="card-title">No Old Quizzes</h3>
             </div>
             <div class="card-body">
                 <p>There are no closed quizzes for this course.</p>

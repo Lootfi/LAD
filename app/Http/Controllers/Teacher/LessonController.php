@@ -60,18 +60,14 @@ class LessonController extends Controller
         ]);
 
 
-        $lesson->update($request->all());
+        $lesson->update([
+            'name' => $validation['name'],
+            'description' => $validation['description'],
+            'status' => $validation['status'],
+            'content' => $request->get('content'),
+        ]);
 
-        return redirect()->route('teacher.course.show', $course)->with('success', 'Section updated successfully');
-    }
-
-    // updateContent method
-    public function updateContent(Request $request, Course $course, Section $section, Lesson $lesson)
-    {
-
-        $lesson->update(['content' => $request->get('content')]);
-
-        return redirect()->route('teacher.course.show', $course)->with('success', 'Section updated successfully');
+        return redirect()->route('teacher.course.show', $course)->with('success', 'Lesson updated successfully');
     }
 
     // destroy method
