@@ -83,6 +83,11 @@ Route::prefix('teacher')
             'notify',
         ])->name('course.section.lesson.notify');
 
+        Route::put('course/{course}/section/{section}/lesson/{lesson}/update-content', [
+            TeacherLessonController::class,
+            'updateContent',
+        ])->name('course.section.lesson.update-content');
+
         Route::resource('course.section.lesson', TeacherLessonController::class);
 
 

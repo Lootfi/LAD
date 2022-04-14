@@ -59,7 +59,17 @@ class LessonController extends Controller
             'status' => 'required|boolean',
         ]);
 
+
         $lesson->update($request->all());
+
+        return redirect()->route('teacher.course.show', $course)->with('success', 'Section updated successfully');
+    }
+
+    // updateContent method
+    public function updateContent(Request $request, Course $course, Section $section, Lesson $lesson)
+    {
+
+        $lesson->update(['content' => $request->get('content')]);
 
         return redirect()->route('teacher.course.show', $course)->with('success', 'Section updated successfully');
     }

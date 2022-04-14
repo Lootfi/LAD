@@ -26,6 +26,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Section whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Section whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $status
+ * @property string|null $description
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereStatus($value)
  */
 class Section extends Model
 {

@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('description')->nullable();
+            $table->boolean('status')->default(true);
+            $table->text('content')->nullable();
 
             $table->unsignedBigInteger('section_id');
             $table
