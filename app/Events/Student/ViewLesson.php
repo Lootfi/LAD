@@ -2,6 +2,8 @@
 
 namespace App\Events\Student;
 
+use App\Models\Lesson;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -14,14 +16,18 @@ class ViewLesson
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public Lesson $lesson;
+    public User $student;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $student, Lesson $lesson)
     {
-        //
+        $this->lesson = $lesson;
+        $this->student = $student;
     }
 
     /**
@@ -29,8 +35,8 @@ class ViewLesson
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn()
-    {
-        return new PrivateChannel('channel-name');
-    }
+    // public function broadcastOn()
+    // {
+    //     return new PrivateChannel('channel-name');
+    // }
 }

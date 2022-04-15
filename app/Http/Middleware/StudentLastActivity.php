@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Events\Student\ViewCourse;
+use App\Events\Student\ViewLesson;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
@@ -28,27 +29,6 @@ class StudentLastActivity
         Cache::put('is_online_' . $user->id, true, $expireTime);
         $user = User::whereId($user->id)->update(['last_seen' => Carbon::now()]);
 
-        // check if request method is GET
-        if ($request->isMethod('GET')) {
-            // request route name
-            $routeName = $request->route()->getName();
-            // if route name is student.course.show (student course show page)
-            if ($routeName == 'student.course.show') {
-                $this->logViewCourse($request);
-            }
-        } elseif ($request->isMethod('POST')) {
-        } elseif ($request->isMethod('PUT')) {
-        }
-
         return $next($request);
-    }
-
-    /*
-    * logViewCourse
-    *
-    */
-    public function logViewCourse(Request $request)
-    {
-        event(new ViewCourse(request()->user(), $request->route('course')));
     }
 }

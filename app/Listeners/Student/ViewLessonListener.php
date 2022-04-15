@@ -26,6 +26,10 @@ class ViewLessonListener
      */
     public function handle(ViewLesson $event)
     {
-        //
+        // log activity
+        activity('student.lesson.show')
+            ->causedBy($event->student)
+            ->performedOn($event->lesson)
+            ->log('Student viewed lesson');
     }
 }

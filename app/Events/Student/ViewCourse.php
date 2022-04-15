@@ -16,8 +16,8 @@ class ViewCourse
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $course;
-    public $student;
+    public User $student;
+    public Course $course;
 
     /**
      * Create a new event instance.

@@ -32,4 +32,65 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    {{-- accordion of course sections --}}
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{ $course->title }} Sections</h3>
+            </div>
+            <div class="box-body">
+                <div class="accordion" id="accordionExample">
+                    @foreach ($course->sections as $section)
+                    <div class="card">
+                        <div class="card-header" id="heading{{ $section->id }}">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapse{{ $section->id }}" aria-expanded="true"
+                                    aria-controls="collapse{{ $section->id }}">
+                                    {{ $section->name }}
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapse{{ $section->id }}" class="collapse"
+                            aria-labelledby="heading{{ $section->id }}" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <b>Description: </b> {{ $section->description }}
+                                {{-- lessons --}}
+                                <br>
+                                <b>Lessons: </b>
+                                <br>
+                                <div class="row">
+                                    @foreach ($section->lessons as $lesson)
+                                    <div class="col-md-3">
+                                        <a href="{{ route('student.course.section.lesson.show', ['course' => $course, 'section' => $section, 'lesson' => $lesson]) }}"
+                                            class="info-box">
+                                            <span data-toggle="tooltip" data-placement="bottom"
+                                                title="{{$lesson->description}}" class="info-box-icon bg-aqua"><i
+                                                    class="fa fa-file"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">{{ $lesson->name }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('js')
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 @endsection

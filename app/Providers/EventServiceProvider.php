@@ -22,18 +22,18 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Student\ViewCourse' => [
             'App\Listeners\Student\ViewCourseListener',
         ],
-        // Student view section
-        'App\Events\Student\ViewSection' => [
-            'App\Listeners\Student\ViewSectionListener',
-        ],
         // Student view lesson
         'App\Events\Student\ViewLesson' => [
             'App\Listeners\Student\ViewLessonListener',
         ],
-        // Student view quiz
-        'App\Events\Student\ViewQuiz' => [
-            'App\Listeners\Student\ViewQuizListener',
-        ],
+        // // Student view section
+        // 'App\Events\Student\ViewSection' => [
+        //     'App\Listeners\Student\ViewSectionListener',
+        // ],
+        // // Student view quiz
+        // 'App\Events\Student\ViewQuiz' => [
+        //     'App\Listeners\Student\ViewQuizListener',
+        // ],
     ];
 
     /**

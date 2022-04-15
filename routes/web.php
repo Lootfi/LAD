@@ -144,7 +144,7 @@ Route::prefix('teacher')
 // student dashboard routes
 Route::prefix('student')
     ->name('student.')
-    ->middleware(['role:student', 'student_last_activity'])
+    ->middleware(['role:student', 'student_last_activity', 'log'])
     ->group(function () {
 
         Route::get('/', [
