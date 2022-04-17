@@ -38,7 +38,7 @@
     <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">{{ $course->title }} Sections</h3>
+                <h3 class="box-title">Course Sections</h3>
             </div>
             <div class="box-body">
                 <div class="accordion" id="accordionExample">

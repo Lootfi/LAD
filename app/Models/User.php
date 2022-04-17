@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cache;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -98,5 +99,10 @@ class User extends Authenticatable
     public function getAvatarAttribute($value)
     {
         return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+    }
+
+    public function isOnline()
+    {
+        return Cache::has('is_online_' . $this->id);
     }
 }
