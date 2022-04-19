@@ -21,4 +21,11 @@ class QuizCountdownTimer extends Component
     {
         return view('livewire.student.quiz-countdown-timer');
     }
+
+    public function countdown()
+    {
+        if ($this->quiz->start_date >= now()) {
+            $this->emitUp('start_quiz');
+        }
+    }
 }

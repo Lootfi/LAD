@@ -10,7 +10,7 @@
 
 @section('content')
 
-{{-- adminlte datatable, showing active quizzes if available --}}
+{{-- list of quizzes --}}
 <x-student.quiz.active_quizzes :quizzes="$quizzes['active']" />
 <x-student.quiz.upcoming_quizzes :quizzes="$quizzes['upcoming']" />
 <x-student.quiz.closed_quizzes :quizzes="$quizzes['closed']" />

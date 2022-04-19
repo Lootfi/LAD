@@ -6,15 +6,11 @@ use App\Events\Student\ViewCourse;
 use App\Events\Student\ViewLesson;
 use App\Models\Course;
 use App\Models\Lesson;
-use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
-use Cache;
-use Carbon\Carbon;
 
 class LogStudentActivity
 {
-    public $params;
     /**
      * Handle an incoming request.
      *

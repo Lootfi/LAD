@@ -22,8 +22,6 @@ class StudentLastActivity
      */
     public function handle(Request $request, Closure $next)
     {
-
-
         $user = auth()->user();
         $expireTime = Carbon::now()->addSeconds(30);
         Cache::put('is_online_' . $user->id, true, $expireTime);

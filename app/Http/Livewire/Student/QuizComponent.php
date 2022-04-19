@@ -23,6 +23,11 @@ class QuizComponent extends Component
         $this->active_question = $this->quiz->questions[$current_step + 1];
     }
 
+    public function setActiveQuestion(QuizQuestion $question)
+    {
+        $this->active_question = $question;
+    }
+
     public function submitQuiz()
     {
         //save last question responses
@@ -49,5 +54,19 @@ class QuizComponent extends Component
     public function render()
     {
         return view('livewire.student.quiz-component');
+    }
+
+    // check if time is up and redirect to results page
+    public function checkTime()
+    {
+        if ($this->quiz->end_date <= now()) {
+            QuizStudent::firstOrCreate([
+                'quiz_id' => $this->quiz->id,
+                'student_id' => auth()->user()->id,
+                'submitted' => false,
+            ]);
+
+            return redirect()->route('student.quiz.results', ['course' => $this->quiz->course, 'quiz' => $this->quiz]);
+        }
     }
 }

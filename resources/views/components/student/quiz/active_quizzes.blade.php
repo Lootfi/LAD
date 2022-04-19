@@ -20,7 +20,7 @@
                         <tr>
                             <td>{{ $quiz->name }}</td>
                             <td>{{ $quiz->start_date }}</td>
-                            <td>{{ $quiz->end_date->diffForHumans() }}</td>
+                            <td>{{ $quiz->end_date->diffForHumans(['parts' => 6]) }}</td>
                             <td>
                                 <a href="{{ route('student.quiz.show', ['course' => $quiz->course, 'quiz' => $quiz]) }}"
                                     class="btn btn-primary btn-sm">

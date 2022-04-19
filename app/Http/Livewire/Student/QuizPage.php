@@ -9,6 +9,12 @@ class QuizPage extends Component
 {
     public $quiz;
 
+    //listeners
+    protected $listeners = [
+        //refresh on start_quiz
+        'start_quiz' => '$refresh',
+    ];
+
     public function mount(Quiz $quiz)
     {
         $this->quiz = $quiz;

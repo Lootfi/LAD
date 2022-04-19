@@ -2,17 +2,19 @@
 
 namespace App\Http\Livewire\Student\Quiz;
 
+use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use App\Models\QuizResponse;
 use Livewire\Component;
 
 class QuestionStep extends Component
 {
-    public $question;
-    public $step;
-    public $quiz;
-    public $lastQuestion;
-    public $responses = [];
+    public QuizQuestion $question;
+    public Quiz $quiz;
+
+    public $step; //current step
+    public $lastQuestion; //boolean to indicate if this is the last question
+    public $responses = []; //array of responses
 
     protected $listeners = [
         'saveResponses' => 'saveResponses',
@@ -25,7 +27,6 @@ class QuestionStep extends Component
         $this->question = $question;
         $this->quiz = $this->question->quiz;
 
-        //load quiz responses
         $responsesCollection = $this->question->responses()
             ->where('student_id', auth()->user()->id)
             ->get('answer_id');
@@ -41,7 +42,6 @@ class QuestionStep extends Component
         $this->emitUp('nextQuestion', $this->step);
     }
 
-    //saving student's response in database
     public function saveResponses()
     {
 

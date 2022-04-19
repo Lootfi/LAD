@@ -1,5 +1,5 @@
 @extends('adminlte::page', ['no_navigation' => true])
-
+{{-- quiz page, no nav --}}
 @section('title', $quiz->name)
 
 @section('css')

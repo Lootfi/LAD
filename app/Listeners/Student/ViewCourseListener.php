@@ -26,7 +26,6 @@ class ViewCourseListener
      */
     public function handle(ViewCourse $event)
     {
-        // log activity
         activity('student.course.show')
             ->causedBy($event->student)
             ->performedOn($event->course)

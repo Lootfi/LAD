@@ -16,11 +16,11 @@ class QuizSeeder extends Seeder
     public function run()
     {
         Quiz::factory()->create([
-            'start_date' => now()->addDays(2),
+            'start_date' => now(),
+            'duration' => 1
         ]);
         Quiz::factory()->create([
-            'start_date' => now(),
-            'duration' => 90
+            'start_date' => now()->addDays(2),
         ]);
     }
 }

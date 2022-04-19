@@ -1,4 +1,5 @@
 @extends('adminlte::page')
+{{-- quiz results page --}}
 
 @section('title', 'Course Quiz - Results')
 
