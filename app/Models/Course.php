@@ -70,6 +70,6 @@ class Course extends Model
 
     public function kcs(): HasMany
     {
-        return $this->hasMany(KnowledgeComponent::class);
+        return $this->hasMany(Kc::class);
     }
 }

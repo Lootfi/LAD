@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class KnowledgeComponent extends Model
+class Kc extends Model
 {
     use HasFactory;
 
@@ -15,8 +15,6 @@ class KnowledgeComponent extends Model
         'name',
         'description',
         'course_id',
-        'lesson_id',
-        'quiz_id',
     ];
 
     public function course(): BelongsTo

@@ -16,7 +16,7 @@ use App\Http\Controllers\Student\SectionController as StudentSectionController;
 use App\Http\Controllers\Student\LessonController as StudentLessonController;
 use App\Http\Controllers\Student\QuizController as StudentQuizController;
 use App\Http\Controllers\Student\NotificationController as StudentNotificationController;
-
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['register' => false]);
 
 Route::get('/', function () {
-    $user = auth()->user();
+    $user = User::find(auth()->id());
     if (!$user) {
         return redirect()->route('login');
     } elseif ($user->hasRole('teacher')) {
@@ -72,7 +72,11 @@ Route::prefix('teacher')
         *
         */
 
-        Route::resource('course.kc', TeacherKCController::class);
+        Route::get('course/{course}/kc/manage', [
+            TeacherKCController::class,
+            'manage',
+        ])->name('kc.manage'); // substitute for create and edit pages
+        Route::resource('course.kc', TeacherKCController::class)->except(['create', 'edit']);
 
 
         /*
