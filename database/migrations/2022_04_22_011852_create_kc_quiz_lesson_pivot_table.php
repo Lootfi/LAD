@@ -24,6 +24,8 @@ return new class extends Migration
             $table->foreign('lesson_id')->references('id')->on('lessons');
 
             $table->primary(['kc_id', 'question_id', 'lesson_id']);
+
+            $table->timestamps();
         });
     }
 

@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             QuizAnswerSeeder::class,
             QuizStudentSeeder::class,
             ActivitySeeder::class,
+            KcSeeder::class
         ]);
     }
 }

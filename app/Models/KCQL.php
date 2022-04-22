@@ -11,6 +11,7 @@ class KCQL extends Pivot
 {
     use HasFactory;
 
+    protected $table = 'kc_question_lesson';
     protected $fillable = [
         'kc_id',
         'quiz_id',

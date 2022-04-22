@@ -17,7 +17,9 @@ class KcFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->word,
+            'description' => $this->faker->sentence,
+            'course_id' => 1,
         ];
     }
 }
