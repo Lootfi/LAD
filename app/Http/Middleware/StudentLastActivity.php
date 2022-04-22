@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Events\Student\ViewCourse;
 use App\Events\Student\ViewLesson;
+use App\Events\StudentOnline;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
@@ -25,7 +26,11 @@ class StudentLastActivity
         $user = auth()->user();
         $expireTime = Carbon::now()->addSeconds(30);
         Cache::put('is_online_' . $user->id, true, $expireTime);
-        $user = User::whereId($user->id)->update(['last_seen' => Carbon::now()]);
+        $user = User::whereId($user->id)->first();
+        $user->update(['last_seen' => Carbon::now()]);
+
+        // websockets event
+        event(new StudentOnline($user));
 
         return $next($request);
     }

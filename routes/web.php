@@ -8,6 +8,7 @@ use App\Http\Controllers\Teacher\QuizQuestionController as TeacherQuizQuestionCo
 use App\Http\Controllers\Teacher\QuizAnswerController as TeacherQuizAnswerController;
 use App\Http\Controllers\Teacher\SectionController as TeacherSectionController;
 use App\Http\Controllers\Teacher\LessonController as TeacherLessonController;
+use App\Http\Controllers\Teacher\KCController as TeacherKCController;
 
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\CourseController as StudentCourseController;
@@ -42,6 +43,8 @@ Route::get('/', function () {
     }
 });
 
+Route::post('/upload', [TeacherLessonController::class, 'upload'])->middleware('role:teacher');
+
 //teacher dashboard routes, with auth middleware
 
 Route::prefix('teacher')
@@ -62,6 +65,14 @@ Route::prefix('teacher')
 
 
         Route::resource('course', TeacherCourseController::class);
+
+        /*
+        *
+        * Course Knowledge Components
+        *
+        */
+
+        Route::resource('course.kc', TeacherKCController::class);
 
 
         /*

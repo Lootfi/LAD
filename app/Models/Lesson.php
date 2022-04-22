@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Tonysm\RichTextLaravel\Casts\AsRichTextContent;
 use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
 
@@ -52,5 +53,10 @@ class Lesson extends Model
     public function section()
     {
         return $this->belongsTo(Section::class);
+    }
+
+    public function knowledge_components(): HasMany
+    {
+        return $this->hasMany(KnowledgeComponent::class);
     }
 }

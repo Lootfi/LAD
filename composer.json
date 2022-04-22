@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "beyondcode/laravel-websockets": "^1.13",
         "calebporzio/parental": "*",
         "guzzlehttp/guzzle": "^7.2",
         "jeroennoten/laravel-adminlte": "^3.8",
@@ -18,6 +19,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
         "livewire/livewire": "^2.10",
+        "pusher/pusher-php-server": "^5.0",
         "rappasoft/laravel-livewire-tables": "^2.0",
         "spatie/laravel-activitylog": "^4.4",
         "spatie/laravel-dashboard": "^2.1",

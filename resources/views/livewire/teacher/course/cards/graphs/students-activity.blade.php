@@ -8,19 +8,22 @@
             <div class="col">
                 <ul class="nav nav-pills justify-content-end">
                     <li class="nav-item mr-2 mr-md-0">
-                        <a wire:click="updateTime('1 day')" class="nav-link py-2 px-3" data-toggle="tab">
+                        <a style="cursor: pointer;" wire:click="updateTime('1 day')" class="nav-link py-2 px-3"
+                            data-toggle="tab">
                             <span class="d-none d-md-block">Day</span>
                             <span class="d-md-none">D</span>
                         </a>
                     </li>
                     <li class="nav-item mr-2 mr-md-0">
-                        <a wire:click="updateTime('1 week')" class="nav-link py-2 px-3" data-toggle="tab">
+                        <a style="cursor: pointer;" wire:click="updateTime('1 week')" class="nav-link py-2 px-3"
+                            data-toggle="tab">
                             <span class="d-none d-md-block">Week</span>
                             <span class="d-md-none">W</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a wire:click="updateTime('1 month')" class="nav-link py-2 px-3 active" data-toggle="tab">
+                        <a style="cursor: pointer;" wire:click="updateTime('1 month')" class="nav-link py-2 px-3 active"
+                            data-toggle="tab">
                             <span class="d-none d-md-block">Month</span>
                             <span class="d-md-none">M</span>
                         </a>

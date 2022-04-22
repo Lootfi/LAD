@@ -24,7 +24,7 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="mb-0">Page visits</h3>
+                            <h3 class="mb-0">Lesson visits</h3>
                         </div>
                         <div class="col text-right">
                             <a href="#!" class="btn btn-sm btn-primary">See all</a>
@@ -37,80 +37,20 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Page name</th>
-                                <th scope="col">Visitors</th>
+                                <th scope="col">Visits</th>
                                 <th scope="col">Unique users</th>
-                                <th scope="col">Bounce rate</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th scope="row">
-                                    /argon/
+                                    Lesson 01
                                 </th>
                                 <td>
-                                    4,569
+                                    459
                                 </td>
                                 <td>
-                                    340
-                                </td>
-                                <td>
-                                    <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    /argon/index.html
-                                </th>
-                                <td>
-                                    3,985
-                                </td>
-                                <td>
-                                    319
-                                </td>
-                                <td>
-                                    <i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    /argon/charts.html
-                                </th>
-                                <td>
-                                    3,513
-                                </td>
-                                <td>
-                                    294
-                                </td>
-                                <td>
-                                    <i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    /argon/tables.html
-                                </th>
-                                <td>
-                                    2,050
-                                </td>
-                                <td>
-                                    147
-                                </td>
-                                <td>
-                                    <i class="fas fa-arrow-up text-success mr-3"></i> 50,87%
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    /argon/profile.html
-                                </th>
-                                <td>
-                                    1,795
-                                </td>
-                                <td>
-                                    190
-                                </td>
-                                <td>
-                                    <i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%
+                                    2
                                 </td>
                             </tr>
                         </tbody>
@@ -118,7 +58,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4">
+        {{-- <div class="col-xl-4">
             <div class="card shadow">
                 <div class="card-header border-0">
                     <div class="row align-items-center">
@@ -245,7 +185,15 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
+@endsection
+
+
+@section('js')
+<script>
+    console.log(window.Echo);
+</script>
+
 @endsection

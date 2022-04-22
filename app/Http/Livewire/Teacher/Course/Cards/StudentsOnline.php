@@ -9,14 +9,20 @@ class StudentsOnline extends Component
     public $course;
     public $students;
 
+    protected $listeners = [
+        'echo:studentonline,StudentOnline' => 'updateStudents'
+    ];
+
     public function mount()
     {
         $this->course = auth()->user()->teaches;
-        $this->students = $this->getStudentsOnline();
+        // $this->students = $this->getStudentsOnline();
     }
 
     public function render()
     {
+        $this->students = $this->getStudentsOnline();
+
         return view('livewire.teacher.course.cards.students-online');
     }
 
@@ -31,5 +37,10 @@ class StudentsOnline extends Component
         }
 
         return $students;
+    }
+
+    public function updateStudents(array $params)
+    {
+        dd($params);
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * App\Models\QuizQuestion
@@ -56,5 +57,11 @@ class QuizQuestion extends Model
     function responses(): HasMany
     {
         return $this->hasMany(QuizResponse::class, 'question_id');
+    }
+
+    // TODO
+    public function knowledge_component(): HasOne
+    {
+        return $this->hasOne(KnowledgeComponent::class);
     }
 }

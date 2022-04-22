@@ -47,8 +47,8 @@
                     {{-- /status --}}
                     {{-- content --}}
                     <label for="lesson_content">Lesson</label>
-                    <input name="content" id="lesson_content" value="{!! $lesson->content->toTrixHtml() !!}"
-                        type="hidden" />
+                    <input type="hidden" name="content" id="lesson_content"
+                        value="{!! $lesson->content->toTrixHtml() !!}" />
                     <trix-editor input="lesson_content" class="trix-content"></trix-editor>
                     {{-- /content --}}
                 </div>
@@ -60,3 +60,7 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+<script src="{{ asset('js/lessons/attachements.js') }}"></script>
+@endpush

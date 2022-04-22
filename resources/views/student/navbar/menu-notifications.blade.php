@@ -13,6 +13,7 @@
         {{-- list student notifications of new quizzes --}}
         @foreach($notifications as $notification)
         <div class="dropdown-divider"></div>
+        @if ($notification->type == 'App\Notifications\NewQuiz')
         <a href="{{ route('student.quiz.show', ['course' => $notification->data['quiz']['course_id'], $notification->data['quiz']['id']]) }}"
             class="dropdown-item">
             <div class="row">
@@ -26,6 +27,24 @@
                 </div>
             </div>
         </a>
+        @elseif ($notification->type == 'App\Notifications\NewLesson')
+        <a href="{{ route('student.course.section.lesson.show', ['course' => $notification->data['lesson']['section']['course']['id'],
+        'section' => $notification->data['lesson']['section_id'],
+        'lesson' => $notification->data['lesson']['id']
+        ]) }}" class="dropdown-item">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="text-dark">
+                        <strong>{{ $notification->data['message'] }}</strong>
+                        <span class="small float-right text-muted">{{ $notification->created_at->diffForHumans()
+                            }}</span>
+                        <div class="small text-muted">{{ $notification->data['lesson']['name'] }}</div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        @endif
+
         @endforeach
         @else
         <span class="dropdown-item dropdown-header">No Notifications</span>

@@ -67,4 +67,9 @@ class Course extends Model
     {
         return $this->hasMany(Section::class);
     }
+
+    public function kcs(): HasMany
+    {
+        return $this->hasMany(KnowledgeComponent::class);
+    }
 }
