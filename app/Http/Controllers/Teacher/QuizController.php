@@ -109,6 +109,6 @@ class QuizController extends Controller
     public function sort(Course $course, Quiz $quiz)
     {
         $quiz->load(['questions', 'course']);
-        return view('teacher.quiz.sort-questions', ['quiz' => $quiz]);
+        return view('teacher.quiz.sort-questions', ['quiz' => $quiz, 'course' => $course]);
     }
 }

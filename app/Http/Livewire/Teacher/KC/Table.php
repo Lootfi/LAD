@@ -42,6 +42,10 @@ class Table extends DataTableComponent
                 ->sortable(),
             Column::make("Updated at", "updated_at")
                 ->hideIf(true),
+            Column::make('Actions')
+                ->label(function (Kc $row) {
+                    return view('livewire.teacher.kc.partials.actions')->withRow($row);
+                }),
         ];
     }
 }

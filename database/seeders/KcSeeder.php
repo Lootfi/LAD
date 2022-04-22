@@ -16,19 +16,31 @@ class KcSeeder extends Seeder
      */
     public function run()
     {
-        Kc::factory(3)->create()->each(function ($kc) {
+        Kc::factory()->create()->each(function ($kc) {
             KCQL::query()->create([
                 'kc_id' => $kc->id,
-                'question_id' => 1,
                 'lesson_id' => 1,
+                'question_id' => 1,
+            ]);
+
+            KCQL::query()->create([
+                'kc_id' => $kc->id,
+                'lesson_id' => 1,
+                'question_id' => 2,
             ]);
         });
 
-        Kc::factory(3)->create()->each(function ($kc) {
+        Kc::factory(2)->create()->each(function ($kc) {
             KCQL::query()->create([
                 'kc_id' => $kc->id,
+                'lesson_id' => 1,
                 'question_id' => 2,
+            ]);
+
+            KCQL::query()->create([
+                'kc_id' => $kc->id,
                 'lesson_id' => 2,
+                'question_id' => 1,
             ]);
         });
     }

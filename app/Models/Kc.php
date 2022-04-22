@@ -17,18 +17,38 @@ class Kc extends Model
         'course_id',
     ];
 
+    function students(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            CourseStudent::class,
+            'course_id',
+            'student_id'
+        );
+    }
+
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
-    public function lesson(): BelongsToMany
+    public function lessons(): BelongsToMany
     {
-        return $this->belongsToMany(Lesson::class);
+        return $this->belongsToMany(
+            Lesson::class,
+            KCQL::class,
+            'kc_id',
+            'lesson_id'
+        );
     }
 
     public function questions(): BelongsToMany
     {
-        return $this->belongsToMany(QuizQuestion::class);
+        return $this->belongsToMany(
+            QuizQuestion::class,
+            KCQL::class,
+            'kc_id',
+            'question_id'
+        );
     }
 }
