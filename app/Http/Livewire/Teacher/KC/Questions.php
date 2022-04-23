@@ -1,19 +1,45 @@
 <?php
 
-namespace App\Http\Livewire\Teacher\KC;
+namespace App\Http\Livewire\Teacher\Kc;
 
+use App\Models\Kc;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\QuizQuestion;
+use Illuminate\Database\Eloquent\Builder;
 
 class Questions extends DataTableComponent
 {
-    protected $model = QuizQuestion::class;
+    public $kc;
+    public $questionids;
+
+    // listeners
+    protected $listeners = [
+        'kcCreated' => '$refresh',
+    ];
+
+    public function mount(Kc $kc, $questionids)
+    {
+        $this->kc = $kc;
+        $this->questionids = $questionids;
+    }
+
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
+        $this->setPrimaryKey('id')
+            ->setDefaultSort('created_at', 'desc');
     }
+
+    public function builder(): Builder
+    {
+        return QuizQuestion::query()
+            ->when(
+                $this->questionids ?? null,
+                fn ($q) => $q->whereIn('id', $this->questionids),
+            );;
+    }
+
 
     public function columns(): array
     {

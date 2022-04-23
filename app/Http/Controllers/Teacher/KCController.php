@@ -58,9 +58,15 @@ class KCController extends Controller
      */
     public function show(Course $course, Kc $kc)
     {
+        //get lessons ids
+        $lessonIds = $kc->lessons->pluck('id')->toArray();
+        //get question ids
+        $questionIds = $kc->questions->pluck('id')->toArray();
         return view('teacher.kc.show', [
             'course' => $course,
             'kc' => $kc,
+            'lessonIds' => $lessonIds,
+            'questionIds' => $questionIds,
         ]);
     }
 

@@ -14,13 +14,13 @@
     <h4 class="text-uppercase ls-1 mb-3">KC Lessons</h4>
 
     <div class="row">
-        <livewire:teacher.kc.lessons :kc="$kc" />
+        <livewire:teacher.kc.lessons :kc="$kc" :lessonids="$lessonIds" />
     </div>
 
     <h4 class="text-uppercase ls-1 mt-5 mb-3">KC Questions</h4>
 
     <div class="row">
-        <livewire:teacher.kc.questions :kc="$kc" />
+        <livewire:teacher.kc.questions :kc="$kc" :questionids="$questionIds" />
     </div>
 
 </div>
