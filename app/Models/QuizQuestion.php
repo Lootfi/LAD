@@ -63,4 +63,14 @@ class QuizQuestion extends Model
     {
         return $this->hasMany(KCQ::class, 'question_id');
     }
+
+    public function kcs(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Kc::class,
+            KCQ::class,
+            'question_id',
+            'kc_id',
+        );
+    }
 }

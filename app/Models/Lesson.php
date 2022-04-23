@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Tonysm\RichTextLaravel\Casts\AsRichTextContent;
 use Tonysm\RichTextLaravel\Models\Traits\HasRichText;
@@ -58,5 +59,15 @@ class Lesson extends Model
     public function kcls(): HasMany
     {
         return $this->hasMany(KCL::class, 'lesson_id');
+    }
+
+    public function kcs(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Kc::class,
+            KCL::class,
+            'lesson_id',
+            'kc_id',
+        );
     }
 }
