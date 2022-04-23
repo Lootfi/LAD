@@ -45,17 +45,21 @@ class Questions extends DataTableComponent
     {
         return [
             Column::make("Id", "id")
-                ->sortable(),
+                ->hideIf(true),
             Column::make("Question", "question")
                 ->sortable(),
             Column::make("Quiz id", "quiz_id")
-                ->sortable(),
+                ->hideIf(true),
             Column::make("Order", "order")
-                ->sortable(),
+                ->hideIf(true),
             Column::make("Created at", "created_at")
                 ->sortable(),
             Column::make("Updated at", "updated_at")
-                ->sortable(),
+                ->hideIf(true),
+            Column::make("Actions")
+                ->label(function (QuizQuestion $row) {
+                    return view('teacher.kc.partials.question-actions')->withRow($row);
+                })
         ];
     }
 }

@@ -45,15 +45,19 @@ class Lessons extends DataTableComponent
     {
         return [
             Column::make("Id", "id")
-                ->sortable(),
-            Column::make("Name", "name")
+                ->hideIf(true),
+            Column::make("Lesson Name", "name")
                 ->sortable(),
             Column::make("Status", "status")
-                ->sortable(),
+                ->hideIf(true),
             Column::make("Created at", "created_at")
                 ->sortable(),
             Column::make("Updated at", "updated_at")
-                ->sortable(),
+                ->hideIf(true),
+            Column::make("Actions")
+                ->label(function (Lesson $row) {
+                    return view('teacher.kc.partials.lesson-actions')->withRow($row);
+                })
         ];
     }
 }
