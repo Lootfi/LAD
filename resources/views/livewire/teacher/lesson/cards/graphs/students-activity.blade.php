@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col">
                 <h6 class="text-uppercase ls-1 mb-1">Overview</h6>
-                <h2 class="mb-0">Students Course Views</h2>
+                <h2 class="mb-0">Students Lesson Views</h2>
             </div>
             <div class="col">
                 <ul class="nav nav-pills justify-content-end">
@@ -37,7 +37,7 @@
         <!-- Chart -->
         <div class="chart">
             {{-- student activity chart.js --}}
-            <div class="chart" wire:key="{{$course->id}}" wire:poll.5s="updateStudentsActivity">
+            <div class="chart" wire:key="{{$lesson->id}}" wire:poll.5s="updateStudentsActivity">
                 <canvas id="studentActivityChart" style="height:250px"></canvas>
             </div>
         </div>
@@ -60,7 +60,7 @@
                 @endforeach
             ],
             datasets: [{
-                label: 'Student Course Views',
+                label: 'Student Lesson Views',
                 data: [
                     @foreach ($studentsActivity as $activities)
                     {{ $activities }},
@@ -94,7 +94,7 @@
         }
     });
     // livewire listen for events
-    Livewire.on('addCourseVisitData', (data) => {
+    Livewire.on('addLessonVisitData', (data) => {
         
         Object.keys(data).forEach(studentName => {
             const index = studentActivityChart.data.labels.indexOf(studentName);
@@ -102,7 +102,7 @@
         });
         studentActivityChart.update();
     });
-    Livewire.on('updateCourseViewTime', (data) => {
+    Livewire.on('updateLessonViewTime', (data) => {
         
         Object.keys(data).forEach((studentName,index) => {
             studentActivityChart.data.labels[index] = studentName;

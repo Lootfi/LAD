@@ -1,27 +1,29 @@
 <?php
 
-namespace App\Http\Livewire\Teacher\Course\Cards\Graphs;
+namespace App\Http\Livewire\Teacher\Lesson\Cards\Graphs;
 
+use App\Models\Lesson;
 use App\Models\User;
-use Livewire\Component;
 use Spatie\Activitylog\Models\Activity;
+use Livewire\Component;
 
 class StudentsActivity extends Component
 {
-    public $course;
+
+    public $lesson;
     public $studentsActivity;
     public $time = '1 month';
 
-    public function mount()
+    public function mount(Lesson $lesson)
     {
-        $this->course = auth()->user()->teaches;
+        $this->lesson = $lesson;
         $activities = $this->getNewActivities();
         $this->studentsActivity = $activities;
     }
 
     public function render()
     {
-        return view('livewire.teacher.course.cards.graphs.students-activity');
+        return view('livewire.teacher.lesson.cards.graphs.students-activity');
     }
 
     public function updateStudentsActivity()
@@ -33,15 +35,15 @@ class StudentsActivity extends Component
             return;
         } else {
             $this->studentsActivity = $newActivity;
-            $this->emit('addCourseVisitData', $diff);
+            $this->emit('addLessonVisitData', $diff);
         }
     }
 
     public function getNewActivities()
     {
         $activities = Activity::select(['causer_id'])
-            ->where('subject_type', 'App\Models\Course')
-            ->whereSubjectId($this->course->id)
+            ->where('subject_type', 'App\Models\Lesson')
+            ->whereSubjectId($this->lesson->id)
             ->where('created_at', '>=', now()->sub($this->time))
             ->get()
             ->groupBy('causer_id')
@@ -60,6 +62,6 @@ class StudentsActivity extends Component
     {
         $this->time = $time;
         $this->studentsActivity = $this->getNewActivities();
-        $this->emit('updateCourseViewTime', $this->studentsActivity);
+        $this->emit('updateLessonViewTime', $this->studentsActivity);
     }
 }
