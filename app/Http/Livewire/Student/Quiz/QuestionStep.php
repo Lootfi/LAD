@@ -49,16 +49,19 @@ class QuestionStep extends Component
         // must change $responses array structure to array of arrays [['answer_id' => boolean], ...]
 
         //delete existing responses first (if student unchecks a question in the middle of the quiz)
-        QuizResponse::where('student_id', auth()->user()->id)
+        QuizResponse::query()
+            ->where('student_id', auth()->user()->id)
             ->where('question_id', $this->question->id)
+            ->whereNotIn('answer_id', $this->responses)
             ->delete();
 
         foreach ($this->responses as $answerId) {
-            QuizResponse::firstOrCreate([
-                'student_id' => auth()->user()->id,
-                'question_id' => $this->question->id,
-                'answer_id' => $answerId,
-            ]);
+            QuizResponse::query()
+                ->firstOrCreate([
+                    'student_id' => auth()->user()->id,
+                    'question_id' => $this->question->id,
+                    'answer_id' => $answerId,
+                ]);
         }
     }
 
