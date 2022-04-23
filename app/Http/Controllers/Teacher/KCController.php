@@ -87,6 +87,10 @@ class KCController extends Controller
      */
     public function destroy(Course $course, Kc $kc)
     {
-        //
+        $kc->delete();
+
+        return redirect()->route('teacher.kc.manage', [
+            'course' => $course->load('kcs'),
+        ]);
     }
 }

@@ -36,7 +36,7 @@ class Kc extends Model
     {
         return $this->belongsToMany(
             Lesson::class,
-            KCQL::class,
+            KCL::class,
             'kc_id',
             'lesson_id'
         );
@@ -46,7 +46,7 @@ class Kc extends Model
     {
         return $this->belongsToMany(
             QuizQuestion::class,
-            KCQL::class,
+            KCQ::class,
             'kc_id',
             'question_id'
         );

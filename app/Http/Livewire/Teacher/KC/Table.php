@@ -10,9 +10,15 @@ use Illuminate\Database\Eloquent\Builder;
 class Table extends DataTableComponent
 {
 
+    // listeners
+    protected $listeners = [
+        'kcCreated' => '$refresh',
+    ];
+
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
+        $this->setPrimaryKey('id')
+            ->setDefaultSort('created_at', 'desc');
     }
 
     public function builder(): Builder

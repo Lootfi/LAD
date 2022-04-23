@@ -1,25 +1,3 @@
-{{-- <div class="dropdown" style="z-index: 100;">
-    <a class="btn btn-sm btn-icon-only" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">
-        <i class="fas fa-ellipsis-v"></i>
-    </a>
-    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-        <a class="dropdown-item" href="{{ route('teacher.quiz.edit', ['course' => $row->course,'quiz' => $row]) }}">
-            Edit Quiz
-        </a>
-        <a class="dropdown-item" href="{{ route('teacher.quiz.sort', ['course' => $row->course, 'quiz' => $row]) }}">
-            Sort Quiz Questions
-        </a>
-        <a class="dropdown-item" href="{{ route('teacher.quiz.notify', ['course' => $row->course, 'quiz' => $row]) }}">
-            Notify Students
-        </a>
-        <button class="dropdown-item" data-toggle="modal" data-target="#deleteModal"
-            data-url="{{ route('teacher.quiz.destroy', ['course' => $row->course, 'quiz' => $row]) }}">
-            Delete Quiz
-        </button>
-    </div>
-</div> --}}
-
 {{-- row of icons for actions, show, notify, sort, edit, delete --}}
 
 <div class="row">

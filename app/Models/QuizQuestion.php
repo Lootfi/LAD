@@ -59,9 +59,8 @@ class QuizQuestion extends Model
         return $this->hasMany(QuizResponse::class, 'question_id');
     }
 
-    // TODO
-    public function knowledge_component(): HasOne
+    public function kcqs(): HasMany
     {
-        return $this->hasOne(KnowledgeComponent::class);
+        return $this->hasMany(KCQ::class, 'question_id');
     }
 }

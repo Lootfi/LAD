@@ -25,6 +25,14 @@ class QuizQuestionSeeder extends Seeder
             'question' => 'What is the capital of Germany?',
             'order' => 2,
         ]);
+
+        QuizQuestion::factory()->create([
+            'quiz_id' => 1,
+            'question' => 'What is the capital of Algeria?',
+            'order' => 3,
+        ]);
+
+
         QuizQuestion::factory()->create([
             'quiz_id' => 2,
             'question' => 'What is the capital of France?',

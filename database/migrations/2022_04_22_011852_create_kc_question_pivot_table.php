@@ -12,18 +12,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kc_question_lesson', function (Blueprint $table) {
+        Schema::create('kc_questions', function (Blueprint $table) {
 
             $table->unsignedBigInteger('kc_id')->index()->nullable();
-            $table->foreign('kc_id')->references('id')->on('kcs');
+            $table->foreign('kc_id')->references('id')->on('kcs')->onDelete('cascade');
 
             $table->unsignedBigInteger('question_id')->index()->nullable();
-            $table->foreign('question_id')->references('id')->on('quiz_questions');
+            $table->foreign('question_id')->references('id')->on('quiz_questions')->onDelete('cascade');
 
-            $table->unsignedBigInteger('lesson_id')->index()->nullable();
-            $table->foreign('lesson_id')->references('id')->on('lessons');
-
-            $table->primary(['kc_id', 'question_id', 'lesson_id']);
+            $table->primary(['kc_id', 'question_id']);
 
             $table->timestamps();
         });
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kc_question_lesson');
+        Schema::dropIfExists('kc_questions');
     }
 };

@@ -38,11 +38,10 @@ class QuizAnswerSeeder extends Seeder
             'answer' => 'Berlin',
         ]);
 
-
         QuizAnswer::factory(1)->create([
             'question_id' => 3,
             'right_answer' => true,
-            'answer' => 'Paris',
+            'answer' => 'Algiers',
         ]);
         QuizAnswer::factory(1)->create([
             'question_id' => 3,
@@ -58,6 +57,18 @@ class QuizAnswerSeeder extends Seeder
         ]);
         QuizAnswer::factory(1)->create([
             'question_id' => 4,
+            'right_answer' => false,
+            'answer' => 'Berlin',
+        ]);
+
+
+        QuizAnswer::factory(1)->create([
+            'question_id' => 5,
+            'right_answer' => true,
+            'answer' => 'Paris',
+        ]);
+        QuizAnswer::factory(1)->create([
+            'question_id' => 5,
             'right_answer' => false,
             'answer' => 'Berlin',
         ]);

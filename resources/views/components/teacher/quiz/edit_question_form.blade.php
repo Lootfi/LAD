@@ -23,11 +23,14 @@
                         @endif
                     </div>
                     {{-- a form group with all possible question's answers, and a toggle for right_answer --}}
-                    <label class="form-control-label mb-4" for="input-answer">{{ __('Answers') }}</label>
+                    <label class="form-control-label mt-4" for="input-answer">{{ __('Answers') }}</label>
 
                     @foreach ($question->answers as $answer)
                     <x-teacher.quiz.edit_answer_form :answer="$answer" />
                     @endforeach
+
+                    {{-- selecting kcs for this question --}}
+                    <x-teacher.quiz.edit_kcs_form :question="$question" />
                     {{-- button that creates a new input group for a new answer in a modal --}}
                     <div class="text-center">
                         <button type="button" class="btn btn-success mt-4" data-toggle="modal"
