@@ -55,8 +55,8 @@ class Lesson extends Model
         return $this->belongsTo(Section::class);
     }
 
-    public function knowledge_components(): HasMany
+    public function kcls(): HasMany
     {
-        return $this->hasMany(KnowledgeComponent::class);
+        return $this->hasMany(KCL::class, 'lesson_id');
     }
 }

@@ -45,6 +45,20 @@
                         </select>
                     </div>
                     {{-- /status --}}
+                    {{-- kcs --}}
+                    <div class="form-group" name="lesson_kcs" id="lesson-kcs-{{$lesson->id}}">
+                        <label for="l_kcs">KCs</label>
+                        <select class="select-multi-kcs-{{$lesson->id}} w-100" name="l_kcs[]" multiple="multiple"
+                            autocomplete="off">
+                            @foreach ($lesson->kcls as $kcl)
+                            <option value="{{$kcl->kc->id}}" selected>{{$kcl->kc->name}}</option>
+                            @endforeach
+                            @foreach ($kc_rest as $kc)
+                            <option value="{{$kc->id}}">{{$kc->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    {{-- /kcs --}}
                     {{-- content --}}
                     <label for="lesson_content">Lesson</label>
                     <input type="hidden" name="content" id="lesson_content"
@@ -63,4 +77,17 @@
 
 @push('js')
 <script src="{{ asset('js/lessons/attachements.js') }}"></script>
+<script>
+    $(document).ready(function() {
+    $('.select-multi-kcs-{{$lesson->id}}').select2({
+        language: {
+            noResults: function() {
+                return $("<a href='{{route('teacher.kc.manage', ['course' => $course])}}'>Create new KC " + "'" + 
+                document.getElementById('lesson-kcs-{{$lesson->id}}').getElementsByClassName('select2-search__field')[0].value
+                + "'" + " for this course</a>");
+            }
+        }
+    });
+});
+</script>
 @endpush
