@@ -1,7 +1,7 @@
 <div>
     <div class="card-header">
         <h4 class="mb-0">
-            <span class="badge badge-pill badge-primary">{{ $step }}</span>
+            <span class="badge badge-pill badge-primary">{{ $step + 1 }}</span>
             {{ $question->question }}
         </h4>
     </div>

@@ -25,13 +25,13 @@
         </div>
     </div>
     <br>
-    <button data-toggle="modal" data-target="#finishModal" class="btn btn-primary">
+    <button wire:click="submitQuiz" class="btn btn-primary">
         Finish Quiz
     </button>
 
 
     {{-- finish quiz confirmation modal --}}
-    <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="finishModalLabel"
+    {{-- <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="finishModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -47,13 +47,14 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form wire:submit.prevent="submitQuiz">
+                    <form>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    --}}
 </div>
 
 @once

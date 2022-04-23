@@ -66,6 +66,6 @@ class QuizController extends Controller
         });
 
 
-        return view('student.quiz.results', compact('quiz'));
+        return view('student.quiz.results', compact('course', 'quiz'));
     }
 }

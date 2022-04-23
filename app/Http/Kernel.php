@@ -72,5 +72,6 @@ class Kernel extends HttpKernel
         \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'log' => \App\Http\Middleware\LogStudentActivity::class,
         'student_last_activity' => \App\Http\Middleware\StudentLastActivity::class,
+        'student_submitted_quiz' => \App\Http\Middleware\StudentSubmittedQuiz::class,
     ];
 }

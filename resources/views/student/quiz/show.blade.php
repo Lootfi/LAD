@@ -18,6 +18,8 @@
 
 @section('content')
 
-<livewire:student.quiz-page :quiz="$quiz" />
+<div>
+    <livewire:student.quiz-page :quiz="$quiz" />
+</div>
 
 @endsection

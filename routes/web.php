@@ -192,7 +192,7 @@ Route::prefix('student')
         * Student Quiz Routes
         */
 
-        Route::resource('course/{course}/quiz', StudentQuizController::class)->except(['create', 'edit', 'destroy']);
+        Route::resource('course/{course}/quiz', StudentQuizController::class)->except(['create', 'edit', 'destroy'])->middleware('student_submitted_quiz');
 
         //quiz results
         Route::get('course/{course}/quiz/{quiz}/results', [
