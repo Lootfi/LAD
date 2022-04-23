@@ -12,7 +12,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ViewLesson
+class ViewLesson implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -26,8 +26,8 @@ class ViewLesson
      */
     public function __construct(User $student, Lesson $lesson)
     {
-        $this->lesson = $lesson;
         $this->student = $student;
+        $this->lesson = $lesson;
     }
 
     /**
@@ -35,8 +35,8 @@ class ViewLesson
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    // public function broadcastOn()
-    // {
-    //     return new PrivateChannel('channel-name');
-    // }
+    public function broadcastOn()
+    {
+        return new Channel('student-activity');
+    }
 }

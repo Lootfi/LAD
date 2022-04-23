@@ -26,8 +26,8 @@ class ViewCourse implements ShouldBroadcast
      */
     public function __construct(User $student, Course $course)
     {
-        $this->course = $course;
         $this->student = $student;
+        $this->course = $course;
     }
 
     /**

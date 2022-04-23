@@ -39,7 +39,7 @@ class LogStudentActivity
     */
     public function logViewCourse(Request $request)
     {
-        $course = Course::find($request->route('course'))->first();
+        $course = Course::whereId($request->route('course')->id)->first();
         event(new ViewCourse(request()->user(), $course));
     }
 
@@ -49,7 +49,7 @@ class LogStudentActivity
     */
     public function logViewLesson(Request $request)
     {
-        $lesson = Lesson::find($request->route('lesson'))->first();
+        $lesson = Lesson::whereId($request->route('lesson')->id)->first();
         event(new ViewLesson(request()->user(), $lesson));
     }
 }
