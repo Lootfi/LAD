@@ -29,12 +29,12 @@ class QuizAnswerSeeder extends Seeder
 
         QuizAnswer::factory(1)->create([
             'question_id' => 2,
-            'right_answer' => true,
+            'right_answer' => false,
             'answer' => 'Paris',
         ]);
         QuizAnswer::factory(1)->create([
             'question_id' => 2,
-            'right_answer' => false,
+            'right_answer' => true,
             'answer' => 'Berlin',
         ]);
 

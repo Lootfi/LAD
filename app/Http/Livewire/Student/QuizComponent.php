@@ -56,7 +56,9 @@ class QuizComponent extends Component
         QuizStudent::query()
             ->where('quiz_id', $this->quiz->id)
             ->where('student_id', auth()->user()->id)
-            ->update(['submitted' => true]);
+            ->update(['submitted' => true, 'submitted_at' => now()]);
+
+        $this->logQuizSubmit();
 
         //redirect to results page
         return redirect()->route('student.quiz.results', ['course' => $this->quiz->course, 'quiz' => $this->quiz]);
@@ -68,5 +70,14 @@ class QuizComponent extends Component
         if ($this->quiz->end_date <= now()) {
             return redirect()->route('student.quiz.results', ['course' => $this->quiz->course, 'quiz' => $this->quiz]);
         }
+    }
+
+    public function logQuizSubmit()
+    {
+        activity('student.quiz.submit')
+            ->event('submitted')
+            ->causedBy(auth()->user())
+            ->performedOn(QuizStudent::query()->where('quiz_id', $this->quiz->id)->where('student_id', auth()->user()->id)->first())
+            ->log('Student submitted quiz');
     }
 }

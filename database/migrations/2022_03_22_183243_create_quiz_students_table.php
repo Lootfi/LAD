@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('quiz_students', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('quiz_id')->index();
             $table
                 ->foreign('quiz_id')
@@ -28,10 +29,9 @@ return new class extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->primary(['quiz_id', 'student_id']);
-
             $table->boolean('submitted')->default(false);
-            $table->timestamp('submitted_at')->default(now());
+            $table->timestamp('submitted_at')->nullable();
+            $table->timestamps();
         });
     }
 

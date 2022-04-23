@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Models\QuizResponse
@@ -27,6 +29,12 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  */
 class QuizResponse extends Pivot
 {
+    use LogsActivity;
+
+    public $incrementing = true;
+
+    protected static $recordEvents = ['created'];
+
     public function student()
     {
         return $this->belongsTo(User::class);
@@ -40,5 +48,13 @@ class QuizResponse extends Pivot
     public function question()
     {
         return $this->belongsTo(QuizQuestion::class, 'question_id');
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['student_id', 'question_id', 'answer_id'])
+            ->useLogName('student.question.response')
+            ->setDescriptionForEvent(fn (string $eventName) => "Student responded to question");
     }
 }

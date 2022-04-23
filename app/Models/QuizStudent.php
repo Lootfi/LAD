@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Models\QuizStudents
@@ -34,10 +36,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class QuizStudent extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     protected $table = 'quiz_students';
-    public $timestamps = false;
+    protected static $recordEvents = ['created'];
 
     protected $fillable = [
         'quiz_id',
@@ -57,5 +59,13 @@ class QuizStudent extends Model
     public function responses()
     {
         return $this->hasMany(QuizResponse::class);
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['quiz_id', 'student_id', 'submitted'])
+            ->useLogName('student.quiz.start')
+            ->setDescriptionForEvent(fn () => 'Student started quiz');
     }
 }

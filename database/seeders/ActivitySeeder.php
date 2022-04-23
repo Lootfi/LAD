@@ -21,23 +21,23 @@ class ActivitySeeder extends Seeder
         $student01 = User::find(2);
         $course01 = Course::find(1);
 
-        for ($i = 0; $i < 100; $i++) {
-            activity('student.course.show')
-                ->causedBy($student01)
-                ->performedOn($course01)
-                ->createdAt(now()->subDays($i * 0.5))
-                ->log('Student viewed course');
-        }
+        // for ($i = 0; $i < 100; $i++) {
+        //     activity('student.course.show')
+        //         ->causedBy($student01)
+        //         ->performedOn($course01)
+        //         ->createdAt(now()->subDays($i * 0.5))
+        //         ->log('Student viewed course');
+        // }
 
-        //activity for Student 02 on course 01
-        $student02 = User::find(3);
+        // //activity for Student 02 on course 01
+        // $student02 = User::find(3);
 
-        for ($i = 0; $i < 10; $i++) {
-            activity('student.course.show')
-                ->causedBy($student02)
-                ->performedOn($course01)
-                ->createdAt(now()->subDays($i * 0.5))
-                ->log('Student viewed course');
-        }
+        // for ($i = 0; $i < 10; $i++) {
+        //     activity('student.course.show')
+        //         ->causedBy($student02)
+        //         ->performedOn($course01)
+        //         ->createdAt(now()->subDays($i * 0.5))
+        //         ->log('Student viewed course');
+        // }
     }
 }
