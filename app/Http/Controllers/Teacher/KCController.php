@@ -58,8 +58,10 @@ class KCController extends Controller
      */
     public function show(Course $course, Kc $kc)
     {
-        // TODO
-        // we can show all related resources of this kc, [lessons, questions, quizzes, assignments, etc]
+        return view('teacher.kc.show', [
+            'course' => $course,
+            'kc' => $kc,
+        ]);
     }
 
     /**

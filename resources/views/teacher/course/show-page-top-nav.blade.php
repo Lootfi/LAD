@@ -53,6 +53,19 @@
                 </div>
 
             </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle {{request()->routeIs('teacher.kc*') ? 'active' : ''}}" href="#"
+                    id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    KCs
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('teacher.kc.manage', ['course' => $course]) }}">Manage
+                        KCs</a>
+                </div>
+
+            </li>
         </ul>
     </div>
 </nav>
