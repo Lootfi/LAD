@@ -45,16 +45,14 @@ class QuestionStep extends Component
     public function saveResponses()
     {
 
-        // TODO: check if student has already answered this question to avoid deleting all responses and creating new ones
-        // must change $responses array structure to array of arrays [['answer_id' => boolean], ...]
-
-        //delete existing responses first (if student unchecks a question in the middle of the quiz)
+        // delete responses not in $responses array (if any)
         QuizResponse::query()
             ->where('student_id', auth()->user()->id)
             ->where('question_id', $this->question->id)
             ->whereNotIn('answer_id', $this->responses)
             ->delete();
 
+        // create newly added responses
         foreach ($this->responses as $answerId) {
             QuizResponse::query()
                 ->firstOrCreate([
@@ -63,6 +61,8 @@ class QuestionStep extends Component
                     'answer_id' => $answerId,
                 ]);
         }
+
+        event(new \App\Events\Student\QuestionAnswered($this->quiz, $this->question));
     }
 
 
