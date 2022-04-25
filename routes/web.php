@@ -117,6 +117,18 @@ Route::prefix('teacher')
             'notify',
         ])->name('quiz.notify');
 
+        // monitor quiz page
+        Route::get('course/{course}/quiz/{quiz}/monitor', [
+            TeacherQuizController::class,
+            'monitor',
+        ])->name('quiz.monitor');
+
+        // monitor quiz page for one student
+        Route::get('course/{course}/quiz/{quiz}/monitor/{student}', [
+            TeacherQuizController::class,
+            'monitorStudent',
+        ])->name('quiz.monitor.student');
+
         Route::get('course/{course}/quiz/{quiz}/sort', [
             TeacherQuizController::class,
             'sort',
