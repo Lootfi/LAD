@@ -5,7 +5,7 @@
 
             <div class="col-xl-7 col-lg-8 col-md-9 d-flex">
                 @foreach ($quiz->questions as $key => $question)
-                <div class="card b-0 {{ $active_question->id != $question->id ? 'd-none' : '' }}">
+                <div class="w-100 b-0 {{ $active_question->id != $question->id ? 'd-none' : '' }}">
                     @livewire('student.quiz.question-step', ['question' => $question, 'step' => $key, 'lastQuestion' =>
                     $loop->last],
                     key($question->id))
@@ -28,6 +28,10 @@
         Submit Quiz and See results
     </button>
 </div>
+
+@push('css')
+<link rel="stylesheet" href="{{ asset('css/quiz-answer.css') }}">
+@endpush
 
 @once
 @push('js')

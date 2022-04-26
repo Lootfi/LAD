@@ -5,11 +5,15 @@
             {{ $question->question }}
         </h4>
     </div>
-    <div class="card-body">
+    <div class="card-body form">
         @foreach ($question->answers as $answer)
-        <div class="form-check">
+        {{-- <div class="form-check">
             <input wire:model="responses" class="form-check-input" type="checkbox" value="{{ $answer->id }}">
             {{ $answer->answer }}
+        </div> --}}
+        <div class="inputGroup">
+            <input id="{{$answer->id}}" wire:model="responses" type="checkbox" value="{{ $answer->id }}" />
+            <label for="{{$answer->id}}">{{ $answer->answer }}</label>
         </div>
         @endforeach
     </div>
