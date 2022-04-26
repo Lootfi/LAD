@@ -20,18 +20,24 @@ class StudentSubmittedQuiz
     public function handle(Request $request, Closure $next)
     {
         $routeName = $request->route()->getName();
-        $quiz = Quiz::whereId($request->route('quiz')->id)->first();
-        $quizStudentSubmitted = QuizStudent::query()
-            ->where('quiz_id', $quiz->id)
-            ->where('student_id', auth()->user()->id)
-            ->where('submitted', true)
-            ->first();
 
         if ($routeName == 'student.quiz.show') {
+            $quiz = Quiz::whereId($request->route('quiz')->id)->first();
+            $quizStudentSubmitted = QuizStudent::query()
+                ->where('quiz_id', $quiz->id)
+                ->where('student_id', auth()->user()->id)
+                ->where('submitted', true)
+                ->first();
             if ($quizStudentSubmitted || $quiz->status == "closed") {
                 return redirect()->route('student.quiz.results', ['course' => $quiz->course, 'quiz' => $quiz]);
             }
         } elseif ($routeName == 'student.quiz.results') {
+            $quiz = Quiz::whereId($request->route('quiz')->id)->first();
+            $quizStudentSubmitted = QuizStudent::query()
+                ->where('quiz_id', $quiz->id)
+                ->where('student_id', auth()->user()->id)
+                ->where('submitted', true)
+                ->first();
             if ($quizStudentSubmitted == null && $quiz->status != "closed") {
                 return redirect()->route('student.quiz.show', ['course' => $quiz->course, 'quiz' => $quiz]);
             }

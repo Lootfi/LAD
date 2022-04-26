@@ -39,7 +39,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    // redirect user to dashboard after login based on role of user 'teacher' or 'student'
     public function redirectTo()
     {
         if (auth()->user()->hasRole('teacher')) {

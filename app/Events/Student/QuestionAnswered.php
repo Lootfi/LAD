@@ -2,8 +2,8 @@
 
 namespace App\Events\Student;
 
-use App\Models\Quiz;
 use App\Models\QuizQuestion;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -16,7 +16,7 @@ class QuestionAnswered implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public Quiz $quiz;
+    public User $student;
     public QuizQuestion $question;
 
     /**
@@ -24,9 +24,9 @@ class QuestionAnswered implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Quiz $quiz, QuizQuestion $question)
+    public function __construct(User $student, QuizQuestion $question)
     {
-        $this->quiz = $quiz;
+        $this->student = $student;
         $this->question = $question;
     }
 
@@ -37,6 +37,6 @@ class QuestionAnswered implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('student-activity');
+        return new Channel($this->student->id . '.answered.' . $this->question->id);
     }
 }

@@ -40,9 +40,9 @@ class QuizQuestion extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['question', 'quiz_id', 'order'];
-
     protected $table = 'quiz_questions';
+
+    protected $fillable = ['question', 'quiz_id', 'order'];
 
     function quiz(): BelongsTo
     {
@@ -73,4 +73,24 @@ class QuizQuestion extends Model
             'kc_id',
         );
     }
+
+    // public function getCorrectAttribute(): bool
+    // {
+    //     $correct = false;
+
+    //     if ($this->responses->count() === 0) {
+    //         return $correct;
+    //     }
+
+    //     foreach ($this->responses as $response) {
+    //         if ($response->answer->is_right) {
+    //             $correct = true;
+    //         } else {
+    //             $correct = false;
+    //             break;
+    //         }
+    //     }
+
+    //     return $correct;
+    // }
 }

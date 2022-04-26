@@ -49,7 +49,7 @@ Route::post('/upload', [TeacherLessonController::class, 'upload'])->middleware('
 
 Route::prefix('teacher')
     ->name('teacher.')
-    ->middleware(['middleware' => 'role:teacher'])
+    ->middleware(['auth', 'role:teacher'])
     ->group(function () {
 
         Route::get('dashboard', [
@@ -171,7 +171,7 @@ Route::prefix('teacher')
 // student dashboard routes
 Route::prefix('student')
     ->name('student.')
-    ->middleware(['role:student', 'student_last_activity', 'log'])
+    ->middleware(['auth', 'role:student', 'student_last_activity', 'log'])
     ->group(function () {
 
         Route::get('/', [

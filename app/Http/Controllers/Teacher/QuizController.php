@@ -75,7 +75,10 @@ class QuizController extends Controller
 
     public function monitor(Course $course, Quiz $quiz)
     {
-        return view('teacher.quiz.monitor.index', ['quiz' => $quiz->load(['questions.kcs']), 'course' => $course->load('students')]);
+        return view('teacher.quiz.monitor.index', [
+            'quiz' => $quiz->load(['questions.kcs']),
+            'course' => $course->load('students')
+        ]);
     }
 
     public function monitorStudent(Course $course, Quiz $quiz, User $student)

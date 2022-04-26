@@ -62,7 +62,7 @@ class QuestionStep extends Component
                 ]);
         }
 
-        event(new \App\Events\Student\QuestionAnswered($this->quiz, $this->question));
+        event(new \App\Events\Student\QuestionAnswered(auth()->user(), $this->question));
     }
 
 

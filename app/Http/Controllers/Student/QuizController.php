@@ -53,7 +53,7 @@ class QuizController extends Controller
 
         $quiz->questions->each(function ($question) {
             $question->correct = false;
-            $responses = $question->responses;
+            $responses = $question->responses()->where('student_id', auth()->id())->get();
 
             foreach ($responses as $response) {
                 if ($response->answer->is_right) {
