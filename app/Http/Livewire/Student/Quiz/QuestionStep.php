@@ -27,6 +27,9 @@ class QuestionStep extends Component
         $this->question = $question;
         $this->quiz = $this->question->quiz;
 
+        // checkTime
+        $this->checkTime();
+
         $responsesCollection = $this->question->responses()
             ->where('student_id', auth()->user()->id)
             ->get('answer_id');
@@ -44,6 +47,9 @@ class QuestionStep extends Component
 
     public function saveResponses()
     {
+
+        // checkTime
+        $this->checkTime();
 
         // delete responses not in $responses array (if any)
         QuizResponse::query()
@@ -63,6 +69,13 @@ class QuestionStep extends Component
         }
 
         event(new \App\Events\Student\QuestionAnswered(auth()->user(), $this->question));
+    }
+
+    public function checkTime()
+    {
+        if ($this->quiz->end_date <= now()) {
+            return redirect()->route('student.quiz.results', ['course' => $this->quiz->course, 'quiz' => $this->quiz]);
+        }
     }
 
 

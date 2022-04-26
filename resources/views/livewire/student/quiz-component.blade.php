@@ -1,6 +1,5 @@
 <div>
-    <span wire:poll="checkTime"></span>
-    <div wire:ignore id="timeLeft"></div>
+    <div id="timeLeft"></div>
     <div class="container-fluid px-1 py-5 mx-auto">
         <div class="row d-flex justify-content-center">
 
@@ -25,36 +24,9 @@
         </div>
     </div>
     <br>
-    <button wire:click="submitQuiz" class="btn btn-primary">
-        Finish Quiz
+    <button wire:click="submitQuiz" class="btn btn-danger">
+        Submit Quiz and See results
     </button>
-
-
-    {{-- finish quiz confirmation modal --}}
-    {{-- <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="finishModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Finish Quiz and Submit</h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to submit this quiz?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    --}}
 </div>
 
 @once

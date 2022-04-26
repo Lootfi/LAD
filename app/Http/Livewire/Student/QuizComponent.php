@@ -64,14 +64,6 @@ class QuizComponent extends Component
         return redirect()->route('student.quiz.results', ['course' => $this->quiz->course, 'quiz' => $this->quiz]);
     }
 
-    // check if time is up and redirect to results page
-    public function checkTime()
-    {
-        if ($this->quiz->end_date <= now()) {
-            return redirect()->route('student.quiz.results', ['course' => $this->quiz->course, 'quiz' => $this->quiz]);
-        }
-    }
-
     public function logQuizSubmit()
     {
         activity('student.quiz.submit')
