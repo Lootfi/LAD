@@ -28,9 +28,7 @@ class Question extends Component
         $this->student = $student;
         $this->question = $question;
         $this->index = $question->order;
-        $this->answered = $question->responses()->where('student_id', $student->id)->exists();
-        if ($this->answered)
-            $this->correct = $this->getCorrectAttribute();
+        $this->getAttributes();
         $this->classes = $this->getCssClasses();
     }
 
@@ -39,10 +37,14 @@ class Question extends Component
         return view('livewire.teacher.quiz.monitor.question');
     }
 
-    public function getCorrectAttribute()
+    public function getAttributes()
     {
-        $correct = false;
         $responses = $this->question->responses()->where('student_id', $this->student->id)->get();
+
+        if ($responses->count() == 0) return;
+
+        $this->answered = true;
+        $correct = false;
 
         foreach ($responses as $response) {
             if ($response->answer->is_right) {
@@ -53,7 +55,7 @@ class Question extends Component
             }
         }
 
-        return $correct;
+        $this->correct = $correct;
     }
 
     public function getCssClasses()
@@ -71,6 +73,7 @@ class Question extends Component
 
     public function questionAnswered()
     {
-        dd('questionAnswered' . $this->student->id . '.' . $this->question->id);
+        $this->getAttributes();
+        $this->classes = $this->getCssClasses();
     }
 }

@@ -15,12 +15,3 @@
     <i class="fa fa-check-circle fa-lg invisible" aria-hidden="true"></i>
 </div>
 @endif
-
-@push('js')
-<script>
-    Echo.channel('questionanswered')
-        .listen('QuestionAnswered', (e) => {
-            console.log(e);
-        });
-</script>
-@endpush
