@@ -14,12 +14,14 @@ class Question extends Component
     public $answered = false;
     public $correct = false;
     public $classes;
+    public $selected = false;
 
     public function getListeners()
     {
         return [
             //{student_id}.answered.{question_id}
             "echo:{$this->student->id}.answered.{$this->question->id},Student\QuestionAnswered" => 'questionAnswered',
+            'chooseQuestion' => 'choose',
         ];
     }
 
@@ -75,5 +77,16 @@ class Question extends Component
     {
         $this->getAttributes();
         $this->classes = $this->getCssClasses();
+    }
+
+    public function chooseQuestion()
+    {
+        $this->emit('chooseQuestion', $this->question->id, $this->student->id);
+        $this->selected = true;
+    }
+
+    public function choose(QuizQuestion $question, User $student)
+    {
+        $this->selected = false;
     }
 }

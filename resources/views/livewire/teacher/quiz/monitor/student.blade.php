@@ -9,12 +9,10 @@
     </div>
     <div class="card-body">
         <p class="card-text">Questions</p>
-        {{-- <a href="#" class="card-link">Link 1</a>
-        <a href="#" class="card-link">Link 2</a> --}}
-        <div class="card-columns">
+        <div class="row row-cols-1 row-cols-md-3">
             @foreach ($quiz->questions as $index => $question)
-            {{-- question card, only takes q-index (int), q-answered (boolean), q-right (boolean) --}}
-            <livewire:teacher.quiz.monitor.question :student="$student" :question="$question" />
+            <livewire:teacher.quiz.monitor.question :student="$student" :question="$question"
+                :selectedQuestion="$selectedQuestion" :wire:key="$loop->index" />
             @endforeach
         </div>
     </div>

@@ -7,6 +7,13 @@
             <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
         </a>
     </div>
+    {{-- monitor page --}}
+    <div class="col-auto">
+        <a href="{{ route('teacher.quiz.monitor', ['course' => $row->course, 'quiz' => $row]) }}"
+            class="btn btn-sm btn-icon btn-2 btn-info btn-text-secondary">
+            <span class="btn-inner--icon"><i class="fas fa-chart-line"></i></span>
+        </a>
+    </div>
     <div class="col-auto">
         <a href="{{ route('teacher.quiz.edit', ['course' => $row->course, 'quiz' => $row]) }}"
             class="btn btn-sm btn-icon btn-2 btn-primary btn-text-secondary">
