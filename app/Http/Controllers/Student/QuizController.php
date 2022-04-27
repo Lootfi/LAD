@@ -47,25 +47,47 @@ class QuizController extends Controller
 
     public function results(Course $course, Quiz $quiz)
     {
-        $quiz->load(['questions.answers', 'course', 'questions.responses']);
-
-        $quiz->questions = $quiz->questions->sortBy('created_at', descending: true);
+        $quiz->load(['questions.answers', 'course', 'questions']);
 
         $quiz->questions->each(function ($question) {
-            $question->correct = false;
-            $responses = $question->responses()->where('student_id', auth()->id())->get();
+            $question->my_responses = $question
+                ->responses()
+                ->where('student_id', auth()->user()->id)
+                ->get();
+        });
+        $quiz->questions = $quiz->questions->sortBy('created_at', descending: true);
 
-            foreach ($responses as $response) {
+        $correct = [];
+
+        foreach ($quiz->questions as $question) {
+            $correct[$question->id] = false;
+            // $responses = $question->responses()->where('student_id', auth()->id())->get();
+
+            foreach ($question->my_responses as $response) {
                 if ($response->answer->is_right) {
-                    $question->correct = true;
+                    $correct[$question->id] = true;
                 } else {
-                    $question->correct = false;
-                    break;
+                    $correct[$question->id] = false;
+                    break 1;
                 }
             }
-        });
+        }
 
+        //building responses array ['question_id' => ['answer_id' => ['answered' => true, 'correct' => true]]]
+        $responses = [];
 
-        return view('student.quiz.results', compact('course', 'quiz'));
+        foreach ($quiz->questions as $question) {
+            foreach ($question->answers as $answer) {
+                $answered = $question->my_responses->contains('answer_id', $answer->id);
+                $responses[$question->id][$answer->id]['answered'] = $answered;
+                if ($answered && $answer->is_right) {
+                    $responses[$question->id][$answer->id]['correct'] = true;
+                } else {
+                    $responses[$question->id][$answer->id]['correct'] = false;
+                }
+            }
+        }
+
+        return view('student.quiz.results', compact('course', 'quiz', 'correct', 'responses'));
     }
 }

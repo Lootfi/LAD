@@ -19,21 +19,38 @@
 
     <div class="card">
         <div class="card-header" id="headingOne">
-            <h2 class="mb-0">
-                <button class="btn btn-link btn-block text-left d-flex justify-content-between" type="button"
-                    data-toggle="collapse" data-target="#collapse-{{$question->id}}" aria-expanded="true"
+            <h5 class="mb-0">
+                <button class="btn btn-link btn-block text-left d-flex justify-content-between align-items-center"
+                    type="button" data-toggle="collapse" data-target="#collapse-{{$question->id}}" aria-expanded="true"
                     aria-controls="collapse-{{$question->id}}">
-                    <p>#Question {{$key+1}}: {{ $question->question }}</p>
-                    <p>{{var_export($question->correct)}}</p>
+                    #Question {{$key+1}}: {{ $question->question }}
+                    @if ($correct[$question->id])
+                    <i class="fas fa-lg fa-check text-success"></i>
+                    </span>
+                    @else
+                    <i class="fas fa-lg fa-times text-danger"></i>
+                    @endif
                 </button>
-            </h2>
+            </h5>
         </div>
 
         <div id="collapse-{{$question->id}}" class="collapse {{$key == 0 ? 'show': ''}}"
             aria-labelledby="heading-{{$question->id}}" data-parent="#QuestionsAccordion">
             <div class="card-body">
-                Some placeholder content for the first accordion panel. This panel is shown by default, thanks to the
-                <code>.show</code> class.
+                {{-- shot student his answers --}}
+                @foreach ($question->answers as $answer)
+                <div
+                    class="row {{$answer->is_right ? 'bg-success text-white':''}}
+                {{($answer->is_right == false && $responses[$question->id][$answer->id]['answered']) ? 'bg-danger text-white':'' }}">
+                    <div class="col-md-1">
+                        <input type="checkbox" disabled {{$responses[$question->id][$answer->id]['answered'] ? 'checked'
+                        : '' }}>
+                    </div>
+                    <div class="col-md-11">
+                        {{ $answer->answer }}
+                    </div>
+                </div>
+                @endforeach
             </div>
         </div>
     </div>
