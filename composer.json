@@ -28,7 +28,6 @@
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
-        "beyondcode/laravel-er-diagram-generator": "^1.5",
         "fakerphp/faker": "^1.9.1",
         "laracasts/generators": "^2.0",
         "laravel/sail": "^1.0.1",
