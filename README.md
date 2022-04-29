@@ -20,4 +20,16 @@ If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Lar
 
 ## Websockets
 
-This project uses [laravel-websockets](https://beyondco.de/docs/laravel-websockets/getting-started/introduction) and [Laravel Echo](https://laravel.com/docs/9.x/broadcasting#client-side-installation) inside [Livewire](https://laravel-livewire.com/docs/2.x/laravel-echo) to broadcast students' activities to teacher's dashboard.
+This project uses [laravel-websockets](https://beyondco.de/docs/laravel-websockets/getting-started/introduction). And listens for [Laravel Echo](https://laravel.com/docs/9.x/broadcasting#client-side-installation) Events (students' activities) inside [Livewire](https://laravel-livewire.com/docs/2.x/laravel-echo) components (teacher's dashboard).
+
+
+## Logging Student's Activity
+
+This projects logs students' activities using [laravel-activitylog](https://spatie.be/docs/laravel-activitylog/v4/introduction), most activities are logged when an event is fired, but some are logged automatically using the [Logging model events feature](https://spatie.be/docs/laravel-activitylog/v4/advanced-usage/logging-model-events).
+
+As for student's online session. it is simply kept in cache for 30 seconds for now.
+
+```php
+    $expireTime = Carbon::now()->addSeconds(30);
+    Cache::put('is_online_' . $user->id, true, $expireTime);
+```
