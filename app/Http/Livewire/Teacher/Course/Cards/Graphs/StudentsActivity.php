@@ -9,14 +9,17 @@ use Spatie\Activitylog\Models\Activity;
 class StudentsActivity extends Component
 {
     public $course;
-    public $studentsActivity;
+    public $studentsActivity = null;
     public $time = '1 month';
+
+    protected $listeners = [
+        'echo:student-activity,Student\ViewCourse' => 'updateStudentsActivity'
+    ];
 
     public function mount()
     {
         $this->course = auth()->user()->teaches;
-        $activities = $this->getNewActivities();
-        $this->studentsActivity = $activities;
+        $this->getNewActivities();
     }
 
     public function render()
@@ -24,17 +27,9 @@ class StudentsActivity extends Component
         return view('livewire.teacher.course.cards.graphs.students-activity');
     }
 
-    public function updateStudentsActivity()
+    public function updateStudentsActivity(array $params = null)
     {
-        $newActivity = $this->getNewActivities();
-        // compare two collections
-        $diff = $newActivity->diff($this->studentsActivity);
-        if ($diff->isEmpty()) {
-            return;
-        } else {
-            $this->studentsActivity = $newActivity;
-            $this->emit('addCourseVisitData', $diff);
-        }
+        $this->getNewActivities();
     }
 
     public function getNewActivities()
@@ -53,7 +48,17 @@ class StudentsActivity extends Component
             unset($activities[$student_id]);
         }
 
-        return $activities;
+        if ($this->studentsActivity == null) {
+            $this->studentsActivity = $activities;
+            $this->emit('addCourseVisitData', $this->studentsActivity);
+            return;
+        }
+
+        $diff = $activities->diff($this->studentsActivity);
+        if (!$diff->isEmpty()) {
+            $this->studentsActivity = $activities;
+            $this->emit('addCourseVisitData', $diff);
+        }
     }
 
     public function updateTime($time)

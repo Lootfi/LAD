@@ -7,7 +7,7 @@
             </div>
         </div>
     </div>
-    <div wire:poll class="card-body">
+    <div wire:poll.60s class="card-body">
         @if ($students->isEmpty())
         <div class="text-center">
             <h4 class="text-muted">No students online</h4>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Teacher\Course\Cards;
 
+use App\Models\User;
 use Livewire\Component;
 
 class StudentsOnline extends Component
@@ -16,13 +17,11 @@ class StudentsOnline extends Component
     public function mount()
     {
         $this->course = auth()->user()->teaches;
-        // $this->students = $this->getStudentsOnline();
     }
 
     public function render()
     {
         $this->students = $this->getStudentsOnline();
-
         return view('livewire.teacher.course.cards.students-online');
     }
 
@@ -41,6 +40,6 @@ class StudentsOnline extends Component
 
     public function updateStudents(array $params)
     {
-        dd($params);
+        $this->students->push(User::query()->find($params['student']['id']));
     }
 }
