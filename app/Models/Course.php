@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * Post
@@ -71,5 +72,10 @@ class Course extends Model
     public function kcs(): HasMany
     {
         return $this->hasMany(Kc::class);
+    }
+
+    public function lessons(): HasManyThrough
+    {
+        return $this->hasManyThrough(Lesson::class, Section::class);
     }
 }
