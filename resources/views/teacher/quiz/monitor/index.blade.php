@@ -14,4 +14,10 @@
 
 <livewire:teacher.quiz.monitor.index :course="$course" :quiz="$quiz" />
 
+<hr>
+<hr>
+<hr>
+
+<livewire:teacher.quiz.monitor.graphs.one :quiz="$quiz" />
+
 @endsection

@@ -21,7 +21,7 @@ class Question extends Component
         return [
             //{student_id}.answered.{question_id}
             "echo:{$this->student->id}.answered.{$this->question->id},Student\QuestionAnswered" => 'questionAnswered',
-            'chooseQuestion' => 'choose',
+            'chooseQuestion.' . $this->question->id => 'chooseQuestionListener',
         ];
     }
 
@@ -81,12 +81,16 @@ class Question extends Component
 
     public function chooseQuestion()
     {
-        $this->emit('chooseQuestion', $this->question->id, $this->student->id);
-        $this->selected = true;
+        $this->emit('chooseQuestion.' . $this->question->id);
+        if ($this->selected) {
+            $this->emitTo('teacher.quiz.monitor.index', 'deselectQuestion', $this->question->id);
+        } else {
+            $this->emitTo('teacher.quiz.monitor.index', 'selectQuestion', $this->question->id);
+        }
     }
 
-    public function choose(QuizQuestion $question, User $student)
+    public function chooseQuestionListener()
     {
-        $this->selected = false;
+        $this->selected = !$this->selected;
     }
 }

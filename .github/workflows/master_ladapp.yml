@@ -45,7 +45,7 @@ jobs:
         run: npm run dev
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: zip -r release.zip * ./public/vendor
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2

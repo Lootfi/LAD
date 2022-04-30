@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use App\Models\User;
+use App\Services\Quiz\GatherQuizMonitorData;
 use Livewire\Component;
 
 class Index extends Component
@@ -15,7 +16,8 @@ class Index extends Component
     public Quiz $quiz;
 
     protected $listeners = [
-        'chooseQuestion' => 'chooseQuestion',
+        'selectQuestion' => 'selectQuestion',
+        'deselectQuestion' => 'deselectQuestion',
     ];
 
     public function mount(Course $course, Quiz $quiz)
@@ -29,7 +31,18 @@ class Index extends Component
         return view('livewire.teacher.quiz.monitor.index');
     }
 
-    public function chooseQuestion(QuizQuestion $question, User $student)
+    public function selectQuestion(QuizQuestion $question)
     {
+        $gather = new GatherQuizMonitorData;
+
+        $data = $gather($this->quiz, $question);
+
+        // emit data to graph component
+        $this->emitTo('teacher.quiz.monitor.graphs.one', 'gatherData', $question->id, $data);
+    }
+
+    function deselectQuestion(QuizQuestion $question)
+    {
+        $this->emitTo('teacher.quiz.monitor.graphs.one', 'removeData', $question->id);
     }
 }
