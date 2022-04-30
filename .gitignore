@@ -3,7 +3,6 @@
 /public/storage
 /public/argon
 /public/assets
-/public/vendor
 /storage/*.key
 /vendor
 /ssl
@@ -17,6 +16,23 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+release.zip
+
+
+/public/vendor/adminlte
+/public/vendor/bootstrap
+/public/vendor/chart.js
+/public/vendor/datatables
+/public/vendor/datatables-plugins
+/public/vendor/fontawesome-free
+/public/vendor/jquery
+/public/vendor/overlayScrollbars
+/public/vendor/popper
+/public/vendor/select2
+/public/vendor/select2-bootstrap4-theme
+/public/vendor/web-tinker
+
+
 
 public/argonx/
 public/assetsx/
