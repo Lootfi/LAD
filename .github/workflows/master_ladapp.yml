@@ -41,8 +41,8 @@ jobs:
       - name: Run npm install
         run: npm install
 
-      - name: Run npm run dev
-        run: npm run dev
+      - name: Run npm run prod
+        run: npm run prod
 
       - name: Zip artifact for deployment
         run: zip -r release.zip ./*
