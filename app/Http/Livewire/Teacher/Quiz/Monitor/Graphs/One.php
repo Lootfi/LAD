@@ -31,10 +31,14 @@ class One extends Component
         $this->graph_data[$question->id] = [
             ...$data
         ];
+
+        $this->emit('addData', $question->id, $data);
     }
 
     public function removeData(QuizQuestion $question)
     {
         unset($this->graph_data[$question->id]);
+
+        $this->emit('deleteData', $question->id);
     }
 }

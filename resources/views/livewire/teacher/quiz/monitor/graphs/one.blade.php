@@ -91,35 +91,35 @@
             }]
         },
         options: {
+            responsive: true,
+            indexAxis: 'y',
             scales: {
-                y: {
-                    beginAtZero: true
-                }
+                x: {
+                    min: 0,
+                    max: 1
+                },
               }
         }
     });
 
     // // livewire listen for events
-    // Livewire.on('addCourseVisitData', (data) => {
+    Livewire.on('addData', (q_id, data) => {
+        let index = QuestionsErrorRateChart.data.labels.indexOf(q_id);
+        if(index == -1) {
+            index = QuestionsErrorRateChart.data.labels.length;
+        }
+        QuestionsErrorRateChart.data.labels[index] = q_id;
+        QuestionsErrorRateChart.data.datasets[0].data[index] = data['error_rate'];
         
-    //     Object.keys(data).forEach(studentName => {
-    //         let index = QuestionsErrorRateChart.data.labels.indexOf(studentName);
-    //         if(index == -1) {
-    //             index = QuestionsErrorRateChart.data.labels.length;
-    //         }
-    //         QuestionsErrorRateChart.data.labels[index] = studentName;
-    //         QuestionsErrorRateChart.data.datasets[0].data[index] = data[studentName];
-    //     });
-    //     QuestionsErrorRateChart.update();
-    // });
-    // Livewire.on('updateCourseViewTime', (data) => {
-        
-    //     Object.keys(data).forEach((studentName,index) => {
-    //         QuestionsErrorRateChart.data.labels[index] = studentName;
-    //         QuestionsErrorRateChart.data.datasets[0].data[index] = data[studentName];
-    //     });
-    //     QuestionsErrorRateChart.update();
-    // });
+        QuestionsErrorRateChart.update();
+    });
+    Livewire.on('deleteData', (q_id) => {
+        let index = QuestionsErrorRateChart.data.labels.indexOf(q_id);
+        QuestionsErrorRateChart.data.labels.splice(index, 1);
+        QuestionsErrorRateChart.data.datasets[0].data.splice(index, 1);
+        console.log(QuestionsErrorRateChart.data.labels, QuestionsErrorRateChart.data.datasets[0].data);
+        QuestionsErrorRateChart.update();
+    });
 });
 </script>
 @endpush
