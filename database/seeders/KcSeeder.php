@@ -17,45 +17,181 @@ class KcSeeder extends Seeder
      */
     public function run()
     {
-        $kc1 = Kc::factory()->create([
-            'name' => 'kc1'
-        ]);
-        $kc2 = Kc::factory()->create([
-            'name' => 'kc2'
+
+        $kc = Kc::factory()->create([
+            'name' => 'ocl_types'
         ]);
 
-        // kc1 L1
         KCL::query()->create([
-            'kc_id' => $kc1->id,
+            'kc_id' => $kc->id,
+            'lesson_id' => 3,
+        ]);
+
+        // ===================================
+
+        KCQ::query()->create([
+            'kc_id' => $kc->id,
+            'question_id' => 1,
+        ]);
+
+        KCQ::query()->create([
+            'kc_id' => $kc->id,
+            'question_id' => 3,
+        ]);
+
+        // ===================================
+        // ===================================
+
+        $kc = Kc::factory()->create([
+            'name' => 'ocl_navigation'
+        ]);
+
+        KCL::query()->create([
+            'kc_id' => $kc->id,
+            'lesson_id' => 3,
+        ]);
+
+        // ===================================
+
+        KCQ::query()->create([
+            'kc_id' => $kc->id,
+            'question_id' => 2,
+        ]);
+
+        // ===================================
+        // ===================================
+
+        $kc = Kc::factory()->create([
+            'name' => 'ocl_operations'
+        ]);
+
+        KCL::query()->create([
+            'kc_id' => $kc->id,
+            'lesson_id' => 3,
+        ]);
+
+        // ===================================
+
+        KCQ::query()->create([
+            'kc_id' => $kc->id,
+            'question_id' => 3,
+        ]);
+
+        // ===================================
+        // ===================================
+
+        $kc = Kc::factory()->create([
+            'name' => 'model-cascade'
+        ]);
+
+
+        KCL::query()->create([
+            'kc_id' => $kc->id,
             'lesson_id' => 1,
         ]);
 
-        // kc2 L2
+        // ===================================
+        // ===================================
+
+
+        $kc = Kc::factory()->create([
+            'name' => 'model-v'
+        ]);
+
         KCL::query()->create([
-            'kc_id' => $kc2->id,
+            'kc_id' => $kc->id,
+            'lesson_id' => 1,
+        ]);
+
+
+        // ===================================
+        // ===================================
+
+        $kc = Kc::factory()->create([
+            'name' => 'model-spirale'
+        ]);
+
+        KCL::query()->create([
+            'kc_id' => $kc->id,
+            'lesson_id' => 1,
+        ]);
+
+        // ===================================
+        // ===================================
+
+        $kc = Kc::factory()->create([
+            'name' => 'creation'
+        ]);
+
+        KCL::query()->create([
+            'kc_id' => $kc->id,
             'lesson_id' => 2,
         ]);
 
+        // ===================================
+
+        KCQ::query()->create([
+            'kc_id' => $kc->id,
+            'question_id' => 5,
+        ]);
+
+        KCQ::query()->create([
+            'kc_id' => $kc->id,
+            'question_id' => 6,
+        ]);
+
+        // ===================================
+        // ===================================
+
+        $kc = Kc::factory()->create([
+            'name' => 'structurels'
+        ]);
+
+        KCL::query()->create([
+            'kc_id' => $kc->id,
+            'lesson_id' => 2,
+        ]);
+
+        // ===================================
+
+        KCQ::query()->create([
+            'kc_id' => $kc->id,
+            'question_id' => 4,
+        ]);
+
+        KCQ::query()->create([
+            'kc_id' => $kc->id,
+            'question_id' => 6,
+        ]);
+
+        // ===================================
+        // ===================================
+
+        $kc = Kc::factory()->create([
+            'name' => 'comportementaux'
+        ]);
+
+        KCL::query()->create([
+            'kc_id' => $kc->id,
+            'lesson_id' => 2,
+        ]);
+
+        // ===================================
+        // ===================================
 
 
-        // kc1 Questions
-        KCQ::query()->create([
-            'kc_id' => $kc1->id,
-            'question_id' => 1,
-        ]);
-
-        //kc2 questions
-        KCQ::query()->create([
-            'kc_id' => $kc2->id,
-            'question_id' => 1,
-        ]);
-        KCQ::query()->create([
-            'kc_id' => $kc2->id,
-            'question_id' => 2,
-        ]);
-        KCQ::query()->create([
-            'kc_id' => $kc2->id,
-            'question_id' => 3,
-        ]);
+        // //kc2 questions
+        // KCQ::query()->create([
+        //     'kc_id' => $kc2->id,
+        //     'question_id' => 1,
+        // ]);
+        // KCQ::query()->create([
+        //     'kc_id' => $kc2->id,
+        //     'question_id' => 2,
+        // ]);
+        // KCQ::query()->create([
+        //     'kc_id' => $kc2->id,
+        //     'question_id' => 3,
+        // ]);
     }
 }

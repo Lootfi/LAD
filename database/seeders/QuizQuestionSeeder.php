@@ -16,163 +16,197 @@ class QuizQuestionSeeder extends Seeder
      */
     public function run()
     {
+        //q1
         QuizQuestion::factory()->create([
             'quiz_id' => 1,
-            'question' => 'What is the capital of France?',
+            'question' => 'Which of these are OCL types?',
             'order' => 1,
         ]);
         QuizAnswer::factory(1)->create([
             'question_id' => 1,
             'right_answer' => true,
-            'answer' => 'Paris',
+            'answer' => 'Boolean',
+        ]);
+        QuizAnswer::factory(1)->create([
+            'question_id' => 1,
+            'right_answer' => true,
+            'answer' => 'Real',
         ]);
         QuizAnswer::factory(1)->create([
             'question_id' => 1,
             'right_answer' => false,
-            'answer' => 'Berlin',
+            'answer' => 'Char',
         ]);
 
-
-
-
+        // ===================================
+        // ===================================
 
         QuizQuestion::factory()->create([
             'quiz_id' => 1,
-            'question' => 'What is the capital of Germany?',
+            'question' => 'Which of these statements concerning OCL navigation is true?',
             'order' => 2,
         ]);
-        QuizAnswer::factory(1)->create([
-            'question_id' => 2,
-            'right_answer' => false,
-            'answer' => 'Paris',
-        ]);
+
         QuizAnswer::factory(1)->create([
             'question_id' => 2,
             'right_answer' => true,
-            'answer' => 'Berlin',
+            'answer' => 'Navigation is the process of moving from one object to another.',
         ]);
 
+        QuizAnswer::factory(1)->create([
+            'question_id' => 2,
+            'right_answer' => false,
+            'answer' => 'Navigation is a function of the OCL types.',
+        ]);
 
-
-
+        // ===================================
+        // ===================================
 
         QuizQuestion::factory()->create([
             'quiz_id' => 1,
-            'question' => 'What is the capital of Algeria?',
+            'question' => 'The "oclIsTypeOf (t : OclType)" operation returns a:',
             'order' => 3,
         ]);
         QuizAnswer::factory(1)->create([
             'question_id' => 3,
             'right_answer' => true,
-            'answer' => 'Algiers',
+            'answer' => 'Boolean',
         ]);
         QuizAnswer::factory(1)->create([
             'question_id' => 3,
             'right_answer' => false,
-            'answer' => 'Berlin',
+            'answer' => 'Real',
+        ]);
+        QuizAnswer::factory(1)->create([
+            'question_id' => 3,
+            'right_answer' => false,
+            'answer' => 'Char',
         ]);
 
+        // ===================================
+        // ===================================
 
-
-
-
+        //structural
         QuizQuestion::factory()->create([
             'quiz_id' => 1,
-            'question' => 'What is the capital of Nigeria?',
+            'question' => 'Which design pattern provides a single class which provides simplified methods required by client and delegates call to those methods?',
             'order' => 4,
         ]);
 
         QuizAnswer::factory(1)->create([
             'question_id' => 4,
             'right_answer' => true,
-            'answer' => 'Abuja',
+            'answer' => 'Facade',
         ]);
+
         QuizAnswer::factory(1)->create([
             'question_id' => 4,
             'right_answer' => false,
-            'answer' => 'Berlin',
+            'answer' => 'Proxy',
         ]);
 
+        QuizAnswer::factory(1)->create([
+            'question_id' => 4,
+            'right_answer' => false,
+            'answer' => 'Decorator',
+        ]);
 
+        // ===================================
+        // ===================================
 
-
-
+        //creational
         QuizQuestion::factory()->create([
             'quiz_id' => 1,
-            'question' => 'What is the capital of Egypt?',
+            'question' => 'Which design pattern ensures that only one object of particular class gets created?',
             'order' => 5,
         ]);
+
         QuizAnswer::factory(1)->create([
             'question_id' => 5,
             'right_answer' => true,
-            'answer' => 'Cairo',
+            'answer' => 'Singleton',
         ]);
+
         QuizAnswer::factory(1)->create([
             'question_id' => 5,
             'right_answer' => false,
-            'answer' => 'Berlin',
+            'answer' => 'Factory',
         ]);
 
+        QuizAnswer::factory(1)->create([
+            'question_id' => 5,
+            'right_answer' => false,
+            'answer' => 'Builder',
+        ]);
 
+        // ===================================
+        // ===================================
 
-
+        // structural and creational
 
         QuizQuestion::factory()->create([
             'quiz_id' => 1,
-            'question' => 'What is the capital of South-Korea?',
+            'question' => 'Which design pattern provides a way to access the object of a particular class without having to know its concrete class?',
             'order' => 6,
         ]);
+
         QuizAnswer::factory(1)->create([
             'question_id' => 6,
             'right_answer' => true,
-            'answer' => 'Seoul',
+            'answer' => 'Adapter',
         ]);
+
         QuizAnswer::factory(1)->create([
             'question_id' => 6,
             'right_answer' => false,
-            'answer' => 'Paris',
-        ]);
-
-
-
-
-
-
-        QuizQuestion::factory()->create([
-            'quiz_id' => 2,
-            'question' => 'What is the capital of France?',
-            'order' => 1,
+            'answer' => 'Bridge',
         ]);
 
         QuizAnswer::factory(1)->create([
-            'question_id' => 7,
-            'right_answer' => true,
-            'answer' => 'Paris',
-        ]);
-        QuizAnswer::factory(1)->create([
-            'question_id' => 7,
+            'question_id' => 6,
             'right_answer' => false,
-            'answer' => 'Berlin',
+            'answer' => 'Composite',
         ]);
 
+        // ===================================
+
+
+
+        // QuizQuestion::factory()->create([
+        //     'quiz_id' => 2,
+        //     'question' => 'What is the capital of France?',
+        //     'order' => 1,
+        // ]);
+
+        // QuizAnswer::factory(1)->create([
+        //     'question_id' => 7,
+        //     'right_answer' => true,
+        //     'answer' => 'Paris',
+        // ]);
+        // QuizAnswer::factory(1)->create([
+        //     'question_id' => 7,
+        //     'right_answer' => false,
+        //     'answer' => 'Berlin',
+        // ]);
 
 
 
 
-        QuizQuestion::factory()->create([
-            'quiz_id' => 2,
-            'question' => 'What is the capital of Germany?',
-            'order' => 2,
-        ]);
-        QuizAnswer::factory(1)->create([
-            'question_id' => 8,
-            'right_answer' => false,
-            'answer' => 'Paris',
-        ]);
-        QuizAnswer::factory(1)->create([
-            'question_id' => 8,
-            'right_answer' => true,
-            'answer' => 'Berlin',
-        ]);
+
+        // QuizQuestion::factory()->create([
+        //     'quiz_id' => 2,
+        //     'question' => 'What is the capital of Germany?',
+        //     'order' => 2,
+        // ]);
+        // QuizAnswer::factory(1)->create([
+        //     'question_id' => 8,
+        //     'right_answer' => false,
+        //     'answer' => 'Paris',
+        // ]);
+        // QuizAnswer::factory(1)->create([
+        //     'question_id' => 8,
+        //     'right_answer' => true,
+        //     'answer' => 'Berlin',
+        // ]);
     }
 }

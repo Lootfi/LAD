@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('quiz_questions', function (Blueprint $table) {
             $table->id();
-            $table->string('question');
+            $table->string('question', 255);
             //order attribute
             $table->unsignedTinyInteger('order');
 

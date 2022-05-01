@@ -15,9 +15,25 @@ class LessonSeeder extends Seeder
      */
     public function run()
     {
-        Lesson::factory(3)->create([
+        Lesson::factory()->create([
+            'name' => 'Modèles de Développement de Logiciels',
+            'description' => 'cascade, v, spirale',
             'section_id' => 1,
         ]);
+
+        Lesson::factory()->create([
+            'name' => 'Patrons de Conception',
+            'description' => 'Création, Structurels, Comportementaux',
+            'section_id' => 1,
+        ]);
+
+        Lesson::factory()->create([
+            'name' => 'OCL',
+            'description' => 'Navigation, Opérations, Types',
+            'section_id' => 1,
+        ]);
+
+
         Lesson::factory(3)->create([
             'section_id' => 2,
         ]);
