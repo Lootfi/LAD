@@ -16,6 +16,10 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        Course::factory(1)->create();
+        Course::factory(1)->create(
+            [
+                'title' => "Génie Logiciel",
+            ]
+        );
     }
 }
