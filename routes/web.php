@@ -50,8 +50,8 @@ Route::post('/upload', [TeacherLessonController::class, 'upload'])->middleware('
 Route::prefix('teacher')
     ->name('teacher.')
     ->middleware(['auth', 'role:teacher'])
+    ->scopeBindings()
     ->group(function () {
-
         Route::get('dashboard', [
             TeacherDashboardController::class,
             'index',
@@ -172,6 +172,7 @@ Route::prefix('teacher')
 Route::prefix('student')
     ->name('student.')
     ->middleware(['auth', 'role:student', 'student_last_activity', 'log'])
+    ->scopeBindings()
     ->group(function () {
 
         Route::get('/', [
