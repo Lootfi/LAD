@@ -33,7 +33,7 @@ class GatherQuizMonitorData
     public function getQuestionErrorRates(QuizQuestion $question)
     {
 
-        $resp_count = $question->responses->count();
+        $resp_count = $question->responses->groupBy('student_id')->count();
         $err_count = 0;
 
         $data = [];
