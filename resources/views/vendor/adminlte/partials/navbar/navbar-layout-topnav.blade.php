@@ -6,14 +6,13 @@
 
         {{-- Navbar brand logo --}}
         @if(config('adminlte.logo_img_xl'))
-            @include('adminlte::partials.common.brand-logo-xl')
+        @include('adminlte::partials.common.brand-logo-xl')
         @else
-            @include('adminlte::partials.common.brand-logo-xs')
+        @include('adminlte::partials.common.brand-logo-xs')
         @endif
-
         {{-- Navbar toggler button --}}
         <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -39,16 +38,16 @@
 
             {{-- User menu link --}}
             @if(Auth::user())
-                @if(config('adminlte.usermenu_enabled'))
-                    @include('adminlte::partials.navbar.menu-item-dropdown-user-menu')
-                @else
-                    @include('adminlte::partials.navbar.menu-item-logout-link')
-                @endif
+            @if(config('adminlte.usermenu_enabled'))
+            @include('adminlte::partials.navbar.menu-item-dropdown-user-menu')
+            @else
+            @include('adminlte::partials.navbar.menu-item-logout-link')
+            @endif
             @endif
 
             {{-- Right sidebar toggler link --}}
-            @if(config('adminlte.right_sidebar'))
-                @include('adminlte::partials.navbar.menu-item-right-sidebar-toggler')
+            @hasSection ('right-sidebar')
+            @include('adminlte::partials.navbar.menu-item-right-sidebar-toggler')
             @endif
         </ul>
 

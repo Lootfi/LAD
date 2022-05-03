@@ -11,13 +11,21 @@
 @endsection
 
 @section('content')
+<div class="">
 
-<livewire:teacher.quiz.monitor.index :course="$course" :quiz="$quiz" />
+    <livewire:teacher.quiz.monitor.index-actions :quiz="$quiz" />
 
-<hr>
-<hr>
-<hr>
+    <livewire:teacher.quiz.monitor.index :course="$course" :quiz="$quiz" />
 
-<livewire:teacher.quiz.monitor.graphs.one :quiz="$quiz" />
+    <hr>
+    <hr>
+    <hr>
 
+    <livewire:teacher.quiz.monitor.graphs.index.questions-error-rate :quiz="$quiz" />
+</div>
+
+@endsection
+
+@section('right-sidebar')
+HELP
 @endsection

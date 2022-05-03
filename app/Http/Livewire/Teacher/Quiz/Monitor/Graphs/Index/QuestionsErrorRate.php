@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Teacher\Quiz\Monitor\Graphs;
+namespace App\Http\Livewire\Teacher\Quiz\Monitor\Graphs\Index;
 
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use Livewire\Component;
 
-class One extends Component
+class QuestionsErrorRate extends Component
 {
     public $quiz;
     public $graph_data = [];
@@ -14,6 +14,7 @@ class One extends Component
     protected $listeners = [
         'gatherData' => 'gatherData',
         'removeData' => 'removeData',
+        'removeAllData' => 'removeAllData',
     ];
 
     public function mount(Quiz $quiz)
@@ -23,7 +24,7 @@ class One extends Component
 
     public function render()
     {
-        return view('livewire.teacher.quiz.monitor.graphs.one');
+        return view('livewire.teacher.quiz.monitor.graphs.index.questions-error-rate');
     }
 
     public function gatherData(QuizQuestion $question, $data)
@@ -40,5 +41,12 @@ class One extends Component
         unset($this->graph_data[$question->id]);
 
         $this->emit('deleteData', $question->id);
+    }
+
+    public function removeAllData()
+    {
+        $this->graph_data = [];
+
+        $this->emit('deleteAllData');
     }
 }

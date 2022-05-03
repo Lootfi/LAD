@@ -1,4 +1,4 @@
-<div>
+<div class="row">
     {{-- bootstrap column card groups --}}
     <div class="card-columns">
         @foreach ($course->students as $student)

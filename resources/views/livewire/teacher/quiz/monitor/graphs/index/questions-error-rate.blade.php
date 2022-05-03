@@ -120,6 +120,12 @@
         console.log(QuestionsErrorRateChart.data.labels, QuestionsErrorRateChart.data.datasets[0].data);
         QuestionsErrorRateChart.update();
     });
+
+    Livewire.on('deleteAllData', () => {
+        QuestionsErrorRateChart.data.labels = [];
+        QuestionsErrorRateChart.data.datasets[0].data = [];
+        QuestionsErrorRateChart.update();
+    });
 });
 </script>
 @endpush

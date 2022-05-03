@@ -6,7 +6,7 @@ use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use Illuminate\Database\Eloquent\Collection;
 
-class GatherQuizMonitorData
+class GatherQuizQuestionsErrorRate
 {
 
     public function __invoke(Quiz $quiz, QuizQuestion $question)

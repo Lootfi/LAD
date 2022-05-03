@@ -22,6 +22,7 @@ class Question extends Component
             //{student_id}.answered.{question_id}
             "echo:{$this->student->id}.answered.{$this->question->id},Student\QuestionAnswered" => 'questionAnswered',
             'chooseQuestion.' . $this->question->id => 'chooseQuestionListener',
+            "clearSelectedQuestions" => 'clearSelectedQuestionsListener',
         ];
     }
 
@@ -92,5 +93,12 @@ class Question extends Component
     public function chooseQuestionListener()
     {
         $this->selected = !$this->selected;
+    }
+
+    public function clearSelectedQuestionsListener()
+    {
+        if ($this->selected) {
+            $this->selected = false;
+        }
     }
 }
