@@ -57,7 +57,9 @@
 <script>
     //wait until the page is loaded to render the chart and avoid the error
     $(document).ready(function () {
+
     var studentActivityChart = document.getElementById('studentActivityChart').getContext('2d');
+    
     var studentActivityChart = new Chart(studentActivityChart, {
         type: 'bar',
         data: {
@@ -115,7 +117,10 @@
         studentActivityChart.update();
     });
     Livewire.on('updateCourseViewTime', (data) => {
-        
+
+        studentActivityChart.data.labels = [];
+        studentActivityChart.data.datasets[0].data = [];
+
         Object.keys(data).forEach((studentName,index) => {
             studentActivityChart.data.labels[index] = studentName;
             studentActivityChart.data.datasets[0].data[index] = data[studentName];

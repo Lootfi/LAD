@@ -14,11 +14,14 @@ class StudentsActivity extends Component
     public $studentsActivity;
     public $time = '1 month';
 
+    protected $listeners = [
+        'echo:student-activity,Student\ViewLesson' => 'updateStudentsActivity'
+    ];
+
     public function mount(Lesson $lesson)
     {
         $this->lesson = $lesson;
-        $activities = $this->getNewActivities();
-        $this->studentsActivity = $activities;
+        $this->getNewActivities();
     }
 
     public function render()
@@ -26,17 +29,9 @@ class StudentsActivity extends Component
         return view('livewire.teacher.lesson.cards.graphs.students-activity');
     }
 
-    public function updateStudentsActivity()
+    public function updateStudentsActivity(array $params = null)
     {
-        $newActivity = $this->getNewActivities();
-        // compare two collections
-        $diff = $newActivity->diff($this->studentsActivity);
-        if ($diff->isEmpty()) {
-            return;
-        } else {
-            $this->studentsActivity = $newActivity;
-            $this->emit('addLessonVisitData', $diff);
-        }
+        $this->getNewActivities();
     }
 
     public function getNewActivities()
@@ -55,13 +50,23 @@ class StudentsActivity extends Component
             unset($activities[$student_id]);
         }
 
-        return $activities;
+        if ($this->studentsActivity == null) {
+            $this->studentsActivity = $activities;
+            $this->emit('addLessonVisitData', $this->studentsActivity);
+            return;
+        }
+
+        $diff = $activities->diff($this->studentsActivity);
+        if (!$diff->isEmpty()) {
+            $this->studentsActivity = $activities;
+            $this->emit('addLessonVisitData', $diff);
+        }
     }
 
     public function updateTime($time)
     {
         $this->time = $time;
-        $this->studentsActivity = $this->getNewActivities();
+        $this->getNewActivities();
         $this->emit('updateLessonViewTime', $this->studentsActivity);
     }
 }

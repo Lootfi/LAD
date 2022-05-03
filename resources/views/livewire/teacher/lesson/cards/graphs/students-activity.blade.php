@@ -37,7 +37,7 @@
         <!-- Chart -->
         <div class="chart">
             {{-- student activity chart.js --}}
-            <div class="chart" wire:key="{{$lesson->id}}" wire:poll.5s="updateStudentsActivity">
+            <div class="chart" wire:key="{{$lesson->id}}">
                 <canvas id="studentActivityChart" style="height:250px"></canvas>
             </div>
         </div>
@@ -50,6 +50,7 @@
     integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    $(document).ready(function () {
     var studentActivityChart = document.getElementById('studentActivityChart').getContext('2d');
     var studentActivityChart = new Chart(studentActivityChart, {
         type: 'bar',
@@ -60,7 +61,7 @@
                 @endforeach
             ],
             datasets: [{
-                label: 'Student Lesson Views',
+                label: 'Student Course Views',
                 data: [
                     @foreach ($studentsActivity as $activities)
                     {{ $activities }},
@@ -93,32 +94,32 @@
               }
         }
     });
+
+
     // livewire listen for events
     Livewire.on('addLessonVisitData', (data) => {
-        
+
         Object.keys(data).forEach(studentName => {
-            const index = studentActivityChart.data.labels.indexOf(studentName);
+            let index = studentActivityChart.data.labels.indexOf(studentName);
+            if(index == -1) {
+                index = studentActivityChart.data.labels.length;
+            }
+            studentActivityChart.data.labels[index] = studentName;
             studentActivityChart.data.datasets[0].data[index] = data[studentName];
         });
         studentActivityChart.update();
     });
     Livewire.on('updateLessonViewTime', (data) => {
-        
+
+        studentActivityChart.data.labels = [];
+        studentActivityChart.data.datasets[0].data = [];
+
         Object.keys(data).forEach((studentName,index) => {
             studentActivityChart.data.labels[index] = studentName;
             studentActivityChart.data.datasets[0].data[index] = data[studentName];
         });
-        // studentActivityChart.data.labels = [
-        //     @foreach ($studentsActivity as $studentName => $activities)
-        //         '{{ $studentName }}',
-        //     @endforeach
-        // ];
-        // studentActivityChart.data.datasets[0].data = [
-        //     @foreach ($studentsActivity as $activities)
-        //             '{{ $activities }}',
-        //     @endforeach
-        // ];
         studentActivityChart.update();
     });
+});
 </script>
 @endpush
