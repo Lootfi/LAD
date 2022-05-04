@@ -4,6 +4,7 @@ namespace App\Services\Quiz;
 
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
+use App\Models\QuizResponse;
 use Illuminate\Database\Eloquent\Collection;
 
 class GatherQuizQuestionsErrorRate
@@ -33,7 +34,8 @@ class GatherQuizQuestionsErrorRate
     public function getQuestionErrorRates(QuizQuestion $question)
     {
 
-        $resp_count = $question->responses->groupBy('student_id')->count();
+        $responses = $question->responses->groupBy('student_id');
+        $resp_count = $responses->count();
         $err_count = 0;
 
         $data = [];
@@ -48,11 +50,23 @@ class GatherQuizQuestionsErrorRate
             return $data;
         }
 
-        foreach ($question->responses as $response) {
-            if (!$response->answer->right_answer) {
+        $studentsWhoAnswered = $question->responses()->with('student')->get()->pluck('student')->unique();
+
+        $correctAsnwers = $question->answers()->where('right_answer', true)->get();
+
+        foreach ($studentsWhoAnswered as $student) {
+            $studentResponseAnswers = QuizResponse::query()
+                ->where('student_id', $student->id)
+                ->where('question_id', $question->id)
+                ->with('answer')
+                ->get()
+                ->pluck('answer');
+
+            if ($correctAsnwers->diff($studentResponseAnswers)->isNotEmpty()) {
                 $err_count++;
             }
         }
+
 
         $data = [
             'error_rate' => $err_count / $resp_count,
