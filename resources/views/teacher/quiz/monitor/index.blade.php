@@ -22,10 +22,14 @@
     <hr>
 
     <livewire:teacher.quiz.monitor.graphs.index.questions-error-rate :quiz="$quiz" />
+
+
+    <hr>
+    <hr>
+    <hr>
+
+    <livewire:teacher.quiz.monitor.graphs.index.kc-error-rate :quiz="$quiz" />
+
 </div>
 
-@endsection
-
-@section('right-sidebar')
-HELP
 @endsection

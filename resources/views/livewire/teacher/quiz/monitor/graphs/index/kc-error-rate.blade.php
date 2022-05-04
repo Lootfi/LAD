@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col">
                 <h6 class="text-uppercase ls-1 mb-1">Overview</h6>
-                <h2 class="mb-0">Questions Error Rate</h2>
+                <h2 class="mb-0">Knowledge Components Error Rate</h2>
             </div>
             <div class="col">
                 {{-- <ul class="nav nav-pills justify-content-end">
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="row align-items-center">
-            <livewire:teacher.quiz.monitor.graphs.index.questions-bar :quiz="$quiz" />
+            <livewire:teacher.quiz.monitor.graphs.index.kcs-bar :quiz="$quiz" />
         </div>
     </div>
 
@@ -40,8 +40,8 @@
         <!-- Chart -->
         <div class="chart">
             {{-- student activity chart.js --}}
-            <div class="chart" wire:key="{{$quiz->id}}">
-                <canvas id="QuestionsErrorRateChart" style="height:250px"></canvas>
+            <div class="chart">
+                <canvas id="KcsErrorRateChart" style="height:250px"></canvas>
             </div>
         </div>
     </div>
@@ -58,17 +58,17 @@
 <script>
     //wait until the page is loaded to render the chart and avoid the error
     $(document).ready(function () {
-    var QuestionsErrorRateChart = document.getElementById('QuestionsErrorRateChart').getContext('2d');
-    var QuestionsErrorRateChart = new Chart(QuestionsErrorRateChart, {
+    var KcsErrorRateChart = document.getElementById('KcsErrorRateChart').getContext('2d');
+    var KcsErrorRateChart = new Chart(KcsErrorRateChart, {
         type: 'bar',
         data: {
             labels: [
-                @foreach ($graph_data as $q_id => $data)
-                '{{ $q_id }}',
+                @foreach ($graph_data as $kc => $data)
+                '{{ $kc }}',
                 @endforeach
             ],
             datasets: [{
-                label: 'Questions Error Rate',
+                label: 'Knowledge Component Error Rate',
                 data: [
                     @foreach ($graph_data as $data)
                     {{ $data['error_rate'] }},
@@ -106,27 +106,27 @@
     });
 
     // // livewire listen for events
-    Livewire.on('addData', (q_id, data) => {
-        let index = QuestionsErrorRateChart.data.labels.indexOf(q_id);
+    Livewire.on('addKcDataToGraph', (kc_name, data) => {
+        let index = KcsErrorRateChart.data.labels.indexOf(kc_name);
         if(index == -1) {
-            index = QuestionsErrorRateChart.data.labels.length;
+            index = KcsErrorRateChart.data.labels.length;
         }
-        QuestionsErrorRateChart.data.labels[index] = q_id;
-        QuestionsErrorRateChart.data.datasets[0].data[index] = data['error_rate'];
+        KcsErrorRateChart.data.labels[index] = kc_name;
+        KcsErrorRateChart.data.datasets[0].data[index] = data['error_rate'];
         
-        QuestionsErrorRateChart.update();
+        KcsErrorRateChart.update();
     });
-    Livewire.on('deleteData', (q_id) => {
-        let index = QuestionsErrorRateChart.data.labels.indexOf(q_id);
-        QuestionsErrorRateChart.data.labels.splice(index, 1);
-        QuestionsErrorRateChart.data.datasets[0].data.splice(index, 1);
-        QuestionsErrorRateChart.update();
+    Livewire.on('deleteKcDataFromGraph', (kc_name) => {
+        let index = KcsErrorRateChart.data.labels.indexOf(kc_name);
+        KcsErrorRateChart.data.labels.splice(index, 1);
+        KcsErrorRateChart.data.datasets[0].data.splice(index, 1);
+        KcsErrorRateChart.update();
     });
 
-    Livewire.on('deleteAllData', () => {
-        QuestionsErrorRateChart.data.labels = [];
-        QuestionsErrorRateChart.data.datasets[0].data = [];
-        QuestionsErrorRateChart.update();
+    Livewire.on('deleteAllKcDataFromGraph', () => {
+        KcsErrorRateChart.data.labels = [];
+        KcsErrorRateChart.data.datasets[0].data = [];
+        KcsErrorRateChart.update();
     });
 });
 </script>
