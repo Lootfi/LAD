@@ -60,17 +60,25 @@ class QuizController extends Controller
         $correct = [];
 
         foreach ($quiz->questions as $question) {
-            $correct[$question->id] = false;
-            // $responses = $question->responses()->where('student_id', auth()->id())->get();
 
-            foreach ($question->my_responses as $response) {
-                if ($response->answer->is_right) {
-                    $correct[$question->id] = true;
-                } else {
-                    $correct[$question->id] = false;
-                    break 1;
-                }
+            $studentResponseAnswers = $question->responses()->where('student_id', auth()->id())->with('answer')->get()->pluck('answer');
+
+            $correctAsnwers = $question->answers()->where('right_answer', true)->get();
+
+            if ($correctAsnwers->diff($studentResponseAnswers)->isEmpty()) {
+                $correct[$question->id] = true;
+            } else {
+                $correct[$question->id] = false;
             }
+
+            // foreach ($question->my_responses as $response) {
+            //     if ($response->answer->right_answer) {
+            //         $correct[$question->id] = true;
+            //     } else {
+            //         $correct[$question->id] = false;
+            //         break 1;
+            //     }
+            // }
         }
 
         //building responses array ['question_id' => ['answer_id' => ['answered' => true, 'correct' => true]]]
@@ -80,7 +88,7 @@ class QuizController extends Controller
             foreach ($question->answers as $answer) {
                 $answered = $question->my_responses->contains('answer_id', $answer->id);
                 $responses[$question->id][$answer->id]['answered'] = $answered;
-                if ($answered && $answer->is_right) {
+                if ($answered && $answer->right_answer) {
                     $responses[$question->id][$answer->id]['correct'] = true;
                 } else {
                     $responses[$question->id][$answer->id]['correct'] = false;

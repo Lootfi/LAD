@@ -351,6 +351,21 @@ return [
     */
 
     'plugins' => [
+        'PyScript' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'https://pyscript.net/alpha/pyscript.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'https://pyscript.net/alpha/pyscript.css',
+                ]
+            ]
+        ],
         'Datatables' => [
             'active' => true,
             'files' => [

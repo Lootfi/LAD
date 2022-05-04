@@ -26,8 +26,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|QuizAnswer whereQuestionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuizAnswer whereRightAnswer($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuizAnswer whereUpdatedAt($value)
- * @mixin \Eloquent
- * @property-read mixed $is_right
  */
 class QuizAnswer extends Model
 {
@@ -35,12 +33,6 @@ class QuizAnswer extends Model
 
     protected $fillable = ['answer', 'right_answer'];
 
-    protected $appends = ['is_right'];
-
-    public function getIsRightAttribute()
-    {
-        return $this->right_answer;
-    }
 
     function question(): BelongsTo
     {

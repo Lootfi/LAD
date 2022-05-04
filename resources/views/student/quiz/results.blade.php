@@ -40,8 +40,8 @@
                 {{-- shot student his answers --}}
                 @foreach ($question->answers as $answer)
                 <div
-                    class="row {{$answer->is_right ? 'bg-success text-white':''}}
-                {{($answer->is_right == false && $responses[$question->id][$answer->id]['answered']) ? 'bg-danger text-white':'' }}">
+                    class="row {{$answer->right_answer ? 'bg-success text-white':''}}
+                {{($answer->right_answer == false && $responses[$question->id][$answer->id]['answered']) ? 'bg-danger text-white':'' }}">
                     <div class="col-md-1">
                         <input type="checkbox" disabled {{$responses[$question->id][$answer->id]['answered'] ? 'checked'
                         : '' }}>

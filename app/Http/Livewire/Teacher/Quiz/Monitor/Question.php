@@ -46,19 +46,38 @@ class Question extends Component
 
         if ($responses->count() == 0) return;
 
+
+        $studentResponseAnswers = $this->question->responses()->where('student_id', $this->student->id)->with('answer')->get()->pluck('answer');
+
+        $correctAsnwers = $this->question->answers()->where('right_answer', true)->get();
+
         $this->answered = true;
         $correct = false;
 
-        foreach ($responses as $response) {
-            if ($response->answer->is_right) {
-                $correct = true;
-            } else {
-                $correct = false;
-                break;
-            }
+        if ($correctAsnwers->diff($studentResponseAnswers)->isEmpty()) {
+            $this->correct = true;
+        } else {
+            $this->correct = false;
         }
+        // foreach ($this->question->answers()->where('right_answer', true)->get() as $answer) {
+        //     if ($responses->where('answer_id', $answer->id)->count() > 0) {
+        //         $correct = true;
+        //     } else {
+        //         $correct = false;
+        //         break;
+        //     }
+        // }
 
-        $this->correct = $correct;
+        // foreach ($responses as $response) {
+        //     if ($response->answer->right_answer) {
+        //         $correct = true;
+        //     } else {
+        //         $correct = false;
+        //         break;
+        //     }
+        // }
+
+        // $this->correct = $correct;
     }
 
     public function getCssClasses()
