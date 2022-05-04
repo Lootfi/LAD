@@ -65,20 +65,11 @@ class QuizController extends Controller
 
             $correctAsnwers = $question->answers()->where('right_answer', true)->get();
 
-            if ($correctAsnwers->diff($studentResponseAnswers)->isEmpty()) {
+            if ($correctAsnwers->diff($studentResponseAnswers)->isEmpty() && $studentResponseAnswers->diff($correctAsnwers)->isEmpty()) {
                 $correct[$question->id] = true;
             } else {
                 $correct[$question->id] = false;
             }
-
-            // foreach ($question->my_responses as $response) {
-            //     if ($response->answer->right_answer) {
-            //         $correct[$question->id] = true;
-            //     } else {
-            //         $correct[$question->id] = false;
-            //         break 1;
-            //     }
-            // }
         }
 
         //building responses array ['question_id' => ['answer_id' => ['answered' => true, 'correct' => true]]]

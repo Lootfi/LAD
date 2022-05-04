@@ -14,15 +14,11 @@ class Question extends Component
     public $answered = false;
     public $correct = false;
     public $classes;
-    public $selected = false;
 
     public function getListeners()
     {
         return [
-            //{student_id}.answered.{question_id}
             "echo:{$this->student->id}.answered.{$this->question->id},Student\QuestionAnswered" => 'questionAnswered',
-            'chooseQuestion.' . $this->question->id => 'chooseQuestionListener',
-            "clearSelectedQuestions" => 'clearSelectedQuestionsListener',
         ];
     }
 
@@ -43,41 +39,18 @@ class Question extends Component
     public function getAttributes()
     {
         $responses = $this->question->responses()->where('student_id', $this->student->id)->get();
-
         if ($responses->count() == 0) return;
 
-
         $studentResponseAnswers = $this->question->responses()->where('student_id', $this->student->id)->with('answer')->get()->pluck('answer');
-
         $correctAsnwers = $this->question->answers()->where('right_answer', true)->get();
 
         $this->answered = true;
-        $correct = false;
 
-        if ($correctAsnwers->diff($studentResponseAnswers)->isEmpty()) {
+        if ($correctAsnwers->diff($studentResponseAnswers)->isEmpty() && $studentResponseAnswers->diff($correctAsnwers)->isEmpty()) {
             $this->correct = true;
         } else {
             $this->correct = false;
         }
-        // foreach ($this->question->answers()->where('right_answer', true)->get() as $answer) {
-        //     if ($responses->where('answer_id', $answer->id)->count() > 0) {
-        //         $correct = true;
-        //     } else {
-        //         $correct = false;
-        //         break;
-        //     }
-        // }
-
-        // foreach ($responses as $response) {
-        //     if ($response->answer->right_answer) {
-        //         $correct = true;
-        //     } else {
-        //         $correct = false;
-        //         break;
-        //     }
-        // }
-
-        // $this->correct = $correct;
     }
 
     public function getCssClasses()
@@ -97,27 +70,5 @@ class Question extends Component
     {
         $this->getAttributes();
         $this->classes = $this->getCssClasses();
-    }
-
-    public function chooseQuestion()
-    {
-        $this->emit('chooseQuestion.' . $this->question->id);
-        if ($this->selected) {
-            $this->emitTo('teacher.quiz.monitor.index', 'deselectQuestion', $this->question->id);
-        } else {
-            $this->emitTo('teacher.quiz.monitor.index', 'selectQuestion', $this->question->id);
-        }
-    }
-
-    public function chooseQuestionListener()
-    {
-        $this->selected = !$this->selected;
-    }
-
-    public function clearSelectedQuestionsListener()
-    {
-        if ($this->selected) {
-            $this->selected = false;
-        }
     }
 }

@@ -79,7 +79,7 @@ class GatherQuizKcsErrorRate
                 ->get()
                 ->pluck('answer');
 
-            if ($correctAsnwers->diff($studentResponseAnswers)->isNotEmpty()) {
+            if ($correctAsnwers->diff($studentResponseAnswers)->isEmpty() && $studentResponseAnswers->diff($correctAsnwers)->isEmpty()) {
                 $err_count++;
             }
         }
