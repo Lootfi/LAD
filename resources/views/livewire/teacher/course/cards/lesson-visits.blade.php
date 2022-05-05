@@ -34,7 +34,7 @@
                         {{-- {{$lesson['unique_students']}} --}}
                         <div class="avatars">
                             @foreach ($lesson['students'] as $student)
-                            <a href="#" class="avatars-item" data-toggle="tooltip" data-placement="top"
+                            <a href="" class="avatars-item" data-toggle="tooltip" data-placement="top"
                                 title="{{$student['name']}}">
                                 <img class="avatar" alt="Image placeholder" src="{{ $student['avatar'] }}">
                             </a>
@@ -43,9 +43,38 @@
                             @endif
                             @endforeach
                             @if (count($lesson['students']) > 4)
-                            <a href="#" class="avatars-item">
+                            <a class="avatars-item" data-toggle="modal"
+                                data-target="#students-who-visited-{{$lesson_id}}">
                                 <img class="avatar" alt="+{{count($lesson['students']) - 4}}" src="">
                             </a>
+
+                            <div class="modal fade" id="students-who-visited-{{$lesson_id}}" tabindex="-1" role="dialog"
+                                aria-labelledby="students-who-visited-lesson-label" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="add-answer-modal-label">{{ __('All students who
+                                                visited lesson') }}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @foreach ($lesson['students'] as $student)
+                                            {{-- list of students with avatars --}}
+                                            <div class="d-flex flex-direction-row pb-3">
+                                                <a href="#" class="avatars-item" data-toggle="tooltip"
+                                                    data-placement="top" title="{{$student['name']}}">
+                                                    <img class="avatar" alt="Image placeholder"
+                                                        src="{{ $student['avatar'] }}">
+                                                </a>
+                                                <span>{{$student['name']}}</span>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endif
                         </div>
                     </td>
