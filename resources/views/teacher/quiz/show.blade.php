@@ -67,8 +67,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="pass_percentage">Pass Percentage</label>
-                    <input type="text" class="form-control" id="pass_percentage"
-                        value="{{$quiz->pass_percentage * 100}} %" disabled>
+                    <input type="text" class="form-control" id="pass_percentage" value="{{$quiz->pass_percentage}}"
+                        disabled>
                 </div>
             </div>
         </div>

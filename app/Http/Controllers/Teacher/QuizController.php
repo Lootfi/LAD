@@ -31,12 +31,14 @@ class QuizController extends Controller
 
     public function show(Course $course, Quiz $quiz)
     {
-        if ($quiz->is_active) {
+        if ($quiz->status == "active") {
             $quiz->pass_percentage = "Still Active";
+        } elseif ($quiz->status == "upcoming") {
+            $quiz->pass_percentage = "Not Yet";
         } else {
             $get_pass_percentage = new GetQuizPassPercentage;
 
-            $quiz->pass_percentage = $get_pass_percentage($quiz);
+            $quiz->pass_percentage = $get_pass_percentage($quiz) * 100 . '%';
         }
 
         return view('teacher.quiz.show', compact('course', 'quiz'));
@@ -44,22 +46,26 @@ class QuizController extends Controller
 
     public function edit(Course $course, Quiz $quiz)
     {
-        $quiz->load('questions.answers');
-
-        return view('teacher.quiz.edit', compact('course', 'quiz'));
+        if ($quiz->is_active) {
+            return redirect()->route('teacher.quiz.show', [
+                'course' => $course,
+                'quiz' => $quiz
+            ]);
+        } else {
+            $quiz->load('questions.answers');
+            return view('teacher.quiz.edit', compact('course', 'quiz'));
+        }
     }
 
     public function update(Request $request, Course $course, Quiz $quiz)
     {
         $quiz->update($request->all());
-
         return redirect()->route('teacher.quiz.index', $course);
     }
 
     public function destroy(Course $course, Quiz $quiz)
     {
         $quiz->delete();
-
         return redirect()->route('teacher.quiz.index', ['course' => $course]);
     }
 
