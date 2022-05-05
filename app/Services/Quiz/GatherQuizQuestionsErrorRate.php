@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 class GatherQuizQuestionsErrorRate
 {
 
-    public function __invoke(Quiz $quiz, QuizQuestion $question)
+    public function __invoke(QuizQuestion $question)
     {
         $data = $this->getQuestionErrorRates($question);
         return $data;

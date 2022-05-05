@@ -24,7 +24,7 @@ class GatherQuizKcsErrorRate
         $questionsData = [];
         foreach ($kc->questions()->where('quiz_id', $quiz->id)->get() as $question) {
             $gatherQuestionErrorRate = new GatherQuizQuestionsErrorRate;
-            $questionData = $gatherQuestionErrorRate($quiz, $question);
+            $questionData = $gatherQuestionErrorRate($question);
             array_push($questionsData, $questionData);
         }
 

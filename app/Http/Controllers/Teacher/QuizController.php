@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Quiz;
 use App\Models\User;
+use App\Services\Quiz\GetQuizPassPercentage;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -30,6 +31,14 @@ class QuizController extends Controller
 
     public function show(Course $course, Quiz $quiz)
     {
+        if ($quiz->is_active) {
+            $quiz->pass_percentage = "Still Active";
+        } else {
+            $get_pass_percentage = new GetQuizPassPercentage;
+
+            $quiz->pass_percentage = $get_pass_percentage($quiz);
+        }
+
         return view('teacher.quiz.show', compact('course', 'quiz'));
     }
 

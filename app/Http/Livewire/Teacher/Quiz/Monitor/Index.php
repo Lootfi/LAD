@@ -35,7 +35,7 @@ class Index extends Component
     {
         $gather = new GatherQuizQuestionsErrorRate;
 
-        $data = $gather($this->quiz, $question);
+        $data = $gather($question);
 
         // emit data to graph component
         $this->emitTo('teacher.quiz.monitor.graphs.index.questions-error-rate', 'gatherData', $question->id, $data);
