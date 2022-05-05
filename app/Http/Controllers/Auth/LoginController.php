@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -41,9 +42,11 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        if (auth()->user()->hasRole('teacher')) {
-            return route('teacher.dashboard');
-        } elseif (auth()->user()->hasRole('student')) {
+        $user = User::find(auth()->id());
+
+        if ($user->hasRole('teacher')) {
+            return route('teacher.course.show', ['course' => $user->teaches]);
+        } elseif ($user->hasRole('student')) {
             return route('student.dashboard');
         }
     }

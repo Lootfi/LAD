@@ -101,6 +101,11 @@ class User extends Authenticatable
         return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
     }
 
+    public function adminlte_image()
+    {
+        return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+    }
+
     public function isOnline()
     {
         return Cache::has('is_online_' . $this->id);

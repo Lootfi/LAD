@@ -37,7 +37,7 @@ Route::get('/', function () {
     if (!$user) {
         return redirect()->route('login');
     } elseif ($user->hasRole('teacher')) {
-        return redirect()->route('teacher.dashboard');
+        return redirect()->route('teacher.course.show', ['course' => $user->teaches]);
     } elseif ($user->hasRole('student')) {
         return redirect()->route('student.dashboard');
     }
