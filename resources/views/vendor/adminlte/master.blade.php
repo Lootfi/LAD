@@ -35,6 +35,7 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     @else
     <link rel="stylesheet" href="{{ mix(config('adminlte.laravel_mix_css_path', 'css/app.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/avatars.css') }}">
     @endif
 
     {{-- Livewire Styles --}}

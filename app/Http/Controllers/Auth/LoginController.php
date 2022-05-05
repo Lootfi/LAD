@@ -47,7 +47,7 @@ class LoginController extends Controller
         if ($user->hasRole('teacher')) {
             return route('teacher.course.show', ['course' => $user->teaches]);
         } elseif ($user->hasRole('student')) {
-            return route('student.dashboard');
+            return route('student.course.index');
         }
     }
 }

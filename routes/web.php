@@ -39,7 +39,18 @@ Route::get('/', function () {
     } elseif ($user->hasRole('teacher')) {
         return redirect()->route('teacher.course.show', ['course' => $user->teaches]);
     } elseif ($user->hasRole('student')) {
-        return redirect()->route('student.dashboard');
+        return redirect()->route('student.course.index');
+    }
+});
+
+Route::get('/home', function () {
+    $user = User::find(auth()->id());
+    if (!$user) {
+        return redirect()->route('login');
+    } elseif ($user->hasRole('teacher')) {
+        return redirect()->route('teacher.course.show', ['course' => $user->teaches]);
+    } elseif ($user->hasRole('student')) {
+        return redirect()->route('student.course.index');
     }
 });
 
@@ -191,7 +202,7 @@ Route::prefix('student')
         *
         * Student Course Sections Routes
         */
-        Route::resource('course.section', StudentSectionController::class)->except(['create', 'edit', 'destroy']);
+        // Route::resource('course.section', StudentSectionController::class)->except(['create', 'edit', 'destroy', 'index', 'show']);
 
         /*
         *

@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+    // show all courses
+    public function index()
+    {
+        return view('student.course.index', ['courses' => auth()->user()->courses]);
+    }
     // show course
     public function show(Course $course)
     {

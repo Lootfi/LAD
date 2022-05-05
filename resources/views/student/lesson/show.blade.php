@@ -7,14 +7,6 @@
 <li class="breadcrumb-item"><a href="{{ route('student.course.index') }}">Courses</a></li>
 <li class="breadcrumb-item"><a href="{{ route('student.course.show', ['course' => $course]) }}">{{ $course->title }}</a>
 </li>
-{{-- sections index --}}
-<li class="breadcrumb-item"><a href="{{ route('student.course.section.index', ['course' => $course]) }}">Sections</a>
-</li>
-{{-- section --}}
-<li class="breadcrumb-item"><a
-        href="{{ route('student.course.section.show', ['course' => $course, 'section' => $section]) }}">{{
-        $section->name }}</a>
-</li>
 {{-- lesson --}}
 <li class="breadcrumb-item active" aria-current="page">{{ $lesson->name }}</li>
 @endsection

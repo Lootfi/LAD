@@ -20,43 +20,7 @@
     </div>
     <div class="row mt-5">
         <div class="col-xl-8 mb-5 mb-xl-0">
-            <div class="card shadow">
-                <div class="card-header border-0">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h3 class="mb-0">Lesson visits</h3>
-                        </div>
-                        <div class="col text-right">
-                            <a href="#!" class="btn btn-sm btn-primary">See all</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Page name</th>
-                                <th scope="col">Visits</th>
-                                <th scope="col">Unique users</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">
-                                    Lesson 01
-                                </th>
-                                <td>
-                                    459
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <livewire:teacher.course.cards.lesson-visits />
         </div>
         {{-- <div class="col-xl-4">
             <div class="card shadow">
