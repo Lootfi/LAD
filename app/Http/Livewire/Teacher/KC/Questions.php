@@ -34,10 +34,7 @@ class Questions extends DataTableComponent
     public function builder(): Builder
     {
         return QuizQuestion::query()
-            ->when(
-                $this->questionids ?? null,
-                fn ($q) => $q->whereIn('id', $this->questionids),
-            );;
+            ->whereIn('id', $this->questionids);
     }
 
 

@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 
 class Table extends DataTableComponent
 {
-    // protected $model = Quiz::class;
 
     public function builder(): Builder
     {

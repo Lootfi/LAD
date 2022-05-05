@@ -13,7 +13,6 @@ class Lessons extends DataTableComponent
     public $kc;
     public $lessonids;
 
-    // listeners
     protected $listeners = [
         'kcCreated' => '$refresh',
     ];
@@ -33,10 +32,7 @@ class Lessons extends DataTableComponent
     public function builder(): Builder
     {
         return Lesson::query()
-            ->when(
-                $this->lessonids ?? null,
-                fn ($q) => $q->whereIn('id', $this->lessonids),
-            );;
+            ->whereIn('id', $this->lessonids);
     }
 
 

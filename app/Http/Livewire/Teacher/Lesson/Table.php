@@ -12,14 +12,13 @@ use function PHPSTORM_META\type;
 
 class Table extends DataTableComponent
 {
-    // protected $model = Lesson::class;
-
     public Section $section;
 
 
     public function builder(): Builder
     {
         return Lesson::query()
+            ->where('section_id', $this->section->id)
             ->with(['section.course']);
     }
 
@@ -27,12 +26,6 @@ class Table extends DataTableComponent
     public function mount(Section $section)
     {
         $this->section = $section;
-    }
-
-    public function getRows()
-    {
-        $builder = $this->baseQuery();
-        return $this->executeQuery($builder->whereSectionId($this->section->id));
     }
 
     public function configure(): void
