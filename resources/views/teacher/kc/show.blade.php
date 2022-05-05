@@ -3,7 +3,6 @@
 @section('title', 'KC ('. $kc->name . ') - Show')
 
 @section('content_header')
-<li class="breadcrumb-item"><a href="{{ route('teacher.course.show', $course) }}">{{$course->name}}</a></li>
 <li class="breadcrumb-item"><a href="{{ route('teacher.kc.manage', $course) }}">KCs</a></li>
 <li class="breadcrumb-item active">KC ({{$kc->name}}) - Show</li>
 @endsection

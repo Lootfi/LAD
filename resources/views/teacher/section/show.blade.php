@@ -2,19 +2,8 @@
 
 @section('title', 'Course Section: '. $section->name)
 
-{{-- content_header --}}
 @section('content_header')
-<li class="breadcrumb-item">
-    <a href="{{ route('teacher.course.show', ['course' => auth()->user()->teaches]) }}">Course</a>
-</li>
-<li class="breadcrumb-item">
-    <a href="#">{{ $course->title }}</a>
-</li>
-<li class="breadcrumb-item">
-    <a href="{{ route('teacher.course.section.index', $course) }}">Sections</a>
-</li>
-<li class="breadcrumb-item active">{{$section->name}}</li>
-
+<li class="breadcrumb-item active">Section: {{$section->name}}</li>
 @endsection
 
 @section('content')

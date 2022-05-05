@@ -3,13 +3,6 @@
 @section('title', 'Course Quiz')
 
 @section('content_header')
-{{-- breadcrumb items --}}
-<li class="breadcrumb-item">
-    <a href="{{ route('teacher.course.show', ['course' => auth()->user()->teaches]) }}">Course</a>
-</li>
-<li class="breadcrumb-item">
-    <a href="#">{{ $course->title }}</a>
-</li>
 <li class="breadcrumb-item">
     <a href="{{ route('teacher.quiz.index', $course) }}">Quizzes</a>
 </li>

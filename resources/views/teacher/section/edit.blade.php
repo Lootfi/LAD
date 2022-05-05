@@ -4,13 +4,7 @@
 
 @section('content_header')
 <li class="breadcrumb-item">
-    <a href="{{ route('teacher.course.show', ['course' => auth()->user()->teaches]) }}">{{$course->title}}</a>
-</li>
-<li class="breadcrumb-item">
-    <a href="{{ route('teacher.course.section.index', $course) }}">Sections</a>
-</li>
-<li class="breadcrumb-item">
-    <a href="{{ route('teacher.course.section.show', [$course,$section]) }}">{{$section->name}}</a>
+    <a href="{{ route('teacher.course.section.show', [$course,$section]) }}">Section: {{$section->name}}</a>
 </li>
 <li class="breadcrumb-item active">Edit</li>
 
