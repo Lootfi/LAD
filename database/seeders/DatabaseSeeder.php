@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             QuizQuestionSeeder::class,
             QuizAnswerSeeder::class,
             QuizStudentSeeder::class,
+            QuizResponseSeeder::class,
             ActivitySeeder::class,
             KcSeeder::class
         ]);

@@ -44,6 +44,8 @@ class QuizStudent extends Model
     protected $fillable = [
         'quiz_id',
         'student_id',
+        'submitted',
+        'submitted_at'
     ];
 
     public function quiz()

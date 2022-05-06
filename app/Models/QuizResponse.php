@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -29,7 +30,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class QuizResponse extends Pivot
 {
-    use LogsActivity;
+    use LogsActivity, HasFactory;
 
     public $incrementing = true;
 

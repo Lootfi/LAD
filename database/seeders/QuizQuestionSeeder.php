@@ -22,6 +22,8 @@ class QuizQuestionSeeder extends Seeder
             'question' => 'Which of these are OCL types?',
             'order' => 1,
         ]);
+
+        //1
         QuizAnswer::factory(1)->create([
             'question_id' => 1,
             'right_answer' => true,
@@ -47,6 +49,7 @@ class QuizQuestionSeeder extends Seeder
             'order' => 2,
         ]);
 
+        //4
         QuizAnswer::factory(1)->create([
             'question_id' => 2,
             'right_answer' => true,
@@ -67,6 +70,8 @@ class QuizQuestionSeeder extends Seeder
             'question' => 'The "oclIsTypeOf (t : OclType)" operation returns a:',
             'order' => 3,
         ]);
+
+        //6
         QuizAnswer::factory(1)->create([
             'question_id' => 3,
             'right_answer' => true,
@@ -93,6 +98,7 @@ class QuizQuestionSeeder extends Seeder
             'order' => 4,
         ]);
 
+        //10
         QuizAnswer::factory(1)->create([
             'question_id' => 4,
             'right_answer' => true,
@@ -121,6 +127,7 @@ class QuizQuestionSeeder extends Seeder
             'order' => 5,
         ]);
 
+        //13
         QuizAnswer::factory(1)->create([
             'question_id' => 5,
             'right_answer' => true,
@@ -150,6 +157,7 @@ class QuizQuestionSeeder extends Seeder
             'order' => 6,
         ]);
 
+        //16
         QuizAnswer::factory(1)->create([
             'question_id' => 6,
             'right_answer' => true,
