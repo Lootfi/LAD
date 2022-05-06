@@ -39,7 +39,10 @@ class Question extends Component
     public function getAttributes()
     {
         $responses = $this->question->responses()->where('student_id', $this->student->id)->get();
-        if ($responses->count() == 0) return;
+        if ($responses->count() == 0) {
+            $this->answered = false;
+            return;
+        }
 
         $studentResponseAnswers = $this->question->responses()->where('student_id', $this->student->id)->with('answer')->get()->pluck('answer');
         $correctAsnwers = $this->question->answers()->where('right_answer', true)->get();
