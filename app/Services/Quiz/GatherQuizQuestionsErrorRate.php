@@ -48,8 +48,9 @@ class GatherQuizQuestionsErrorRate
                 ->pluck('answer');
 
             if ($correctAsnwers->diff($studentResponseAnswers)->isEmpty() && $studentResponseAnswers->diff($correctAsnwers)->isEmpty()) {
-                $err_count++;
+                continue;
             }
+            $err_count++;
         }
 
 

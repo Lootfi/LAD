@@ -19,10 +19,4 @@ class IndexActions extends Component
     {
         return view('livewire.teacher.quiz.monitor.index-actions');
     }
-
-    public function clearSelectedQuestions()
-    {
-        $this->emit('clearSelectedQuestions');
-        $this->emitTo('teacher.quiz.monitor.graphs.index.questions-error-rate', 'removeAllData');
-    }
 }
