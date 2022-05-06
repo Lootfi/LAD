@@ -43,23 +43,29 @@ class GatherStudentQuizKcsAwareness
             if (!isset($count[0])) $count[0] = 0;
             if (!isset($count[-1])) $count[-1] = 0;
 
-            //all equal
-            if (($count[-1] == $count[0]) && ($count[0] == $count[1])) {
-                # code...
-                $kcAware[$kc->id] = -1;
-            } elseif (($count[1] > $count[0]) && ($count[1] > $count[-1])) {
-                // aware only if count of questions answered right is higher than everything
-                $kcAware[$kc->id] = 1;
-            } elseif (($count[0] > $count[-1]) && ($count[0] > $count[1])) {
-                // not aware only if count of questions answered false is higher than everything
-                $kcAware[$kc->id] = 0;
-                # code...
-            } else {
-                // not yet if everything else
-                $kcAware[$kc->id] = -1;
-            }
+            $kcAware[$kc->id] = $this->compareCorrectResponsesCount($count[1], $count[0], $count[-1]);
         }
 
         return $kcAware;
+    }
+
+
+    public function compareCorrectResponsesCount($correct, $uncorrect, $unanswered)
+    {
+        if ($correct > $uncorrect) {
+            if ($correct == $unanswered)
+                return -1;
+            if ($correct > $unanswered)
+                return 1;
+            else
+                return -1;
+        } else {
+            if ($correct == $uncorrect)
+                return -1;
+            if ($uncorrect > $unanswered)
+                return 0;
+            else
+                return -1;
+        }
     }
 }
