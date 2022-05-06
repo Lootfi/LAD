@@ -45,7 +45,7 @@ jobs:
         run: npm run prod
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip ./*
+        run: zip -r release.zip ./
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -79,4 +79,4 @@ jobs:
           app-name: 'ladapp'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F9DBF16520F64906805678BF0EC48A6C }}
-          package: 'release.zip'
+          package: .
