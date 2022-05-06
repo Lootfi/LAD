@@ -46,10 +46,11 @@
 
 {{-- script --}}
 @push('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
     integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    --}}
     $(document).ready(function () {
     var studentActivityChart = document.getElementById('studentActivityChart').getContext('2d');
     var studentActivityChart = new Chart(studentActivityChart, {
