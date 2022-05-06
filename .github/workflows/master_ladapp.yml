@@ -79,4 +79,4 @@ jobs:
           app-name: 'ladapp'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F9DBF16520F64906805678BF0EC48A6C }}
-          package: .
+          package: 'release.zip'
