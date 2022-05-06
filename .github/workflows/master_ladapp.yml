@@ -39,7 +39,7 @@ jobs:
           cache: npm
 
       - name: Run npm install
-        run: npm install --only=prod
+        run: npm install
 
       - name: Run npm run prod
         run: npm run prod
