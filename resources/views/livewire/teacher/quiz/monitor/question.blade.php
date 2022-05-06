@@ -1,4 +1,11 @@
-<div class="col mb-4">
+<div class="col mb-4" data-toggle="tooltip" data-placement="top" data-title="<h6>KCs:</h6>
+@foreach ($question->kcs as $kc)
+{{$kc->name}}
+{{-- if loop last --}}
+@if (!$loop->last)
+,
+@endif
+@endforeach">
     @if ($answered)
     <div class="card text-center py-2 bg-white">
         <p class="card-text">Q{{$index}}</p>
@@ -17,3 +24,15 @@
     </div>
     @endif
 </div>
+
+@once
+@push('js')
+<script>
+    $(function () {
+  $('[data-toggle="tooltip"]').tooltip({
+      html: true
+  })
+})
+</script>
+@endpush
+@endonce

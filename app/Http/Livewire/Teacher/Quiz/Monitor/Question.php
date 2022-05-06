@@ -70,5 +70,6 @@ class Question extends Component
     {
         $this->getAttributes();
         $this->classes = $this->getCssClasses();
+        $this->emitTo('teacher.quiz.monitor.student.kcs', 'student.' . $this->student->id . '.answeredQuestion', ['question_id' => $this->question->id]);
     }
 }

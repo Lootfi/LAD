@@ -12,11 +12,11 @@
         <div class="row row-cols-1 row-cols-md-3">
             @foreach ($quiz->questions as $index => $question)
             <livewire:teacher.quiz.monitor.question :student="$student" :question="$question"
-                :selectedQuestion="$selectedQuestion" :wire:key="$loop->index" />
+                :wire:key="$loop->index" />
             @endforeach
         </div>
     </div>
     <div class="card-footer text-muted">
-        Actions
+        <livewire:teacher.quiz.monitor.student.kcs :student="$student" :quiz="$quiz" />
     </div>
 </div>
