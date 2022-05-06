@@ -29,7 +29,7 @@ jobs:
 
       - name: Run composer install if composer.json exists
         if: steps.check_files.outputs.files_exists == 'true'
-        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
+        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress --no-dev
 
         
       - name: Setup Node 16.x
@@ -39,7 +39,7 @@ jobs:
           cache: npm
 
       - name: Run npm install
-        run: npm install
+        run: npm install --only=prod
 
       - name: Run npm run prod
         run: npm run prod

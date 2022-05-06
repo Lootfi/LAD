@@ -58,6 +58,7 @@ Route::post('/upload', [TeacherLessonController::class, 'upload'])->middleware('
 
 //teacher dashboard routes, with auth middleware
 
+
 Route::prefix('teacher')
     ->name('teacher.')
     ->middleware(['auth', 'role:teacher'])
