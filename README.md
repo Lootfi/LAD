@@ -20,7 +20,7 @@ If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Lar
 
 ## Websockets
 
-This project uses [laravel-websockets](https://beyondco.de/docs/laravel-websockets/getting-started/introduction). And listens for [Laravel Echo](https://laravel.com/docs/9.x/broadcasting#client-side-installation) Events (students' activities) inside [Livewire](https://laravel-livewire.com/docs/2.x/laravel-echo) components (teacher's dashboard).
+This project uses [laravel-websockets](https://beyondco.de/docs/laravel-websockets/getting-started/introduction). And listens for [Laravel Echo](https://laravel.com/docs/9.x/broadcasting#client-side-installation) Events (students' activities) inside [Livewire](https://laravel-livewire.com/docs/2.x/laravel-echo#listeners) components (teacher's dashboard).
 
 
 ## Logging Student's Activity
