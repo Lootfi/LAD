@@ -24,5 +24,20 @@ class CourseStudentSeeder extends Seeder
             'course_id' => 1,
             'student_id' => 3,
         ]);
+
+        CourseStudent::factory(1)->create([
+            'course_id' => 1,
+            'student_id' => 4,
+        ]);
+
+        CourseStudent::factory(1)->create([
+            'course_id' => 1,
+            'student_id' => 5,
+        ]);
+
+        CourseStudent::factory(1)->create([
+            'course_id' => 1,
+            'student_id' => 6,
+        ]);
     }
 }

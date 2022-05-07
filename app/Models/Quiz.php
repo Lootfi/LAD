@@ -58,9 +58,9 @@ class Quiz extends Model
         return $this->hasMany(QuizQuestion::class);
     }
 
-    public function students(): BelongsToMany
+    public function students(): HasMany
     {
-        return $this->belongsToMany(User::class, 'quiz_students', 'quiz_id', 'student_id');
+        return $this->hasMany(QuizStudent::class);
     }
 
     public function kcs(): HasManyThrough

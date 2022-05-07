@@ -29,8 +29,11 @@ return new class extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
+            $table->unsignedFloat('score')->nullable();
             $table->boolean('submitted')->default(false);
             $table->timestamp('submitted_at')->nullable();
+
+
             $table->timestamps();
         });
     }

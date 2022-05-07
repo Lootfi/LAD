@@ -49,14 +49,37 @@ class PermissionsSeeder extends Seeder
         $user->assignRole($teacher);
 
         $user = \App\Models\User::factory()->create([
-            'name' => 'Student 01',
+            // name
+            'name' => 'Pamela Anderson',
             'email' => 'student01@example.com',
         ]);
         $user->assignRole($student);
 
         $user = \App\Models\User::factory()->create([
-            'name' => 'Student 02',
+            // name
+            'name' => 'John Williams',
             'email' => 'student02@example.com',
+        ]);
+        $user->assignRole($student);
+
+        $user = \App\Models\User::factory()->create([
+            // name
+            'name' => 'Jane Doe',
+            'email' => 'student03@example.com',
+        ]);
+        $user->assignRole($student);
+
+        $user = \App\Models\User::factory()->create([
+            // name
+            'name' => 'Sawyer Smith',
+            'email' => 'student04@example.com',
+        ]);
+        $user->assignRole($student);
+
+        $user = \App\Models\User::factory()->create([
+            // name
+            'name' => 'Samantha Michaels',
+            'email' => 'student05@example.com',
         ]);
         $user->assignRole($student);
     }

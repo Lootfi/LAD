@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Quiz;
 use App\Models\User;
+use App\Services\Quiz\GatherStudentQuestionCorrectness;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -49,6 +50,8 @@ class QuizController extends Controller
     {
         $quiz->load(['questions.answers', 'course', 'questions']);
 
+        $score = $quiz->students()->where('student_id', auth()->id())->first()->score;
+
         $quiz->questions->each(function ($question) {
             $question->my_responses = $question
                 ->responses()
@@ -61,15 +64,19 @@ class QuizController extends Controller
 
         foreach ($quiz->questions as $question) {
 
-            $studentResponseAnswers = $question->responses()->where('student_id', auth()->id())->with('answer')->get()->pluck('answer');
+            // $studentResponseAnswers = $question->responses()->where('student_id', auth()->id())->with('answer')->get()->pluck('answer');
 
-            $correctAsnwers = $question->answers()->where('right_answer', true)->get();
+            // $correctAsnwers = $question->answers()->where('right_answer', true)->get();
 
-            if ($correctAsnwers->diff($studentResponseAnswers)->isEmpty() && $studentResponseAnswers->diff($correctAsnwers)->isEmpty()) {
-                $correct[$question->id] = true;
-            } else {
-                $correct[$question->id] = false;
-            }
+            // if ($correctAsnwers->diff($studentResponseAnswers)->isEmpty() && $studentResponseAnswers->diff($correctAsnwers)->isEmpty()) {
+            //     $correct[$question->id] = true;
+            // } else {
+            //     $correct[$question->id] = false;
+            // }
+
+            $getCorrectness = new GatherStudentQuestionCorrectness;
+
+            $correct[$question->id] = $getCorrectness(auth()->user(), $question);
         }
 
         //building responses array ['question_id' => ['answer_id' => ['answered' => true, 'correct' => true]]]
@@ -87,6 +94,6 @@ class QuizController extends Controller
             }
         }
 
-        return view('student.quiz.results', compact('course', 'quiz', 'correct', 'responses'));
+        return view('student.quiz.results', compact('course', 'quiz', 'correct', 'responses', 'score'));
     }
 }

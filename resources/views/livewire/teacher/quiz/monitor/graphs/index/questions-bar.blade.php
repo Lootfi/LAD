@@ -5,4 +5,5 @@
             class="btn {{in_array($question->id, $this->selected_questions) ? 'btn-primary' : 'btn-secondary'}}">#Q{{$question->order}}</button>
         @endforeach
     </div>
+
 </div>

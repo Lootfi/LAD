@@ -45,7 +45,8 @@ class QuizStudent extends Model
         'quiz_id',
         'student_id',
         'submitted',
-        'submitted_at'
+        'submitted_at',
+        'score',
     ];
 
     public function quiz()

@@ -1,13 +1,13 @@
-<div class="col mb-4" data-toggle="tooltip" data-placement="top" data-title="<h6>KCs:</h6>
-@foreach ($question->kcs as $kc)
-{{$kc->name}}
-{{-- if loop last --}}
-@if (!$loop->last)
-,
-@endif
-@endforeach">
+<div class="card" data-toggle="tooltip" data-placement="top" data-title="<h6>KCs:</h6>
+    @foreach ($question->kcs as $kc)
+    {{$kc->name}}
+    {{-- if loop last --}}
+    @if (!$loop->last)
+    ,
+    @endif
+    @endforeach">
     @if ($answered)
-    <div class="card text-center py-2 bg-white">
+    <div class="card-body text-center py-2 bg-white">
         <p class="card-text">Q{{$index}}</p>
         <p class="card-text">
             @if ($correct)
@@ -18,12 +18,13 @@
         </p>
     </div>
     @else
-    <div class="item card text-center bg-dark py-2">
+    <div class="card-body text-center bg-dark py-2">
         <p class="card-text">Q{{$index}}</p>
         <i class="fa fa-check-circle fa-lg invisible" aria-hidden="true"></i>
     </div>
     @endif
 </div>
+
 
 @once
 @push('js')

@@ -5,6 +5,7 @@ namespace App\Notifications;
 use App\Models\Quiz;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -50,5 +51,21 @@ class NewQuiz extends Notification implements ShouldQueue
             'link' => route('student.quiz.show', ['quiz' => $this->quiz, 'course' => $this->quiz->course]),
             'quiz' => $this->quiz
         ];
+    }
+
+
+    /**
+     * Get the broadcastable representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return BroadcastMessage
+     */
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'message' => 'You have a new quiz: ' . $this->quiz->name,
+            'link' => route('student.quiz.show', ['quiz' => $this->quiz, 'course' => $this->quiz->course]),
+            'quiz' => $this->quiz
+        ]);
     }
 }

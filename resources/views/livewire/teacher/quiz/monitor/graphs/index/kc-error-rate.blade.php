@@ -1,38 +1,10 @@
 <div wire:ignore class="card bg-gradient-default shadow">
     <div class="card-header bg-transparent">
         <div class="row align-items-center">
-            <div class="col">
+            <div class="col-12">
                 <h6 class="text-uppercase ls-1 mb-1">Overview</h6>
-                <h2 class="mb-0">Knowledge Components Error Rate</h2>
+                <h2 class="mb-1">Knowledge Components Error Rate</h2>
             </div>
-            <div class="col">
-                {{-- <ul class="nav nav-pills justify-content-end">
-                    <li class="nav-item mr-2 mr-md-0">
-                        <a style="cursor: pointer;" wire:click="updateTime('1 day')" class="nav-link py-2 px-3"
-                            data-toggle="tab">
-                            <span class="d-none d-md-block">Day</span>
-                            <span class="d-md-none">D</span>
-                        </a>
-                    </li>
-                    <li class="nav-item mr-2 mr-md-0">
-                        <a style="cursor: pointer;" wire:click="updateTime('1 week')" class="nav-link py-2 px-3"
-                            data-toggle="tab">
-                            <span class="d-none d-md-block">Week</span>
-                            <span class="d-md-none">W</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a style="cursor: pointer;" wire:click="updateTime('1 month')" class="nav-link py-2 px-3 active"
-                            data-toggle="tab">
-                            <span class="d-none d-md-block">Month</span>
-                            <span class="d-md-none">M</span>
-                        </a>
-                    </li>
-                </ul> --}}
-            </div>
-        </div>
-        <div class="row align-items-center">
-            <livewire:teacher.quiz.monitor.graphs.index.kcs-bar :quiz="$quiz" />
         </div>
     </div>
 
@@ -43,6 +15,9 @@
             <div class="chart">
                 <canvas id="KcsErrorRateChart" style="height:250px"></canvas>
             </div>
+        </div>
+        <div class="mt-3 row align-items-center justify-content-center">
+            <livewire:teacher.quiz.monitor.graphs.index.kcs-bar :quiz="$quiz" />
         </div>
     </div>
 </div>

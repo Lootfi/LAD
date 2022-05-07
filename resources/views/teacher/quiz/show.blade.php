@@ -17,6 +17,12 @@
         <h3 class="card-title">{{$quiz->name}}</h3>
         {{-- edit and delete buttons --}}
         <div class="card-tools">
+            <a href="{{ route('teacher.quiz.monitor', ['course' => $course, 'quiz' => $quiz]) }}"
+                class="btn btn-sm btn-info">
+                <i class="fas fa-chart-line"></i>
+                Monitor
+            </a>
+            </a>
             <a href="{{ route('teacher.quiz.edit', [$course, $quiz]) }}" class="btn btn-sm btn-primary">
                 <i class="fas fa-edit"></i>
                 Edit

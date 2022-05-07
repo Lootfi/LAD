@@ -73,7 +73,7 @@ class QuestionStep extends Component
 
     public function checkTime()
     {
-        if ($this->quiz->end_date <= now()) {
+        if ($this->quiz->end_date < now()) {
             return redirect()->route('student.quiz.results', ['course' => $this->quiz->course, 'quiz' => $this->quiz]);
         }
     }

@@ -42,7 +42,7 @@ class QuizResponseSeeder extends Seeder
         QuizResponse::factory()->create([
             'student_id' => 2,
             'question_id' => 4,
-            'answer_id' => 10 //11-12
+            'answer_id' => 10 //10-12
         ]);
 
         QuizResponse::factory()->create([
@@ -82,7 +82,7 @@ class QuizResponseSeeder extends Seeder
         QuizResponse::factory()->create([
             'student_id' => 3,
             'question_id' => 4,
-            'answer_id' => 10 //11-12
+            'answer_id' => 10 //10-12
         ]);
 
         QuizResponse::factory()->create([

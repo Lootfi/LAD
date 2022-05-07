@@ -14,6 +14,7 @@ class Index extends Component
 
     public Course $course;
     public Quiz $quiz;
+    public $search = '';
 
     protected $listeners = [
         'selectQuestion' => 'selectQuestion',
@@ -28,7 +29,12 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.teacher.quiz.monitor.index');
+        return view(
+            'livewire.teacher.quiz.monitor.index',
+            [
+                'students' => $this->course->students()->search($this->search)->get()
+            ]
+        );
     }
 
     public function selectQuestion(QuizQuestion $question)

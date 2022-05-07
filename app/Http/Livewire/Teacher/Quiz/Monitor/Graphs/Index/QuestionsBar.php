@@ -29,9 +29,10 @@ class QuestionsBar extends Component
             $this->emitTo('teacher.quiz.monitor.graphs.index.questions-error-rate', 'removeData', $question->id);
         } else {
             array_push($this->selected_questions, $question->id);
-            $gather = new GatherQuizQuestionsErrorRate;
 
+            $gather = new GatherQuizQuestionsErrorRate;
             $data = $gather($question);
+
             $this->emitTo('teacher.quiz.monitor.graphs.index.questions-error-rate', 'gatherData', $question->id, $data);
         }
     }

@@ -14,47 +14,64 @@
 @endsection
 
 @section('content')
-<div class="accordion" id="QuestionsAccordion">
-    @foreach ($quiz->questions as $key => $question)
 
-    <div class="card">
-        <div class="card-header" id="headingOne">
-            <h5 class="mb-0">
-                <button class="btn btn-link btn-block text-left d-flex justify-content-between align-items-center"
-                    type="button" data-toggle="collapse" data-target="#collapse-{{$question->id}}" aria-expanded="true"
-                    aria-controls="collapse-{{$question->id}}">
-                    #Question {{$key+1}}: {{ $question->question }}
-                    @if ($correct[$question->id])
-                    <i class="fas fa-lg fa-check text-success"></i>
-                    </span>
-                    @else
-                    <i class="fas fa-lg fa-times text-danger"></i>
-                    @endif
-                </button>
-            </h5>
-        </div>
+<div class="">
+    {{-- quiz student score --}}
+    {{-- float right --}}
+    <div class="row justify-content-end">
+        @if ($score < 0.500) <h1 style="width: 100px;" class="text-danger">
+            {{$score * 100}}%
+            </h1>
+            @else
+            <h1 style="width: 100px;" class="text-success">
+                {{$score * 100}}%
+            </h1>
+            @endif
+    </div>
+    <div class="accordion" id="QuestionsAccordion">
+        @foreach ($quiz->questions as $key => $question)
 
-        <div id="collapse-{{$question->id}}" class="collapse {{$key == 0 ? 'show': ''}}"
-            aria-labelledby="heading-{{$question->id}}" data-parent="#QuestionsAccordion">
-            <div class="card-body">
-                {{-- shot student his answers --}}
-                @foreach ($question->answers as $answer)
-                <div
-                    class="row {{$answer->right_answer ? 'bg-success text-white':''}}
-                {{($answer->right_answer == false && $responses[$question->id][$answer->id]['answered']) ? 'bg-danger text-white':'' }}">
-                    <div class="col-md-1">
-                        <input type="checkbox" disabled {{$responses[$question->id][$answer->id]['answered'] ? 'checked'
-                        : '' }}>
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link btn-block text-left d-flex justify-content-between align-items-center"
+                        type="button" data-toggle="collapse" data-target="#collapse-{{$question->id}}"
+                        aria-expanded="true" aria-controls="collapse-{{$question->id}}">
+                        #Question {{$key+1}}: {{ $question->question }}
+                        @if ($correct[$question->id])
+                        <i class="fas fa-lg fa-check text-success"></i>
+                        </span>
+                        @else
+                        <i class="fas fa-lg fa-times text-danger"></i>
+                        @endif
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapse-{{$question->id}}" class="collapse {{$key == 0 ? 'show': ''}}"
+                aria-labelledby="heading-{{$question->id}}" data-parent="#QuestionsAccordion">
+                <div class="card-body">
+                    {{-- shot student his answers --}}
+                    @foreach ($question->answers as $answer)
+                    <div
+                        class="row {{$answer->right_answer ? 'bg-success text-white':''}}
+                    {{($answer->right_answer == false && $responses[$question->id][$answer->id]['answered']) ? 'bg-danger text-white':'' }}">
+                        <div class="col-md-1">
+                            <input type="checkbox" disabled {{$responses[$question->id][$answer->id]['answered']
+                            ?
+                            'checked'
+                            : '' }}>
+                        </div>
+                        <div class="col-md-11">
+                            {{ $answer->answer }}
+                        </div>
                     </div>
-                    <div class="col-md-11">
-                        {{ $answer->answer }}
-                    </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
-    </div>
-    @endforeach
+        @endforeach
 
+    </div>
 </div>
 @endsection

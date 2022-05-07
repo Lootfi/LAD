@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Cache;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -109,5 +110,21 @@ class User extends Authenticatable
     public function isOnline()
     {
         return Cache::has('is_online_' . $this->id);
+    }
+
+    public function scopeSearch(Builder $query, string $search)
+    {
+        return $search ? $query->where('name', 'like', '%' . $search . '%') : $query;
+    }
+
+
+    /**
+     * The channels the user receives notification broadcasts on.
+     *
+     * @return string
+     */
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'users.' . $this->id;
     }
 }

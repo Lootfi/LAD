@@ -13,13 +13,18 @@
                     Quizzes
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('teacher.quiz.index', ['course' => $course]) }}">All
+                        Quizzes</a>
+                    <div class="dropdown-divider"></div>
+
                     <h6 class="dropdown-header">Active Quizzes</h6>
                     @foreach ($course->quizzes as $quiz)
-
+                    @if ($quiz->is_active)
                     <a class="dropdown-item {{request()->is('teacher/course/' . $course->id . '/quiz/' . $quiz->id ) ? 'active' : ''}}"
                         href="{{ route('teacher.quiz.show', ['course' => $course, 'quiz' => $quiz]) }}">
-                        {{$quiz->name}}
+                        <span>{{$quiz->name}}</span>
                     </a>
+                    @endif
                     @endforeach
 
                     <div class="dropdown-divider"></div>
@@ -38,23 +43,22 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <h6 class="dropdown-header">Active Sections</h6>
                     @foreach ($course->sections as $section)
-
+                    @if ($section->status == true)
                     <a class="dropdown-item {{request()->is('teacher/course/' . $course->id . '/section/' . $section->id ) ? 'active' : ''}}"
                         href="{{ route('teacher.course.section.show', ['course' => $course, 'section' => $section]) }}">
                         {{$section->name}}
                     </a>
+                    @endif
                     @endforeach
 
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item"
-                        href="{{ route('teacher.course.section.create', ['course' => $course]) }}">Add
-                        New
-                        Section</a>
+                        href="{{ route('teacher.course.section.create', ['course' => $course]) }}">Create Section</a>
                 </div>
 
             </li>
 
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle {{request()->routeIs('teacher.kc*') ? 'active' : ''}}" href="#"
                     id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                     KCs
@@ -65,6 +69,12 @@
                         KCs</a>
                 </div>
 
+            </li> --}}
+
+            <li class="nav-item">
+
+                <a class="nav-link {{request()->routeIs('teacher.kc.manage') ? 'active' : ''}}"
+                    href="{{ route('teacher.kc.manage', ['course' => $course]) }}">Manage KCs</a>
             </li>
         </ul>
     </div>

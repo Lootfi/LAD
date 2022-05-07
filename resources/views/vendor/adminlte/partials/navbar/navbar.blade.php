@@ -33,7 +33,9 @@
 
         {{-- if user is a student, show notifications icon --}}
         @if(Auth::user() && Auth::user()->hasRole('student'))
-        @include('student.navbar.menu-notifications', ['notifications' => auth()->user()->unreadNotifications ])
+        {{-- @include('student.navbar.menu-notifications', ['notifications' => auth()->user()->unreadNotifications ])
+        --}}
+        <livewire:student.menu-notifications />
         @endif
 
         {{-- Right sidebar toggler link --}}
