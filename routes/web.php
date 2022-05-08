@@ -135,11 +135,7 @@ Route::prefix('teacher')
             'monitor',
         ])->name('quiz.monitor');
 
-        // monitor quiz page for one student
-        Route::get('course/{course}/quiz/{quiz}/monitor/{student}', [
-            TeacherQuizController::class,
-            'monitorStudent',
-        ])->name('quiz.monitor.student');
+
 
         Route::get('course/{course}/quiz/{quiz}/sort', [
             TeacherQuizController::class,
@@ -177,7 +173,11 @@ Route::prefix('teacher')
     });
 
 
-
+// monitor quiz page for one student
+Route::get('teacher/course/{course}/quiz/{quiz}/monitor/{student}', [
+    TeacherQuizController::class,
+    'monitorStudent',
+])->name('teacher.quiz.monitor.student');
 
 
 // student dashboard routes

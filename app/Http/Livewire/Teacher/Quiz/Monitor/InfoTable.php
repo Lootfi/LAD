@@ -4,10 +4,8 @@ namespace App\Http\Livewire\Teacher\Quiz\Monitor;
 
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
-use App\Models\QuizResponse;
 use App\Models\QuizStudent;
 use App\Services\Quiz\GatherStudentQuestionCorrectness;
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Spatie\Activitylog\Models\Activity;
 

@@ -5,6 +5,9 @@ namespace App\Http\Livewire\Student\Quiz;
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use App\Models\QuizResponse;
+use App\Models\QuizStudent;
+use App\Services\Quiz\GetStudentQuizScore;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class QuestionStep extends Component
@@ -45,7 +48,7 @@ class QuestionStep extends Component
         $this->emitUp('nextQuestion', $this->step);
     }
 
-    public function saveResponses()
+    public function saveResponses($submit = false)
     {
 
         // checkTime
@@ -60,12 +63,25 @@ class QuestionStep extends Component
 
         // create newly added responses
         foreach ($this->responses as $answerId) {
-            QuizResponse::query()
-                ->firstOrCreate([
-                    'student_id' => auth()->user()->id,
-                    'question_id' => $this->question->id,
-                    'answer_id' => $answerId,
-                ]);
+            DB::transaction(function () use ($answerId) {
+                QuizResponse::query()
+                    ->firstOrCreate([
+                        'student_id' => auth()->user()->id,
+                        'question_id' => $this->question->id,
+                        'answer_id' => $answerId,
+                    ]);
+            });
+        }
+
+        if ($submit) {
+            $score = $this->getScore();
+            DB::transaction(function () use ($score) {
+                //indicate that student has finished quiz
+                QuizStudent::query()
+                    ->where('quiz_id', $this->quiz->id)
+                    ->where('student_id', auth()->user()->id)
+                    ->update(['submitted' => true, 'submitted_at' => now(), 'score' => $score]);
+            });
         }
 
         event(new \App\Events\Student\QuestionAnswered(auth()->user(), $this->question));
@@ -76,6 +92,13 @@ class QuestionStep extends Component
         if ($this->quiz->end_date < now()) {
             return redirect()->route('student.quiz.results', ['course' => $this->quiz->course, 'quiz' => $this->quiz]);
         }
+    }
+
+    public function getScore()
+    {
+        $getScore = new GetStudentQuizScore;
+
+        return $getScore($this->quiz, auth()->user());
     }
 
 

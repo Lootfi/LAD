@@ -23,10 +23,6 @@ class QuizStudentSeeder extends Seeder
         QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => 5, 'submitted' => false]);
         QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => 6, 'submitted' => false]);
 
-        $getScore = new GetStudentQuizScore();
-
-        $score = $getScore(Quiz::find(1), User::find(3));
-
-        QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => 3, 'submitted' => true, 'submitted_at' => now(), 'score' => $score]);
+        QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => 3, 'submitted' => false, 'score' => 0.00]);
     }
 }

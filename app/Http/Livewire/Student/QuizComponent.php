@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Student;
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use App\Models\QuizStudent;
-use App\Services\Quiz\GetStudentQuizScore;
 use Livewire\Component;
 
 class QuizComponent extends Component
@@ -50,17 +49,8 @@ class QuizComponent extends Component
 
     public function submitQuiz()
     {
-        //save last question responses
-        $this->emit('saveResponses');
-
-        // get score
-        $score = $this->getScore();
-
-        //indicate that student has finished quiz
-        QuizStudent::query()
-            ->where('quiz_id', $this->quiz->id)
-            ->where('student_id', auth()->user()->id)
-            ->update(['submitted' => true, 'submitted_at' => now(), 'score' => $score]);
+        //save last question responses and submit
+        $this->emitTo('student.quiz.question-step', 'saveResponses', true); // boolean indicats $submit
 
         $this->logQuizSubmit();
 
@@ -75,12 +65,5 @@ class QuizComponent extends Component
             ->causedBy(auth()->user())
             ->performedOn(QuizStudent::query()->where('quiz_id', $this->quiz->id)->where('student_id', auth()->user()->id)->first())
             ->log('Student submitted quiz');
-    }
-
-    public function getScore()
-    {
-        $getScore = new GetStudentQuizScore;
-
-        return $getScore($this->quiz, auth()->user());
     }
 }

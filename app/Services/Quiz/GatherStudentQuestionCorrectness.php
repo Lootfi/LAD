@@ -22,7 +22,6 @@ class GatherStudentQuestionCorrectness
 
         $correct = false;
 
-
         $studentResponseAnswers = $question->responses()->where('student_id', $student->id)->with('answer')->get()->pluck('answer');
 
         $correctAsnwers = $question->answers()->where('right_answer', true)->get();

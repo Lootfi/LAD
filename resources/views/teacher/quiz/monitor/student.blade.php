@@ -1,8 +1,5 @@
 @extends('adminlte::page')
 
 @section('content')
-@endsection
-
-@section('js')
-
+<livewire:teacher.quiz.monitor.student.index :student="$student" :quiz="$quiz" />
 @endsection

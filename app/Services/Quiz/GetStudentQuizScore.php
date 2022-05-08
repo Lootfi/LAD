@@ -25,6 +25,9 @@ class GetStudentQuizScore
         foreach ($questions as $question) {
             $gather = new GatherStudentQuestionCorrectness();
             $correct = $gather($student, $question);
+            // if ($question->id == 6) {
+            //     dd($question, $correct, 'score_before', $score, 'score', $score++);
+            // }
             if ($correct) {
                 $score++;
             }

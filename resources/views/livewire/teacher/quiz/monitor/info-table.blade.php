@@ -1,4 +1,4 @@
-<table>
+<table class="table">
     <tr>
         <th>Students Online</th>
         <td>{{$students_online->count()}}</td>
