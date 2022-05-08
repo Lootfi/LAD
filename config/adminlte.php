@@ -406,8 +406,8 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js',
+                    'asset' => true,
+                    'location' => 'assets/chartjs/chart.min.js',
                 ],
             ],
         ],

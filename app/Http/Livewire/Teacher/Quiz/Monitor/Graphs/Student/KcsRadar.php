@@ -17,11 +17,11 @@ class KcsRadar extends Component
 
     public $graph_data = ['help'];
 
-    protected $listeners = [
-        'gatherData' => 'gatherData',
-        'removeData' => 'removeData',
-        'removeAllData' => 'removeAllData',
-    ];
+    // protected $listeners = [
+    //     'gatherData' => 'gatherData',
+    //     'removeData' => 'removeData',
+    //     'removeAllData' => 'removeAllData',
+    // ];
 
     public function mount(User $student, Quiz $quiz)
     {
@@ -72,26 +72,26 @@ class KcsRadar extends Component
         $this->graph_data = $graph_data;
     }
 
-    public function gatherData(Kc $kc, $data)
-    {
-        $this->graph_data[$kc->name] = [
-            ...$data
-        ];
+    // public function gatherData(Kc $kc, $data)
+    // {
+    //     $this->graph_data[$kc->name] = [
+    //         ...$data
+    //     ];
 
-        $this->emit('addDataToKcRadarGraph', $kc->name, $data);
-    }
+    //     $this->emit('addDataToKcRadarGraph', $kc->name, $data);
+    // }
 
-    public function removeData(Kc $kc)
-    {
-        unset($this->graph_data[$kc->name]);
+    // public function removeData(Kc $kc)
+    // {
+    //     unset($this->graph_data[$kc->name]);
 
-        $this->emit('deleteKcDataFromRadarGraph', $kc->name);
-    }
+    //     $this->emit('deleteKcDataFromRadarGraph', $kc->name);
+    // }
 
-    public function removeAllData()
-    {
-        $this->graph_data = [];
+    // public function removeAllData()
+    // {
+    //     $this->graph_data = [];
 
-        $this->emit('deleteAllKcDataFromRadarGraph');
-    }
+    //     $this->emit('deleteAllKcDataFromRadarGraph');
+    // }
 }

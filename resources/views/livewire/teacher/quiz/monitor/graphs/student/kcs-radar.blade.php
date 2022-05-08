@@ -3,7 +3,9 @@
         <div class="row align-items-center">
             <div class="col-12">
                 <h6 class="text-uppercase ls-1 mb-1">Overview</h6>
-                <h2 class="mb-1">Knowledge Components</h2>
+                <h2 class="mb-1">
+                    Quiz '<b>{{$quiz->name}}</b>' Knowledge Components Awareness
+                </h2>
             </div>
         </div>
     </div>
@@ -37,7 +39,7 @@
                 @endforeach
             ],
             datasets: [{
-                label: 'Knowledge Component Error Rate',
+                label: 'KC Awareness',
                 data: [
                     @foreach ($graph_data as $kc_name => $rating)
                     {{ $rating }},
@@ -68,28 +70,28 @@
     });
 
     // // livewire listen for events
-    Livewire.on('addDataToKcRadarGraph', (kc_name, data) => {
-        let index = StudentKcsRadarChart.data.labels.indexOf(kc_name);
-        if(index == -1) {
-            index = StudentKcsRadarChart.data.labels.length;
-        }
-        StudentKcsRadarChart.data.labels[index] = kc_name;
-        StudentKcsRadarChart.data.datasets[0].data[index] = data['error_rate'];
+    // Livewire.on('addDataToKcRadarGraph', (kc_name, data) => {
+    //     let index = StudentKcsRadarChart.data.labels.indexOf(kc_name);
+    //     if(index == -1) {
+    //         index = StudentKcsRadarChart.data.labels.length;
+    //     }
+    //     StudentKcsRadarChart.data.labels[index] = kc_name;
+    //     StudentKcsRadarChart.data.datasets[0].data[index] = data['error_rate'];
         
-        StudentKcsRadarChart.update();
-    });
-    Livewire.on('deleteKcDataFromRadarGraph', (kc_name) => {
-        let index = StudentKcsRadarChart.data.labels.indexOf(kc_name);
-        StudentKcsRadarChart.data.labels.splice(index, 1);
-        StudentKcsRadarChart.data.datasets[0].data.splice(index, 1);
-        StudentKcsRadarChart.update();
-    });
+    //     StudentKcsRadarChart.update();
+    // });
+    // Livewire.on('deleteKcDataFromRadarGraph', (kc_name) => {
+    //     let index = StudentKcsRadarChart.data.labels.indexOf(kc_name);
+    //     StudentKcsRadarChart.data.labels.splice(index, 1);
+    //     StudentKcsRadarChart.data.datasets[0].data.splice(index, 1);
+    //     StudentKcsRadarChart.update();
+    // });
 
-    Livewire.on('deleteAllKcDataFromRadarGraph', () => {
-        StudentKcsRadarChart.data.labels = [];
-        StudentKcsRadarChart.data.datasets[0].data = [];
-        StudentKcsRadarChart.update();
-    });
+    // Livewire.on('deleteAllKcDataFromRadarGraph', () => {
+    //     StudentKcsRadarChart.data.labels = [];
+    //     StudentKcsRadarChart.data.datasets[0].data = [];
+    //     StudentKcsRadarChart.update();
+    // });
 });
 </script>
 @endpush
