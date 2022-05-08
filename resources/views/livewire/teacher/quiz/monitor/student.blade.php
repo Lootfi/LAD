@@ -10,7 +10,7 @@
                 <i class="fa fa-xs fa-circle text-success" aria-hidden="true"></i>
                 @endif {{$student->name}}</a></h4>
         <br>
-        @if ($quiz_student->submitted)
+        @if (isset($quiz_student) && $quiz_student->submitted)
         <h6 class="text-muted mb-2"><i class="fa fa-xs fa-check" aria-hidden="true"></i> Submitted</h6>
         @endif
     </div>

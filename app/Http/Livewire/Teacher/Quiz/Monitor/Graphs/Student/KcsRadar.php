@@ -15,13 +15,17 @@ class KcsRadar extends Component
     public $student;
     public $kcs;
 
-    public $graph_data = ['help'];
+    public $graph_data = [];
 
-    // protected $listeners = [
-    //     'gatherData' => 'gatherData',
-    //     'removeData' => 'removeData',
-    //     'removeAllData' => 'removeAllData',
-    // ];
+    // public function getListeners()
+    // {
+    //     $events = [];
+    //     foreach ($this->quiz->questions as $question) {
+    //         $events["echo:{$this->student->id}.answered.{$question->id},Student\QuestionAnswered"] = 'updateData';
+    //     }
+    //     return $events;
+    // }
+
 
     public function mount(User $student, Quiz $quiz)
     {
@@ -71,27 +75,4 @@ class KcsRadar extends Component
         }
         $this->graph_data = $graph_data;
     }
-
-    // public function gatherData(Kc $kc, $data)
-    // {
-    //     $this->graph_data[$kc->name] = [
-    //         ...$data
-    //     ];
-
-    //     $this->emit('addDataToKcRadarGraph', $kc->name, $data);
-    // }
-
-    // public function removeData(Kc $kc)
-    // {
-    //     unset($this->graph_data[$kc->name]);
-
-    //     $this->emit('deleteKcDataFromRadarGraph', $kc->name);
-    // }
-
-    // public function removeAllData()
-    // {
-    //     $this->graph_data = [];
-
-    //     $this->emit('deleteAllKcDataFromRadarGraph');
-    // }
 }

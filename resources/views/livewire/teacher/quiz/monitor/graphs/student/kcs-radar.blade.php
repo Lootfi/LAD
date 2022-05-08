@@ -4,7 +4,7 @@
             <div class="col-12">
                 <h6 class="text-uppercase ls-1 mb-1">Overview</h6>
                 <h2 class="mb-1">
-                    Quiz '<b>{{$quiz->name}}</b>' Knowledge Components Awareness
+                    Quiz '<b>{{$quiz->name}}</b>' Knowledge Components Awareness Score
                 </h2>
             </div>
         </div>
@@ -61,13 +61,22 @@
                     'rgba(153, 102, 255, 1)',
                     'rgba(255, 159, 64, 1)'
                 ],
-                borderWidth: 1
+                borderWidth: 3
             }]
         },
         options: {
             responsive: true,
         }
     });
+    StudentKcsRadarChart.data.datasets[0].borderColor.forEach((color, index) => {
+        if (StudentKcsRadarChart.data.datasets[0].data[index] > 50) {
+            StudentKcsRadarChart.data.datasets[0].borderColor[index] = '#00ff00';
+        } else {
+            StudentKcsRadarChart.data.datasets[0].borderColor[index] = '#ff0000';
+        }
+    });
+
+    StudentKcsRadarChart.update();
 
     // // livewire listen for events
     // Livewire.on('addDataToKcRadarGraph', (kc_name, data) => {
