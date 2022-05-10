@@ -30,6 +30,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/help', function () {
+    return view('help');
+});
+
 Auth::routes(['register' => false]);
 
 Route::get('/', function () {

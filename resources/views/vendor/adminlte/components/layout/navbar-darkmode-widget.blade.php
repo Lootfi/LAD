@@ -1,7 +1,7 @@
 {{-- Navbar darkmode widget --}}
 
 <li class="nav-item adminlte-darkmode-widget">
-
+    <h1>cccccccccccccc</h1>
     <a class="nav-link" href="#" role="button">
         <i class="{{ $makeIconClass() }}"></i>
     </a>
@@ -13,7 +13,6 @@
 @once
 @push('js')
 <script>
-
     $(() => {
 
         const body = document.querySelector('body');
@@ -43,23 +42,24 @@
             // the dark mode configuration over multiple request.
 
             const fetchCfg = {
-                headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
                 method: 'POST',
             };
 
             fetch(
-                "{{ route('adminlte.darkmode.toggle') }}",
-                fetchCfg
-            )
-            .catch((error) => {
-                console.log(
-                    'Failed to notify server that dark mode was toggled',
-                    error
-                );
-            });
+                    "{{ route('adminlte.darkmode.toggle') }}",
+                    fetchCfg
+                )
+                .catch((error) => {
+                    console.log(
+                        'Failed to notify server that dark mode was toggled',
+                        error
+                    );
+                });
         });
     })
-
 </script>
 @endpush
 @endonce
