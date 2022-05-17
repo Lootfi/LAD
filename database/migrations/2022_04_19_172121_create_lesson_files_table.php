@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('lesson_files', function (Blueprint $table) {
             $table->id();
-            $table->string('path');
+            $table->string('path', 1083);
             $table->string('file_name');
             $table->string('session_id');
             $table->unsignedBigInteger('lesson_id')->nullable(); //null in case lesson isn't created yet
