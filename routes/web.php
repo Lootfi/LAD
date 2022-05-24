@@ -187,10 +187,11 @@ Route::get('teacher/course/{course}/quiz/{quiz}/monitor/{student}', [
 // student dashboard routes
 Route::prefix('student')
     ->name('student.')
-    ->middleware(['auth', 'role:student', 'student_last_activity', 'log'])
+    ->middleware([ 'auth', 'role:student', 'student_last_activity', 'log' ])
     ->scopeBindings()
     ->group(function () {
 
+        // All students routes grouped ..
         Route::get('/', [
             StudentDashboardController::class,
             'index',
