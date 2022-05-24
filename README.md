@@ -5,7 +5,7 @@
 -   `composer install`
 -   `cp .env.example .env` then setup your new database config `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
 -   `php artisan key:generate`
--   `php artisan migrate --seed` (make sure your local mysql is running and that the database exists before running this)
+-   `php artisan migrate:fresh --seed` (make sure your local mysql is running and that the database exists before running this)
 -   `php artisan adminlte:install` (but don't replace the config file when asked)
 -   `npm run dev`
 -   Serve the project the way you prefer
