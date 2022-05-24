@@ -27,7 +27,7 @@
 
 <style>
     body {
-        background-image: url(vendor/adminlte/dist/img/splash.jpg);
+        background-image: url(images/splash.jpg);
         backdrop-filter: brightness(50%);
         height: 100vh;
     }
