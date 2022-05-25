@@ -5,10 +5,11 @@ namespace App\Notifications;
 use App\Models\Lesson;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewLesson extends Notification
+class NewLesson extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -45,8 +46,24 @@ class NewLesson extends Notification
     {
         return [
             'message' => 'You have a new lesson: ' . $this->lesson->name,
-            // 'link' => route('student.course.section.show', ['lesson' => $this->lesson, 'section' => $this->lesson->section, 'course' => $this->lesson->section->course]),
+            'link' => route('student.course.section.lesson.show', ['lesson' => $this->lesson, 'section' => $this->lesson->section, 'course' => $this->lesson->section->course]),
             'lesson' => $this->lesson
         ];
+    }
+
+
+    /**
+     * Get the broadcastable representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return BroadcastMessage
+     */
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'message' => 'You have a new quiz: ' . $this->quiz->name,
+            'link' => route('student.quiz.show', ['quiz' => $this->quiz, 'course' => $this->quiz->course]),
+            'quiz' => $this->quiz
+        ]);
     }
 }

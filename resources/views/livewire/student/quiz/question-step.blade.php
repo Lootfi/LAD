@@ -19,9 +19,9 @@
     </div>
     <div class="row d-flex justify-content-center">
         @if(!$lastQuestion)
-        <div wire:loading.remove class="circle" wire:click="goToNextQuestion">
-            <div class="fa fa-long-arrow-right next" id="nextquestion"><i class="fa fa-arrow-right"
-                    aria-hidden="true"></i>
+        <div wire:loading.class.remove="bg-primary" class="circle bg-primary" wire:click="goToNextQuestion">
+            <div class="fa fa-long-arrow-right next p-3" id="nextquestion" style="cursor: pointer;"><i
+                    class="fa fa-arrow-right" aria-hidden="true"></i>
             </div>
         </div>
         @endif
