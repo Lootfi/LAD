@@ -12,14 +12,14 @@
             {{ $answer->answer }}
         </div> --}}
         <div class="inputGroup">
-            <input id="{{$answer->id}}" wire:model="responses" type="checkbox" value="{{ $answer->id }}" />
+            <input id="{{$answer->id}}" wire:model.defer="responses" type="checkbox" value="{{ $answer->id }}" />
             <label for="{{$answer->id}}">{{ $answer->answer }}</label>
         </div>
         @endforeach
     </div>
     <div class="row d-flex justify-content-center">
         @if(!$lastQuestion)
-        <div class="circle" wire:click="goToNextQuestion">
+        <div wire:loading.remove class="circle" wire:click="goToNextQuestion">
             <div class="fa fa-long-arrow-right next" id="nextquestion"><i class="fa fa-arrow-right"
                     aria-hidden="true"></i>
             </div>
