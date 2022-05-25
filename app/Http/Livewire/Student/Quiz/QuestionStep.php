@@ -73,6 +73,8 @@ class QuestionStep extends Component
             });
         }
 
+        
+
         if ($submit) {
             $score = $this->getScore();
             DB::transaction(function () use ($score) {
@@ -83,7 +85,7 @@ class QuestionStep extends Component
                     ->update(['submitted' => true, 'submitted_at' => now(), 'score' => $score]);
             });
         }
-
+        
         event(new \App\Events\Student\QuestionAnswered(auth()->user(), $this->question));
     }
 

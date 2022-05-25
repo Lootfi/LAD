@@ -174,6 +174,7 @@ class InfoTable extends Component
 
     public function getStudentsWhoHaventStartedQuizYet()
     {
+        //students with no record in quiz_students table
         $this->students_who_havent_started_quiz_yet = $this->students->diff($this->quiz->students()->with('student')->get()->pluck('student'));
     }
 }

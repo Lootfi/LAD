@@ -116,15 +116,4 @@ class User extends Authenticatable
     {
         return $search ? $query->where('name', 'like', '%' . $search . '%') : $query;
     }
-
-
-    /**
-     * The channels the user receives notification broadcasts on.
-     *
-     * @return string
-     */
-    public function receivesBroadcastNotificationsOn()
-    {
-        return 'users.' . $this->id;
-    }
 }

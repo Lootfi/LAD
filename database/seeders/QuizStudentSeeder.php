@@ -19,10 +19,6 @@ class QuizStudentSeeder extends Seeder
     public function run()
     {
         QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => 2, 'submitted' => false]);
-        QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => 4, 'submitted' => false]);
-        QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => 5, 'submitted' => false]);
-        QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => 6, 'submitted' => false]);
-
         QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => 3, 'submitted' => false, 'score' => 0.00]);
     }
 }

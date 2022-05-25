@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Teacher\Quiz\Monitor;
 
+use App\Events\Student\QuizKcAwarenessWarning;
+use App\Models\Kc;
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use App\Models\QuizStudent;

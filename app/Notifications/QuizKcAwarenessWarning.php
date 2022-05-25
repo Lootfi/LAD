@@ -2,26 +2,26 @@
 
 namespace App\Notifications;
 
-use App\Models\Lesson;
+use App\Models\Kc;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewLesson extends Notification
+class QuizKcAwarenessWarning extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    protected Lesson $lesson;
+    protected $message;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Lesson $lesson)
+    public function __construct(string $message)
     {
-        $this->lesson = $lesson;
+        $this->message = $message;
     }
 
     /**
@@ -44,9 +44,7 @@ class NewLesson extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => 'You have a new lesson: ' . $this->lesson->name,
-            // 'link' => route('student.course.section.show', ['lesson' => $this->lesson, 'section' => $this->lesson->section, 'course' => $this->lesson->section->course]),
-            'lesson' => $this->lesson
+            'message' => $this->message
         ];
     }
 }

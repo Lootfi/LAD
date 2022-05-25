@@ -153,11 +153,3 @@
     </div>
 </div>
 @endsection
-
-
-@section('js')
-<script>
-    console.log(window.Echo);
-</script>
-
-@endsection

@@ -21,20 +21,20 @@ import Echo from "laravel-echo";
 window.Pusher = require('pusher-js');
 
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     wsHost: process.env.MIX_PUSHER_APP_HOST,
-//     wsPort: process.env.MIX_PUSHER_APP_PORT == "6001" ? 6001 : 443,
-//     forceTLS: false,
-//     disableStats: true,
-// });
-
-
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: 'ea66669b9a1a5a97d47a',
-    cluster: 'eu',
-    forceTLS: true
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    wsHost: process.env.MIX_PUSHER_APP_HOST,
+    wsPort: process.env.MIX_PUSHER_APP_PORT == "6001" ? 6001 : 443,
+    forceTLS: false,
+    disableStats: true,
 });
+
+
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: 'ea66669b9a1a5a97d47a',
+//     cluster: 'eu',
+//     forceTLS: true
+// });

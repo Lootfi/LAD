@@ -1,5 +1,5 @@
 <table class="table">
-    <tr>
+    <tr style="background-color: rgba(0,0,0,.05);">
         <th>{{$students_online->count()}} Students Online</th>
         <td class="avatars">
 
@@ -74,7 +74,7 @@
 
     </tr>
     </tr>
-    <tr>
+    <tr style="background-color: rgba(0,0,0,.05);">
         <th>{{$students_with_all_wrong_answers->count()}} Students With All Answers Wrong</th>
         <td class="avatars">
             @foreach ($students_with_all_wrong_answers as $student)
@@ -112,3 +112,15 @@
     </tr>
     </tr>
 </table>
+
+
+@section('css')
+<style>
+    .table td,
+    .table th {
+        padding: .75rem;
+        vertical-align: top;
+        border-top: none;
+    }
+</style>
+@endsection

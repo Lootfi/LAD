@@ -153,7 +153,7 @@ class LessonController extends Controller
     public function notify(Course $course, Section $section, Lesson $lesson)
     {
         $students = $course->students;
-
+        
         foreach ($students as $student) {
             $student->notify(new \App\Notifications\NewLesson($lesson->load('section.course')));
         }
