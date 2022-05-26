@@ -103,6 +103,23 @@
         KcsErrorRateChart.data.datasets[0].data = [];
         KcsErrorRateChart.update();
     });
+
+    Livewire.on('addAllKcDataToGraph', (data) => {
+        KcsErrorRateChart.data.labels = [];
+        KcsErrorRateChart.data.datasets[0].data = [];
+
+        Object.entries(data).forEach((element) => {
+            KcsErrorRateChart.data.labels.push(element[0]);
+            KcsErrorRateChart.data.datasets[0].data.push(element[1].error_rate);
+        });
+        KcsErrorRateChart.update();
+    });
+
+    Livewire.on('deleteAllKcDataFromGraph', () => {
+        KcsErrorRateChart.data.labels = [];
+        KcsErrorRateChart.data.datasets[0].data = [];
+        KcsErrorRateChart.update();
+    });
 });
 </script>
 @endpush

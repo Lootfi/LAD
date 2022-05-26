@@ -17,7 +17,8 @@ class KcErrorRate extends Component
     protected $listeners = [
         'gatherData' => 'gatherData',
         'removeData' => 'removeData',
-        'removeAllData' => 'removeAllData',
+        'gatherAll' => 'gatherAll',
+        'removeAll' => 'removeAll',
     ];
 
     public function mount(Quiz $quiz)
@@ -46,10 +47,17 @@ class KcErrorRate extends Component
         $this->emit('deleteKcDataFromGraph', $kc->name);
     }
 
-    public function removeAllData()
+    public function removeAll()
     {
         $this->graph_data = [];
 
         $this->emit('deleteAllKcDataFromGraph');
+    }
+
+    public function gatherAll(array $data)
+    {
+        $this->graph_data = $data;
+
+        $this->emit('addAllKcDataToGraph', $data);
     }
 }
