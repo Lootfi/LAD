@@ -35,6 +35,12 @@ class QuizComponent extends Component
             'student_id' => auth()->user()->id,
             'submitted' => false,
         ]);
+
+        activity('student.quiz.start')
+            ->event('started')
+            ->causedBy($this->student)
+            ->performedOn($this->quiz)
+            ->log('Student started quiz');
     }
 
 
@@ -70,7 +76,7 @@ class QuizComponent extends Component
         activity('student.quiz.submit')
             ->event('submitted')
             ->causedBy(auth()->user())
-            ->performedOn(QuizStudent::query()->where('quiz_id', $this->quiz->id)->where('student_id', auth()->user()->id)->first())
+            ->performedOn($this->quiz)
             ->log('Student submitted quiz');
     }
 

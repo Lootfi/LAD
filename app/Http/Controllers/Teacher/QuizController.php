@@ -81,6 +81,15 @@ class QuizController extends Controller
         return redirect()->route('teacher.quiz.index', compact('course'))->with('success', 'Students have been notified about quiz!');
     }
 
+    public function message(Course $course, Quiz $quiz, User $student)
+    {
+        return view('teacher.quiz.monitor.message', [
+            'course' => $course,
+            'quiz' => $quiz,
+            'student' => $student
+        ]);
+    }
+
     public function sort(Course $course, Quiz $quiz)
     {
         $quiz->load(['questions', 'course']);

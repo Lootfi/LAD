@@ -31,6 +31,16 @@ class InfoTable extends Component
         $this->getStudentsWithAllWrongAnswers();
         $this->getStudentsWhoHaventStartedQuizYet();
     }
+
+    public function refreshData()
+    {
+        $this->getStudentsOnline();
+        $this->getStudentsPassingQuizInLast('1 day');
+        $this->getStudentsStruggling();
+        $this->getStudentsWithPerfectScore();
+        $this->getStudentsWithAllWrongAnswers();
+        $this->getStudentsWhoHaventStartedQuizYet();
+    }
     public function render()
     {
         return view('livewire.teacher.quiz.monitor.info-table');
@@ -141,7 +151,7 @@ class InfoTable extends Component
         foreach ($this->students as $student) {
             $quiz_student = $this->quiz->students()->where('student_id', $student->id)->first();
             if ($quiz_student != null && $quiz_student->submitted) {
-                if ($quiz_student->score = 0.00) {
+                if ($quiz_student->score == 0.00) {
                     $students_with_all_wrong_answers->push($student);
                 }
             } else {
