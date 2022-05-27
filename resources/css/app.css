@@ -1,15 +1,15 @@
 /** These are specific for the tag that will be added to the rich text content */
-.trix-content .attachment-gallery>.attachment,
-.trix-content .attachment-gallery>rich-text-attachment {
+.trix-content .attachment-gallery > .attachment,
+.trix-content .attachment-gallery > rich-text-attachment {
     flex: 1 0 33%;
     padding: 0 0.5em;
     max-width: 33%;
 }
 
-.trix-content .attachment-gallery.attachment-gallery--2>.attachment,
-.trix-content .attachment-gallery.attachment-gallery--2>rich-text-attachment,
-.trix-content .attachment-gallery.attachment-gallery--4>.attachment,
-.trix-content .attachment-gallery.attachment-gallery--4>rich-text-attachment {
+.trix-content .attachment-gallery.attachment-gallery--2 > .attachment,
+.trix-content .attachment-gallery.attachment-gallery--2 > rich-text-attachment,
+.trix-content .attachment-gallery.attachment-gallery--4 > .attachment,
+.trix-content .attachment-gallery.attachment-gallery--4 > rich-text-attachment {
     flex-basis: 50%;
     max-width: 50%;
 }

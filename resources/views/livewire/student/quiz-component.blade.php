@@ -10,15 +10,13 @@
                     $loop->last],
                     key($question->id))
 
-                    <student.quiz.question-step :question="$question" :step="$key" lastQuestion="{{$loop->last}}"
-                        wire:key="{{$question->id}}" />
+                    <student.quiz.question-step :question="$question" :step="$key" lastQuestion="{{$loop->last}}" wire:key="{{$question->id}}" />
                 </div>
                 @endforeach
                 <ul class="list-group mr-2">
                     @foreach ($quiz->questions as $key => $question)
                     {{-- rounded div --}}
-                    <li wire:click="setActiveQuestion({{ $question->id }})"
-                        class="list-group-item {{ $question->id == $active_question->id ? 'active' : '' }}">
+                    <li wire:click="setActiveQuestion({{ $question->id }})" class="list-group-item {{ $question->id == $active_question->id ? 'active' : '' }}">
                         <span>{{ $key + 1 }}</span>
                     </li>
                     @endforeach
@@ -26,19 +24,28 @@
             </div>
         </div>
     </div>
-    <br>
-    <button wire:click="submitQuiz" class="btn btn-danger">
-        Submit Quiz and See results
-    </button>
-
-
-
-    <div class="alert alert-success alert-dismissible fade" role="alert" id="alert"> {{-- fade or show--}}
-        <pre id="alert-text"></pre>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+    <<<<<<< HEAD <br>
+        <button wire:click="submitQuiz" class="btn btn-danger">
+            Submit Quiz and See results
         </button>
-    </div>
+        =======
+        <!-- <br> -->
+        <div class="col text-center">
+            <button wire:click="submitQuiz" class="btn btn-danger ">
+                Submit quiz and see results
+            </button>
+        </div>
+</div>
+>>>>>>> f5648a3 (some changes)
+
+
+
+<div class="alert alert-success alert-dismissible fade" role="alert" id="alert"> {{-- fade or show--}}
+    <pre id="alert-text"></pre>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 
 
 </div>
@@ -55,33 +62,26 @@
 
     var x = setInterval(function() {
         diff = countDownDate.diff(moment());
-    
-        if (diff <= 0) {
-          clearInterval(x);
-           // If the count down is finished, write some text 
-          $('#timeLeft').text("EXPIRED");
-        } else
-          $('#timeLeft').text("Time Left: " + moment.utc(diff).format("HH:mm:ss"));
 
-      }, 1000);
+    }, 1000);
 </script>
 
 <script>
     toastr.options = {
-  "closeButton": true,
-  "newestOnTop": true,
-  "positionClass": "toast-top-right",
-  "preventDuplicates": true,
-  "showEasing": "swing",
-  "showMethod": "fadeIn",
-  'timeOut': 0,
-  'extendedTimeOut': 0, 
-}
+        "closeButton": true,
+        "newestOnTop": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": true,
+        "showEasing": "swing",
+        "showMethod": "fadeIn",
+        'timeOut': 0,
+        'extendedTimeOut': 0,
+    }
 
     Echo.channel(`quiz.@js($quiz->id).student.@js($student->id).kcs`)
-    .listen('Student\\QuizKcAwarenessWarning', (e) => {
-        toastr.info(e.message, "Teacher Notification!")
-    });
+        .listen('Student\\QuizKcAwarenessWarning', (e) => {
+            toastr.info(e.message, "Teacher Notification!")
+        });
 </script>
 
 {{-- <script>

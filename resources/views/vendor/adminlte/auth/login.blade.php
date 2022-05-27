@@ -1,4 +1,7 @@
 @extends('adminlte::auth.auth-page', ['auth_type' => 'login'])
+<h1 class="blockquote" style="color:white;top:0; position:absolute;padding-top: 12px">Learning Management System</h1>
+<h1 class="blockquote" style="color:white;top:0;left:0; position:absolute;padding-top: 12px;padding-left: 12px">LAD</h1>
+<h1 class="blockquote" style="color:white;top:0;right:0; position:absolute;padding-top: 12px"><a style="color:white;padding-right: 12px" href="/help">Help</a></h1>
 @section('adminlte_css_pre')
 <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 @stop
@@ -20,9 +23,9 @@
 
 
 @section('auth_header')
-<div style="display: flex; justify-content: center;" class="header-links">
+<!-- <div style="display: flex; justify-content: center;" class="header-links">
     <a style="color: white; " href="{{ route('help') }}">Help</a>
-</div>
+</div> -->
 @endsection
 
 @section('auth_body')

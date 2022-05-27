@@ -5,6 +5,7 @@
 
 @section('content_header')
 <h1>Edit Lesson</h1>
+<br>
 @stop
 
 
@@ -14,26 +15,24 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">Edit Lesson</h3>
+                <br>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" method="POST"
-                action="{{ route('teacher.course.section.lesson.update', ['course' => $course, 'section' => $section, 'lesson' => $lesson]) }}">
+            <form role="form" method="POST" action="{{ route('teacher.course.section.lesson.update', ['course' => $course, 'section' => $section, 'lesson' => $lesson]) }}">
                 @csrf
                 @method('PUT')
                 <div class="box-body">
                     {{-- title --}}
                     <div class="form-group">
                         <label for="name">Title</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Title"
-                            value="{{ $lesson->name }}">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Title" value="{{ $lesson->name }}">
                     </div>
                     {{-- /title --}}
                     {{-- description --}}
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="3"
-                            placeholder="Enter Description">{{ $lesson->description }}</textarea>
+                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter Description">{{ $lesson->description }}</textarea>
                     </div>
                     {{-- /description --}}
                     {{-- status --}}
@@ -48,8 +47,7 @@
                     {{-- kcs --}}
                     <div class="form-group" name="lesson_kcs" id="lesson-kcs-{{$lesson->id}}">
                         <label for="l_kcs">KCs</label>
-                        <select class="select-multi-kcs-{{$lesson->id}} w-100" name="l_kcs[]" multiple="multiple"
-                            autocomplete="off">
+                        <select class="select-multi-kcs-{{$lesson->id}} w-100" name="l_kcs[]" multiple="multiple" autocomplete="off">
                             @foreach ($lesson->kcls as $kcl)
                             <option value="{{$kcl->kc->id}}" selected>{{$kcl->kc->name}}</option>
                             @endforeach
@@ -80,15 +78,15 @@
 <script src="{{ asset('js/lessons/attachements.js') }}"></script>
 <script>
     $(document).ready(function() {
-    $('.select-multi-kcs-{{$lesson->id}}').select2({
-        language: {
-            noResults: function() {
-                return $("<a href='{{route('teacher.kc.manage', ['course' => $course])}}'>Create new KC " + "'" + 
-                document.getElementById('lesson-kcs-{{$lesson->id}}').getElementsByClassName('select2-search__field')[0].value
-                + "'" + " for this course</a>");
+        $('.select-multi-kcs-{{$lesson->id}}').select2({
+            language: {
+                noResults: function() {
+                    return $("<a href='{{route('teacher.kc.manage', ['course' => $course])}}'>Create new KC " + "'" +
+                        document.getElementById('lesson-kcs-{{$lesson->id}}').getElementsByClassName('select2-search__field')[0].value +
+                        "'" + " for this course</a>");
+                }
             }
-        }
+        });
     });
-});
 </script>
 @endpush
