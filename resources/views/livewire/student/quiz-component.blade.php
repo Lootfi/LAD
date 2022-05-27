@@ -9,6 +9,9 @@
                     @livewire('student.quiz.question-step', ['question' => $question, 'step' => $key, 'lastQuestion' =>
                     $loop->last],
                     key($question->id))
+
+                    <student.quiz.question-step :question="$question" :step="$key" lastQuestion="{{$loop->last}}"
+                        wire:key="{{$question->id}}" />
                 </div>
                 @endforeach
                 <ul class="list-group mr-2">
@@ -27,11 +30,18 @@
     <button wire:click="submitQuiz" class="btn btn-danger">
         Submit Quiz and See results
     </button>
-</div>
 
-@push('css')
-<link rel="stylesheet" href="{{ asset('css/quiz-answer.css') }}">
-@endpush
+
+
+    <div class="alert alert-success alert-dismissible fade" role="alert" id="alert"> {{-- fade or show--}}
+        <pre id="alert-text"></pre>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+</div>
 
 @once
 @push('js')
@@ -39,7 +49,7 @@
 @endpush
 @endonce
 
-@push('js')
+@section('js')
 <script defer>
     var countDownDate = moment('{{$quiz->end_date}}');
 
@@ -54,11 +64,35 @@
           $('#timeLeft').text("Time Left: " + moment.utc(diff).format("HH:mm:ss"));
 
       }, 1000);
-
-    // setInterval(() => {
-    //         // document.getElementById('timeLeft').innerHTML = moment().format('dddd');
-    //         document.getElementById('timeLeft').innerHTML = moment('{{$quiz->end_date}}').fromNow()
-    //         // document.getElementById('timeLeft2').innerHTML = moment().locale('{{ config('app.locale') }}').format('LTS')
-    //     }, 60000)
 </script>
+
+<script>
+    toastr.options = {
+  "closeButton": true,
+  "newestOnTop": true,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": true,
+  "showEasing": "swing",
+  "showMethod": "fadeIn",
+  'timeOut': 0,
+  'extendedTimeOut': 0, 
+}
+
+    Echo.channel(`quiz.@js($quiz->id).student.@js($student->id).kcs`)
+    .listen('Student\\QuizKcAwarenessWarning', (e) => {
+        toastr.info(e.message, "Teacher Notification!")
+    });
+</script>
+
+{{-- <script>
+    // 'quiz.' . $this->quiz->id . '.student.' . $this->student->id . 'kcs'
+    Echo.channel(`quiz.@js($quiz->id).student.@js($student->id).kcs`)
+        .listen('Student/QuizKcAwarenessWarning', (e) => {
+            console.log(e);
+        });
+</script> --}}
+@endsection
+
+@push('css')
+<link rel="stylesheet" href="{{ asset('css/quiz-answer.css') }}">
 @endpush

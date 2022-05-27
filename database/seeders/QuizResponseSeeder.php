@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\QuizQuestion;
 use App\Models\QuizResponse;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

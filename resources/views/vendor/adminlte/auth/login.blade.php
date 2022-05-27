@@ -1,10 +1,6 @@
 @extends('adminlte::auth.auth-page', ['auth_type' => 'login'])
-<h1 class="blockquote" style="color:white;top:0; position:absolute">Learning Management System</h1>
-<h1 class="blockquote" style="color:white;top:0;left:0; position:absolute">LAD</h1>
-<h1 class="blockquote" style="color:white;top:0;right:0; position:absolute"><a style="color:white;" href="/help">Help</a></h1>
 @section('adminlte_css_pre')
 <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-
 @stop
 
 @php( $login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login') )
@@ -22,14 +18,22 @@
 @php( $password_reset_url = $password_reset_url ? url($password_reset_url) : '' )
 @endif
 
-@section('auth_header', __('adminlte::adminlte.login_message'))
+
+@section('auth_header')
+<div style="display: flex; justify-content: center;" class="header-links">
+    <a style="color: white; " href="{{ route('help') }}">Help</a>
+</div>
+@endsection
+
 @section('auth_body')
 
 <style>
     body {
         background-image: url(images/splash.jpg);
+        background-size: 100vw;
+        background-repeat: no-repeat;
+
         backdrop-filter: brightness(50%);
-        height: 100vh;
     }
 </style>
 
@@ -38,7 +42,8 @@
 
     {{-- Email field --}}
     <div class="input-group mb-3">
-        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
+        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+            value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
 
         <div class="input-group-append">
             <div class="input-group-text">
@@ -55,7 +60,8 @@
 
     {{-- Password field --}}
     <div class="input-group mb-3">
-        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('adminlte::adminlte.password') }}">
+        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+            placeholder="{{ __('adminlte::adminlte.password') }}">
 
         <div class="input-group-append">
             <div class="input-group-text">
@@ -97,7 +103,7 @@
 {{-- Password reset link --}}
 @if($password_reset_url)
 <p class="my-0">
-    <a href="{{ $password_reset_url }}">
+    <a class="text-info" href="{{ $password_reset_url }}">
         {{ __('adminlte::adminlte.i_forgot_my_password') }}
     </a>
 </p>
@@ -107,8 +113,8 @@
 {{-- @if($register_url)
 <p class="my-0">
     <a href="{{ $register_url }}">
-{{ __('adminlte::adminlte.register_a_new_membership') }}
-</a>
+        {{ __('adminlte::adminlte.register_a_new_membership') }}
+    </a>
 </p>
 @endif --}}
 @stop

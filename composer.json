@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
         "livewire/livewire": "^2.10",
+        "maatwebsite/excel": "^3.1",
         "php-ai/php-ml": "^0.4.1",
         "pusher/pusher-php-server": "^7.0",
         "rappasoft/laravel-livewire-tables": "^2.0",

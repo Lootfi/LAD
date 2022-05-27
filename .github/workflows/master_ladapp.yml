@@ -29,9 +29,8 @@ jobs:
 
       - name: Run composer install if composer.json exists
         if: steps.check_files.outputs.files_exists == 'true'
-        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress --no-dev
+        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
-        
       - name: Setup Node 16.x
         uses: actions/setup-node@v3
         with:
@@ -68,7 +67,7 @@ jobs:
 
       - name: unzip artifact for deployment
         run: unzip release.zip
-      
+
       - name: delete zip file
         run: rm release.zip
 

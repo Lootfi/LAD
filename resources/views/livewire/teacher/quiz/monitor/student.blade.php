@@ -16,15 +16,16 @@
     </div>
     <div class="card-body">
         <p class="card-text">Questions</p>
-        <div class="card-columns">
+        <div class="d-flex flex-wrap">
             @foreach ($quiz->questions as $index => $question)
             <livewire:teacher.quiz.monitor.question :student="$student" :question="$question"
-                :wire:key="$loop->index" />
+                wire:key="student-{{$student->id}}-question-{{$question->id}}" />
             @endforeach
         </div>
     </div>
     <div class="card-footer text-muted">
-        <livewire:teacher.quiz.monitor.student.kcs :student="$student" :quiz="$quiz" />
+        <livewire:teacher.quiz.monitor.student.kcs :student="$student" :quiz="$quiz"
+            wire:key="student-kcs-{{$student->id}}" />
     </div>
 </div>
 

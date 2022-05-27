@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CourseStudentController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
 use App\Http\Controllers\Teacher\CourseController as TeacherCourseController;
 use App\Http\Controllers\Teacher\StudentController as TeacherStudentController;
@@ -16,6 +18,7 @@ use App\Http\Controllers\Student\SectionController as StudentSectionController;
 use App\Http\Controllers\Student\LessonController as StudentLessonController;
 use App\Http\Controllers\Student\QuizController as StudentQuizController;
 use App\Http\Controllers\Student\NotificationController as StudentNotificationController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -32,9 +35,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/help', function () {
     return view('help');
-});
+})->name('help');
+
 
 Auth::routes(['register' => false]);
+
+Route::prefix('password')
+->name('password.')
+->middleware(['auth'])
+->group(function () {
+    Route::get('change', [
+        PasswordController::class,
+        'show'
+    ])->name('change.show');
+
+    Route::post('update', [
+        PasswordController::class,
+        'update'
+    ])->name('update');
+    
+});
 
 Route::get('/', function () {
     $user = User::find(auth()->id());
@@ -56,7 +76,7 @@ Route::get('/home', function () {
     } elseif ($user->hasRole('student')) {
         return redirect()->route('student.course.index');
     }
-});
+})->name('home');
 
 Route::post('/upload', [TeacherLessonController::class, 'upload'])->middleware('role:teacher');
 
@@ -173,8 +193,22 @@ Route::prefix('teacher')
         * Teacher Students Routes
         */
 
-        Route::resource('student', TeacherStudentController::class);
+        Route::get('course/{course}/student/import', [TeacherStudentController::class, 'import'])
+        ->name('student.import');
+        
+        Route::get('course/{course}/student', [TeacherStudentController::class, 'manage'])
+        ->name('student.manage');
+
+
     });
+
+
+
+// send a custom message to the monitored student
+Route::get('teacher/course/{course}/quiz/{quiz}/monitor/{student}/message', [
+    TeacherQuizController::class,
+    'message',
+])->name('teacher.quiz.monitor.student.message');
 
 
 // monitor quiz page for one student
@@ -187,10 +221,11 @@ Route::get('teacher/course/{course}/quiz/{quiz}/monitor/{student}', [
 // student dashboard routes
 Route::prefix('student')
     ->name('student.')
-    ->middleware(['auth', 'role:student', 'student_last_activity', 'log'])
+    ->middleware([ 'auth', 'role:student', 'student_last_activity', 'log' ])
     ->scopeBindings()
     ->group(function () {
 
+        // All students routes grouped ..
         Route::get('/', [
             StudentDashboardController::class,
             'index',
@@ -242,10 +277,3 @@ Route::prefix('student')
             'markAsRead',
         ])->name('notifications.markAsRead');
     });
-
-
-
-
-Route::get('/home', function () {
-    return view('home');
-})->name('home')->middleware('auth');

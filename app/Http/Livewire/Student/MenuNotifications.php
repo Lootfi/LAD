@@ -10,7 +10,7 @@ class MenuNotifications extends Component
     protected function getListeners()
     {
         return [
-            'echo:users.{auth()->id()},' => 'notified',
+            "echo:App.Models.User.{auth()->id()}," => 'notified',
         ];
     }
 

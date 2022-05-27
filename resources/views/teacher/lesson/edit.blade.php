@@ -60,10 +60,11 @@
                     </div>
                     {{-- /kcs --}}
                     {{-- content --}}
-                    <label for="lesson_content">Lesson</label>
-                    <input type="hidden" name="content" id="lesson_content"
-                        value="{!! $lesson->content->toTrixHtml() !!}" />
-                    <trix-editor input="lesson_content" class="trix-content"></trix-editor>
+                    <div class="form-group">
+                        <label for="lesson_content">Lesson</label>
+                        <input type="hidden" name="content" id="lesson_content" value="{{$lesson->content}}" />
+                        <trix-editor input="lesson_content" class="trix-content"></trix-editor>
+                    </div>
                     {{-- /content --}}
                 </div>
                 <div class="box-footer">

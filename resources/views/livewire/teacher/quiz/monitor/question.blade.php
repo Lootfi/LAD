@@ -1,4 +1,4 @@
-<div class="card" data-toggle="tooltip" data-placement="top" data-title="<h6>KCs:</h6>
+<div class="card mx-1" style="width: 90px;" data-toggle="tooltip" data-placement="top" data-title="<h6>KCs:</h6>
     @foreach ($question->kcs as $kc)
     {{$kc->name}}
     {{-- if loop last --}}

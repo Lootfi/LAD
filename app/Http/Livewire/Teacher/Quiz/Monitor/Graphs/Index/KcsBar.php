@@ -39,4 +39,23 @@ class KcsBar extends Component
             $this->emitTo('teacher.quiz.monitor.graphs.index.kc-error-rate', 'gatherData', $kc->id, $data);
         }
     }
+
+    public function selectAll()
+    {
+        if(count($this->selected_kcs) == $this->kcs->count()) {
+            $this->selected_kcs = [];
+            $this->emitTo('teacher.quiz.monitor.graphs.index.kc-error-rate', 'removeAll');
+        } else {
+            $this->selected_kcs = $this->quiz->kcs()->with('kc')->get()->pluck('kc.id')->unique()->flatten()->toArray();
+            $gather = new GatherQuizKcsErrorRate;
+            $data = [];
+
+            foreach ($this->kcs as $kc) {
+                $kc = Kc::find($kc['id']);
+                $data[$kc->name] = $gather($this->quiz, $kc);
+            }
+
+            $this->emitTo('teacher.quiz.monitor.graphs.index.kc-error-rate', 'gatherAll', $data);
+        }
+    }
 }

@@ -11,7 +11,6 @@ use Spatie\Activitylog\Models\Activity;
 
 class InfoTable extends Component
 {
-
     public $quiz;
     public $students;
     public $students_online;
@@ -25,6 +24,16 @@ class InfoTable extends Component
     {
         $this->quiz = $quiz;
         $this->students = $this->quiz->course->students;
+        $this->getStudentsOnline();
+        $this->getStudentsPassingQuizInLast('1 day');
+        $this->getStudentsStruggling();
+        $this->getStudentsWithPerfectScore();
+        $this->getStudentsWithAllWrongAnswers();
+        $this->getStudentsWhoHaventStartedQuizYet();
+    }
+
+    public function refreshData()
+    {
         $this->getStudentsOnline();
         $this->getStudentsPassingQuizInLast('1 day');
         $this->getStudentsStruggling();
@@ -49,8 +58,10 @@ class InfoTable extends Component
 
     public function getStudentsPassingQuizInLast(string $time)
     {
+        // all ids of students related to this quiz
         $students_ids = $this->students->pluck('id')->toArray();
-        $this->students_passing_quiz_in_last_x = Activity::query()
+
+        $students_passing_quiz_in_last_x = Activity::query()
             ->where('log_name', 'student.question.response')
             ->where('created_at', '>', now()->sub($time))
             ->whereIn('causer_id', $students_ids)
@@ -58,18 +69,24 @@ class InfoTable extends Component
             ->get()
             ->pluck('causer')
             ->unique();
-        $this->students_passing_quiz_in_last_x->push(
-            Activity::query()
-                ->where('log_name', 'student.quiz.submit')
-                ->where('created_at', '>', now()->sub($time))
-                ->whereIn('causer_id', $students_ids)
-                ->with('causer')
-                ->get()
-                ->pluck('causer')
-                ->unique()
-        );
 
-        $this->students_passing_quiz_in_last_x->unique();
+                        
+
+        $students_who_submited_in_x = Activity::query()
+        ->where('log_name', 'student.quiz.submit')
+        ->where('created_at', '>', now()->sub($time))
+        ->whereIn('causer_id', $students_ids)
+        ->with('causer')
+        ->get()
+        ->pluck('causer')
+        ->unique();
+
+        foreach ($students_who_submited_in_x as $student) {
+            $students_passing_quiz_in_last_x->push($student);
+        }
+
+        $this->students_passing_quiz_in_last_x = $students_passing_quiz_in_last_x->unique();
+
     }
 
     public function getStudentsStruggling()
@@ -134,7 +151,7 @@ class InfoTable extends Component
         foreach ($this->students as $student) {
             $quiz_student = $this->quiz->students()->where('student_id', $student->id)->first();
             if ($quiz_student != null && $quiz_student->submitted) {
-                if ($quiz_student->score = 0.00) {
+                if ($quiz_student->score == 0.00) {
                     $students_with_all_wrong_answers->push($student);
                 }
             } else {
@@ -167,6 +184,7 @@ class InfoTable extends Component
 
     public function getStudentsWhoHaventStartedQuizYet()
     {
+        //students with no record in quiz_students table
         $this->students_who_havent_started_quiz_yet = $this->students->diff($this->quiz->students()->with('student')->get()->pluck('student'));
     }
 }

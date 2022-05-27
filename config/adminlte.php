@@ -102,12 +102,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'bg-gradient-dark',
-    'classes_auth_header' => '',
-    'classes_auth_body' => 'bg-gradient-dark',
+    'classes_auth_card' => '',
+    'classes_auth_header' => 'bg-gradient-info',
+    'classes_auth_body' => 'bg-gradient-light',
     'classes_auth_footer' => 'text-center',
-    'classes_auth_icon' => 'fa-fw text-light',
-    'classes_auth_btn' => 'btn-flat btn-light',
+    'classes_auth_icon' => 'fa-lg text-info',
+    'classes_auth_btn' => 'btn-flat btn-info',
 
     /*
     |--------------------------------------------------------------------------
@@ -351,6 +351,7 @@ return [
     */
 
     'plugins' => [
+
         'Datatables' => [
             'active' => true,
             'files' => [
@@ -436,6 +437,21 @@ return [
                 ],
             ],
         ],
+        'Toastr' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js',
+                ],
+            ],
+        ]
     ],
 
     /*

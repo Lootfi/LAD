@@ -43,6 +43,15 @@
                 </div>
             </div>
         </a>
+        @elseif ($notification->type == 'App\Notifications\QuizKcAwarenessWarning')
+        <div class="dropdown-item">
+            <div class="row">
+                <div class="text-dark">
+                    <p>{{ $notification->data['message'] }}</p>
+                    <span class="small text-muted">{{ $notification->created_at->diffForHumans()}}</span>
+                </div>
+            </div>
+        </div>
         @endif
 
         @endforeach
@@ -80,10 +89,10 @@
 
 </script>
 
-{{-- <script>
-    Echo.private('users.' + @js(auth()->user()->id))
+<script>
+    Echo.private('App.Models.User.' + @js(auth()->user()->id))
     .notification((notification) => {
-        console.log(notification.type);
+        console.log(notification);
     });
-</script> --}}
+</script>
 @endpush

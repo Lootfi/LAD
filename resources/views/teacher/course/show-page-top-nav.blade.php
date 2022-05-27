@@ -76,6 +76,25 @@
                 <a class="nav-link {{request()->routeIs('teacher.kc.manage') ? 'active' : ''}}"
                     href="{{ route('teacher.kc.manage', ['course' => $course]) }}">Manage KCs</a>
             </li>
+
+
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle {{request()->routeIs('teacher.student*') ? 'active' : ''}}" href="#"
+                    id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Students
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item {{request()->is('teacher.student.manage') ? 'active' : ''}}"
+                        href="{{ route('teacher.student.manage', ['course' => $course]) }}">
+                        Manage Students
+                    </a>
+                    <a class="dropdown-item {{request()->is('teacher.student.import') ? 'active' : ''}}"
+                        href="{{ route('teacher.student.import', ['course' => $course]) }}">Import
+                        Students</a>
+                </div>
+
+            </li>
         </ul>
     </div>
 </nav>

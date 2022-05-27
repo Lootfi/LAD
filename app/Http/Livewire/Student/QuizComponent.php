@@ -5,22 +5,29 @@ namespace App\Http\Livewire\Student;
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use App\Models\QuizStudent;
+use App\Models\User;
 use Livewire\Component;
 
 class QuizComponent extends Component
 {
 
     public Quiz $quiz;
+    public User $student;
     public QuizQuestion $active_question;
 
-    public $listeners = [
-        'saveResponses' => 'saveResponses',
-        'nextQuestion' => 'nextQuestion',
-    ];
+    public function getListeners()
+    {
+        return [
+            'saveResponses' => 'saveResponses',
+            'nextQuestion' => 'nextQuestion',
+            // "echo:quiz.{$this->quiz->id}.student.{$this->student->id}.kcs,Student\QuizKcAwarenessWarning" => "notified"
+        ];
+    }
 
     public function mount(Quiz $quiz)
     {
         $this->quiz = $quiz->load('questions.answers');
+        $this->student = auth()->user();
         $this->active_question = $this->quiz->questions->first();
 
         QuizStudent::firstOrCreate([
@@ -28,6 +35,12 @@ class QuizComponent extends Component
             'student_id' => auth()->user()->id,
             'submitted' => false,
         ]);
+
+        activity('student.quiz.start')
+            ->event('started')
+            ->causedBy($this->student)
+            ->performedOn($this->quiz)
+            ->log('Student started quiz');
     }
 
 
@@ -63,7 +76,8 @@ class QuizComponent extends Component
         activity('student.quiz.submit')
             ->event('submitted')
             ->causedBy(auth()->user())
-            ->performedOn(QuizStudent::query()->where('quiz_id', $this->quiz->id)->where('student_id', auth()->user()->id)->first())
+            ->performedOn($this->quiz)
             ->log('Student submitted quiz');
     }
+
 }
