@@ -1,4 +1,4 @@
-<div>
+<div class="w-100">
     <form wire:submit.prevent="createKC">
         <div class="form-group">
             <label for="name">KC Name</label>

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Kc;
+use App\Models\Quiz;
+use App\Models\QuizQuestion;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller

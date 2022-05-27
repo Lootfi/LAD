@@ -4,7 +4,6 @@ namespace App\Services\Quiz\Kc;
 
 use App\Models\Kc;
 use App\Models\Quiz;
-use App\Models\QuizQuestion;
 use App\Models\User;
 use App\Services\Quiz\GatherStudentQuestionCorrectness;
 

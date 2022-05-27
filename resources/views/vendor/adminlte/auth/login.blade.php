@@ -30,7 +30,7 @@
 <style>
     body {
         background-image: url(assets/images/bg.jpeg);
-        background-size: 100vw;
+        background-size: cover;
         background-repeat: no-repeat;
         backdrop-filter: brightness(50%);
     }
@@ -107,13 +107,4 @@
     </a>
 </p>
 @endif
-
-{{-- Register link --}}
-{{-- @if($register_url)
-<p class="my-0">
-    <a href="{{ $register_url }}">
-        {{ __('adminlte::adminlte.register_a_new_membership') }}
-    </a>
-</p>
-@endif --}}
 @stop
