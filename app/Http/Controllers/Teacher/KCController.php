@@ -100,4 +100,15 @@ class KCController extends Controller
             'course' => $course->load('kcs'),
         ]);
     }
+
+
+    public function split(Course $course, Kc $kc)
+    {
+        return view('teacher.kc.split', [
+            'course' => $course,
+            'kc' => $kc,
+            'questions' => $kc->questions,
+            'lessons' => $kc->lessons
+        ]);
+    }
 }

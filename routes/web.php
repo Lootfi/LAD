@@ -112,6 +112,10 @@ Route::prefix('teacher')
             TeacherKCController::class,
             'manage',
         ])->name('kc.manage'); // substitute for create and edit pages
+        Route::get('course/{course}/kc/{kc}/split', [
+            TeacherKCController::class,
+            'split',
+        ])->name('kc.split');
         Route::resource('course.kc', TeacherKCController::class)->except(['create', 'edit']);
 
 

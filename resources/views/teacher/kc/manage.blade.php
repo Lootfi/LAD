@@ -25,7 +25,7 @@
     <hr>
     <h4 class="text-uppercase ls-1 mb-4 mt-5">Splittable KCs</h4>
     <div class="row w-100">
-        <livewire:teacher.kc.split :course="$course" />
+        <livewire:teacher.kc.fetch-splittable :course="$course" />
     </div>
 </div>
 @endsection
