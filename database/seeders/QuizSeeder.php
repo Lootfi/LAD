@@ -20,7 +20,9 @@ class QuizSeeder extends Seeder
             'duration' => 90
         ]);
         Quiz::factory()->create([
-            'start_date' => now()->addDays(2),
+            'course_id' => 2,
+            'start_date' => now(),
+            'duration' => 20
         ]);
     }
 }

@@ -16,13 +16,13 @@ class LessonSeeder extends Seeder
     public function run()
     {
         Lesson::factory()->create([
-            'name' => 'Modèles de Développement de Logiciels',
+            'name' => 'Software Development Models',
             'description' => 'cascade, v, spirale',
             'section_id' => 1,
         ]);
 
         Lesson::factory()->create([
-            'name' => 'Patrons de Conception',
+            'name' => 'Design Patterns',
             'description' => 'Création, Structurels, Comportementaux',
             'section_id' => 1,
         ]);
@@ -39,6 +39,28 @@ class LessonSeeder extends Seeder
         ]);
         Lesson::factory(3)->create([
             'section_id' => 3,
+        ]);
+
+        // course 2
+
+        // 10 - 18
+
+        Lesson::factory()->create([
+            'name' => 'Python 101',
+            'description' => '',
+            'section_id' => 4,
+        ]);
+
+        Lesson::factory()->create([
+            'name' => 'Numpy 101',
+            'description' => '',
+            'section_id' => 4,
+        ]);
+
+        Lesson::factory()->create([
+            'name' => 'scikit-learn 101',
+            'description' => '',
+            'section_id' => 4,
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Course;
 use App\Models\Quiz;
 use App\Models\QuizStudent;
 use App\Models\User;
@@ -18,7 +19,9 @@ class QuizStudentSeeder extends Seeder
      */
     public function run()
     {
-        QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => 2, 'submitted' => false]);
-        QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => 3, 'submitted' => false, 'score' => 0.00]);
+        $s1 = Course::first()->students->first();
+        $s2 = Course::first()->students->get(1);
+        QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => $s1->id, 'submitted' => false]);
+        QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => $s2->id, 'submitted' => false, 'score' => 0.00]);
     }
 }

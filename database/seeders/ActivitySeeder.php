@@ -19,7 +19,7 @@ class ActivitySeeder extends Seeder
     {
         //activity for Student 01 on course 01
 
-        $student01 = User::find(2);
+        $student01 = User::find(3);
         $course01 = Course::find(1);
 
         $lesson01 = Lesson::first();
@@ -39,7 +39,7 @@ class ActivitySeeder extends Seeder
         }
 
         //activity for Student 02 on course 01
-        $student02 = User::find(3);
+        $student02 = User::find(4);
 
         for ($i = 0; $i < 10; $i++) {
             activity('student.course.show')

@@ -1,11 +1,13 @@
 @php
+
+$course = $question->quiz->course;
 $kc_id_array_dirty = $question->kcqs()->get(['kc_id'])->toArray();
 $kc_ids = [];
 
 foreach ($kc_id_array_dirty as $kcq) {
 $kc_ids[] = $kcq['kc_id'];
 }
-$kc_rest = App\Models\Kc::whereNotIn('id', $kc_ids)->get();
+$kc_rest = $course->kcs()->whereNotIn('id', $kc_ids)->get();
 @endphp
 
 <div class="form-group" name="question_kcs" id="question-kcs-{{$question->id}}">

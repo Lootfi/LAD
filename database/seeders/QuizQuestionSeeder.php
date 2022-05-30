@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Course;
 use App\Models\QuizAnswer;
 use App\Models\QuizQuestion;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -178,43 +179,60 @@ class QuizQuestionSeeder extends Seeder
 
         // ===================================
 
+        $this->secondCourseQuiz();
+    }
 
 
-        // QuizQuestion::factory()->create([
-        //     'quiz_id' => 2,
-        //     'question' => 'What is the capital of France?',
-        //     'order' => 1,
-        // ]);
+    public function secondCourseQuiz()
+    {
+        //q1
+        $quiz = Course::all()->last()->quizzes->first();
+        $qst = QuizQuestion::factory()->create([
+            'quiz_id' => $quiz->id,
+            'question' => 'Among the following option identify the one which is not a type of learning',
+            'order' => 1,
+        ]);
 
-        // QuizAnswer::factory(1)->create([
-        //     'question_id' => 7,
-        //     'right_answer' => true,
-        //     'answer' => 'Paris',
-        // ]);
-        // QuizAnswer::factory(1)->create([
-        //     'question_id' => 7,
-        //     'right_answer' => false,
-        //     'answer' => 'Berlin',
-        // ]);
+        //1
+        QuizAnswer::factory(1)->create([
+            'question_id' => $qst->id,
+            'right_answer' => false,
+            'answer' => 'Supervised Learning',
+        ]);
+        QuizAnswer::factory(1)->create([
+            'question_id' => $qst->id,
+            'right_answer' => false,
+            'answer' => 'Unsupervised Learning',
+        ]);
+        QuizAnswer::factory(1)->create([
+            'question_id' => $qst->id,
+            'right_answer' => true,
+            'answer' => 'Semi Unsupervised Learning',
+        ]);
 
+        // 2
 
+        $qst = QuizQuestion::factory()->create([
+            'quiz_id' => $quiz->id,
+            'question' => 'Identify the kind of learning algorithm for  “facial identities for facial expressions”.',
+            'order' => 2,
+        ]);
 
-
-
-        // QuizQuestion::factory()->create([
-        //     'quiz_id' => 2,
-        //     'question' => 'What is the capital of Germany?',
-        //     'order' => 2,
-        // ]);
-        // QuizAnswer::factory(1)->create([
-        //     'question_id' => 8,
-        //     'right_answer' => false,
-        //     'answer' => 'Paris',
-        // ]);
-        // QuizAnswer::factory(1)->create([
-        //     'question_id' => 8,
-        //     'right_answer' => true,
-        //     'answer' => 'Berlin',
-        // ]);
+        //1
+        QuizAnswer::factory(1)->create([
+            'question_id' => $qst->id,
+            'right_answer' => false,
+            'answer' => 'Prediction',
+        ]);
+        QuizAnswer::factory(1)->create([
+            'question_id' => $qst->id,
+            'right_answer' => false,
+            'answer' => 'Generating Patterns',
+        ]);
+        QuizAnswer::factory(1)->create([
+            'question_id' => $qst->id,
+            'right_answer' => true,
+            'answer' => 'Recognition Patterns',
+        ]);
     }
 }

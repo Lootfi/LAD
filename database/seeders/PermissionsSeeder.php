@@ -44,12 +44,16 @@ class PermissionsSeeder extends Seeder
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Mohammed Mahrez',
-            'email' => 'teacher@example.com',
+            'email' => 'teacher01@example.com',
+        ]);
+        $user->assignRole($teacher);
+        $user = \App\Models\User::factory()->create([
+            'name' => 'Riad Naboulsi',
+            'email' => 'teacher02@example.com',
         ]);
         $user->assignRole($teacher);
 
         $user = \App\Models\User::factory()->create([
-            // name
             'name' => 'Pamela Anderson',
             'email' => 'student01@example.com',
         ]);

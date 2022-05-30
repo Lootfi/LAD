@@ -48,8 +48,8 @@
                         <span class="text-info">#Q{{$diff['q2']}}:</span>
                         <span>{{$group['questions']->where('id',$diff['q2'])->first()->question}}</span>
                         <br>
-                        <b class="text-info">The Error Rate difference: <span
-                                class="text-danger">{{$diff['diff']}}</span></b>
+                        <b class="text-info">The Error Rate difference: <span class="text-danger">{{$diff['diff'] *
+                                100}}%</span></b>
                         <hr>
                         @endforeach
                         <span class="text-info">Splittable Knowledge Components: </span>

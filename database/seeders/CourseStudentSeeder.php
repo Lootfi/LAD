@@ -18,10 +18,6 @@ class CourseStudentSeeder extends Seeder
     {
         CourseStudent::factory(1)->create([
             'course_id' => 1,
-            'student_id' => 2,
-        ]);
-        CourseStudent::factory(1)->create([
-            'course_id' => 1,
             'student_id' => 3,
         ]);
 
@@ -38,6 +34,11 @@ class CourseStudentSeeder extends Seeder
         CourseStudent::factory(1)->create([
             'course_id' => 1,
             'student_id' => 6,
+        ]);
+
+        CourseStudent::factory(1)->create([
+            'course_id' => 1,
+            'student_id' => 7,
         ]);
     }
 }

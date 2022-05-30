@@ -38,7 +38,7 @@ class FetchSplittable extends Component
 
     public function fetchSplittable()
     {
-        $validatedData = $this->validate();
+        $this->validate();
 
         $fetchSplittable = new FetchSplittableKcs;
 
