@@ -32,13 +32,14 @@
                     {{-- selecting kcs for this question --}}
                     <x-teacher.quiz.edit_kcs_form :question="$question" />
                     {{-- button that creates a new input group for a new answer in a modal --}}
-                    <div class="text-center">
-                        <button type="button" class="btn btn-success mt-4" data-toggle="modal"
-                            data-target="#add-answer-modal-{{$question->id}}">{{ __('Add A New Answer') }}</button>
-                    </div>
-
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
+                    <div class="w-100 d-flex justify-content-end">
+                        <div class="text-center mx-1">
+                            <button type="button" class="btn btn-info mt-4" data-toggle="modal"
+                                data-target="#add-answer-modal-{{$question->id}}">{{ __('Add A New Answer') }}</button>
+                        </div>
+                        <div class="text-center mx-1">
+                            <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
+                        </div>
                     </div>
                 </form>
 
