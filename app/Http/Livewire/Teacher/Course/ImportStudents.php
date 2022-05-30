@@ -14,8 +14,6 @@ class ImportStudents extends Component
 
     public Course $course;
     public $students_file;
-    public $errors;
-    public $duplicates;
 
     public function mount(Course $course)
     {
@@ -30,19 +28,9 @@ class ImportStudents extends Component
 
         $this->students_file->storeAs('students_csv', 'students_course-' . $this->course->id . '_' . date('m-d-Y_hia'));
 
-        $import = new StudentsImport();
+        $import = new StudentsImport($this->course);
         $import->import($this->students_file);
 
-        $this->errors = $import->errors();
-        $duplicates = collect();
-        foreach ($this->errors as $error) {
-            if($error->getCode() == 23000) {
-                $duplicates->push($error->errorInfo[2]);
-            }
-        }
-
-        $this->duplicates = $duplicates;
-        
         session()->flash('success', 'Students successfully uploaded.');
     }
 

@@ -23,7 +23,6 @@ class GatherStudentQuizKcsAwareness
         $kcAware = [];
         foreach ($kcs as $kc) {
             $correctQuestion = [];
-            $countCorrectQuestion = [];
             $questions = $kc->questions()->where('quiz_id', $quiz->id)->get();
 
             $gatherQuestionCorrectness = new GatherStudentQuestionCorrectness;

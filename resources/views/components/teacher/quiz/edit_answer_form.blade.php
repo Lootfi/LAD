@@ -1,20 +1,4 @@
 <div class="form-group" name="answers" id="{{$answer->id}}">
-    {{-- fancy checkbox for right_answer, allow user to change right_answer --}}
-    {{-- <div class="custom-control custom-checkbox mb-3">
-        <input type="checkbox" name="right-answers[]" class="custom-control-input" id="right-answer-{{ $answer->id }}"
-            value="{{ $answer->id }}" {{ $answer->right_answer ?
-        'checked' : '' }}>
-        <label class="custom-control-label" for="right-answer-{{ $answer->id }}">{{ __('Correct
-            Answer') }}</label>
-    </div> --}}
-
-    {{-- answer --}}
-    {{-- <input type="text" name="answers[{{ $answer->id }}]" id="answer-{{ $answer->id }}"
-        class="form-control form-control-alternative{{ $errors->has('answer') ? ' is-invalid' : '' }}"
-        placeholder="{{ __('Answer') }}" value="{{ old('answer', $answer->answer) }}" required autofocus>
-    --}}
-
-
     <div class="input-group mb-3" id="answer-wrapper-{{ $answer->id }}">
         <div class="input-group-prepend">
             <div class="input-group-text">

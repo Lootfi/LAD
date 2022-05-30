@@ -66,6 +66,6 @@ class Students extends DataTableComponent
 
         $this->clearSelected();
 
-        return Excel::download(new StudentsExport($students), 'my_students.xlsx');
+        return Excel::download(new StudentsExport($this->course, $students), 'my_students.xlsx');
     }
 }

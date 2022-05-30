@@ -11,7 +11,8 @@
                 @endif {{$student->name}}</a></h4>
         <br>
         @if (isset($quiz_student) && $quiz_student->submitted)
-        <h6 class="text-muted mb-2"><i class="fa fa-xs fa-check" aria-hidden="true"></i> Submitted</h6>
+        <h6 class="text-muted mb-2"><i class="fa fa-xs fa-check" aria-hidden="true"></i> Submitted in
+            {{Carbon\Carbon::make($quiz_student->submitted_at)->diffInMinutes($quiz_student->created_at)}} mins</h6>
         @endif
     </div>
     <div class="card-body">
