@@ -2207,7 +2207,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   disableStats: true
 }); // window.Echo = new Echo({
 //     broadcaster: 'pusher',
-//     key: 'ea66669b9a1a5a97d47a',
+//     key: '93531635c893e9c56bf3',
 //     cluster: 'eu',
 //     forceTLS: true
 // });

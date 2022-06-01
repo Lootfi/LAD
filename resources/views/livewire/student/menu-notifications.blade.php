@@ -88,10 +88,4 @@
     });
 
 </script>
-
-<script>
-    window.Echo.private('users.{{ Auth::user()->id }}').notification((notification) => {
-        console.log(notification);
-    });
-</script>
 @endpush
