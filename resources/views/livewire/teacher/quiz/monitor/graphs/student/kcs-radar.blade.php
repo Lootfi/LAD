@@ -4,7 +4,7 @@
             <div class="col-12">
                 <h6 class="text-uppercase ls-1 mb-1">Overview</h6>
                 <h2 class="mb-1">
-                    Quiz '<b>{{$quiz->name}}</b>' Knowledge Components Awareness Score
+                    Quiz '<b>{{$quiz->name}}</b>' Knowledge Components Awareness Score (%)
                 </h2>
             </div>
         </div>
@@ -12,15 +12,11 @@
 
     <div class="card-body">
         <!-- Chart -->
-        <div class="chart">
+        <div class="chart d-flex justify-content-center">
             {{-- student activity chart.js --}}
-            <div class="chart">
+            <div class="chart w-50">
                 <canvas id="StudentKcsRadarChart" style="height:250px"></canvas>
             </div>
-        </div>
-        <div class="mt-3 row align-items-center justify-content-center">
-            {{--
-            <livewire:teacher.quiz.monitor.graphs.index.kcs-bar :quiz="$quiz" /> --}}
         </div>
     </div>
 </div>
@@ -39,7 +35,7 @@
                 @endforeach
             ],
             datasets: [{
-                label: 'KC Awareness',
+                label: 'KC Awareness Percentage',
                 data: [
                     @foreach ($graph_data as $kc_name => $rating)
                     {{ $rating }},
@@ -77,30 +73,6 @@
     });
 
     StudentKcsRadarChart.update();
-
-    // // livewire listen for events
-    // Livewire.on('addDataToKcRadarGraph', (kc_name, data) => {
-    //     let index = StudentKcsRadarChart.data.labels.indexOf(kc_name);
-    //     if(index == -1) {
-    //         index = StudentKcsRadarChart.data.labels.length;
-    //     }
-    //     StudentKcsRadarChart.data.labels[index] = kc_name;
-    //     StudentKcsRadarChart.data.datasets[0].data[index] = data['error_rate'];
-        
-    //     StudentKcsRadarChart.update();
-    // });
-    // Livewire.on('deleteKcDataFromRadarGraph', (kc_name) => {
-    //     let index = StudentKcsRadarChart.data.labels.indexOf(kc_name);
-    //     StudentKcsRadarChart.data.labels.splice(index, 1);
-    //     StudentKcsRadarChart.data.datasets[0].data.splice(index, 1);
-    //     StudentKcsRadarChart.update();
-    // });
-
-    // Livewire.on('deleteAllKcDataFromRadarGraph', () => {
-    //     StudentKcsRadarChart.data.labels = [];
-    //     StudentKcsRadarChart.data.datasets[0].data = [];
-    //     StudentKcsRadarChart.update();
-    // });
 });
 </script>
 @endpush

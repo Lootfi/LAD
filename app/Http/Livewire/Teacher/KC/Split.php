@@ -15,7 +15,7 @@ class Split extends Component
     public Kc $kc;
     public $questions;
     public $lessons;
-    public int $splitnum = 2;
+    public $splitnum = 2;
     public $splits = [];
     public $lessons_kcs = [];
     public $questions_kcs = [];
@@ -23,7 +23,7 @@ class Split extends Component
     public $new_kcs;
 
     protected $rules = [
-        'splitnum' => 'required|numeric|integer|min:2|max:3',
+        'splitnum' => 'required|numeric|min:2|max:5',
         'splits.*' => 'required|distinct|string|min:6|max:30|unique:kcs,name',
         'lessons_kcs.*' => 'required|array',
         'questions_kcs.*' => 'required|array',

@@ -131,7 +131,7 @@ class KcSeeder extends Seeder
         // ===================================
 
         $kc = Kc::factory()->create([
-            'name' => 'creation'
+            'name' => 'design-patterns'
         ]);
 
         KCL::query()->create([
@@ -154,14 +154,14 @@ class KcSeeder extends Seeder
         // ===================================
         // ===================================
 
-        $kc = Kc::factory()->create([
-            'name' => 'structurels'
-        ]);
+        // $kc = Kc::factory()->create([
+        //     'name' => 'structurels'
+        // ]);
 
-        KCL::query()->create([
-            'kc_id' => $kc->id,
-            'lesson_id' => 2,
-        ]);
+        // KCL::query()->create([
+        //     'kc_id' => $kc->id,
+        //     'lesson_id' => 2,
+        // ]);
 
         // ===================================
 
@@ -170,22 +170,22 @@ class KcSeeder extends Seeder
             'question_id' => 4,
         ]);
 
-        KCQ::query()->create([
-            'kc_id' => $kc->id,
-            'question_id' => 6,
-        ]);
+        // KCQ::query()->create([
+        //     'kc_id' => $kc->id,
+        //     'question_id' => 6,
+        // ]);
 
         // ===================================
         // ===================================
 
-        $kc = Kc::factory()->create([
-            'name' => 'comportementaux'
-        ]);
+        // $kc = Kc::factory()->create([
+        //     'name' => 'comportementaux'
+        // ]);
 
-        KCL::query()->create([
-            'kc_id' => $kc->id,
-            'lesson_id' => 2,
-        ]);
+        // KCL::query()->create([
+        //     'kc_id' => $kc->id,
+        //     'lesson_id' => 2,
+        // ]);
     }
 
     public function secondCourse()

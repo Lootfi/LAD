@@ -44,31 +44,12 @@
     </div>
 </div>
 
-{{-- script --}}
-{{-- @once
-@push('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
-    integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-@endpush
-@endonce --}}
-
 @push('js')
 <script>
-    //wait until the page is loaded to render the chart and avoid the error
     $(document).ready(function () {
 
-    var studentActivityChart = document.getElementById('studentActivityChart').getContext('2d');
-    
-    var studentActivityChart = new Chart(studentActivityChart, {
-        type: 'bar',
-        data: {
-            labels: [
-                @foreach ($studentsActivity as $studentName => $activities)
-                '{{ $studentName }}',
-                @endforeach
-            ],
-            datasets: [{
+        let data = [
+                {
                 label: 'Student Course Views',
                 data: [
                     @foreach ($studentsActivity as $activities)
@@ -91,8 +72,50 @@
                     'rgba(153, 102, 255, 1)',
                     'rgba(255, 159, 64, 1)'
                 ],
-                borderWidth: 1
-            }]
+                borderWidth: 1,
+                stack: 'combined',
+                type: 'bar'
+            },
+            {
+                    label: 'Student Lessons Views',
+                    data: [
+                    @foreach ($studentsLessonViews as $activities)
+                    {{ $activities }},
+                    @endforeach
+                ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                type: 'line',
+                    stack: 'combined'
+                }
+            ];
+
+
+    var studentActivityChart = document.getElementById('studentActivityChart').getContext('2d');
+    
+    var studentActivityChart = new Chart(studentActivityChart, {
+        type: 'bar',
+        data: {
+            labels: [
+                @foreach ($studentsActivity as $studentName => $activities)
+                '{{ $studentName }}',
+                @endforeach
+            ],
+            datasets: data
         },
         options: {
             scales: {

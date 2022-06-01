@@ -16,29 +16,15 @@ class CourseStudentSeeder extends Seeder
      */
     public function run()
     {
-        CourseStudent::factory(1)->create([
-            'course_id' => 1,
-            'student_id' => 3,
-        ]);
-
-        CourseStudent::factory(1)->create([
-            'course_id' => 1,
-            'student_id' => 4,
-        ]);
-
-        CourseStudent::factory(1)->create([
-            'course_id' => 1,
-            'student_id' => 5,
-        ]);
-
-        CourseStudent::factory(1)->create([
-            'course_id' => 1,
-            'student_id' => 6,
-        ]);
-
-        CourseStudent::factory(1)->create([
-            'course_id' => 1,
-            'student_id' => 7,
-        ]);
+        foreach ([3,4,5,6,7] as $student_id) {
+            CourseStudent::factory(1)->create([
+                'course_id' => 1,
+                'student_id' => $student_id,
+            ]);
+            CourseStudent::factory(1)->create([
+                'course_id' => 2,
+                'student_id' => $student_id,
+            ]);
+        }
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Course;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Columns\ImageColumn;
 use Maatwebsite\Excel\Facades\Excel;
@@ -46,7 +47,8 @@ class Students extends DataTableComponent
             ImageColumn::make('Avatar')
                 ->location(
                     fn($row) => $row->avatar
-                ),
+                )
+                ->collapseOnMobile(),
             Column::make("Name", "name")
                 ->sortable()
                 ->searchable(),
@@ -54,9 +56,18 @@ class Students extends DataTableComponent
                 ->sortable()
                 ->searchable(),
             Column::make("Created at", "created_at")
-                ->sortable(),
+                ->hideIf(true),
             Column::make("Updated at", "updated_at")
-                ->sortable(),
+                ->hideIf(true),
+            Column::make('Last Seen')
+            ->format(
+                function($value, $row, Column $column) {
+                    $last_seen = Carbon::make($row->last_seen);
+                    if($last_seen) 
+                     return $last_seen->diffForHumans();
+                     else return '';
+                }
+            )
         ];
     }
 

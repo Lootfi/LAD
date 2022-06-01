@@ -90,8 +90,7 @@
 </script>
 
 <script>
-    Echo.private('App.Models.User.' + @js(auth()->user()->id))
-    .notification((notification) => {
+    window.Echo.private('users.{{ Auth::user()->id }}').notification((notification) => {
         console.log(notification);
     });
 </script>

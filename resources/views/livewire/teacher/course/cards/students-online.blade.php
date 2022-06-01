@@ -16,16 +16,16 @@
         @foreach ($students as $student)
         @if ($student->isOnline())
         <div class="row align-items-center no-gutters">
-            <div class="col-auto">
-                <img src="{{ $student->avatar }}" class="avatar avatar-sm rounded-circle">
+            <div class="col-auto w-25">
+                <img src="{{ $student->avatar }}" class="avatar avatar-sm rounded-circle w-50">
             </div>
             <div class="col ml--2">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h4 class="mb-0 text-sm">{{ $student->name }}</h4>
+                        <h6 class="mb-0 text-bold">{{ $student->name }}</h6>
                     </div>
                 </div>
-                <p class="text-sm mb-0">
+                <p class="text-sm mb-0 font-italic">
                     {{ $student->email }}
                 </p>
             </div>

@@ -38,7 +38,7 @@
                     <label for="splitnum">Number of Splits: </label>
                     <input wire:model.defer="splitnum" id="splitnum" type="number" class="form-control"
                         placeholder="2 or 3" required>
-                    @error('splitnum') <span class="error">{{ $message }}</span> @enderror
+                    @error('splitnum') <span class="erro text-danger small">{{ $message }}</span> @enderror
                 </div>
             </div>
         </div>

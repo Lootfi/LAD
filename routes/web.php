@@ -100,7 +100,7 @@ Route::prefix('teacher')
         */
 
 
-        Route::resource('course', TeacherCourseController::class);
+        Route::resource('course', TeacherCourseController::class)->only(['show']);
 
         /*
         *

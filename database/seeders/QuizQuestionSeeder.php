@@ -154,7 +154,7 @@ class QuizQuestionSeeder extends Seeder
 
         QuizQuestion::factory()->create([
             'quiz_id' => 1,
-            'question' => 'Which design pattern provides a way to access the object of a particular class without having to know its concrete class?',
+            'question' => 'Design patterns are divided into three fundamental groups.',
             'order' => 6,
         ]);
 
@@ -162,19 +162,25 @@ class QuizQuestionSeeder extends Seeder
         QuizAnswer::factory(1)->create([
             'question_id' => 6,
             'right_answer' => true,
-            'answer' => 'Adapter',
+            'answer' => 'Behavioral Patterns',
+        ]);
+
+        QuizAnswer::factory(1)->create([
+            'question_id' => 6,
+            'right_answer' => true,
+            'answer' => 'Creational Patterns',
+        ]);
+
+        QuizAnswer::factory(1)->create([
+            'question_id' => 6,
+            'right_answer' => true,
+            'answer' => 'Structural Patterns',
         ]);
 
         QuizAnswer::factory(1)->create([
             'question_id' => 6,
             'right_answer' => false,
-            'answer' => 'Bridge',
-        ]);
-
-        QuizAnswer::factory(1)->create([
-            'question_id' => 6,
-            'right_answer' => false,
-            'answer' => 'Composite',
+            'answer' => 'J2EE Patterns',
         ]);
 
         // ===================================

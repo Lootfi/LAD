@@ -11,6 +11,7 @@ class StudentsActivity extends Component
     public $course;
     public $studentsActivity = null;
     public $time = '1 month';
+    public $studentsLessonViews = null;
 
     protected $listeners = [
         'echo:student-activity,Student\ViewCourse' => 'updateStudentsActivity'
@@ -20,6 +21,7 @@ class StudentsActivity extends Component
     {
         $this->course = auth()->user()->teaches;
         $this->getNewActivities();
+        $this->getLessonViews();
     }
 
     public function render()
@@ -59,6 +61,27 @@ class StudentsActivity extends Component
             $this->studentsActivity = $activities;
             $this->emit('addCourseVisitData', $diff);
         }
+    }
+
+    public function getLessonViews()
+    {
+
+        $activities = Activity::select(['causer_id'])
+            ->where('subject_type', 'App\Models\Lesson')
+            ->whereIn('subject_id',$this->course->lessons->pluck(['id'])->toArray())
+            ->where('created_at', '>=', now()->sub($this->time))
+            ->get()
+            ->groupBy('causer_id')
+            ->map(function ($item) {
+                return $item->count();
+            });
+        
+        foreach ($activities as $student_id => $actnum) {
+            $activities[User::where('id', $student_id)->first()->name] = $actnum;
+            unset($activities[$student_id]);
+        }
+
+        $this->studentsLessonViews = $activities;
     }
 
     public function updateTime($time)

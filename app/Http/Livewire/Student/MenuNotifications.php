@@ -7,10 +7,11 @@ use Livewire\Component;
 class MenuNotifications extends Component
 {
 
-    protected function getListeners()
+    public function getListeners(): array
     {
+        $authId = auth()->id();
         return [
-            "echo:App.Models.User.{auth()->id()}," => 'notified',
+            "echo-private:users.{$authId},Illuminate\\Notifications\\Events\\BroadcastNotificationCreated" => 'notified',
         ];
     }
 
@@ -24,7 +25,7 @@ class MenuNotifications extends Component
         return view('livewire.student.menu-notifications');
     }
 
-    public function notified()
+    public function notified(mixed $notify): void
     {
         dd('help');
     }
