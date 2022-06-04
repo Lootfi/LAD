@@ -129,7 +129,7 @@
 
 {{-- add-question-modal --}}
 
-<x-teacher.quiz.create_new_question_modal :quiz="$quiz" />
+<x-teacher.quiz.create_new_question_modal :course="$course" :quiz="$quiz" />
 
 
 

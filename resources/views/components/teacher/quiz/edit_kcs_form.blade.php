@@ -11,13 +11,9 @@ $kc_rest = $course->kcs()->whereNotIn('id', $kc_ids)->get();
 @endphp
 
 <div class="form-group" name="question_kcs" id="question-kcs-{{$question->id}}">
-    <select class="select-multi-kcs-{{$question->id}} w-100" name="q_kcs[]" multiple="multiple" autocomplete="off">
-
-        @foreach ($question->kcqs as $kcq)
-        <option value="{{$kcq->kc->id}}" selected>{{$kcq->kc->name}}</option>
-        @endforeach
-        @foreach ($kc_rest as $kc)
-        <option value="{{$kc->id}}">{{$kc->name}}</option>
+    <select class="select-multi-kcs-{{$question->id}} w-100" name="kcs[]" multiple="multiple" autocomplete="off">
+        @foreach ($course->kcs as $kc)
+        <option value="{{$kc->id}}" @selected($question->kcs->contains($kc))>{{$kc->name}}</option>
         @endforeach
     </select>
 </div>

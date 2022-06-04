@@ -2,6 +2,7 @@
 
 namespace App\View\Components\teacher\quiz;
 
+use App\Models\Course;
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use Illuminate\View\Component;
@@ -9,6 +10,7 @@ use Illuminate\View\Component;
 class create_new_question_modal extends Component
 {
     // quiz and question parameters
+    public $course;
     public $quiz;
 
     /**
@@ -16,8 +18,9 @@ class create_new_question_modal extends Component
      *
      * @return void
      */
-    public function __construct(Quiz $quiz)
+    public function __construct(Course $course, Quiz $quiz)
     {
+        $this->course = $course;
         $this->quiz = $quiz;
     }
 

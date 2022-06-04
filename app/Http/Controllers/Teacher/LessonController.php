@@ -66,17 +66,10 @@ class LessonController extends Controller
     public function edit(Course $course, Section $section, Lesson $lesson)
     {
 
-        $kc_id_array_dirty = $lesson->kcls()->get(['kc_id'])->toArray();
-        $kc_ids = [];
+        $lesson->load('kcs');
+        $course->load('kcs');
 
-        foreach ($kc_id_array_dirty as $kcl) {
-            $kc_ids[] = $kcl['kc_id'];
-        }
-        $kc_rest = Kc::whereNotIn('id', $kc_ids)->get();
-
-        $lesson->load('kcls.kc');
-
-        return view('teacher.lesson.edit', compact('course', 'section', 'lesson', 'kc_rest'));
+        return view('teacher.lesson.edit', compact('course', 'section', 'lesson'));
     }
 
     // update method
@@ -90,42 +83,7 @@ class LessonController extends Controller
             'content' => $request->content,
         ]);
 
-
-        //kcs
-        $kcls = $lesson->kcls;
-
-        //if l_kcs array is empty, delete all kcqs
-        if (empty($request->l_kcs)) {
-            $kcls->each(function ($kcl) {
-                KCL::query()
-                    ->where('kc_id', $kcl->kc_id)
-                    ->where('lesson_id', $kcl->lesson_id)
-                    ->delete();
-            });
-        } else {
-            // find if user deleted kcqs
-            $kcls->each(function ($kcl) use ($request) {
-                if (!in_array($kcl->kc_id, $request->get("l_kcs"))) {
-                    KCL::query()
-                        ->where('kc_id', $kcl->kc_id)
-                        ->where('lesson_id', $kcl->lesson_id)
-                        ->delete();
-                }
-            });
-
-            // find if user added kcqs
-            foreach ($request->get('l_kcs') as $kc_id) {
-                if (!$lesson->kcls->contains('kc_id', $kc_id)) {
-                    KCL::query()
-                        ->create([
-                            'lesson_id' => $lesson->id,
-                            'kc_id' => $kc_id,
-                        ]);
-                }
-            }
-        }
-
-
+        $lesson->kcs()->sync($request->kcs);
 
         LessonFile::where([
             'session_id' => Session::getId(),
@@ -153,7 +111,7 @@ class LessonController extends Controller
     public function notify(Course $course, Section $section, Lesson $lesson)
     {
         $students = $course->students;
-        
+
         foreach ($students as $student) {
             $student->notify(new \App\Notifications\NewLesson($lesson->load('section.course')));
         }

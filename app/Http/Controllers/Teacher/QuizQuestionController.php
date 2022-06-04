@@ -36,38 +36,8 @@ class QuizQuestionController extends Controller
         });
 
         //update kcqs
-        $kcqs = $question->kcqs;
+        $question->kcs()->sync($request->kcs);
 
-        //if q_kcs array is empty, delete all kcqs
-        if (empty($request->q_kcs)) {
-            $kcqs->each(function ($kcq) {
-                KCQ::query()
-                    ->where('kc_id', $kcq->kc_id)
-                    ->where('question_id', $kcq->question_id)
-                    ->delete();
-            });
-        } else {
-            // find if user deleted kcqs
-            $kcqs->each(function ($kcq) use ($request) {
-                if (!in_array($kcq->kc_id, $request->get("q_kcs"))) {
-                    KCQ::query()
-                        ->where('kc_id', $kcq->kc_id)
-                        ->where('question_id', $kcq->question_id)
-                        ->delete();
-                }
-            });
-
-            // find if user added kcqs
-            foreach ($request->get('q_kcs') as $kc_id) {
-                if (!$question->kcqs->contains('kc_id', $kc_id)) {
-                    KCQ::query()
-                        ->create([
-                            'question_id' => $question->id,
-                            'kc_id' => $kc_id,
-                        ]);
-                }
-            }
-        }
         $question->save();
 
         //reload page and scroll to the updated question in the list of questions in the quiz edit page
@@ -90,6 +60,8 @@ class QuizQuestionController extends Controller
             'answer' => $request->answer,
             'right_answer' => true,
         ]);
+
+        $question->kcs()->attach($request->kcs);
         $question->save();
 
         return redirect()->route('teacher.quiz.edit', ['course' => $course, 'quiz' => $quiz, 'question_id' => $question->id]);

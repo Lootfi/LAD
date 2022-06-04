@@ -48,13 +48,10 @@
                     {{-- kcs --}}
                     <div class="form-group" name="lesson_kcs" id="lesson-kcs-{{$lesson->id}}">
                         <label for="l_kcs">KCs</label>
-                        <select class="select-multi-kcs-{{$lesson->id}} w-100" name="l_kcs[]" multiple="multiple"
+                        <select class="select-multi-kcs-{{$lesson->id}} w-100" name="kcs[]" multiple="multiple"
                             autocomplete="off">
-                            @foreach ($lesson->kcls as $kcl)
-                            <option value="{{$kcl->kc->id}}" selected>{{$kcl->kc->name}}</option>
-                            @endforeach
-                            @foreach ($kc_rest as $kc)
-                            <option value="{{$kc->id}}">{{$kc->name}}</option>
+                            @foreach ($course->kcs as $kc)
+                            <option value="{{$kc->id}}" @selected($lesson->kcs->contains($kc))>{{$kc->name}}</option>
                             @endforeach
                         </select>
                     </div>
