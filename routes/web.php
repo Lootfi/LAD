@@ -41,20 +41,19 @@ Route::get('/help', function () {
 Auth::routes(['register' => false]);
 
 Route::prefix('password')
-->name('password.')
-->middleware(['auth'])
-->group(function () {
-    Route::get('change', [
-        PasswordController::class,
-        'show'
-    ])->name('change.show');
+    ->name('password.')
+    ->middleware(['auth'])
+    ->group(function () {
+        Route::get('change', [
+            PasswordController::class,
+            'show'
+        ])->name('change.show');
 
-    Route::post('update', [
-        PasswordController::class,
-        'update'
-    ])->name('update');
-    
-});
+        Route::post('update', [
+            PasswordController::class,
+            'update'
+        ])->name('update');
+    });
 
 Route::get('/', function () {
     $user = User::find(auth()->id());
@@ -116,6 +115,10 @@ Route::prefix('teacher')
             TeacherKCController::class,
             'split',
         ])->name('kc.split');
+        Route::post('course/{course}/kc/faststore', [
+            TeacherKCController::class,
+            'faststore',
+        ])->name('kc.faststore');
         Route::resource('course.kc', TeacherKCController::class)->except(['create', 'edit']);
 
 
@@ -198,12 +201,10 @@ Route::prefix('teacher')
         */
 
         Route::get('course/{course}/student/import', [TeacherStudentController::class, 'import'])
-        ->name('student.import');
-        
+            ->name('student.import');
+
         Route::get('course/{course}/student', [TeacherStudentController::class, 'manage'])
-        ->name('student.manage');
-
-
+            ->name('student.manage');
     });
 
 
@@ -225,7 +226,7 @@ Route::get('teacher/course/{course}/quiz/{quiz}/monitor/{student}', [
 // student dashboard routes
 Route::prefix('student')
     ->name('student.')
-    ->middleware([ 'auth', 'role:student', 'student_last_activity', 'log' ])
+    ->middleware(['auth', 'role:student', 'student_last_activity', 'log'])
     ->scopeBindings()
     ->group(function () {
 

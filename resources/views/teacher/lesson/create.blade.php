@@ -22,7 +22,7 @@
                                         <div class="form-group">
                                                 <label for="name">Title</label>
                                                 <input type="text" class="form-control" id="name" name="name"
-                                                        placeholder="Enter Title">
+                                                        placeholder="Enter Title" value="Lesson Name">
                                         </div>
                                         {{-- /title --}}
                                         {{-- description --}}
@@ -75,12 +75,27 @@
     $('.lesson_kcs_select').select2({
         language: {
             noResults: function() {
-                return $("<a href='{{route('teacher.kc.manage', ['course' => $course])}}'>Create new KC " + "'" + 
-                document.getElementsByClassName('select2-search__field')[0].value
-                + "'" + " for this course</a>");
+                return $(`<button type="button" class="btn btn-primary" onclick="createNewKc()">Create new KC '${document.getElementsByClassName('select2-search__field')[0].value}' for this course</button>`);
             }
         }
     });
+
 });
+function createNewKc() {
+        var newKc = {
+                name: document.getElementsByClassName('select2-search__field')[0].value,
+                description: 'No description',
+                course_id: `{{$course->id}}`,
+                _token: "{{ csrf_token() }}",
+        };
+        $.ajax({
+                url: `{{ route('teacher.kc.faststore', ['course' => $course]) }}`,
+                type: 'POST',
+                data: newKc,
+                success: function(data) {
+                $('.lesson_kcs_select').append(new Option(data.name, data.id, true, true)).trigger('change');
+                }
+        });
+}
 </script>
 @endpush

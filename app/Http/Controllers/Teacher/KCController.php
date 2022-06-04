@@ -52,6 +52,23 @@ class KCController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     */
+    public function faststore(Request $request, Course $course)
+    {
+
+        $kc = new Kc();
+        $kc->name = $request->name;
+        $kc->description = $request->description;
+        $kc->course_id = $course->id;
+        $kc->save();
+
+        return response($kc, 200);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Kc  $kc
