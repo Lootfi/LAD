@@ -127,27 +127,57 @@
     });
 
     // livewire listen for events
-    Livewire.on('addCourseVisitData', (data) => {
-        
-        Object.keys(data).forEach(studentName => {
+    Livewire.on('addCourseVisitData', (courseVisitsData, lessonVisitsData) => {
+        studentActivityChart.data.labels = [];
+        studentActivityChart.data.datasets[0].data = [];
+        studentActivityChart.data.datasets[1].data = [];
+
+        Object.keys(courseVisitsData).forEach(studentName => {
             let index = studentActivityChart.data.labels.indexOf(studentName);
             if(index == -1) {
                 index = studentActivityChart.data.labels.length;
             }
             studentActivityChart.data.labels[index] = studentName;
-            studentActivityChart.data.datasets[0].data[index] = data[studentName];
+            studentActivityChart.data.datasets[0].data[index] = courseVisitsData[studentName];
         });
+
+        Object.keys(lessonVisitsData).forEach(studentName => {
+            let index = studentActivityChart.data.labels.indexOf(studentName);
+            if(index == -1) {
+                index = studentActivityChart.data.labels.length;
+            }
+            studentActivityChart.data.labels[index] = studentName;
+            studentActivityChart.data.datasets[1].data[index] = lessonVisitsData[studentName];
+        });
+
+
         studentActivityChart.update();
     });
-    Livewire.on('updateCourseViewTime', (data) => {
+    Livewire.on('updateCourseViewTime', (courseVisitsData, lessonVisitsData) => {
 
         studentActivityChart.data.labels = [];
         studentActivityChart.data.datasets[0].data = [];
+        studentActivityChart.data.datasets[1].data = [];
 
-        Object.keys(data).forEach((studentName,index) => {
+        Object.keys(courseVisitsData).forEach(studentName => {
+            let index = studentActivityChart.data.labels.indexOf(studentName);
+            if(index == -1) {
+                index = studentActivityChart.data.labels.length;
+            }
             studentActivityChart.data.labels[index] = studentName;
-            studentActivityChart.data.datasets[0].data[index] = data[studentName];
+            studentActivityChart.data.datasets[0].data[index] = courseVisitsData[studentName];
         });
+
+        Object.keys(lessonVisitsData).forEach(studentName => {
+            let index = studentActivityChart.data.labels.indexOf(studentName);
+            if(index == -1) {
+                index = studentActivityChart.data.labels.length;
+            }
+            studentActivityChart.data.labels[index] = studentName;
+            studentActivityChart.data.datasets[1].data[index] = lessonVisitsData[studentName];
+        });
+
+        
         studentActivityChart.update();
     });
 });

@@ -41,6 +41,51 @@
                     @error('splitnum') <span class="erro text-danger small">{{ $message }}</span> @enderror
                 </div>
             </div>
+            <div class="row mt-3 accordion w-100" id="accordion">
+                <div class="card w-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <button
+                                class="btn btn-link btn-block text-left d-flex justify-content-between align-items-center"
+                                type="button" data-toggle="collapse" data-target="#collapse-lessons"
+                                aria-expanded="true" aria-controls="collapse-lessons">{{$lessons->count()}} Lesson(s)
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapse-lessons" class="collapse" aria-labelledby="heading-lessons"
+                        data-parent="#accordion">
+                        <ul>
+                            @foreach ($lessons as $lesson)
+                            <li class="my-3">{{$lesson->name}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card w-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <button
+                                class="btn btn-link btn-block text-left d-flex justify-content-between align-items-center"
+                                type="button" data-toggle="collapse" data-target="#collapse-questions"
+                                aria-expanded="true" aria-controls="collapse-questions">{{$questions->count()}}
+                                Question(s)
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapse-questions" class="collapse" aria-labelledby="heading-questions"
+                        data-parent="#accordion">
+                        <ul>
+                            @foreach ($questions as $question)
+                            <li class="my-3">{{$question->question}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
         </div>
         @break
         @case(2)

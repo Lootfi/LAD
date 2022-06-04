@@ -2,7 +2,7 @@
     <div class="col">
         <div class="card bg-default shadow">
             <div class="card-header bg-transparent border-0">
-                <h3 class="mb-0">Edit Question</h3>
+                <h3 class="mb-0">Edit Question #{{$question->order}}</h3>
             </div>
             <div class="card-body">
                 <form id="question-{{$question->id}}" method="POST"

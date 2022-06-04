@@ -25,6 +25,7 @@
         "rappasoft/laravel-livewire-tables": "^2.0",
         "rubix/ml": "2.0.1",
         "spatie/laravel-activitylog": "^4.4",
+        "spatie/laravel-login-link": "^1.1",
         "spatie/laravel-permission": "^5.5",
         "tonysm/rich-text-laravel": "^1.4"
     },

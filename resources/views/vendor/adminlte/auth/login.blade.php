@@ -36,6 +36,13 @@
     }
 </style>
 
+@env('local')
+<div class="my-2 d-flex justify-content-around">
+    <x-login-link type="button" email="teacher01@example.com" label="Login as teacher" class="btn btn-primary mr-1" />
+    <x-login-link type="button" email="student01@example.com" label="Login as student" class="btn btn-secondary ml-1" />
+</div>
+@endenv
+
 <form action="{{ $login_url }}" method="post">
     @csrf
 

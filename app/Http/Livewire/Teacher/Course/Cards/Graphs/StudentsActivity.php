@@ -22,6 +22,8 @@ class StudentsActivity extends Component
         $this->course = auth()->user()->teaches;
         $this->getNewActivities();
         $this->getLessonViews();
+
+        $this->emit('addCourseVisitData', $this->studentsActivity, $this->studentsLessonViews);
     }
 
     public function render()
@@ -29,7 +31,7 @@ class StudentsActivity extends Component
         return view('livewire.teacher.course.cards.graphs.students-activity');
     }
 
-    public function updateStudentsActivity(array $params = null)
+    public function updateStudentsActivity()
     {
         $this->getNewActivities();
     }
@@ -50,17 +52,7 @@ class StudentsActivity extends Component
             unset($activities[$student_id]);
         }
 
-        if ($this->studentsActivity == null) {
-            $this->studentsActivity = $activities;
-            $this->emit('addCourseVisitData', $this->studentsActivity);
-            return;
-        }
-
-        $diff = $activities->diff($this->studentsActivity);
-        if (!$diff->isEmpty()) {
-            $this->studentsActivity = $activities;
-            $this->emit('addCourseVisitData', $diff);
-        }
+        $this->studentsActivity = $activities;
     }
 
     public function getLessonViews()
@@ -68,14 +60,14 @@ class StudentsActivity extends Component
 
         $activities = Activity::select(['causer_id'])
             ->where('subject_type', 'App\Models\Lesson')
-            ->whereIn('subject_id',$this->course->lessons->pluck(['id'])->toArray())
+            ->whereIn('subject_id', $this->course->lessons->pluck(['id'])->toArray())
             ->where('created_at', '>=', now()->sub($this->time))
             ->get()
             ->groupBy('causer_id')
             ->map(function ($item) {
                 return $item->count();
             });
-        
+
         foreach ($activities as $student_id => $actnum) {
             $activities[User::where('id', $student_id)->first()->name] = $actnum;
             unset($activities[$student_id]);
@@ -88,6 +80,7 @@ class StudentsActivity extends Component
     {
         $this->time = $time;
         $this->getNewActivities();
-        $this->emit('updateCourseViewTime', $this->studentsActivity);
+        $this->getLessonViews();
+        $this->emit('updateCourseViewTime', $this->studentsActivity, $this->studentsLessonViews);
     }
 }
