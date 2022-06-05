@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('kcs', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string("name")->unique();
             $table->string("description");
 
             $table->unsignedBigInteger("course_id");

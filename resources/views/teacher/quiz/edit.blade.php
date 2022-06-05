@@ -140,13 +140,9 @@
 @section('js')
 <script>
     var updateRightAnswer;
-    // when page is reloaded, scroll to question's id in url (if exists) or to the top of the page (if not)
     $(document).ready(function () {
-        // get question_id from url paramaters (if exists)
         var question_id = new URLSearchParams(window.location.search).get('question_id')
-        console.log(question_id);
         if (question_id) {
-
             document.getElementById('question-' + question_id).scrollIntoView({
             behavior: 'auto',
             block: 'center',

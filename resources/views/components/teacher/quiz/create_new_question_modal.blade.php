@@ -39,7 +39,7 @@
 
                     {{-- question kcs --}}
                     {{-- kcs --}}
-                    @include('teacher.kc.partials.select', ['editForm' => false]])
+                    @include('teacher.kc.partials.select', ['editForm' => false])
                     {{-- /kcs --}}
                     <div class="text-center">
                         <button type="submit" class="btn btn-success mt-4">{{ __('Add') }}</button>
