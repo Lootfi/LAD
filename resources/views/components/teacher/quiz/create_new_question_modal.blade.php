@@ -39,17 +39,8 @@
 
                     {{-- question kcs --}}
                     {{-- kcs --}}
-                    <div class="form-group w-100">
-                        <label class="form-control-label w-100" for="kcs">KCS</label>
-                        <select class="question_modal_kcs_select form-control" id="kcs" name="kcs[]" multiple="multiple"
-                            autocomplete="off" style="width: 100%;">
-                            @foreach ($course->kcs as $kc)
-                            <option value="{{$kc->id}}">{{$kc->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    @include('teacher.kc.partials.select', ['editForm' => false]])
                     {{-- /kcs --}}
-
                     <div class="text-center">
                         <button type="submit" class="btn btn-success mt-4">{{ __('Add') }}</button>
                     </div>
@@ -58,19 +49,3 @@
         </div>
     </div>
 </div>
-
-@push('js')
-<script>
-    $(document).ready(function() {
-    $('.question_modal_kcs_select').select2({
-        language: {
-            noResults: function() {
-                return $("<a href='{{route('teacher.kc.manage', ['course' => $course])}}'>Create new KC " + "'" + 
-                document.getElementsByClassName('select2-search__field')[0].value
-                + "'" + " for this course</a>");
-            }
-        }
-    });
-});
-</script>
-@endpush

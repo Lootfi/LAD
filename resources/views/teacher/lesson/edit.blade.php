@@ -46,15 +46,7 @@
                     </div>
                     {{-- /status --}}
                     {{-- kcs --}}
-                    <div class="form-group" name="lesson_kcs" id="lesson-kcs-{{$lesson->id}}">
-                        <label for="l_kcs">KCs</label>
-                        <select class="select-multi-kcs-{{$lesson->id}} w-100" name="kcs[]" multiple="multiple"
-                            autocomplete="off">
-                            @foreach ($course->kcs as $kc)
-                            <option value="{{$kc->id}}" @selected($lesson->kcs->contains($kc))>{{$kc->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    @include('teacher.kc.partials.select', ['editForm' => true, 'model' => $lesson])
                     {{-- /kcs --}}
                     {{-- content --}}
                     <div class="form-group">
@@ -72,20 +64,3 @@
     </div>
 </div>
 @endsection
-
-@push('js')
-<script src="{{ asset('js/lessons/attachements.js') }}"></script>
-<script>
-    $(document).ready(function() {
-    $('.select-multi-kcs-{{$lesson->id}}').select2({
-        language: {
-            noResults: function() {
-                return $("<a href='{{route('teacher.kc.manage', ['course' => $course])}}'>Create new KC " + "'" + 
-                document.getElementById('lesson-kcs-{{$lesson->id}}').getElementsByClassName('select2-search__field')[0].value
-                + "'" + " for this course</a>");
-            }
-        }
-    });
-});
-</script>
-@endpush

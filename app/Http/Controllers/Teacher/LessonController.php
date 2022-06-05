@@ -101,7 +101,7 @@ class LessonController extends Controller
     }
 
     // destroy method
-    public function destroy(Course $course, Section $section, Lesson $lesson)
+    public function destroy(Course $course, Lesson $lesson)
     {
         $lesson->delete();
 
