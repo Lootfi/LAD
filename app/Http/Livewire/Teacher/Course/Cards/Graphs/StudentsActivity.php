@@ -34,6 +34,7 @@ class StudentsActivity extends Component
     public function updateStudentsActivity()
     {
         $this->getNewActivities();
+        $this->emit('updateCourseViewTime', $this->studentsActivity, $this->studentsLessonViews);
     }
 
     public function getNewActivities()
