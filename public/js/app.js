@@ -2196,21 +2196,22 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 
-window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js"); // window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: process.env.MIX_PUSHER_APP_KEY,
+//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     wsHost: process.env.MIX_PUSHER_APP_HOST,
+//     wsPort: process.env.MIX_PUSHER_APP_PORT == "6001" ? 6001 : 443,
+//     forceTLS: false,
+//     disableStats: true,
+// });
+
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "QWERTY",
-  cluster: "eu",
-  wsHost: "sockets.test",
-  wsPort:  true ? 6001 : 0,
-  forceTLS: false,
-  disableStats: true
-}); // window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: '93531635c893e9c56bf3',
-//     cluster: 'eu',
-//     forceTLS: true
-// });
+  key: '93531635c893e9c56bf3',
+  cluster: 'eu',
+  forceTLS: true
+});
 
 /***/ }),
 
