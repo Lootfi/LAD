@@ -1,15 +1,23 @@
 ## Setup
 
+#### Requirements
+
+-   [PHP 8](https://www.php.net/downloads.php)
+-   [Composer v2](https://getcomposer.org/download/)
+-   [LTS node and npm](https://nodejs.org/en/)
+
 #### Clone this project then follow these steps:
 
--   `composer install`
--   `cp .env.example .env` then setup your new database config `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
--   `php artisan key:generate`
--   `php artisan migrate --seed` (make sure your local mysql is running and that the database exists before running this)
--   `php artisan adminlte:install` (but don't replace the config file when asked)
--   `npm run dev`
--   Serve the project the way you prefer
--   Serve websockets `php artisan websockets:serve`
+-   `composer install` to install PHP dependencies.
+-   Setup your SQL database (Preferably MySQL).
+-   `cp .env.example .env` to copy `.env.example` to `.env`. then setup your new database config inside the `.env` file in: `DB_DATABASE` the name of your database, `DB_USERNAME` your MySQL server username, `DB_PASSWORD` your MySQL server password.
+-   `php artisan key:generate` to generate a private encryption key for your session data and cookies.
+-   `php artisan migrate --seed` this will create and fill the database tables for you. (make sure your local MySQL is running and that the database exists before running this)
+-   `php artisan adminlte:install` (don't replace the config file when asked) this will setup the frontend requirements.
+-   `npm run dev` to compile your frontend assets using webpack.
+-   `php artisan serve` to serve the project (you can change host/port with options).
+-   `php artisan websockets:serve` to serve the websockets server.
+-   go to `http://localhost:8000/`
 -   Login with either `teacher01@example.com:password`, `student01@example.com:password`
 
 ## Learning Laravel
