@@ -3,11 +3,10 @@
 namespace App\Http\Livewire\Teacher\Quiz\Monitor\Student;
 
 use App\Events\Student\QuizKcAwarenessWarning;
-use App\Models\Kc;
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use App\Models\User;
-use App\Services\Quiz\GatherStudentQuizKcsAwareness;
+use KcFacade;
 use Livewire\Component;
 
 class Kcs extends Component
@@ -44,9 +43,7 @@ class Kcs extends Component
 
     public function getAwareness()
     {
-        $gather = new GatherStudentQuizKcsAwareness;
-
-        $kcsAwareness = $gather($this->student, $this->quiz);
+        $kcsAwareness = KcFacade::getStudentAwarenessInQuiz($this->student, $this->quiz);
 
         $this->kcs_awareness = $kcsAwareness;
     }

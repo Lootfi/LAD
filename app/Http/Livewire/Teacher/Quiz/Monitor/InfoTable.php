@@ -5,8 +5,8 @@ namespace App\Http\Livewire\Teacher\Quiz\Monitor;
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use App\Models\QuizStudent;
-use App\Services\Quiz\GatherStudentQuestionCorrectness;
 use Livewire\Component;
+use QuizFacade;
 use Spatie\Activitylog\Models\Activity;
 
 class InfoTable extends Component
@@ -70,23 +70,22 @@ class InfoTable extends Component
             ->pluck('causer')
             ->unique();
 
-                        
+
 
         $students_who_submited_in_x = Activity::query()
-        ->where('log_name', 'student.quiz.submit')
-        ->where('created_at', '>', now()->sub($time))
-        ->whereIn('causer_id', $students_ids)
-        ->with('causer')
-        ->get()
-        ->pluck('causer')
-        ->unique();
+            ->where('log_name', 'student.quiz.submit')
+            ->where('created_at', '>', now()->sub($time))
+            ->whereIn('causer_id', $students_ids)
+            ->with('causer')
+            ->get()
+            ->pluck('causer')
+            ->unique();
 
         foreach ($students_who_submited_in_x as $student) {
             $students_passing_quiz_in_last_x->push($student);
         }
 
         $this->students_passing_quiz_in_last_x = $students_passing_quiz_in_last_x->unique();
-
     }
 
     public function getStudentsStruggling()
@@ -118,8 +117,7 @@ class InfoTable extends Component
                     // if high percentage incorrect, struggling
                     $score = 0;
                     foreach ($questions as $question) {
-                        $getCorrectness = new GatherStudentQuestionCorrectness;
-                        $correct = $getCorrectness($student, $question);
+                        $correct = QuizFacade::getQuestionCorrectness($student, $question);
                         if ($correct) $score++;
                     }
 
@@ -167,8 +165,7 @@ class InfoTable extends Component
                     // if high percentage incorrect, struggling
                     $score = 0;
                     foreach ($questions as $question) {
-                        $getCorrectness = new GatherStudentQuestionCorrectness;
-                        $correct = $getCorrectness($student, $question);
+                        $correct = QuizFacade::getQuestionCorrectness($student, $question);
                         if ($correct) $score++;
                     }
                     // TODO: DO NOT Hardcode passing score, let teacher specify it in quiz edit

@@ -3,9 +3,7 @@
 namespace App\Http\Livewire\Teacher\Kc;
 
 use App\Models\Course;
-use App\Models\QuizQuestion;
-use App\Services\Course\FetchSplittableKcs;
-use App\Services\Quiz\GatherQuizQuestionsErrorRate;
+use KcFacade;
 use Livewire\Component;
 
 class FetchSplittable extends Component
@@ -40,8 +38,6 @@ class FetchSplittable extends Component
     {
         $this->validate();
 
-        $fetchSplittable = new FetchSplittableKcs;
-
-        $this->question_groups_er_diffs = $fetchSplittable($this->course, $this->split_percentage);
+        $this->question_groups_er_diffs = KcFacade::fetchSplittable($this->course, $this->split_percentage);
     }
 }

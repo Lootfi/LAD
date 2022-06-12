@@ -5,10 +5,8 @@ namespace App\Http\Livewire\Teacher\Quiz\Monitor;
 use App\Models\Course;
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
-use App\Models\QuizResponse;
-use App\Services\Quiz\CreateLeftOverQuizStudents;
-use App\Services\Quiz\GatherQuizQuestionsErrorRate;
 use Livewire\Component;
+use QuizFacade;
 
 class Index extends Component
 {
@@ -41,11 +39,8 @@ class Index extends Component
 
     public function selectQuestion(QuizQuestion $question)
     {
-        $gather = new GatherQuizQuestionsErrorRate;
+        $data = QuizFacade::getQuestionErrorRate($question);
 
-        $data = $gather($question);
-
-        // emit data to graph component
         $this->emitTo('teacher.quiz.monitor.graphs.index.questions-error-rate', 'gatherData', $question->id, $data);
     }
 
@@ -61,8 +56,7 @@ class Index extends Component
             &&
             ($this->quiz->students->count() < $this->quiz->course->students()->count())
         ) {
-            $createLeftOvers = new CreateLeftOverQuizStudents;
-            $createLeftOvers($this->quiz);
+            QuizFacade::createLeftOverStudents($this->quiz);
         }
     }
 }

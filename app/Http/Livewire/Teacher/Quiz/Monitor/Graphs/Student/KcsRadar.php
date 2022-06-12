@@ -2,11 +2,10 @@
 
 namespace App\Http\Livewire\Teacher\Quiz\Monitor\Graphs\Student;
 
-use App\Models\Kc;
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use App\Models\User;
-use App\Services\Quiz\Kc\GetQuizStudentKcRating;
+use KcFacade;
 use Livewire\Component;
 
 class KcsRadar extends Component
@@ -14,18 +13,7 @@ class KcsRadar extends Component
     public $quiz;
     public $student;
     public $kcs;
-
     public $graph_data = [];
-
-    // public function getListeners()
-    // {
-    //     $events = [];
-    //     foreach ($this->quiz->questions as $question) {
-    //         $events["echo:{$this->student->id}.answered.{$question->id},Student\QuestionAnswered"] = 'updateData';
-    //     }
-    //     return $events;
-    // }
-
 
     public function mount(User $student, Quiz $quiz)
     {
@@ -69,8 +57,8 @@ class KcsRadar extends Component
     {
         $graph_data = [];
         foreach ($this->kcs as $kc) {
-            $getKcRating = new GetQuizStudentKcRating;
-            $rating = $getKcRating($this->quiz, $kc, $this->student);
+            $rating = KcFacade::getStudentRatingInQuiz($kc, $this->student, $this->quiz);
+
             $graph_data[$kc->name] = $rating;
         }
         $this->graph_data = $graph_data;

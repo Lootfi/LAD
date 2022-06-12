@@ -6,10 +6,10 @@ use App\Models\Course;
 use App\Models\Quiz;
 use App\Models\QuizStudent;
 use App\Models\User;
-use App\Services\Course\Kc\GetCourseKcsAwareness;
-use App\Services\Quiz\CreateLeftOverQuizStudents;
+use KcFacade;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use QuizFacade;
 
 class StudentsExport implements FromCollection, WithHeadings
 {
@@ -18,7 +18,8 @@ class StudentsExport implements FromCollection, WithHeadings
     public $quizzes;
     public $kcs;
 
-    public function __construct(Course $course, $students) {
+    public function __construct(Course $course, $students)
+    {
         $this->course = $course;
         $this->students = $students;
         $this->quizzes = $this->course->quizzes->where('status', 'closed');
@@ -27,7 +28,7 @@ class StudentsExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        $students = User::whereIn('id', $this->students)->get(['id','name','email','last_seen']);
+        $students = User::whereIn('id', $this->students)->get(['id', 'name', 'email', 'last_seen']);
 
         foreach ($this->quizzes as $quiz) {
             // not a problem since we are only looping through closed quizzes
@@ -35,9 +36,9 @@ class StudentsExport implements FromCollection, WithHeadings
 
             foreach ($students as $student) {
                 $qs = QuizStudent::query()
-                            ->where('student_id', $student->id)
-                            ->where('quiz_id', $quiz->id)
-                            ->first();
+                    ->where('student_id', $student->id)
+                    ->where('quiz_id', $quiz->id)
+                    ->first();
 
                 $student['quiz_' . $quiz->id . '_score'] = $qs->score;
             }
@@ -45,17 +46,13 @@ class StudentsExport implements FromCollection, WithHeadings
 
         foreach ($this->kcs as $kc) {
             foreach ($students as $student) {
-                $getAwareness = new GetCourseKcsAwareness;
+                $awareness = KcFacade::getStudentRating($kc, $student);
 
-                $awareness = $getAwareness($kc, $student);
-
-
-                $student['kc: ' . '"' . $kc->name .'" awareness'] = $awareness == 'UNDETERMINED' ? $awareness : $awareness . '%';
+                $student['kc: ' . '"' . $kc->name . '" awareness'] = $awareness == 'UNDETERMINED' ? $awareness : $awareness . '%';
             }
         }
 
         return $students;
-
     }
 
     public function headings(): array
@@ -86,8 +83,7 @@ class StudentsExport implements FromCollection, WithHeadings
             &&
             ($quiz->students->count() < $quiz->course->students()->count())
         ) {
-            $createLeftOvers = new CreateLeftOverQuizStudents;
-            $createLeftOvers($quiz);
+            QuizFacade::createLeftOverStudents($quiz);
         }
     }
 }

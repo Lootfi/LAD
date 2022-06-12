@@ -3,11 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Course;
-use App\Models\Quiz;
 use App\Models\QuizStudent;
-use App\Models\User;
-use App\Services\Quiz\GetStudentQuizScore;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class QuizStudentSeeder extends Seeder

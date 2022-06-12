@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Teacher\Quiz\Monitor\Graphs\Index;
 
 use App\Models\Kc;
 use App\Models\Quiz;
-use App\Services\Quiz\GatherQuizKcsErrorRate;
+use KcFacade;
 use Livewire\Component;
 
 class KcsBar extends Component
@@ -32,27 +32,26 @@ class KcsBar extends Component
             $this->emitTo('teacher.quiz.monitor.graphs.index.kc-error-rate', 'removeData', $kc->id);
         } else {
             array_push($this->selected_kcs, $kc->id);
-            $gather = new GatherQuizKcsErrorRate;
 
-            $data = $gather($this->quiz, $kc);
-            // emit data to graph component
+            $data = KcFacade::getQuizErrorRate($kc, $this->quiz);
+
             $this->emitTo('teacher.quiz.monitor.graphs.index.kc-error-rate', 'gatherData', $kc->id, $data);
         }
     }
 
     public function selectAll()
     {
-        if(count($this->selected_kcs) == $this->kcs->count()) {
+        if (count($this->selected_kcs) == $this->kcs->count()) {
             $this->selected_kcs = [];
             $this->emitTo('teacher.quiz.monitor.graphs.index.kc-error-rate', 'removeAll');
         } else {
             $this->selected_kcs = $this->quiz->kcs()->with('kc')->get()->pluck('kc.id')->unique()->flatten()->toArray();
-            $gather = new GatherQuizKcsErrorRate;
+
             $data = [];
 
             foreach ($this->kcs as $kc) {
                 $kc = Kc::find($kc['id']);
-                $data[$kc->name] = $gather($this->quiz, $kc);
+                $data[$kc->name] = KcFacade::getQuizErrorRate($kc, $this->quiz);
             }
 
             $this->emitTo('teacher.quiz.monitor.graphs.index.kc-error-rate', 'gatherAll', $data);

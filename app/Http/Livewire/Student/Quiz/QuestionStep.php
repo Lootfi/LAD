@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Student\Quiz;
 
+use App\Facades\QuizFacade;
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use App\Models\QuizResponse;
 use App\Models\QuizStudent;
-use App\Services\Quiz\GetStudentQuizScore;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -73,7 +73,7 @@ class QuestionStep extends Component
             });
         }
 
-        
+
 
         if ($submit) {
             $score = $this->getScore();
@@ -85,7 +85,7 @@ class QuestionStep extends Component
                     ->update(['submitted' => true, 'submitted_at' => now(), 'score' => $score]);
             });
         }
-        
+
         event(new \App\Events\Student\QuestionAnswered(auth()->user(), $this->question));
     }
 
@@ -98,9 +98,7 @@ class QuestionStep extends Component
 
     public function getScore()
     {
-        $getScore = new GetStudentQuizScore;
-
-        return $getScore($this->quiz, auth()->user());
+        return QuizFacade::getStudentScore($this->quiz, auth()->user());
     }
 
 

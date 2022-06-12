@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Quiz;
 use App\Models\User;
-use App\Services\Quiz\GetQuizPassPercentage;
 use Illuminate\Http\Request;
+use QuizFacade;
 
 class QuizController extends Controller
 {
@@ -36,9 +36,7 @@ class QuizController extends Controller
         } elseif ($quiz->status == "upcoming") {
             $quiz->pass_percentage = "Not Yet";
         } else {
-            $get_pass_percentage = new GetQuizPassPercentage;
-
-            $quiz->pass_percentage = $get_pass_percentage($quiz) * 100 . '%';
+            $quiz->pass_percentage = QuizFacade::getPassPercentage($quiz) * 100 . '%';
         }
 
         return view('teacher.quiz.show', compact('course', 'quiz'));
