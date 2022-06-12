@@ -4,7 +4,7 @@ namespace App\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class RubixFacade extends Facade
+class KcFacade extends Facade
 {
 
     /**
@@ -12,8 +12,8 @@ class RubixFacade extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
-        return 'rubix';
+        return 'Kc';
     }
 }

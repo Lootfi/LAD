@@ -176,6 +176,8 @@ return [
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\KcFacadeServiceProvider::class,
+        App\Providers\QuizFacadeServiceProvider::class,
     ],
 
     /*
@@ -191,7 +193,8 @@ return [
 
     'aliases' => Facade::defaultAliases()
         ->merge([
-            // ...
+            'KcFacade' => App\Facades\KcFacade::class,
+            'QuizFacade' => App\Facades\QuizFacade::class,
         ])
         ->toArray(),
 ];

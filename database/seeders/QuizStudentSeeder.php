@@ -21,7 +21,7 @@ class QuizStudentSeeder extends Seeder
     {
         $s1 = Course::first()->students->first();
         $s2 = Course::first()->students->get(1);
-        QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => $s1->id, 'submitted' => true, 'submitted_at' => now()->addMinutes(3)]);
+        QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => $s1->id, 'submitted' => false]);
         QuizStudent::factory()->create(['quiz_id' => 1, 'student_id' => $s2->id, 'submitted' => false, 'score' => 0.00]);
     }
 }

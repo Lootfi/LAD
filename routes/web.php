@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\CourseStudentController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
 use App\Http\Controllers\Teacher\CourseController as TeacherCourseController;
@@ -14,11 +13,9 @@ use App\Http\Controllers\Teacher\KCController as TeacherKCController;
 
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\CourseController as StudentCourseController;
-use App\Http\Controllers\Student\SectionController as StudentSectionController;
 use App\Http\Controllers\Student\LessonController as StudentLessonController;
 use App\Http\Controllers\Student\QuizController as StudentQuizController;
 use App\Http\Controllers\Student\NotificationController as StudentNotificationController;
-use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
