@@ -56,7 +56,7 @@
         {{-- show page top navigation --}}
         @include('teacher.course.show-page-top-nav', ['course' => $course])
         @endif
-        <div class="{{ config('adminlte.classes_content') ?: $def_container_class }}">
+        <div class="content_child {{ config('adminlte.classes_content') ?: $def_container_class }}">
             {{-- yield content --}}
             @yield('content')
         </div>

@@ -183,3 +183,18 @@
 });
 </script>
 @endpush
+
+@push('css')
+<style>
+    @media (max-width: 420px) {
+        .chart {
+            width: 100%;
+        }
+
+        .content_child {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+    }
+</style>
+@endpush
