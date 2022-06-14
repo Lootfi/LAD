@@ -12,9 +12,13 @@ use Livewire\Component;
 class Kcs extends Component
 {
     public $student;
+
     public $quiz;
+
     public $kcs;
+
     public $kcs_awareness;
+
     public function getListeners()
     {
         return [

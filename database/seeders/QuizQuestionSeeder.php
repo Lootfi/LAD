@@ -188,7 +188,6 @@ class QuizQuestionSeeder extends Seeder
         $this->secondCourseQuiz();
     }
 
-
     public function secondCourseQuiz()
     {
         //q1

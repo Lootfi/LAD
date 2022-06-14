@@ -10,6 +10,7 @@ use QuizFacade;
 class QuestionsBar extends Component
 {
     public $quiz;
+
     public $selected_questions = [];
 
     public function mount(Quiz $quiz)

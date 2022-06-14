@@ -14,8 +14,11 @@ use QuizFacade;
 class StudentsExport implements FromCollection, WithHeadings
 {
     public Course $course;
+
     public $students;
+
     public $quizzes;
+
     public $kcs;
 
     public function __construct(Course $course, $students)
@@ -40,7 +43,7 @@ class StudentsExport implements FromCollection, WithHeadings
                     ->where('quiz_id', $quiz->id)
                     ->first();
 
-                $student['quiz_' . $quiz->id . '_score'] = $qs->score;
+                $student['quiz_'.$quiz->id.'_score'] = $qs->score;
             }
         }
 
@@ -48,7 +51,7 @@ class StudentsExport implements FromCollection, WithHeadings
             foreach ($students as $student) {
                 $awareness = KcFacade::getStudentRating($kc, $student);
 
-                $student['kc: ' . '"' . $kc->name . '" awareness'] = $awareness == 'UNDETERMINED' ? $awareness : $awareness . '%';
+                $student['kc: '.'"'.$kc->name.'" awareness'] = $awareness == 'UNDETERMINED' ? $awareness : $awareness.'%';
             }
         }
 
@@ -65,13 +68,12 @@ class StudentsExport implements FromCollection, WithHeadings
         ];
 
         foreach ($this->quizzes as $quiz) {
-            array_push($headings, $quiz->name . ' scores');
+            array_push($headings, $quiz->name.' scores');
         }
 
         foreach ($this->kcs as $kc) {
-            array_push($headings, '"' . $kc->name . '" awareness');
+            array_push($headings, '"'.$kc->name.'" awareness');
         }
-
 
         return $headings;
     }
@@ -79,7 +81,7 @@ class StudentsExport implements FromCollection, WithHeadings
     public function createLeftOversIfQuizIsOver(Quiz $quiz)
     {
         if (
-            ($quiz->status == "closed")
+            ($quiz->status == 'closed')
             &&
             ($quiz->students->count() < $quiz->course->students()->count())
         ) {

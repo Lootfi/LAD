@@ -11,8 +11,9 @@ class StudentQuizMessage extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject = "";
-    public $content = "";
+    public $subject = '';
+
+    public $content = '';
 
     /**
      * Create a new message instance.

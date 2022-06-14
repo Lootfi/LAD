@@ -21,21 +21,21 @@ class StudentsImport implements ToCollection, WithCustomCsvSettings, SkipsOnErro
 
     public Course $course;
 
-    function __construct(Course $course) {
+    public function __construct(Course $course)
+    {
         $this->course = $course;
-      }
+    }
 
     public function getCsvSettings(): array
     {
         return [
-            'delimiter' => ';'
+            'delimiter' => ';',
         ];
     }
 
     public function collection(Collection $rows)
     {
-        foreach ($rows as $row) 
-        {
+        foreach ($rows as $row) {
             $user = User::query()
             ->firstOrCreate([
                 'email'    => $row['email'],
@@ -43,7 +43,7 @@ class StudentsImport implements ToCollection, WithCustomCsvSettings, SkipsOnErro
             [
                 'name'     => $row['name'],
                 'password' => isset($row['password']) ? \Hash::make($row['Password']) : \Hash::make('password'),
-             ]
+            ]
             );
 
             CourseStudent::query()
@@ -51,7 +51,6 @@ class StudentsImport implements ToCollection, WithCustomCsvSettings, SkipsOnErro
                 'student_id' => $user->id,
                 'course_id' => $this->course->id,
             ]);
-
         }
     }
 }

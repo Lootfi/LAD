@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-
     //index function
     public function index()
     {
@@ -17,11 +16,11 @@ class StudentController extends Controller
 
     public function manage(Course $course)
     {
-        return view('teacher.course.students',compact('course'));
+        return view('teacher.course.students', compact('course'));
     }
 
     public function import(Course $course)
     {
-        return view('teacher.student.import',compact('course'));
+        return view('teacher.student.import', compact('course'));
     }
 }

@@ -12,12 +12,19 @@ use Spatie\Activitylog\Models\Activity;
 class InfoTable extends Component
 {
     public $quiz;
+
     public $students;
+
     public $students_online;
+
     public $students_passing_quiz_in_last_x;
+
     public $students_struggling;
+
     public $students_with_perfect_score;
+
     public $students_with_all_wrong_answers;
+
     public $students_who_havent_started_quiz_yet;
 
     public function mount(Quiz $quiz)
@@ -41,6 +48,7 @@ class InfoTable extends Component
         $this->getStudentsWithAllWrongAnswers();
         $this->getStudentsWhoHaventStartedQuizYet();
     }
+
     public function render()
     {
         return view('livewire.teacher.quiz.monitor.info-table');
@@ -51,8 +59,9 @@ class InfoTable extends Component
         $this->students_online = collect();
 
         foreach ($this->students as $student) {
-            if ($student->isOnline())
+            if ($student->isOnline()) {
                 $this->students_online->push($student);
+            }
         }
     }
 
@@ -69,8 +78,6 @@ class InfoTable extends Component
             ->get()
             ->pluck('causer')
             ->unique();
-
-
 
         $students_who_submited_in_x = Activity::query()
             ->where('log_name', 'student.quiz.submit')
@@ -118,7 +125,9 @@ class InfoTable extends Component
                     $score = 0;
                     foreach ($questions as $question) {
                         $correct = QuizFacade::getQuestionCorrectness($student, $question);
-                        if ($correct) $score++;
+                        if ($correct) {
+                            $score++;
+                        }
                     }
 
                     $score = $score / $questions->count();
@@ -143,7 +152,6 @@ class InfoTable extends Component
 
     public function getStudentsWithAllWrongAnswers()
     {
-
         $students_with_all_wrong_answers = collect();
 
         foreach ($this->students as $student) {
@@ -166,7 +174,9 @@ class InfoTable extends Component
                     $score = 0;
                     foreach ($questions as $question) {
                         $correct = QuizFacade::getQuestionCorrectness($student, $question);
-                        if ($correct) $score++;
+                        if ($correct) {
+                            $score++;
+                        }
                     }
                     // TODO: DO NOT Hardcode passing score, let teacher specify it in quiz edit
                     if ($score == 0) {

@@ -9,9 +9,8 @@ use Livewire\Component;
 
 class KcErrorRate extends Component
 {
-
-
     public $quiz;
+
     public $graph_data = [];
 
     protected $listeners = [
@@ -34,7 +33,7 @@ class KcErrorRate extends Component
     public function gatherData(Kc $kc, $data)
     {
         $this->graph_data[$kc->name] = [
-            ...$data
+            ...$data,
         ];
 
         $this->emit('addKcDataToGraph', $kc->name, $data);

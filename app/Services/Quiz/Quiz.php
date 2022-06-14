@@ -13,6 +13,7 @@ class Quiz
     {
         dd('help');
     }
+
     public static function createLeftOverStudents(QuizModel $quiz)
     {
         return (new CreateLeftOverQuizStudents)($quiz);

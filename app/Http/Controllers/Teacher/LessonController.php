@@ -31,13 +31,13 @@ class LessonController extends Controller
     public function create(Course $course, Section $section)
     {
         $course->load('kcs');
+
         return view('teacher.lesson.create', compact('course', 'section'));
     }
 
     // store method
     public function store(Request $request, Course $course, Section $section)
     {
-
         $lesson = $section->lessons()->create($request->all());
 
         if ($request->kcs) {
@@ -65,7 +65,6 @@ class LessonController extends Controller
     // edit method
     public function edit(Course $course, Section $section, Lesson $lesson)
     {
-
         $lesson->load('kcs');
         $course->load('kcs');
 
@@ -75,7 +74,6 @@ class LessonController extends Controller
     // update method
     public function update(Request $request, Course $course, Section $section, Lesson $lesson)
     {
-
         $lesson->update([
             'name' => $request->name,
             'description' => $request->description,
@@ -89,7 +87,7 @@ class LessonController extends Controller
             'session_id' => Session::getId(),
             'lesson_id' => null,
         ])->get()->each(function ($file) use ($lesson) {
-            $new_path = asset('storage/lessons/' . $lesson->id . '/' . $file->file_name);
+            $new_path = asset('storage/lessons/'.$lesson->id.'/'.$file->file_name);
             Storage::move($file->path, $new_path);
             $file->update([
                 'lesson_id' => $lesson->id,
@@ -134,21 +132,21 @@ class LessonController extends Controller
             $extension = $request->file('file')->getClientOriginalExtension();
 
             //filename to store
-            $filenametostore = $filename . '_' . time() . '.' . $extension;
+            $filenametostore = $filename.'_'.time().'.'.$extension;
 
             //Upload File temporarly until lesson is created or updated
-            $request->file('file')->storeAs('public/temp/' . Session::getId(), $filenametostore);
+            $request->file('file')->storeAs('public/temp/'.Session::getId(), $filenametostore);
             //path to file
-            $path = asset('storage/temp/' . Session::getId() . '/' . $filenametostore);
+            $path = asset('storage/temp/'.Session::getId().'/'.$filenametostore);
             //create lesson file
             LessonFile::create([
                 'path' => $path,
                 'file_name' => $filenametostore,
                 'session_id' => Session::getId(),
-                'lesson_id' => $request->lesson_id == "create" ? null : $request->lesson_id,
+                'lesson_id' => $request->lesson_id == 'create' ? null : $request->lesson_id,
             ]);
 
-            return response()->json(['url' => $path, 'href' => $path . "?content-disposition=attachment"]);
+            return response()->json(['url' => $path, 'href' => $path.'?content-disposition=attachment']);
         }
     }
 }

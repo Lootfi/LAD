@@ -8,7 +8,9 @@ use Livewire\Component;
 class Create extends Component
 {
     public Course $course;
+
     public $name;
+
     public $description;
 
     public function mount()

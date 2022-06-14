@@ -3,14 +3,15 @@
 namespace App\Http\Livewire\Teacher\Kc;
 
 use App\Models\Kc;
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\QuizQuestion;
 use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class Questions extends DataTableComponent
 {
     public $kc;
+
     public $questionids;
 
     // listeners
@@ -24,7 +25,6 @@ class Questions extends DataTableComponent
         $this->questionids = $questionids;
     }
 
-
     public function configure(): void
     {
         $this->setPrimaryKey('id')
@@ -37,26 +37,25 @@ class Questions extends DataTableComponent
             ->whereIn('id', $this->questionids);
     }
 
-
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make('Id', 'id')
                 ->hideIf(true),
-            Column::make("Question", "question")
+            Column::make('Question', 'question')
                 ->sortable(),
-            Column::make("Quiz id", "quiz_id")
+            Column::make('Quiz id', 'quiz_id')
                 ->hideIf(true),
-            Column::make("Order", "order")
+            Column::make('Order', 'order')
                 ->hideIf(true),
-            Column::make("Created at", "created_at")
+            Column::make('Created at', 'created_at')
                 ->sortable(),
-            Column::make("Updated at", "updated_at")
+            Column::make('Updated at', 'updated_at')
                 ->hideIf(true),
-            Column::make("Actions")
+            Column::make('Actions')
                 ->label(function (QuizQuestion $row) {
                     return view('teacher.kc.partials.question-actions')->withRow($row);
-                })
+                }),
         ];
     }
 }

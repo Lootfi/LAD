@@ -7,10 +7,10 @@ use App\Models\Quiz;
 
 class GatherQuizKcsErrorRate
 {
-
     public function __invoke(Quiz $quiz, Kc $kc)
     {
         $data = $this->getKcErrorRate($quiz, $kc);
+
         return $data;
     }
 

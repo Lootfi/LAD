@@ -3,14 +3,15 @@
 namespace App\Http\Livewire\Teacher\Kc;
 
 use App\Models\Kc;
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Lesson;
 use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class Lessons extends DataTableComponent
 {
     public $kc;
+
     public $lessonids;
 
     protected $listeners = [
@@ -35,25 +36,23 @@ class Lessons extends DataTableComponent
             ->whereIn('id', $this->lessonids);
     }
 
-
-
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make('Id', 'id')
                 ->hideIf(true),
-            Column::make("Lesson Name", "name")
+            Column::make('Lesson Name', 'name')
                 ->sortable(),
-            Column::make("Status", "status")
+            Column::make('Status', 'status')
                 ->hideIf(true),
-            Column::make("Created at", "created_at")
+            Column::make('Created at', 'created_at')
                 ->sortable(),
-            Column::make("Updated at", "updated_at")
+            Column::make('Updated at', 'updated_at')
                 ->hideIf(true),
-            Column::make("Actions")
+            Column::make('Actions')
                 ->label(function (Lesson $row) {
                     return view('teacher.kc.partials.lesson-actions')->withRow($row);
-                })
+                }),
         ];
     }
 }

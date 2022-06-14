@@ -13,10 +13,12 @@ class CourseController extends Controller
     {
         return view('student.course.index', ['courses' => auth()->user()->courses]);
     }
+
     // show course
     public function show(Course $course)
     {
         $course->load(['quizzes', 'teacher', 'sections.lessons']);
+
         return view('student.course.show', compact('course'));
     }
 }

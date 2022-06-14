@@ -13,7 +13,7 @@ class LessonFile extends Model
         'path',
         'lesson_id',
         'session_id',
-        'file_name'
+        'file_name',
     ];
 
     public function lesson()

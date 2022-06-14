@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class SectionController extends Controller
 {
-
     public function index(Course $course)
     {
         $course->load('sections');
@@ -21,7 +20,6 @@ class SectionController extends Controller
     {
         return view('teacher.section.show', compact('section', 'course'));
     }
-
 
     public function create(Course $course)
     {

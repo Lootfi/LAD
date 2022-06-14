@@ -11,13 +11,21 @@ use Livewire\Component;
 class Split extends Component
 {
     public Course $course;
+
     public int $current_step = 1;
+
     public Kc $kc;
+
     public $questions;
+
     public $lessons;
+
     public $splitnum = 2;
+
     public $splits = [];
+
     public $lessons_kcs = [];
+
     public $questions_kcs = [];
 
     public $new_kcs;
@@ -28,7 +36,6 @@ class Split extends Component
         'lessons_kcs.*' => 'required|array',
         'questions_kcs.*' => 'required|array',
     ];
-
 
     public function updated($propertyName)
     {
@@ -75,9 +82,9 @@ class Split extends Component
 
     public function setupForSecondStep()
     {
-        for ($i=1; $i <= $this->splitnum; $i++) { 
-            if(!isset($this->splits[$i])) {
-                $this->splits[$i] = "";
+        for ($i = 1; $i <= $this->splitnum; $i++) {
+            if (! isset($this->splits[$i])) {
+                $this->splits[$i] = '';
             }
         }
     }
@@ -130,7 +137,7 @@ class Split extends Component
             ->create([
                 'name' => $split,
                 'description' => $split,
-                'course_id' => $this->course->id
+                'course_id' => $this->course->id,
             ]));
         }
 
@@ -147,7 +154,7 @@ class Split extends Component
 
                 KCL::query()->create([
                     'kc_id' => $kc->id,
-                    'lesson_id' => $lesson->id
+                    'lesson_id' => $lesson->id,
                 ]);
             }
         }
@@ -163,7 +170,7 @@ class Split extends Component
 
                 KCQ::query()->create([
                     'kc_id' => $kc->id,
-                    'question_id' => $question->id
+                    'question_id' => $question->id,
                 ]);
             }
         }

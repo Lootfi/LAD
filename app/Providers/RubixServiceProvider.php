@@ -13,8 +13,8 @@ class RubixServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/rubixai_config.php', 'rubixai');
-        if (!defined('RUBIX_CUSTOM_CONFIG')) {
+        $this->mergeConfigFrom(__DIR__.'/../config/rubixai_config.php', 'rubixai');
+        if (! defined('RUBIX_CUSTOM_CONFIG')) {
             define('RUBIX_CUSTOM_CONFIG', config('rubix'));
         }
 
@@ -32,7 +32,6 @@ class RubixServiceProvider extends ServiceProvider
     {
         //
     }
-
 
     /**
      * Get the services provided by the provider.

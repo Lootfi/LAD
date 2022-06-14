@@ -17,6 +17,7 @@ class QuestionAnswered implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public User $student;
+
     public QuizQuestion $question;
 
     /**
@@ -37,6 +38,6 @@ class QuestionAnswered implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel($this->student->id . '.answered.' . $this->question->id);
+        return new Channel($this->student->id.'.answered.'.$this->question->id);
     }
 }

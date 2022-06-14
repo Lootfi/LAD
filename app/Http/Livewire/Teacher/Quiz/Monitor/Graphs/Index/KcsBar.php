@@ -10,12 +10,13 @@ use Livewire\Component;
 class KcsBar extends Component
 {
     public $quiz;
+
     public $kcs;
+
     public $selected_kcs = [];
 
     public function mount(Quiz $quiz)
     {
-
         $this->quiz = $quiz;
         $this->kcs = $this->quiz->kcs()->with('kc')->get()->pluck('kc')->unique();
     }

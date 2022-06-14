@@ -32,7 +32,6 @@ class LogStudentActivity
         return $next($request);
     }
 
-
     /*
     * logViewCourse
     *

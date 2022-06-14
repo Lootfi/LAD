@@ -9,6 +9,7 @@ use Livewire\Component;
 class Index extends Component
 {
     public $student;
+
     public $quiz;
 
     public function mount(User $student, Quiz $quiz)

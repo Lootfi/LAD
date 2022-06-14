@@ -33,7 +33,7 @@
         <input type="number" class="form-control" id="time_limit" name="duration" placeholder="Enter time limit"
             required>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Create</button>
 </form>
 
 

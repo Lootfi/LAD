@@ -12,7 +12,6 @@ use Symfony\Component\Console\Question\Question;
 
 class QuizQuestionController extends Controller
 {
-
     public function update(Request $request, Quiz $quiz, QuizQuestion $question)
     {
         $course = $quiz->course;
@@ -30,7 +29,7 @@ class QuizQuestionController extends Controller
         $answers->each(function ($answer) use ($request) {
             $answer->update([
                 'answer' => $request->answers[$answer->id],
-                'right_answer' => in_array($answer->id, $request->get("right-answers")),
+                'right_answer' => in_array($answer->id, $request->get('right-answers')),
             ]);
             $answer->save();
         });
@@ -50,7 +49,6 @@ class QuizQuestionController extends Controller
     {
         $course = $quiz->course;
         $quiz->load('questions');
-
 
         $question = $quiz->questions()->create([
             'question' => $request->question,

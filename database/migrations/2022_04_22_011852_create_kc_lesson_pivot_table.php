@@ -3,8 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,7 +12,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kc_lessons', function (Blueprint $table) {
-
             $table->unsignedBigInteger('kc_id')->index()->nullable();
             $table->foreign('kc_id')->references('id')->on('kcs')->onDelete('cascade');
 

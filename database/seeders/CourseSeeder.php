@@ -18,14 +18,14 @@ class CourseSeeder extends Seeder
     {
         Course::factory(1)->create(
             [
-                'title' => "Software Engineering 2021-2022",
+                'title' => 'Software Engineering 2021-2022',
             ]
         );
 
         Course::factory(1)->create(
             [
-                'title' => "Machine Learning 2021-2022",
-                'teacher_id' => 2
+                'title' => 'Machine Learning 2021-2022',
+                'teacher_id' => 2,
             ]
         );
     }

@@ -451,7 +451,7 @@ return [
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js',
                 ],
             ],
-        ]
+        ],
     ],
 
     /*

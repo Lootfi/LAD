@@ -28,7 +28,7 @@ class StudentSubmittedQuiz
                 ->where('student_id', auth()->user()->id)
                 ->where('submitted', true)
                 ->first();
-            if ($quizStudentSubmitted || $quiz->status == "closed") {
+            if ($quizStudentSubmitted || $quiz->status == 'closed') {
                 return redirect()->route('student.quiz.results', ['course' => $quiz->course, 'quiz' => $quiz]);
             }
         } elseif ($routeName == 'student.quiz.results') {
@@ -38,10 +38,11 @@ class StudentSubmittedQuiz
                 ->where('student_id', auth()->user()->id)
                 ->where('submitted', true)
                 ->first();
-            if ($quizStudentSubmitted == null && $quiz->status != "closed") {
+            if ($quizStudentSubmitted == null && $quiz->status != 'closed') {
                 return redirect()->route('student.quiz.show', ['course' => $quiz->course, 'quiz' => $quiz]);
             }
         }
+
         return $next($request);
     }
 }

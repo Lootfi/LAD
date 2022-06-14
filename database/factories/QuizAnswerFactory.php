@@ -17,7 +17,7 @@ class QuizAnswerFactory extends Factory
     public function definition()
     {
         return [
-            'answer' => $this->faker->sentence(2) . '.',
+            'answer' => $this->faker->sentence(2).'.',
         ];
     }
 }

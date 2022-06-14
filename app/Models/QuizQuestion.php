@@ -44,17 +44,17 @@ class QuizQuestion extends Model
 
     protected $fillable = ['question', 'quiz_id', 'order'];
 
-    function quiz(): BelongsTo
+    public function quiz(): BelongsTo
     {
         return $this->belongsTo(Quiz::class, 'quiz_id');
     }
 
-    function answers(): HasMany
+    public function answers(): HasMany
     {
         return $this->hasMany(QuizAnswer::class, 'question_id');
     }
 
-    function responses(): HasMany
+    public function responses(): HasMany
     {
         return $this->hasMany(QuizResponse::class, 'question_id');
     }

@@ -14,6 +14,7 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $course->load(['sections.lessons', 'students']);
+
         return view('teacher.course.show', compact('course'));
     }
 }

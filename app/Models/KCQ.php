@@ -15,7 +15,7 @@ class KCQ extends Pivot
 
     protected $fillable = [
         'kc_id',
-        'question_id'
+        'question_id',
     ];
 
     public function kc(): BelongsTo

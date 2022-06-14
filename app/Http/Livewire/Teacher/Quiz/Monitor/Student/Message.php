@@ -11,14 +11,17 @@ use Livewire\Component;
 
 class Message extends Component
 {
-
     public Quiz $quiz;
-    public User $student;
-    public $message_method = 'email';
-    public $email = '';
-    public $message_subject = '';
-    public $message_content = '';
 
+    public User $student;
+
+    public $message_method = 'email';
+
+    public $email = '';
+
+    public $message_subject = '';
+
+    public $message_content = '';
 
     public function mount(Quiz $quiz, User $student)
     {
@@ -34,7 +37,7 @@ class Message extends Component
 
     public function send()
     {
-        if ($this->message_method == "email") {
+        if ($this->message_method == 'email') {
             $this->sendEmail();
         } else {
             $this->sendInAppNotification();

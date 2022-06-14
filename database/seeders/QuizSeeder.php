@@ -17,12 +17,12 @@ class QuizSeeder extends Seeder
     {
         Quiz::factory()->create([
             'start_date' => now()->subMinute(),
-            'duration' => 20
+            'duration' => 20,
         ]);
         Quiz::factory()->create([
             'course_id' => 2,
             'start_date' => now(),
-            'duration' => 20
+            'duration' => 20,
         ]);
     }
 }

@@ -39,6 +39,7 @@ class QuizStudent extends Model
     use HasFactory, LogsActivity;
 
     protected $table = 'quiz_students';
+
     protected static $recordEvents = ['created'];
 
     protected $fillable = [

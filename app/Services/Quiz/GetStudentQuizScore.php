@@ -7,7 +7,6 @@ use App\Models\User;
 
 class GetStudentQuizScore
 {
-
     // invoke
     public function __invoke(Quiz $quiz, User $student)
     {
@@ -16,7 +15,6 @@ class GetStudentQuizScore
 
     public function getStudentQuizScore(Quiz $quiz, User $student)
     {
-
         $questions = $quiz->questions;
 
         $score = 0;

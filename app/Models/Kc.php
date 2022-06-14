@@ -17,7 +17,7 @@ class Kc extends Model
         'course_id',
     ];
 
-    function students(): BelongsToMany
+    public function students(): BelongsToMany
     {
         return $this->belongsToMany(
             User::class,

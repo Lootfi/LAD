@@ -13,6 +13,7 @@ class ImportStudents extends Component
     use WithFileUploads;
 
     public Course $course;
+
     public $students_file;
 
     public function mount(Course $course)
@@ -23,10 +24,10 @@ class ImportStudents extends Component
     public function save()
     {
         $this->validate([
-            'students_file' => 'required|mimes:csv,txt,xlsx'
+            'students_file' => 'required|mimes:csv,txt,xlsx',
         ]);
 
-        $this->students_file->storeAs('students_csv', 'students_course-' . $this->course->id . '_' . date('m-d-Y_hia'));
+        $this->students_file->storeAs('students_csv', 'students_course-'.$this->course->id.'_'.date('m-d-Y_hia'));
 
         $import = new StudentsImport($this->course);
         $import->import($this->students_file);

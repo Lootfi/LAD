@@ -9,6 +9,7 @@ use Livewire\Component;
 class SortQuestions extends Component
 {
     public Quiz $quiz;
+
     public array $questions;
 
     public function reorderQuestions($newOrderIds)

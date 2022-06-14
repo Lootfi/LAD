@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\QuizStudents;
 use App\Http\Requests\StoreQuizStudentsRequest;
 use App\Http\Requests\UpdateQuizStudentsRequest;
+use App\Models\QuizStudents;
 
 class QuizStudentsController extends Controller
 {

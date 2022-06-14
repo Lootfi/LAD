@@ -4,18 +4,19 @@ namespace App\Http\Livewire\Teacher\Lesson\Cards\Graphs;
 
 use App\Models\Lesson;
 use App\Models\User;
-use Spatie\Activitylog\Models\Activity;
 use Livewire\Component;
+use Spatie\Activitylog\Models\Activity;
 
 class StudentsActivity extends Component
 {
-
     public $lesson;
+
     public $studentsActivity;
+
     public $time = '1 month';
 
     protected $listeners = [
-        'echo:student-activity,Student\ViewLesson' => 'updateStudentsActivity'
+        'echo:student-activity,Student\ViewLesson' => 'updateStudentsActivity',
     ];
 
     public function mount(Lesson $lesson)
@@ -53,11 +54,12 @@ class StudentsActivity extends Component
         if ($this->studentsActivity == null) {
             $this->studentsActivity = $activities;
             $this->emit('addLessonVisitData', $this->studentsActivity);
+
             return;
         }
 
         $diff = $activities->diff($this->studentsActivity);
-        if (!$diff->isEmpty()) {
+        if (! $diff->isEmpty()) {
             $this->studentsActivity = $activities;
             $this->emit('addLessonVisitData', $diff);
         }

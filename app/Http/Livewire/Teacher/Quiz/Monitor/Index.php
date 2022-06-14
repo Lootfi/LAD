@@ -10,9 +10,10 @@ use QuizFacade;
 
 class Index extends Component
 {
-
     public Course $course;
+
     public Quiz $quiz;
+
     public $search = '';
 
     protected $listeners = [
@@ -32,7 +33,7 @@ class Index extends Component
         return view(
             'livewire.teacher.quiz.monitor.index',
             [
-                'students' => $this->course->students()->search($this->search)->get()
+                'students' => $this->course->students()->search($this->search)->get(),
             ]
         );
     }
@@ -44,7 +45,7 @@ class Index extends Component
         $this->emitTo('teacher.quiz.monitor.graphs.index.questions-error-rate', 'gatherData', $question->id, $data);
     }
 
-    function deselectQuestion(QuizQuestion $question)
+    public function deselectQuestion(QuizQuestion $question)
     {
         $this->emitTo('teacher.quiz.monitor.graphs.index.questions-error-rate', 'removeData', $question->id);
     }
@@ -52,7 +53,7 @@ class Index extends Component
     public function createLeftOversIfQuizIsOver()
     {
         if (
-            ($this->quiz->status == "closed")
+            ($this->quiz->status == 'closed')
             &&
             ($this->quiz->students->count() < $this->quiz->course->students()->count())
         ) {

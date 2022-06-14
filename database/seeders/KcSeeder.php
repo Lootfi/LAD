@@ -26,11 +26,10 @@ class KcSeeder extends Seeder
         $this->secondCourse();
     }
 
-
     public function firstCourse()
     {
         $kc = Kc::factory()->create([
-            'name' => 'ocl_types'
+            'name' => 'ocl_types',
         ]);
 
         KCL::query()->create([
@@ -54,7 +53,7 @@ class KcSeeder extends Seeder
         // ===================================
 
         $kc = Kc::factory()->create([
-            'name' => 'ocl_navigation'
+            'name' => 'ocl_navigation',
         ]);
 
         KCL::query()->create([
@@ -73,7 +72,7 @@ class KcSeeder extends Seeder
         // ===================================
 
         $kc = Kc::factory()->create([
-            'name' => 'ocl_operations'
+            'name' => 'ocl_operations',
         ]);
 
         KCL::query()->create([
@@ -92,34 +91,7 @@ class KcSeeder extends Seeder
         // ===================================
 
         $kc = Kc::factory()->create([
-            'name' => 'model-cascade'
-        ]);
-
-
-        KCL::query()->create([
-            'kc_id' => $kc->id,
-            'lesson_id' => 1,
-        ]);
-
-        // ===================================
-        // ===================================
-
-
-        $kc = Kc::factory()->create([
-            'name' => 'model-v'
-        ]);
-
-        KCL::query()->create([
-            'kc_id' => $kc->id,
-            'lesson_id' => 1,
-        ]);
-
-
-        // ===================================
-        // ===================================
-
-        $kc = Kc::factory()->create([
-            'name' => 'model-spirale'
+            'name' => 'model-cascade',
         ]);
 
         KCL::query()->create([
@@ -131,7 +103,31 @@ class KcSeeder extends Seeder
         // ===================================
 
         $kc = Kc::factory()->create([
-            'name' => 'design-patterns'
+            'name' => 'model-v',
+        ]);
+
+        KCL::query()->create([
+            'kc_id' => $kc->id,
+            'lesson_id' => 1,
+        ]);
+
+        // ===================================
+        // ===================================
+
+        $kc = Kc::factory()->create([
+            'name' => 'model-spirale',
+        ]);
+
+        KCL::query()->create([
+            'kc_id' => $kc->id,
+            'lesson_id' => 1,
+        ]);
+
+        // ===================================
+        // ===================================
+
+        $kc = Kc::factory()->create([
+            'name' => 'design-patterns',
         ]);
 
         KCL::query()->create([
@@ -196,7 +192,7 @@ class KcSeeder extends Seeder
 
         $kc = Kc::factory()->create([
             'course_id' => $c->id,
-            'name' => 'python_types'
+            'name' => 'python_types',
         ]);
 
         KCL::query()->create([

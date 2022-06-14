@@ -2,14 +2,13 @@
 
 namespace App\Http\Livewire\Teacher\Kc;
 
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Kc;
 use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class Table extends DataTableComponent
 {
-
     // listeners
     protected $listeners = [
         'kcCreated' => '$refresh',
@@ -30,23 +29,23 @@ class Table extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make('Id', 'id')
                 ->hideIf(true),
-            Column::make("Name", "name")
+            Column::make('Name', 'name')
                 ->sortable(),
-            Column::make("Course id", "course_id")
+            Column::make('Course id', 'course_id')
                 ->hideIf(true),
-            Column::make("Lessons")
+            Column::make('Lessons')
                 ->label(function (Kc $kc) {
                     return $kc->lessons->count();
                 }),
-            Column::make("Questions")
+            Column::make('Questions')
                 ->label(function (Kc $kc) {
                     return $kc->questions->count();
                 }),
-            Column::make("Created at", "created_at")
+            Column::make('Created at', 'created_at')
                 ->sortable(),
-            Column::make("Updated at", "updated_at")
+            Column::make('Updated at', 'updated_at')
                 ->hideIf(true),
             Column::make('Actions')
                 ->label(function (Kc $row) {

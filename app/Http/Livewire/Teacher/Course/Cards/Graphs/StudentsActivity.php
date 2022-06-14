@@ -9,12 +9,15 @@ use Spatie\Activitylog\Models\Activity;
 class StudentsActivity extends Component
 {
     public $course;
+
     public $studentsActivity = null;
+
     public $time = '1 month';
+
     public $studentsLessonViews = null;
 
     protected $listeners = [
-        'echo:student-activity,Student\ViewCourse' => 'updateStudentsActivity'
+        'echo:student-activity,Student\ViewCourse' => 'updateStudentsActivity',
     ];
 
     public function mount()
@@ -58,7 +61,6 @@ class StudentsActivity extends Component
 
     public function getLessonViews()
     {
-
         $activities = Activity::select(['causer_id'])
             ->where('subject_type', 'App\Models\Lesson')
             ->whereIn('subject_id', $this->course->lessons->pluck(['id'])->toArray())

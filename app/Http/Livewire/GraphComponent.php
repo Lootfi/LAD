@@ -8,7 +8,7 @@ abstract class GraphComponent extends Component
 {
     public $data;
 
-    public abstract function updateGraphData();
+    abstract public function updateGraphData();
 
-    public abstract function getNewData();
+    abstract public function getNewData();
 }

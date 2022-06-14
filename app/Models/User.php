@@ -58,7 +58,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
-
     /**
      * The attributes that are mass assignable.
      *
@@ -82,12 +81,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    function teaches()
+    public function teaches()
     {
         return $this->hasOne(Course::class, 'teacher_id', 'id');
     }
 
-    function courses(): BelongsToMany
+    public function courses(): BelongsToMany
     {
         return $this->belongsToMany(
             Course::class,
@@ -109,12 +108,12 @@ class User extends Authenticatable
 
     public function isOnline()
     {
-        return Cache::has('is_online_' . $this->id);
+        return Cache::has('is_online_'.$this->id);
     }
 
     public function scopeSearch(Builder $query, string $search)
     {
-        return $search ? $query->where('name', 'like', '%' . $search . '%') : $query;
+        return $search ? $query->where('name', 'like', '%'.$search.'%') : $query;
     }
 
     /**
@@ -126,5 +125,4 @@ class User extends Authenticatable
     {
         return 'users.'.$this->id;
     }
-
 }

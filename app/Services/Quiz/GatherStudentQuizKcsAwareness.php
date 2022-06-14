@@ -7,18 +7,16 @@ use App\Models\User;
 
 class GatherStudentQuizKcsAwareness
 {
-
     public function __invoke(User $student, Quiz $quiz)
     {
         $data = $this->getKcsAwareness($student, $quiz);
+
         return $data;
     }
 
     public function getKcsAwareness(User $student, Quiz $quiz)
     {
-
         $kcs = $quiz->kcs()->with('kc')->get()->pluck('kc')->unique();
-
 
         $kcAware = [];
         foreach ($kcs as $kc) {
@@ -38,9 +36,15 @@ class GatherStudentQuizKcsAwareness
 
             $count = array_count_values($correctQuestion);
 
-            if (!isset($count[1])) $count[1] = 0;
-            if (!isset($count[0])) $count[0] = 0;
-            if (!isset($count[-1])) $count[-1] = 0;
+            if (! isset($count[1])) {
+                $count[1] = 0;
+            }
+            if (! isset($count[0])) {
+                $count[0] = 0;
+            }
+            if (! isset($count[-1])) {
+                $count[-1] = 0;
+            }
 
             $kcAware[$kc->id] = $this->compareCorrectResponsesCount($count[1], $count[0], $count[-1]);
         }
@@ -48,23 +52,26 @@ class GatherStudentQuizKcsAwareness
         return $kcAware;
     }
 
-
     public function compareCorrectResponsesCount($correct, $uncorrect, $unanswered)
     {
         if ($correct > $uncorrect) {
-            if ($correct == $unanswered)
+            if ($correct == $unanswered) {
                 return -1;
-            if ($correct > $unanswered)
+            }
+            if ($correct > $unanswered) {
                 return 1;
-            else
+            } else {
                 return -1;
+            }
         } else {
-            if ($correct == $uncorrect)
+            if ($correct == $uncorrect) {
                 return -1;
-            if ($uncorrect > $unanswered)
+            }
+            if ($uncorrect > $unanswered) {
                 return 0;
-            else
+            } else {
                 return -1;
+            }
         }
     }
 }

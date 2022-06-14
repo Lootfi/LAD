@@ -17,9 +17,10 @@ class DashboardController extends Controller
         $this->middleware('role:teacher');
     }
 
-    function index()
+    public function index()
     {
         $teacher = auth()->user();
+
         return view('teacher.dashboard', ['course' => $teacher->teaches]);
     }
 }

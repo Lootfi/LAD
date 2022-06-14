@@ -10,9 +10,10 @@ use Spatie\Activitylog\Models\Activity;
 
 class Index extends Component
 {
-
     public User $student;
+
     public Quiz $quiz;
+
     public $logs;
 
     public function mount(User $student, Quiz $quiz)

@@ -13,10 +13,13 @@ use Livewire\Component;
 class QuestionStep extends Component
 {
     public QuizQuestion $question;
+
     public Quiz $quiz;
 
     public $step; //current step
+
     public $lastQuestion; //boolean to indicate if this is the last question
+
     public $responses = []; //array of responses
 
     protected $listeners = [
@@ -73,8 +76,6 @@ class QuestionStep extends Component
             });
         }
 
-
-
         if ($submit) {
             $score = $this->getScore();
             DB::transaction(function () use ($score) {
@@ -100,7 +101,6 @@ class QuestionStep extends Component
     {
         return QuizFacade::getStudentScore($this->quiz, auth()->user());
     }
-
 
     public function render()
     {

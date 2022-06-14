@@ -11,8 +11,11 @@ use Livewire\Component;
 class KcsRadar extends Component
 {
     public $quiz;
+
     public $student;
+
     public $kcs;
+
     public $graph_data = [];
 
     public function mount(User $student, Quiz $quiz)
@@ -30,7 +33,6 @@ class KcsRadar extends Component
 
     public function getKcs()
     {
-
         $quiz_student = $this->quiz->students()->where('student_id', $this->student->id)->first();
 
         if ($quiz_student != null && $quiz_student->submitted) {

@@ -11,7 +11,6 @@ class KCController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
      */
     // public function index(Course $course)
     // {
@@ -39,7 +38,6 @@ class KCController extends Controller
      */
     public function store(Request $request, Course $course)
     {
-
         $kc = new Kc();
         $kc->name = $request->name;
         $kc->description = $request->description;
@@ -58,7 +56,6 @@ class KCController extends Controller
      */
     public function faststore(Request $request, Course $course)
     {
-
         $kc = new Kc();
         $kc->name = $request->name;
         $kc->description = $request->description;
@@ -94,7 +91,6 @@ class KCController extends Controller
      */
     public function update(Request $request, Course $course, Kc $kc)
     {
-
         $kc->name = $request->name;
         $kc->description = $request->description;
         $kc->save();
@@ -118,14 +114,13 @@ class KCController extends Controller
         ]);
     }
 
-
     public function split(Course $course, Kc $kc)
     {
         return view('teacher.kc.split', [
             'course' => $course,
             'kc' => $kc,
             'questions' => $kc->questions,
-            'lessons' => $kc->lessons
+            'lessons' => $kc->lessons,
         ]);
     }
 }

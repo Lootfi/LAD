@@ -2,23 +2,21 @@
 
 namespace App\Http\Livewire\Teacher\Quiz;
 
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Quiz;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class Table extends DataTableComponent
 {
-
     public function builder(): Builder
     {
         return Quiz::query()
             ->where('course_id', auth()->user()->teaches->id)
             ->with(['course.students', 'course.teacher']);
     }
-
 
     public function configure(): void
     {
@@ -31,16 +29,16 @@ class Table extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("ID", "id")
+            Column::make('ID', 'id')
                 ->hideIf(true),
-            Column::make("Name", "name")
+            Column::make('Name', 'name')
                 ->searchable()
                 ->sortable(),
-            Column::make("Course id", "course_id")
+            Column::make('Course id', 'course_id')
                 ->hideIf(true),
-            Column::make("Start date", "start_date")
+            Column::make('Start date', 'start_date')
                 ->hideIf(true),
-            Column::make("Start date")
+            Column::make('Start date')
                 ->label(function (Quiz $quiz) {
                     $start_date = Carbon::parse($quiz->start_date);
 
@@ -48,12 +46,13 @@ class Table extends DataTableComponent
                 })
                 ->searchable()
                 ->sortable(),
-            Column::make("Status")
+            Column::make('Status')
                 ->label(function (Quiz $quiz) {
                     $start_date = Carbon::parse($quiz->start_date);
-                    return Str::ucfirst($quiz->status) . ' (' . $start_date->diffForHumans() . ')';
+
+                    return Str::ucfirst($quiz->status).' ('.$start_date->diffForHumans().')';
                 }),
-            Column::make("Duration", "duration")
+            Column::make('Duration', 'duration')
                 ->sortable(),
             Column::make('Students')
                 ->label(function (Quiz $row) {

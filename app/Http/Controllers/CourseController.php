@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use App\Models\Course;
 use App\Models\User;
 
 class CourseController extends Controller
@@ -53,6 +53,7 @@ class CourseController extends Controller
 
         return view('teacher.course', compact('course', 'students', 'quizzes'));
     }
+
     /**
      * Show the form for editing the specified resource.
      *

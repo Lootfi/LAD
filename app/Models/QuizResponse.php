@@ -56,6 +56,6 @@ class QuizResponse extends Pivot
         return LogOptions::defaults()
             ->logOnly(['student_id', 'question_id', 'answer_id'])
             ->useLogName('student.question.response')
-            ->setDescriptionForEvent(fn (string $eventName) => "Student responded to question");
+            ->setDescriptionForEvent(fn (string $eventName) => 'Student responded to question');
     }
 }

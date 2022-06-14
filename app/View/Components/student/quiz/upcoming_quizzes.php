@@ -22,7 +22,6 @@ class upcoming_quizzes extends Component
         $this->quizzes = $quizzes;
     }
 
-
     /**
      * Get the view / contents that represent the component.
      *

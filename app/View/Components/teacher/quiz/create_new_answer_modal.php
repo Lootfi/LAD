@@ -10,6 +10,7 @@ class create_new_answer_modal extends Component
 {
     // quiz and question parameters
     public $quiz;
+
     public $question;
 
     /**

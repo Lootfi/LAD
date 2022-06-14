@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -46,14 +46,15 @@ class Quiz extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'course_id', 'start_date', 'duration', 'description'];
+
     protected $appends = ['status', 'end_date', 'is_active'];
 
-    function course(): BelongsTo
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
-    function questions(): HasMany
+    public function questions(): HasMany
     {
         return $this->hasMany(QuizQuestion::class);
     }
@@ -68,11 +69,11 @@ class Quiz extends Model
         return $this->hasManyThrough(KCQ::class, QuizQuestion::class, 'quiz_id', 'question_id');
     }
 
-
     public function getEndDateAttribute()
     {
         $startDate = Carbon::parse($this->start_date);
         $endDate = $startDate->addMinutes($this->duration);
+
         return $endDate;
     }
 
@@ -81,6 +82,7 @@ class Quiz extends Model
         if ($this->status == 'active') {
             return true;
         }
+
         return false;
     }
 

@@ -31,7 +31,7 @@ class StoreQuizRequest extends FormRequest
     public function rules()
     {
         return [
-                //
-            ];
+            //
+        ];
     }
 }

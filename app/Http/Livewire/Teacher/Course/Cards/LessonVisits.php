@@ -10,14 +10,13 @@ use Spatie\Activitylog\Models\Activity;
 
 class LessonVisits extends Component
 {
-
     public $course;
+
     public $lessons_visits;
 
     protected $listeners = [
-        'echo:student-activity,Student\ViewLesson' => 'addLessonView'
+        'echo:student-activity,Student\ViewLesson' => 'addLessonView',
     ];
-
 
     public function mount()
     {
@@ -49,7 +48,7 @@ class LessonVisits extends Component
                 'visits' => $activities->count(),
                 'unique_students' => $activities->groupBy('causer_id')->count(),
                 'since_last_week' => $percentage,
-                'students' => []
+                'students' => [],
             ];
 
             $visits[$lesson->id] = $this->setLessonViewers($visits[$lesson->id], $activities->unique('causer_id'));
@@ -71,8 +70,7 @@ class LessonVisits extends Component
             ->where('subject_type', 'App\Models\Lesson')
             ->whereSubjectId($lesson->id));
 
-
-        if (!array_key_exists($student->id, $lesson_visits['students'])) {
+        if (! array_key_exists($student->id, $lesson_visits['students'])) {
             $lesson_visits['unique_students']++;
             $lesson_visits['students'][$student->id]['name'] = $student->name;
             $lesson_visits['students'][$student->id]['avatar'] = $student->avatar;
@@ -86,7 +84,7 @@ class LessonVisits extends Component
         foreach ($activities as $activity) {
             $lesson_visits['students'][$activity->causer_id] = [
                 'name' => $activity->causer->name,
-                'avatar' => $activity->causer->avatar
+                'avatar' => $activity->causer->avatar,
             ];
         }
 
@@ -101,7 +99,6 @@ class LessonVisits extends Component
         $lastWeekActivities = $activitiesBuilder
             ->where('created_at', '>=', now()->subWeeks(1))
             ->count();
-
 
         if (($lastTwoWeeksActivities == 0 && $lastWeekActivities == 0)) {
             return 0;

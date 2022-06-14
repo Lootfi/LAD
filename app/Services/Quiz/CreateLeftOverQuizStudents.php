@@ -7,7 +7,6 @@ use App\Models\QuizStudent;
 
 class CreateLeftOverQuizStudents
 {
-
     public function __invoke(Quiz $quiz)
     {
         $this->createQuizStudents($quiz);
@@ -22,12 +21,12 @@ class CreateLeftOverQuizStudents
                 ->firstOrCreate(
                     [
                         'quiz_id' => $quiz->id,
-                        'student_id' => $student->id
+                        'student_id' => $student->id,
                     ],
                     [
                         'submitted' => false,
                         'submitted_at' => $quiz->end_date,
-                        'score' => $getScore($quiz, $student)
+                        'score' => $getScore($quiz, $student),
                     ]
                 );
         }

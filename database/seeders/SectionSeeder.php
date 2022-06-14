@@ -17,32 +17,32 @@ class SectionSeeder extends Seeder
     {
         // course 1
         Section::factory(1)->create([
-            'name' => "Introduction",
+            'name' => 'Introduction',
         ]);
 
         Section::factory(1)->create([
-            'name' => "Linux Basics",
+            'name' => 'Linux Basics',
         ]);
 
         Section::factory(1)->create([
-            'name' => "Databases",
+            'name' => 'Databases',
         ]);
 
         // course 2
 
         Section::factory(1)->create([
             'course_id' => 2,
-            'name' => "Introduction",
+            'name' => 'Introduction',
         ]);
 
         Section::factory(1)->create([
             'course_id' => 2,
-            'name' => "Linear Regression",
+            'name' => 'Linear Regression',
         ]);
 
         Section::factory(1)->create([
             'course_id' => 2,
-            'name' => "Unsupervised Learning",
+            'name' => 'Unsupervised Learning',
         ]);
     }
 }

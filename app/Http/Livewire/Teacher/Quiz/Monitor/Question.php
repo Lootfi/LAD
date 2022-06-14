@@ -9,10 +9,15 @@ use Livewire\Component;
 class Question extends Component
 {
     public User $student;
+
     public QuizQuestion $question;
+
     public $index;
+
     public $answered = false;
+
     public $correct = false;
+
     public $classes;
 
     public function getListeners()
@@ -41,6 +46,7 @@ class Question extends Component
         $responses = $this->question->responses()->where('student_id', $this->student->id)->get();
         if ($responses->count() == 0) {
             $this->answered = false;
+
             return;
         }
 
@@ -58,7 +64,7 @@ class Question extends Component
 
     public function getCssClasses()
     {
-        if (!$this->answered) {
+        if (! $this->answered) {
             return 'text-white bg-dark';
         } else {
             if ($this->correct) {
@@ -73,6 +79,6 @@ class Question extends Component
     {
         $this->getAttributes();
         $this->classes = $this->getCssClasses();
-        $this->emitTo('teacher.quiz.monitor.student.kcs', 'student.' . $this->student->id . '.answeredQuestion', ['question_id' => $this->question->id]);
+        $this->emitTo('teacher.quiz.monitor.student.kcs', 'student.'.$this->student->id.'.answeredQuestion', ['question_id' => $this->question->id]);
     }
 }

@@ -44,7 +44,7 @@ class QuizKcAwarenessWarning extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'message' => $this->message
+            'message' => $this->message,
         ];
     }
 }

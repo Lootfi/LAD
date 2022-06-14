@@ -19,9 +19,13 @@ class QuizKcAwarenessWarning implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public array $lessons;
+
     public $kcs;
+
     public string $message = '';
+
     protected Quiz $quiz;
+
     protected User $student;
 
     /**
@@ -41,15 +45,15 @@ class QuizKcAwarenessWarning implements ShouldBroadcast
         foreach ($kc_ids as $kc_id => $awareness) {
             $kc = Kc::query()->where('id', $kc_id)->first();
 
-            if($awareness == 0 || $awareness == -1) {
+            if ($awareness == 0 || $awareness == -1) {
                 $kcs->push($kc);
                 $lessons[$kc_id] = $kc->lessons;
             }
 
             if ($kc_id == $last_key) {
-                $this->message = $this->message . $kc->name . '.';
+                $this->message = $this->message.$kc->name.'.';
             } else {
-                $this->message = $this->message . $kc->name . ', ';
+                $this->message = $this->message.$kc->name.', ';
             }
         }
 
@@ -66,6 +70,6 @@ class QuizKcAwarenessWarning implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('quiz.' . $this->quiz->id . '.student.' . $this->student->id . '.kcs');
+        return new Channel('quiz.'.$this->quiz->id.'.student.'.$this->student->id.'.kcs');
     }
 }

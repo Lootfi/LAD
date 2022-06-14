@@ -8,11 +8,14 @@ use Livewire\Component;
 
 class FetchSplittable extends Component
 {
-
     public Course $course;
+
     public $grouped_questions;
+
     public $split_percentage = 0.5;
+
     public $splittable;
+
     public $question_groups_er_differences;
 
     protected $rules = [

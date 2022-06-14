@@ -17,6 +17,7 @@ class ViewLesson implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public Lesson $lesson;
+
     public User $student;
 
     /**

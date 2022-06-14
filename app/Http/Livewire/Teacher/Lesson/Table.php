@@ -2,18 +2,16 @@
 
 namespace App\Http\Livewire\Teacher\Lesson;
 
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Illuminate\Database\Eloquent\Builder;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Lesson;
 use App\Models\Section;
-
+use Illuminate\Database\Eloquent\Builder;
 use function PHPSTORM_META\type;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class Table extends DataTableComponent
 {
     public Section $section;
-
 
     public function builder(): Builder
     {
@@ -37,14 +35,14 @@ class Table extends DataTableComponent
     {
         return [
 
-            Column::make("Id", "id")
+            Column::make('Id', 'id')
                 ->hideIf(true),
             // section_id
-            Column::make("Section id", "section_id")->hideIf(true),
-            Column::make("Name", "name"),
-            Column::make("Created at", "created_at")
+            Column::make('Section id', 'section_id')->hideIf(true),
+            Column::make('Name', 'name'),
+            Column::make('Created at', 'created_at')
                 ->sortable(),
-            Column::make("Updated at", "updated_at")
+            Column::make('Updated at', 'updated_at')
                 ->hideIf(true),
             Column::make('Actions')
                 ->label(function (Lesson $row) {

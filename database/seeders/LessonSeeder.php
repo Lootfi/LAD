@@ -33,7 +33,6 @@ class LessonSeeder extends Seeder
             'section_id' => 1,
         ]);
 
-
         Lesson::factory(3)->create([
             'section_id' => 2,
         ]);

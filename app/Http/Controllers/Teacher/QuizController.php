@@ -11,7 +11,6 @@ use QuizFacade;
 
 class QuizController extends Controller
 {
-
     public function index(Course $course)
     {
         return view('teacher.quiz.index', ['course' => $course->load('quizzes')]);
@@ -31,12 +30,12 @@ class QuizController extends Controller
 
     public function show(Course $course, Quiz $quiz)
     {
-        if ($quiz->status == "active") {
-            $quiz->pass_percentage = "Still Active";
-        } elseif ($quiz->status == "upcoming") {
-            $quiz->pass_percentage = "Not Yet";
+        if ($quiz->status == 'active') {
+            $quiz->pass_percentage = 'Still Active';
+        } elseif ($quiz->status == 'upcoming') {
+            $quiz->pass_percentage = 'Not Yet';
         } else {
-            $quiz->pass_percentage = QuizFacade::getPassPercentage($quiz) * 100 . '%';
+            $quiz->pass_percentage = QuizFacade::getPassPercentage($quiz) * 100 .'%';
         }
 
         return view('teacher.quiz.show', compact('course', 'quiz'));
@@ -47,10 +46,11 @@ class QuizController extends Controller
         if ($quiz->is_active) {
             return redirect()->route('teacher.quiz.show', [
                 'course' => $course,
-                'quiz' => $quiz
+                'quiz' => $quiz,
             ]);
         } else {
             $quiz->load('questions.answers');
+
             return view('teacher.quiz.edit', compact('course', 'quiz'));
         }
     }
@@ -58,12 +58,14 @@ class QuizController extends Controller
     public function update(Request $request, Course $course, Quiz $quiz)
     {
         $quiz->update($request->all());
+
         return redirect()->route('teacher.quiz.index', $course);
     }
 
     public function destroy(Course $course, Quiz $quiz)
     {
         $quiz->delete();
+
         return redirect()->route('teacher.quiz.index', ['course' => $course]);
     }
 
@@ -84,7 +86,7 @@ class QuizController extends Controller
         return view('teacher.quiz.monitor.message', [
             'course' => $course,
             'quiz' => $quiz,
-            'student' => $student
+            'student' => $student,
         ]);
     }
 
@@ -99,7 +101,7 @@ class QuizController extends Controller
     {
         return view('teacher.quiz.monitor.index', [
             'quiz' => $quiz->load(['questions.kcs']),
-            'course' => $course->load('students')
+            'course' => $course->load('students'),
         ]);
     }
 
@@ -108,7 +110,7 @@ class QuizController extends Controller
         return view('teacher.quiz.monitor.student', [
             'quiz' => $quiz->load('questions'),
             'course' => $course,
-            'student' => $student
+            'student' => $student,
         ]);
     }
 }

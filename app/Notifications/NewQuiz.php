@@ -24,7 +24,6 @@ class NewQuiz extends Notification
         $this->quiz = $quiz;
     }
 
-
     /**
      * Get the notification's delivery channels.
      *
@@ -45,12 +44,11 @@ class NewQuiz extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => 'You have a new quiz: ' . $this->quiz->name,
+            'message' => 'You have a new quiz: '.$this->quiz->name,
             'link' => route('student.quiz.show', ['quiz' => $this->quiz, 'course' => $this->quiz->course]),
-            'quiz' => $this->quiz
+            'quiz' => $this->quiz,
         ];
     }
-
 
     /**
      * Get the broadcastable representation of the notification.
@@ -61,9 +59,9 @@ class NewQuiz extends Notification
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'message' => 'You have a new quiz: ' . $this->quiz->name,
+            'message' => 'You have a new quiz: '.$this->quiz->name,
             'link' => route('student.quiz.show', ['quiz' => $this->quiz, 'course' => $this->quiz->course]),
-            'quiz' => $this->quiz
+            'quiz' => $this->quiz,
         ]);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             QuizStudentSeeder::class,
             QuizResponseSeeder::class,
             ActivitySeeder::class,
-            KcSeeder::class
+            KcSeeder::class,
         ]);
     }
 }

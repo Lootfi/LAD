@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class IndexActions extends Component
 {
-
     public $quiz;
 
     public function mount(Quiz $quiz)

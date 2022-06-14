@@ -17,7 +17,9 @@ class CustomQuizWarning implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     protected Quiz $quiz;
+
     protected User $student;
+
     public $message;
 
     /**
@@ -39,8 +41,6 @@ class CustomQuizWarning implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('quiz.' . $this->quiz->id . '.student.' . $this->student->id . '.kcs');
+        return new Channel('quiz.'.$this->quiz->id.'.student.'.$this->student->id.'.kcs');
     }
-
-    
 }

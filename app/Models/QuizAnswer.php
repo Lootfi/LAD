@@ -33,8 +33,7 @@ class QuizAnswer extends Model
 
     protected $fillable = ['answer', 'right_answer'];
 
-
-    function question(): BelongsTo
+    public function question(): BelongsTo
     {
         return $this->belongsTo(QuizQuestion::class, 'question_id');
     }

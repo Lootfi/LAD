@@ -9,6 +9,7 @@ use Livewire\Component;
 class QuestionsErrorRate extends Component
 {
     public $quiz;
+
     public $graph_data = [];
 
     protected $listeners = [
@@ -30,7 +31,7 @@ class QuestionsErrorRate extends Component
     public function gatherData(QuizQuestion $question, $data)
     {
         $this->graph_data[$question->id] = [
-            ...$data
+            ...$data,
         ];
 
         $this->emit('addData', $question->id, $data);

@@ -7,7 +7,6 @@ use App\Services\Quiz\GatherQuizQuestionsErrorRate;
 
 class GetCorrectResponsesRate
 {
-
     public function __invoke(QuizQuestion $question)
     {
         $gatherErrorRate = new GatherQuizQuestionsErrorRate;

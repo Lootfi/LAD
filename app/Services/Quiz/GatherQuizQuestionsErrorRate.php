@@ -9,22 +9,20 @@ use Illuminate\Database\Eloquent\Collection;
 
 class GatherQuizQuestionsErrorRate
 {
-
     public function __invoke(QuizQuestion $question)
     {
         $data = $this->getQuestionErrorRates($question);
+
         return $data;
     }
 
     public function getQuestionErrorRates(QuizQuestion $question)
     {
-
         $responses = $question->responses->groupBy('student_id');
         $resp_count = $responses->count();
         $err_count = 0;
 
         $data = [];
-
 
         if ($resp_count == 0) {
             $data = [
@@ -32,6 +30,7 @@ class GatherQuizQuestionsErrorRate
                 'error_count' => $err_count,
                 'resp_count' => $resp_count,
             ];
+
             return $data;
         }
 
@@ -52,7 +51,6 @@ class GatherQuizQuestionsErrorRate
             }
             $err_count++;
         }
-
 
         $data = [
             'error_rate' => $err_count / $resp_count,

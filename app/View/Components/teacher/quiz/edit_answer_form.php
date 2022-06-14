@@ -9,6 +9,7 @@ class edit_answer_form extends Component
 {
     // params
     public $answer;
+
     /**
      * Create a new component instance.
      *

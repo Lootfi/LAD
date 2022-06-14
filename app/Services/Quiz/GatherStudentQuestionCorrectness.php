@@ -10,16 +10,15 @@ use Illuminate\Database\Eloquent\Collection;
 
 class GatherStudentQuestionCorrectness
 {
-
     public function __invoke(User $student, QuizQuestion $question)
     {
         $data = $this->getQuestionCorrectness($student, $question);
+
         return $data;
     }
 
     public function getQuestionCorrectness(User $student, QuizQuestion $question)
     {
-
         $correct = false;
 
         $studentResponseAnswers = $question->responses()->where('student_id', $student->id)->with('answer')->get()->pluck('answer');

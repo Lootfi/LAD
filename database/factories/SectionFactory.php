@@ -18,7 +18,7 @@ class SectionFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'Section ' . Str::ucfirst($this->faker->word),
+            'name' => 'Section '.Str::ucfirst($this->faker->word),
             'status' => true,
             'description' => $this->faker->sentence,
             'course_id' => 1,

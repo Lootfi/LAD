@@ -43,12 +43,11 @@ class NewLesson extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => 'You have a new lesson: ' . $this->lesson->name,
+            'message' => 'You have a new lesson: '.$this->lesson->name,
             'link' => route('student.course.section.lesson.show', ['lesson' => $this->lesson, 'section' => $this->lesson->section, 'course' => $this->lesson->section->course]),
-            'lesson' => $this->lesson
+            'lesson' => $this->lesson,
         ];
     }
-
 
     /**
      * Get the broadcastable representation of the notification.
@@ -59,9 +58,9 @@ class NewLesson extends Notification
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'message' => 'You have a new lesson: ' . $this->lesson->name,
+            'message' => 'You have a new lesson: '.$this->lesson->name,
             'link' => route('student.course.section.lesson.show', ['lesson' => $this->lesson, 'section' => $this->lesson->section, 'course' => $this->lesson->section->course]),
-            'lesson' => $this->lesson
+            'lesson' => $this->lesson,
         ]);
     }
 }

@@ -10,6 +10,7 @@ class edit_question_form extends Component
 {
     // params
     public $quiz;
+
     public $question;
 
     /**

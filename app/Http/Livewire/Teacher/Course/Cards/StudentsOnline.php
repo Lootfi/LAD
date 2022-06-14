@@ -8,10 +8,11 @@ use Livewire\Component;
 class StudentsOnline extends Component
 {
     public $course;
+
     public $students;
 
     protected $listeners = [
-        'echo:studentonline,StudentOnline' => 'updateStudents'
+        'echo:studentonline,StudentOnline' => 'updateStudents',
     ];
 
     public function mount()
@@ -22,6 +23,7 @@ class StudentsOnline extends Component
     public function render()
     {
         $this->students = $this->getStudentsOnline();
+
         return view('livewire.teacher.course.cards.students-online');
     }
 

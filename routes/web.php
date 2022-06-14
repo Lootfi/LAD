@@ -1,21 +1,20 @@
 <?php
 
 use App\Http\Controllers\PasswordController;
-use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
+use App\Http\Controllers\Student\CourseController as StudentCourseController;
+use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
+use App\Http\Controllers\Student\LessonController as StudentLessonController;
+use App\Http\Controllers\Student\NotificationController as StudentNotificationController;
+use App\Http\Controllers\Student\QuizController as StudentQuizController;
 use App\Http\Controllers\Teacher\CourseController as TeacherCourseController;
-use App\Http\Controllers\Teacher\StudentController as TeacherStudentController;
+use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
+use App\Http\Controllers\Teacher\KCController as TeacherKCController;
+use App\Http\Controllers\Teacher\LessonController as TeacherLessonController;
+use App\Http\Controllers\Teacher\QuizAnswerController as TeacherQuizAnswerController;
 use App\Http\Controllers\Teacher\QuizController as TeacherQuizController;
 use App\Http\Controllers\Teacher\QuizQuestionController as TeacherQuizQuestionController;
-use App\Http\Controllers\Teacher\QuizAnswerController as TeacherQuizAnswerController;
 use App\Http\Controllers\Teacher\SectionController as TeacherSectionController;
-use App\Http\Controllers\Teacher\LessonController as TeacherLessonController;
-use App\Http\Controllers\Teacher\KCController as TeacherKCController;
-
-use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
-use App\Http\Controllers\Student\CourseController as StudentCourseController;
-use App\Http\Controllers\Student\LessonController as StudentLessonController;
-use App\Http\Controllers\Student\QuizController as StudentQuizController;
-use App\Http\Controllers\Student\NotificationController as StudentNotificationController;
+use App\Http\Controllers\Teacher\StudentController as TeacherStudentController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +33,6 @@ Route::get('/help', function () {
     return view('help');
 })->name('help');
 
-
 Auth::routes(['register' => false]);
 
 Route::prefix('password')
@@ -43,18 +41,18 @@ Route::prefix('password')
     ->group(function () {
         Route::get('change', [
             PasswordController::class,
-            'show'
+            'show',
         ])->name('change.show');
 
         Route::post('update', [
             PasswordController::class,
-            'update'
+            'update',
         ])->name('update');
     });
 
 Route::get('/', function () {
     $user = User::find(auth()->id());
-    if (!$user) {
+    if (! $user) {
         return redirect()->route('login');
     } elseif ($user->hasRole('teacher')) {
         return redirect()->route('teacher.course.show', ['course' => $user->teaches]);
@@ -65,7 +63,7 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     $user = User::find(auth()->id());
-    if (!$user) {
+    if (! $user) {
         return redirect()->route('login');
     } elseif ($user->hasRole('teacher')) {
         return redirect()->route('teacher.course.show', ['course' => $user->teaches]);
@@ -77,7 +75,6 @@ Route::get('/home', function () {
 Route::post('/upload', [TeacherLessonController::class, 'upload'])->middleware('role:teacher');
 
 //teacher dashboard routes, with auth middleware
-
 
 Route::prefix('teacher')
     ->name('teacher.')
@@ -94,7 +91,6 @@ Route::prefix('teacher')
         * Course Resource Routes
         *
         */
-
 
         Route::resource('course', TeacherCourseController::class)->only(['show']);
 
@@ -117,7 +113,6 @@ Route::prefix('teacher')
             'faststore',
         ])->name('kc.faststore');
         Route::resource('course.kc', TeacherKCController::class)->except(['create', 'edit']);
-
 
         /*
         *
@@ -145,8 +140,6 @@ Route::prefix('teacher')
 
         Route::resource('course.section.lesson', TeacherLessonController::class);
 
-
-
         /*
         *
         * Course Quiz Routes
@@ -163,17 +156,12 @@ Route::prefix('teacher')
             'monitor',
         ])->name('quiz.monitor');
 
-
-
         Route::get('course/{course}/quiz/{quiz}/sort', [
             TeacherQuizController::class,
             'sort',
         ])->name('quiz.sort');
 
         Route::resource('course/{course}/quiz', TeacherQuizController::class);
-
-
-
 
         /*
         *
@@ -183,14 +171,12 @@ Route::prefix('teacher')
 
         Route::resource('quiz/{quiz}/question', TeacherQuizQuestionController::class);
 
-
         /*
         *
         * Quiz Answers Routes
         */
 
         Route::resource('quiz/{quiz}/question/{question}/answer', TeacherQuizAnswerController::class);
-
 
         /*
         *
@@ -204,21 +190,17 @@ Route::prefix('teacher')
             ->name('student.manage');
     });
 
-
-
 // send a custom message to the monitored student
 Route::get('teacher/course/{course}/quiz/{quiz}/monitor/{student}/message', [
     TeacherQuizController::class,
     'message',
 ])->name('teacher.quiz.monitor.student.message');
 
-
 // monitor quiz page for one student
 Route::get('teacher/course/{course}/quiz/{quiz}/monitor/{student}', [
     TeacherQuizController::class,
     'monitorStudent',
 ])->name('teacher.quiz.monitor.student');
-
 
 // student dashboard routes
 Route::prefix('student')
@@ -252,7 +234,6 @@ Route::prefix('student')
         */
         Route::resource('course.section.lesson', StudentLessonController::class)->except(['create', 'edit', 'destroy']);
 
-
         /*
         *
         * Student Quiz Routes
@@ -265,9 +246,6 @@ Route::prefix('student')
         ])->name('quiz.results')->middleware('student_submitted_quiz');
 
         Route::resource('course/{course}/quiz', StudentQuizController::class)->except(['create', 'edit', 'destroy'])->middleware('student_submitted_quiz');
-
-
-
 
         /*
         *

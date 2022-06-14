@@ -18,7 +18,7 @@ class QuizFactory extends Factory
     {
         return [
             'duration' => 30,
-            'name' => 'Quiz #' . rand(1, 100),
+            'name' => 'Quiz #'.rand(1, 100),
             'course_id' => 1,
         ];
     }

@@ -10,10 +10,10 @@ use App\Services\Quiz\Question\GetCorrectResponsesRate;
 
 class GetQuizPassPercentage
 {
-
     public function __invoke(Quiz $quiz)
     {
         $percentage = $this->getPercentage($quiz);
+
         return $percentage;
     }
 
@@ -38,7 +38,6 @@ class GetQuizPassPercentage
         foreach ($students as $student) {
             $correct = [];
             foreach ($quiz->questions as $question) {
-
                 $studentResponseAnswers = $question->responses()->where('student_id', $student->id)->with('answer')->get()->pluck('answer');
 
                 $correctAsnwers = $question->answers()->where('right_answer', true)->get();
@@ -52,8 +51,12 @@ class GetQuizPassPercentage
 
             $count = array_count_values($correct);
 
-            if (!isset($count[1])) $count[1] = 0;
-            if (!isset($count[0])) $count[0] = 0;
+            if (! isset($count[1])) {
+                $count[1] = 0;
+            }
+            if (! isset($count[0])) {
+                $count[0] = 0;
+            }
 
             if (($count[1] >= $count[0])) {
                 $pass_quiz_count++;

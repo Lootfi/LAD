@@ -12,9 +12,10 @@ use Livewire\Component;
 
 class Student extends Component
 {
-
     public $student;
+
     public $quiz;
+
     public $quiz_student;
 
     public function mount(Quiz $quiz, User $student)

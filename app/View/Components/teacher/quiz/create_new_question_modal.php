@@ -11,6 +11,7 @@ class create_new_question_modal extends Component
 {
     // quiz and question parameters
     public $course;
+
     public $quiz;
 
     /**
@@ -23,7 +24,6 @@ class create_new_question_modal extends Component
         $this->course = $course;
         $this->quiz = $quiz;
     }
-
 
     /**
      * Get the view / contents that represent the component.

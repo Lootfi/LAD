@@ -29,7 +29,9 @@ class GetQuizStudentKcRating
 
         $count = array_count_values($correct);
 
-        if (!isset($count[1])) $count[1] = 0;
+        if (! isset($count[1])) {
+            $count[1] = 0;
+        }
 
         return $count[1] / $questions->count();
     }

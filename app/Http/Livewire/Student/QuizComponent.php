@@ -10,9 +10,10 @@ use Livewire\Component;
 
 class QuizComponent extends Component
 {
-
     public Quiz $quiz;
+
     public User $student;
+
     public QuizQuestion $active_question;
 
     public function getListeners()
@@ -43,12 +44,10 @@ class QuizComponent extends Component
             ->log('Student started quiz');
     }
 
-
     public function render()
     {
         return view('livewire.student.quiz-component');
     }
-
 
     public function nextQuestion($current_step)
     {
@@ -79,5 +78,4 @@ class QuizComponent extends Component
             ->performedOn($this->quiz)
             ->log('Student submitted quiz');
     }
-
 }

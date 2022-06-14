@@ -13,12 +13,12 @@ class QuizAnswerController extends Controller
     // store new quiz answer function
     public function store(Request $request, Course $course, Quiz $quiz, QuizQuestion $question)
     {
-
         $course = $quiz->course;
         $question->answers()->create([
             'answer' => $request->answer,
             'right_answer' => $request->right_answer ? true : false,
         ]);
+
         return redirect()->route('teacher.quiz.edit', parameters: ['course' => $course, 'quiz' => $quiz, 'question_id' => $question->id]);
     }
 }
