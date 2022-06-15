@@ -7,13 +7,12 @@ use App\Models\CourseStudent;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Artisan;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class ViewCourseListTest extends TestCase
 {
-
-    use RefreshDatabase;
 
     public $user;
 
@@ -21,30 +20,11 @@ class ViewCourseListTest extends TestCase
     {
         parent::setUp();
 
-        $student = Role::create(['name' => 'student']);
+        $this->user = User::query()->where('email', 'student01@example.com')->first();
 
-        $this->user = User::factory()->create([
-            'name' => 'Pamela',
-            'email' => 'student01@example.com',
-        ]);
+        $this->teacher = User::query()->where('email', 'teacher01@example.com')->first();
 
-        $this->user->assignRole($student);
-
-        $teacherRole = Role::create(['name' => 'teacher']);
-        $teacher = User::factory()->create([
-            'name' => 'Mohammed Mahrez',
-            'email' => 'teacher01@example.com',
-        ]);
-        $teacher->assignRole($teacherRole);
-
-        $this->courses = Course::factory(2)->create([
-            'teacher_id' => $teacher->id
-        ])->each(function (Course $course) {
-            CourseStudent::create([
-                'course_id' => $course->id,
-                'student_id' => $this->user->id
-            ]);
-        });
+        $this->courses = $this->user->courses;
     }
 
     /**
@@ -52,11 +32,6 @@ class ViewCourseListTest extends TestCase
      */
     public function test_student_can_see_list_of_his_courses()
     {
-
-
-
-
-
         $response = $this->actingAs($this->user)->get(route('student.course.index'));
 
         $response->assertstatus(200);

@@ -8,46 +8,22 @@ use App\Models\Section;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Artisan;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class ViewCourseTest extends TestCase
 {
 
-    use RefreshDatabase;
-
     public function setUp(): void
     {
         parent::setUp();
 
-        $student = Role::create(['name' => 'student']);
+        $this->user = User::query()->where('email', 'student01@example.com')->first();
 
-        $this->user = User::factory()->create([
-            'name' => 'Pamela',
-            'email' => 'student01@example.com',
-        ]);
+        $this->course = Course::all()->first();
 
-        $this->user->assignRole($student);
-
-        $teacherRole = Role::create(['name' => 'teacher']);
-        $teacher = User::factory()->create([
-            'name' => 'Mohammed Mahrez',
-            'email' => 'teacher01@example.com',
-        ]);
-        $teacher->assignRole($teacherRole);
-
-        $this->course = Course::factory()->create([
-            'teacher_id' => $teacher->id
-        ]);
-
-        $this->sections = Section::factory(3)->create([
-            'course_id' => $this->course->id
-        ]);
-
-        CourseStudent::create([
-            'course_id' => $this->course->id,
-            'student_id' => $this->user->id
-        ]);
+        $this->sections = $this->course->sections;
     }
 
     /**
