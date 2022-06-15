@@ -16,17 +16,28 @@
     @csrf
     <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="name" placeholder="Enter title" required>
+        <input type="text" class="form-control" id="title" name="name" placeholder="Enter title" required
+            value="{{ old('name') }}">
+        {{-- errors --}}
+
+        @error('name')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
     </div>
     <div class="form-group">
         <label for="description">Description</label>
         <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter description"
-            required></textarea>
+            required>{{ old('description') }}</textarea>
     </div>
     <div class="form-group">
         <label for="start_date">Start Date</label>
         {{-- input for start date datetime_local dd/mm/yyyy--}}
-        <input type="datetime-local" class="form-control" id="start_date" name="start_date" required>
+        <input type="datetime-local" class="form-control" id="start_date" name="start_date" required
+            value="{{old('start_date')}}">
+        {{-- errors --}}
+        @error('start_date')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
     </div>
     <div class="form-group">
         <label for="time_limit">Time Limit (mins)</label>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Teacher\Quiz\CreateQuizRequest;
 use App\Models\Course;
 use App\Models\Quiz;
 use App\Models\User;
@@ -21,7 +22,7 @@ class QuizController extends Controller
         return view('teacher.quiz.create', compact('course'));
     }
 
-    public function store(Request $request, Course $course)
+    public function store(CreateQuizRequest $request, Course $course)
     {
         $quiz = $course->quizzes()->create($request->all());
 
@@ -35,7 +36,7 @@ class QuizController extends Controller
         } elseif ($quiz->status == 'upcoming') {
             $quiz->pass_percentage = 'Not Yet';
         } else {
-            $quiz->pass_percentage = QuizFacade::getPassPercentage($quiz) * 100 .'%';
+            $quiz->pass_percentage = QuizFacade::getPassPercentage($quiz) * 100 . '%';
         }
 
         return view('teacher.quiz.show', compact('course', 'quiz'));
