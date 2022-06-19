@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Teacher\Quiz\CreateQuizRequest;
+use App\Http\Requests\Teacher\Quiz\UpdateQuizRequest;
 use App\Models\Course;
 use App\Models\Quiz;
 use App\Models\User;
@@ -56,7 +57,7 @@ class QuizController extends Controller
         }
     }
 
-    public function update(Request $request, Course $course, Quiz $quiz)
+    public function update(UpdateQuizRequest $request, Course $course, Quiz $quiz)
     {
         $quiz->update($request->all());
 

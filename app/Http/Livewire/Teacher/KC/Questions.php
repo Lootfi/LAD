@@ -40,12 +40,10 @@ class Questions extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id')
-                ->hideIf(true),
+            Column::make('Quiz', 'quiz_id'),
+            Column::make('Q#', 'order'),
             Column::make('Question', 'question')
                 ->sortable(),
-            Column::make('Quiz id', 'quiz_id')
-                ->hideIf(true),
             Column::make('Order', 'order')
                 ->hideIf(true),
             Column::make('Created at', 'created_at')

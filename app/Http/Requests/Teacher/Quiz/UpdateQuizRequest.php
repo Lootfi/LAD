@@ -1,21 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Teacher\Quiz;
 
+use App\Models\Quiz;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateQuizRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,7 +15,8 @@ class UpdateQuizRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'string|unique:quizzes,name,' . $this->quiz->id,
+            'start_date' => 'required|date|after:now'
         ];
     }
 }

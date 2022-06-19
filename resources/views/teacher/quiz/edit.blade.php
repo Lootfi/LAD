@@ -40,10 +40,9 @@
                     <div class="form-group{{ $errors->has('start_date') ? ' has-danger' : '' }}">
                         <label class="form-control-label" for="input-start_date">{{ __('Start Date') }}</label>
                         {{-- input for start date datetime_local dd/mm/yyyy--}}
-                        <input type="datetime-local" name="start_date" id="input-start_date"
+                        <input type="datetime-local" name="start_date" id="input-start_date" step="any"
                             class="form-control form-control-alternative{{ $errors->has('start_date') ? ' is-invalid' : '' }}"
-                            placeholder="{{ __('Start Date') }}" value="{{ old('start_date', $quiz->start_date) }}"
-                            required autofocus>
+                            placeholder="{{ __('Start Date') }}" value="{{ $quiz->start_date }}" required autofocus>
 
                         @if ($errors->has('start_date'))
                         <span class="invalid-feedback" role="alert">

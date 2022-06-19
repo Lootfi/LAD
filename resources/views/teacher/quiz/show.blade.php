@@ -23,10 +23,17 @@
                 Monitor
             </a>
             </a>
+            @if ($quiz->status == "upcoming")
             <a href="{{ route('teacher.quiz.edit', [$course, $quiz]) }}" class="btn btn-sm btn-primary">
                 <i class="fas fa-edit"></i>
                 Edit
             </a>
+            @else
+            <button class="btn btn-sm btn-primary" disabled>
+                <i class="fas fa-edit"></i>
+                Edit
+            </button>
+            @endif
             <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal">
                 <i class="fas fa-trash"></i>
                 Delete
