@@ -31,7 +31,9 @@ class QuestionsErrorRate extends Component
     public function gatherData(QuizQuestion $question, $data)
     {
         $this->graph_data[$question->id] = [
-            ...$data,
+            'error_rate' => $data['error_rate'],
+            'error_count' => $data['error_count'],
+            'resp_count' => $data['resp_count']
         ];
 
         $this->emit('addData', $question->id, $data);

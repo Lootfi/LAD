@@ -33,7 +33,9 @@ class KcErrorRate extends Component
     public function gatherData(Kc $kc, $data)
     {
         $this->graph_data[$kc->name] = [
-            ...$data,
+            'error_rate' => $data['error_rate'],
+            'error_count' => $data['error_count'],
+            'resp_count' => $data['resp_count']
         ];
 
         $this->emit('addKcDataToGraph', $kc->name, $data);

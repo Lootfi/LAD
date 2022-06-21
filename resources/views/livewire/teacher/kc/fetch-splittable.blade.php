@@ -31,9 +31,8 @@
                             class="btn btn-link btn-block text-left d-flex justify-content-between align-items-center text-info"
                             type="button" data-toggle="collapse" data-target="#collapse-{{$key}}" aria-expanded="true"
                             aria-controls="collapse-{{$key}}">
-                            #Group {{$key+1}}: [ @foreach($group['questions'] as $question) #Q{{$question->id}}
-                            @endforeach ] share {{$group['kcs']->count()}} Knowledge Component{{$group['kcs']->count()
-                            >= 2 ? 's':''}}
+                            #Group {{$key+1}}: [ @foreach($group['questions'] as $question) #Q{{$question['id']}}
+                            @endforeach ] share {{count($group['kcs'])}} Knowledge Component(s)
                         </button>
                     </h5>
                 </div>

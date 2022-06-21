@@ -124,7 +124,7 @@ class QuizQuestionSeeder extends Seeder
         //creational
         QuizQuestion::factory()->create([
             'quiz_id' => 1,
-            'question' => 'Which design pattern ensures that only one object of particular class gets created?',
+            'question' => 'Which design pattern provides an interface for creating objects in a superclass?',
             'order' => 5,
         ]);
 
@@ -132,19 +132,19 @@ class QuizQuestionSeeder extends Seeder
         QuizAnswer::factory(1)->create([
             'question_id' => 5,
             'right_answer' => true,
+            'answer' => 'Factory Method',
+        ]);
+
+        QuizAnswer::factory(1)->create([
+            'question_id' => 5,
+            'right_answer' => false,
             'answer' => 'Singleton',
         ]);
 
         QuizAnswer::factory(1)->create([
             'question_id' => 5,
             'right_answer' => false,
-            'answer' => 'Factory',
-        ]);
-
-        QuizAnswer::factory(1)->create([
-            'question_id' => 5,
-            'right_answer' => false,
-            'answer' => 'Builder',
+            'answer' => 'Decorator',
         ]);
 
         // ===================================
