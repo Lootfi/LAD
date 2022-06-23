@@ -48,12 +48,14 @@ class QuizKcAwarenessWarning implements ShouldBroadcast
             if ($awareness == 0 || $awareness == -1) {
                 $kcs->push($kc);
                 $lessons[$kc_id] = $kc->lessons;
+                if ($kc_id == $last_key) {
+                    $this->message = $this->message . $kc->name;
+                } else {
+                    $this->message = $this->message . $kc->name . ', ';
+                }
             }
-
             if ($kc_id == $last_key) {
-                $this->message = $this->message.$kc->name.'.';
-            } else {
-                $this->message = $this->message.$kc->name.', ';
+                $this->message = $this->message . '.';
             }
         }
 
@@ -70,6 +72,6 @@ class QuizKcAwarenessWarning implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('quiz.'.$this->quiz->id.'.student.'.$this->student->id.'.kcs');
+        return new Channel('quiz.' . $this->quiz->id . '.student.' . $this->student->id . '.kcs');
     }
 }
