@@ -4,9 +4,6 @@
             <div class="col">
                 <h3 class="mb-0">Students Lessons Views</h3>
             </div>
-            <div class="col text-right">
-                <a href="#!" class="btn btn-sm btn-primary">See all</a>
-            </div>
         </div>
     </div>
     <div class="table-responsive">
@@ -34,10 +31,10 @@
                         {{-- {{$lesson['unique_students']}} --}}
                         <div class="avatars">
                             @foreach ($lesson['students'] as $student)
-                            <a href="" class="avatars-item" data-toggle="tooltip" data-placement="top"
-                                title="{{$student['name']}}">
+                            <div class="avatars-item" data-toggle="tooltip" data-placement="top"
+                                title="{{$student['name']}}" style="cursor: ">
                                 <img class="avatar" alt="Image placeholder" src="{{ $student['avatar'] }}">
-                            </a>
+                            </div>
                             @if ($loop->iteration == 4)
                             @break
                             @endif

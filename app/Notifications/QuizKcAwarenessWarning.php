@@ -5,10 +5,11 @@ namespace App\Notifications;
 use App\Models\Kc;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class QuizKcAwarenessWarning extends Notification implements ShouldQueue
+class QuizKcAwarenessWarning extends Notification
 {
     use Queueable;
 
@@ -32,7 +33,7 @@ class QuizKcAwarenessWarning extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -46,5 +47,18 @@ class QuizKcAwarenessWarning extends Notification implements ShouldQueue
         return [
             'message' => $this->message,
         ];
+    }
+
+    /**
+     * Get the broadcastable representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return BroadcastMessage
+     */
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'message' => $this->message,
+        ]);
     }
 }
