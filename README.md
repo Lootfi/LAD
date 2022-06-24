@@ -9,6 +9,7 @@
 #### Clone this project then follow these steps:
 
 -   `composer install` to install PHP dependencies.
+-   `npm install` to install Javascript dependencies.
 -   Setup your SQL database (Preferably MySQL).
 -   `cp .env.example .env` to copy `.env.example` to `.env`. then setup your new database config inside the `.env` file in: `DB_DATABASE` the name of your database, `DB_USERNAME` your MySQL server username, `DB_PASSWORD` your MySQL server password.
 -   `php artisan key:generate` to generate a private encryption key for your session data and cookies.
