@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Laravelista\Comments\Commentable;
 
 /**
  * Post
@@ -40,7 +41,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  */
 class Course extends Model
 {
-    use HasFactory;
+    use HasFactory, Commentable;
 
     protected $fillable = ['title', 'active', 'teacher_id'];
 

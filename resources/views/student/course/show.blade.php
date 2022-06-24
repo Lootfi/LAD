@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row mt-3">
     {{-- accordion of course sections --}}
     <div class="col-md-12">
         <div class="box box-primary">
@@ -81,6 +81,19 @@
                     </div>
                     @endforeach
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Course Feedback</h3>
+            </div>
+            <div class="box-body">
+                @comments(['model' => $course, 'canComment' => true])
             </div>
         </div>
     </div>

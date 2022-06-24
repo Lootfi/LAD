@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use Cache;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Parental\HasChildren;
+use Laravelista\Comments\Commenter;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -56,7 +55,7 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, Commenter;
 
     /**
      * The attributes that are mass assignable.
@@ -108,12 +107,12 @@ class User extends Authenticatable
 
     public function isOnline()
     {
-        return Cache::has('is_online_'.$this->id);
+        return Cache::has('is_online_' . $this->id);
     }
 
     public function scopeSearch(Builder $query, string $search)
     {
-        return $search ? $query->where('name', 'like', '%'.$search.'%') : $query;
+        return $search ? $query->where('name', 'like', '%' . $search . '%') : $query;
     }
 
     /**
@@ -123,6 +122,6 @@ class User extends Authenticatable
      */
     public function receivesBroadcastNotificationsOn()
     {
-        return 'users.'.$this->id;
+        return 'users.' . $this->id;
     }
 }
