@@ -64,3 +64,7 @@
     </div>
 </div>
 @endsection
+
+@section('js')
+<script src="{{ asset('js/lessons/attachements.js') }}"></script>
+@endsection

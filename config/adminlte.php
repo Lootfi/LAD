@@ -353,7 +353,7 @@ return [
     'plugins' => [
 
         'Datatables' => [
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',
@@ -388,7 +388,7 @@ return [
             ],
         ],
         'Filepond' => [
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',

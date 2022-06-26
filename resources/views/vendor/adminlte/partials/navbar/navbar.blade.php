@@ -20,7 +20,7 @@
         @yield('content_top_nav_right')
 
         {{-- Configured right links --}}
-        @each('adminlte::partials.navbar.menu-item', $adminlte->menu('navbar-right'), 'item')
+        {{-- @each('adminlte::partials.navbar.menu-item', $adminlte->menu('navbar-right'), 'item') --}}
 
         {{-- User menu link --}}
         @if(Auth::user())
