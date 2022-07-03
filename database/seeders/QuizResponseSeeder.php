@@ -52,7 +52,7 @@ class QuizResponseSeeder extends Seeder
         QuizResponse::factory()->create([
             'student_id' => $s1->id,
             'question_id' => 5,
-            'answer_id' => 14, //12 - 14
+            'answer_id' => 13, //12 - 14
         ]);
 
         QuizResponse::factory()->create([
@@ -68,7 +68,7 @@ class QuizResponseSeeder extends Seeder
         QuizResponse::factory()->create([
             'student_id' => $s1->id,
             'question_id' => 6,
-            'answer_id' => 17, //15-17
+            'answer_id' => 18, //15-17
         ]);
 
         // =====================================
@@ -114,7 +114,20 @@ class QuizResponseSeeder extends Seeder
         QuizResponse::factory()->create([
             'student_id' => $s2->id,
             'question_id' => 6,
+            'answer_id' => 15, //15-17
+        ]);
+
+        QuizResponse::factory()->create([
+            'student_id' => $s2->id,
+            'question_id' => 6,
             'answer_id' => 16, //15-17
+        ]);
+
+
+        QuizResponse::factory()->create([
+            'student_id' => $s2->id,
+            'question_id' => 6,
+            'answer_id' => 18, //15-17
         ]);
     }
 }

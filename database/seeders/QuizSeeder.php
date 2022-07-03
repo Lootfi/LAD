@@ -17,7 +17,7 @@ class QuizSeeder extends Seeder
     {
         Quiz::factory()->create([
             'start_date' => now(),
-            'duration' => 20,
+            'duration' => 60,
         ]);
         Quiz::factory()->create([
             'course_id' => 2,
